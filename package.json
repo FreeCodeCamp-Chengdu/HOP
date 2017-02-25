@@ -1,0 +1,25 @@
+{
+  "name": "hop",
+  "version": "0.4.0",
+  "description": "A Open Platform with all kinds of services for Hackathon",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FreeCodeCamp-Chengdu/HOP.git"
+  },
+  "keywords": [
+    "hackathon",
+    "open",
+    "platform",
+    "github"
+  ],
+  "author": "FCC-CDG",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/FreeCodeCamp-Chengdu/HOP/issues"
+  },
+  "homepage": "https://github.com/FreeCodeCamp-Chengdu/HOP#readme"
+}
