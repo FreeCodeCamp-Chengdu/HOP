@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/FreeCodeCamp-Chengdu/HOP#readme",
   "dependencies": {
-    "easy-rest": "^0.3.0"
+    "easy-rest": "^0.3.0",
+    "node-session": "^1.2.1"
   }
 }
