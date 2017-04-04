@@ -15,20 +15,129 @@
 </head>
 <body>
 <div id="app">
-  <h2 @click="changeTitle">{{title}}</h2>
+
 </div>
 </body>
 <script src="//cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
 <script src="//cdn.bootcss.com/element-ui/1.2.7/index.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
 <script>
+  var url = '/github/repos/FreeCodeCamp-Chengdu/HOP';
+  $(document).ready(function(){
+    app.getReadme();
+  });
+
   var app = new Vue({
     el:'#app',
     data:{
-      title:'aaa'
+      info:{
+        name: '',　//标题
+        description: '',　//项目描述
+        created_at: null,　//创建时间
+        updated_at: null　//更新时间
+      },
+      readme: '' //html格式数据
+      issues: [],
+      collaborator: [],
+      milestone: 0
     },
     methods:{
-      changeTitle:function(){
-        this.title = 'bbb';
+      getInfo:function() {
+        var _self = this;
+        $.ajax({
+          type: "GET",
+          url: url,
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+              console.error("error message : " + errorThrown.toString(), "bottom-right", "error", false);
+          },
+          success: function (obj) {
+            if(obj.hasOwnProperty('message')){
+              console.error(obj.message);
+            }else{
+              _self.info = {
+                name: obj.name,
+                description: obj.description,
+                created_at: obj.created_at,
+                updated_at: obj.updated_at
+              };
+            }
+          }
+        });
+      },
+      getReadme:function() {
+        var _self = this;
+        $.ajax({
+          type: "GET",
+          headers: {
+            'Accept':'application/vnd.github.VERSION.html'
+          },
+          url: url + '/readme',
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+              console.error("error message : " + errorThrown.toString(), "bottom-right", "error", false);
+          },
+          success: function (obj) {
+            if(obj.hasOwnProperty('message')){
+              console.error(obj.message);
+            }else{
+              _self.readme = obj.content;
+            }
+          }
+        });
+      },
+      getIssues:function() {
+        // 获取issue列表
+        var _self = this;
+        $.ajax({
+          type: "GET",
+          url: url + '/issues',
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+              console.error("error message : " + errorThrown.toString(), "bottom-right", "error", false);
+          },
+          success: function (obj) {
+            if(obj.hasOwnProperty('message')){
+              console.error(obj.message);
+            }else{
+              _self.issues = obj;
+            }
+          }
+        });
+      },
+      getCollaborator:function() {
+        // 获取成员列表
+        var _self = this;
+        $.ajax({
+          type: "GET",
+          url: url + '/collaborators',
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+              console.error("error message : " + errorThrown.toString(), "bottom-right", "error", false);
+          },
+          success: function (obj) {
+            if(obj.hasOwnProperty('message')){
+              console.error(obj.message);
+            }else{
+              _self.collaborator = obj;
+            }
+          }
+        });
+      },
+      getMilestone:function() {
+        // 获取进度信息
+        var _self = this;
+        $.ajax({
+          type: "GET",
+          url: url + '/collaborators',
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+              console.error("error message : " + errorThrown.toString(), "bottom-right", "error", false);
+          },
+          success: function (obj) {
+            if(obj.hasOwnProperty('message')){
+              console.error(obj.message);
+            }else{
+              var total = obj.closed_issues + obj.open_issues;
+              _self.milestone = ((obj.closed_issues / total)*100).toFixed(0);
+            }
+          }
+        });
       }
     }
   })
