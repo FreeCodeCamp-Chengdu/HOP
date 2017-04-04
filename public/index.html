@@ -1,99 +1,112 @@
-<!DocType HTML>
-<html><head>
-    <meta http-equiv="Cache-Control"
-          content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://use.fontawesome.com/1f251a0ffc.js"></script>
     <title>黑客马拉松开放平台 - HOP</title>
+</head>
+<body>
+<div id="app">
+    <el-menu style="background-color: #20A0FF" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="1"><a class="nav-item" href="#about" style="color: white">关于黑客松</a></el-menu-item>
+        <el-menu-item index="2"><a class="nav-item" href="#events" style="color: white">寻觅活动</a></el-menu-item>
+        <el-menu-item index="3"><a class="nav-item" href="#products" style="color: white">发掘作品</a></el-menu-item>
+        <el-menu-item index="4"><a class="nav-item" href="#sponsors" style="color: white">赞助商</a></el-menu-item>
+        <el-menu-item index="5" style="position: absolute; right: 0">
+            <a class="nav-item" href="#" style="color: white"><i class="fa fa-github fa-2x" aria-hidden="true"></i>Github登录</a>
+        </el-menu-item>
+    </el-menu>
+    <br>
 
-    <link rel="stylesheet" href="//tech_query.oschina.io/css/EasyWebUI.css" />
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet"
-          href="//cdn.bootcss.com/medium-editor/5.22.1/css/medium-editor.min.css" />
-    <link rel="stylesheet"
-          href="//cdn.bootcss.com/medium-editor/5.22.1/css/themes/default.min.css" />
 
-    <script src="//cdn.bootcss.com/require.js/2.3.0/require.min.js"></script>
-    <script>
-        require.config({
-            baseUrl:    'javascript/',
-            paths:      {
-                jquery:             '//cdn.bootcss.com/jquery/1.12.4/jquery.min',
-                'jQuery+':          'http://tech_query.oschina.io/iquery/jQuery+',
-                'iQuery+':          'http://tech_query.oschina.io/iquery/iQuery+',
-                MutationObserver:
-                    '//cdn.bootcss.com/MutationObserver.js/0.3.2/mutationobserver.min',
-                EasyWebUI:          '//tech_query.oschina.io/css/EasyWebUI',
-                marked:             '//cdn.bootcss.com/marked/0.3.6/marked.min',
-                MediumEditor:
-                    '//cdn.bootcss.com/medium-editor/5.22.1/js/medium-editor.min',
-                QRcode:
-                    '//cdn.bootcss.com/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min',
-                Git_List:           '../html/Git_List',
-                Data_Table:         '../component/Data_Table'
-            },
-            shim:       {
-                MutationObserver:    {exports:  'MutationObserver'},
-                QRcode:              ['jquery']
-            }
-        });
+    <div id="about">
+        <el-carousel :interval="4000" type="card" height="400px">
+            <el-carousel-item v-for="item in 6">
 
-        require(['jquery', 'TreeBuilder'],  function ($, TreeBuilder) {
-
-            $.getJSON(document.body.getAttribute('src'),  function (iData) {
-
-                iView = TreeBuilder('body > .Head').render( iData );
-            });
-        });
-    </script>
-</head><body src="index.json">
-    <div class="Head CenterX Black_O">
-        <div class="Grid-Row CenterY">
-            <div id="Main_Title">
-                <h1 target="_self" href="html/Git_List.html">
-                    ${vm.Title}
-                </h1>
-                <p>${vm.Description}</p>
-            </div>
-        </div>
-        <div class="DropDown Head">
-            <ul class="NavBar Black_O" id="Main_Nav" name="Main_Nav">
-                <li><a target="${vm.target || '_self'}" href="${vm.href}"
-                       autofocus="${vm.autofocus}">
-                    ${vm.title}
-                </a></li>
-            </ul>
-        </div>
+            </el-carousel-item>
+        </el-carousel>
     </div>
-    <div class="PC_Narrow Grid-Row">
-        <div>
-            <div id="Toolkit">
-                <span class="DropDown Head" id="QRcode">
-                    <i class="Icon Mobile"></i>
-                    <div class="DropDown Body"></div>
-                </span>
-                <i class="Icon Pen"></i>
-            </div>
-            <div id="Main_Content"></div>
-        </div>
-        <ul class="Column_1-5" id="Content_Nav" tabindex="-1">
-            <li><a></a></li>
-        </ul>
+
+    <div id="events">
+        <div class="line"></div>
+        <div class="title">寻觅活动</div>
+        <el-row :gutter="25">
+            <el-card aria-busy="true" class="events-list">
+                <el-col span="4" class="events-list-details"><div><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div></el-col>
+                <el-col span="6" class="events-list-details" ><div class="event-title">xxx hackathon</div></el-col>
+                <el-col span="8" class="events-list-details" ><div class="event-subtitle">description</div></el-col>
+                <el-col span="3" class="events-list-details" ><div><i class="fa fa-map-marker" aria-hidden="true"></i>  Local</div></el-col>
+            </el-card>
+        </el-row>
+        <el-row :gutter="25">
+            <el-card aria-busy="true" class="events-list">
+                <el-col span="4" class="events-list-details"><div><i class="fa fa-calendar" aria-hidden="true"></i>  Today</div></el-col>
+                <el-col span="6" class="events-list-details" ><div class="event-title">FCC hackathon</div></el-col>
+                <el-col span="8" class="events-list-details" ><div class="event-subtitle">descriptiondescriptiondescription</div></el-col>
+                <el-col span="3" class="events-list-details" ><div><i class="fa fa-map-marker" aria-hidden="true"></i>  ChengDu</div></el-col>
+            </el-card>
+        </el-row>
     </div>
-    <div class="Foot Black_O Grid-Row CenterX">
-        <span>
-            (C)2017  <a target="_blank" href="https://freecodecamp-chengdu.github.io/">FCC-CDG</a>
-        </span>
-        <span>
-            Powered by
-            <a target="_blank" href="//tech_query.oschina.io/easywebapp/">EasyWebApp</a>,
-            <a target="_blank" href="//git.oschina.net/Tech_Query/EasyREST.js">EasyREST</a> &amp;
-            <a target="_blank" href="https://github.com/FreeCodeCamp-Chengdu/HOP">HOP</a>
-        </span>
+    <div id="products">
+        <div class="line"></div>
+        <div class="title">发掘作品</div>
+        <el-row :gutter="20">
+            <el-col span="12">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span class="product-title">FCC 官网</span>
+                    </div>
+                        <div v-for="o in 4" class="text item">
+                            {{'功能点 ' + o }}
+                        </div>
+                </el-card>
+            </el-col>
+            <el-col span="12">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span class="product-title">FCC 官网</span>
+                    </div>
+                        <div v-for="o in 4" class="text item">
+                            {{'功能点 ' + o }}
+                        </div>
+                </el-card>
+            </el-col>
+
+        </el-row>
     </div>
-</body></html>
+    <div id="sponsors">
+        <div class="line"></div>
+        <div class="title">赞助商</div>
+        <el-row :gutter="24" class="sponsor">
+            <el-col span="3" offset="1"><i class="fa fa-facebook fa-4x"></i></el-col>
+            <el-col span="3" offset="1"><i class="fa fa-twitter fa-4x"></i></el-col>
+            <el-col span="3" offset="1"><i class="fa fa-github fa-4x"></i></el-col>
+            <el-col span="3" offset="1"><i class="fa fa-google fa-4x"></i></el-col>
+            <el-col span="3" offset="1"><i class="fa fa-free-code-camp fa-4x"></i></el-col>
+            <el-col span="3" offset="1"><i class="fa fa-amazon fa-4x"></i></el-col>
+        </el-row>
+    </div>
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+        activeIndex: '1',
+        activeIndex2: '1'
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  })
+</script>
+</html>

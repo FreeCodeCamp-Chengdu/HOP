@@ -121,3 +121,128 @@ body > .PC_Narrow > div {
 #Content_Nav li.active > a {
     border-left-color:    blue;
 }
+
+/* add by Ak 4-4-2017 */
+a, u {
+    text-decoration: none !important;
+}
+
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.el-row {
+    margin-bottom: 20px;
+&:last-child {
+     margin-bottom: 0;
+ }
+}
+.el-col {
+    border-radius: 4px;
+}
+.bg-purple-dark {
+    background: #99a9bf;
+}
+.bg-purple {
+    background: #d3dce6;
+}
+.bg-purple-light {
+    background: #e5e9f2;
+}
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}
+
+.line{
+    background-color: #58b7ff;
+    height: 1px;
+    margin-top: 20px;
+}
+
+.event-title{
+    font-size: large;
+    font-weight: bold;
+}
+
+.event-subtitle{
+    font-size: medium;
+    margin: auto;
+}
+
+.el-row{
+    margin: auto;
+    padding: 2px 20px;
+}
+
+.title{
+    background-color: white;
+    color: #99a9bf;
+    font-weight: bold;
+    margin: 0px 0px;
+    padding: 10px 10px;
+}
+
+.events-list{
+    padding: 0px 20px;
+
+}
+
+.events-list-details{
+    height: 40px;
+}
+
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+}
+
+.sponsor {
+    color: #20A0FF;
+}
+
+div.el-menu.el-menu-item:hover {
+    background-color: white;
+    color: #20A0FF;
+}
