@@ -1,0 +1,99 @@
+<!DocType HTML>
+<html><head>
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+    <title>黑客马拉松开放平台 - HOP</title>
+
+    <link rel="stylesheet" href="//tech_query.oschina.io/css/EasyWebUI.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/medium-editor/5.22.1/css/medium-editor.min.css" />
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/medium-editor/5.22.1/css/themes/default.min.css" />
+
+    <script src="//cdn.bootcss.com/require.js/2.3.0/require.min.js"></script>
+    <script>
+        require.config({
+            baseUrl:    'javascript/',
+            paths:      {
+                jquery:             '//cdn.bootcss.com/jquery/1.12.4/jquery.min',
+                'jQuery+':          'http://tech_query.oschina.io/iquery/jQuery+',
+                'iQuery+':          'http://tech_query.oschina.io/iquery/iQuery+',
+                MutationObserver:
+                    '//cdn.bootcss.com/MutationObserver.js/0.3.2/mutationobserver.min',
+                EasyWebUI:          '//tech_query.oschina.io/css/EasyWebUI',
+                marked:             '//cdn.bootcss.com/marked/0.3.6/marked.min',
+                MediumEditor:
+                    '//cdn.bootcss.com/medium-editor/5.22.1/js/medium-editor.min',
+                QRcode:
+                    '//cdn.bootcss.com/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min',
+                Git_List:           '../html/Git_List',
+                Data_Table:         '../component/Data_Table'
+            },
+            shim:       {
+                MutationObserver:    {exports:  'MutationObserver'},
+                QRcode:              ['jquery']
+            }
+        });
+
+        require(['jquery', 'TreeBuilder'],  function ($, TreeBuilder) {
+
+            $.getJSON(document.body.getAttribute('src'),  function (iData) {
+
+                iView = TreeBuilder('body > .Head').render( iData );
+            });
+        });
+    </script>
+</head><body src="index.json">
+    <div class="Head CenterX Black_O">
+        <div class="Grid-Row CenterY">
+            <div id="Main_Title">
+                <h1 target="_self" href="html/Git_List.html">
+                    ${vm.Title}
+                </h1>
+                <p>${vm.Description}</p>
+            </div>
+        </div>
+        <div class="DropDown Head">
+            <ul class="NavBar Black_O" id="Main_Nav" name="Main_Nav">
+                <li><a target="${vm.target || '_self'}" href="${vm.href}"
+                       autofocus="${vm.autofocus}">
+                    ${vm.title}
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="PC_Narrow Grid-Row">
+        <div>
+            <div id="Toolkit">
+                <span class="DropDown Head" id="QRcode">
+                    <i class="Icon Mobile"></i>
+                    <div class="DropDown Body"></div>
+                </span>
+                <i class="Icon Pen"></i>
+            </div>
+            <div id="Main_Content"></div>
+        </div>
+        <ul class="Column_1-5" id="Content_Nav" tabindex="-1">
+            <li><a></a></li>
+        </ul>
+    </div>
+    <div class="Foot Black_O Grid-Row CenterX">
+        <span>
+            (C)2017  <a target="_blank" href="https://freecodecamp-chengdu.github.io/">FCC-CDG</a>
+        </span>
+        <span>
+            Powered by
+            <a target="_blank" href="//tech_query.oschina.io/easywebapp/">EasyWebApp</a>,
+            <a target="_blank" href="//git.oschina.net/Tech_Query/EasyREST.js">EasyREST</a> &amp;
+            <a target="_blank" href="https://github.com/FreeCodeCamp-Chengdu/HOP">HOP</a>
+        </span>
+    </div>
+</body></html>
