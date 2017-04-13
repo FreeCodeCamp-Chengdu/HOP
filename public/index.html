@@ -2,107 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/index.css">
     <script src="https://use.fontawesome.com/ff0e763f8f.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>黑客马拉松开放平台 - HOP</title>
 </head>
 <body>
-<div id="app">
-    <el-menu style="background-color: #20A0FF" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1"><a class="nav-item" href="#about" style="color: white">关于黑客松</a></el-menu-item>
-        <el-menu-item index="2"><a class="nav-item" href="#events" style="color: white">寻觅活动</a></el-menu-item>
-        <el-menu-item index="3"><a class="nav-item" href="#products" style="color: white">发掘作品</a></el-menu-item>
-        <el-menu-item index="4"><a class="nav-item" href="#sponsors" style="color: white">赞助商</a></el-menu-item>
-        <el-menu-item index="5" style="position: absolute; right: 0">
-            <a class="nav-item" href="#" style="color: white"><i class="fa fa-github fa-2x" aria-hidden="true"></i>Github登录</a>
-        </el-menu-item>
-    </el-menu>
+<div id="app" class="container-fluid">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" :default-active="activeIndex">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">FCC</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" ><a class="nav-link" href="#about" >关于黑客松</a></li>
+            <li class="nav-item" ><a class="nav-link" href="#events" >寻觅活动</a></li>
+            <li class="nav-item" ><a class="nav-link" href="#products" >发掘作品</a></li>
+            <li class="nav-item" ><a class="nav-link" href="#sponsors" >赞助商</a></li>
+            <li class="nav-item" style="position: absolute; right: 0">
+                <a class="nav-item" href="#"><i class="fa fa-github fa-2x" aria-hidden="true">Github登录</i></a>
+            </li>
+        </ul>
+    </nav>
+    <br><br><br><br>
+
+    <div id="about" class="card">
+        <img class="card-img main_image" src="image/freecodecamp.jpg" alt="Card Image">
+        <!-- <div class="card-img-overlay">
+            <h4>Title</h4>
+            <p>Wider card</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div> -->
+    </div>
+
     <br>
 
-
-    <div id="about">
-        <el-carousel :interval="4000" type="card" height="400px">
-            <el-carousel-item v-for="item in 6" :key="item">
-
-            </el-carousel-item>
-        </el-carousel>
+    <div id="events" class="row">
+        <div class="title col-md-12">寻觅活动</div>
+        <br>
+        <div class="line col-md-12"></div>
+        <br>
+        <div v-for="item in 4" class="col-md-6 px-1">
+            <a class="card card-block" href="#">
+                <div class="card-title"><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div>
+                <h3 class="card-title">xxx hackathon</h3>
+                <p class="card-text">This is the first hackathon in Chengdu Fcc group. And both of us will wait for you. Please booking
+                as soon as possible. There are only 20 sits here XD</p>
+                <div class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>  Local</div>
+            </a>
+        </div>
+    </div>
+    <div id="products" class="row">
+        <div class="title col-md-12">发掘作品</div>
+        <br>
+        <div class="line col-md-12"></div>
+        <br>
+        <div  v-for="product in 6" class="col-md-4 px-1" id="product">
+            <a class="card my-1" href="#">
+                <img class="card-img-top img-fluid image-product" src="image/temp_img.png" alt="project image">
+                <h4 class="card-title col-md-12">
+                    FCC 官网
+                </h4>
+                <div v-for="o in 3" class="card-text col-md-12">
+                    {{'功能点 ' + o }}
+                </div>
+            </a>
+        </div>
     </div>
 
-    <div id="events">
-        <div class="line"></div>
-        <div class="title">寻觅活动</div>
-        <el-row :gutter="20">
-            <el-card aria-busy="true" class="events-list">
-                <el-col :span="4" class="events-list-details"><div><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div></el-col>
-                <el-col :span="6" class="events-list-details" ><div class="event-title">xxx hackathon</div></el-col>
-                <el-col :span="8" class="events-list-details" ><div class="event-subtitle">description</div></el-col>
-                <el-col :span="3" class="events-list-details" ><div><i class="fa fa-map-marker" aria-hidden="true"></i>  Local</div></el-col>
-            </el-card>
-        </el-row>
-        <el-row :gutter="20">
-            <el-card aria-busy="true" class="events-list">
-                <el-col :span="4" class="events-list-details"><div><i class="fa fa-calendar" aria-hidden="true"></i>  Today</div></el-col>
-                <el-col :span="6" class="events-list-details" ><div class="event-title">FCC hackathon</div></el-col>
-                <el-col :span="8" class="events-list-details" ><div class="event-subtitle">descriptiondescriptiondescription</div></el-col>
-                <el-col :span="3" class="events-list-details" ><div><i class="fa fa-map-marker" aria-hidden="true"></i>  ChengDu</div></el-col>
-            </el-card>
-        </el-row>
-    </div>
-    <div id="products">
-        <div class="line"></div>
-        <div class="title">发掘作品</div>
-        <el-row :gutter="20">
-            <el-col :span="12">
-                <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                        <span class="product-title">FCC 官网</span>
-                    </div>
-                        <div v-for="o in 4" class="text item">
-                            {{'功能点 ' + o }}
-                        </div>
-                </el-card>
-            </el-col>
-            <el-col :span="12">
-                <a>
-                <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                        <span class="product-title">FCC 官网</span>
-                    </div>
-                        <div v-for="o in 4" class="text item">
-                            {{'功能点 ' + o }}
-                        </div>
-                </el-card>
-                </a>
-            </el-col>
-
-        </el-row>
-    </div>
-    <div id="sponsors">
-        <div class="line"></div>
-        <div class="title">赞助商</div>
-        <el-row :gutter="24" class="sponsor">
-            <el-col :span="3" :offset=1><i class="fa fa-facebook fa-4x"></i></el-col>
-            <el-col :span="3" :offset=1><i class="fa fa-twitter fa-4x"></i></el-col>
-            <el-col :span="3" :offset=1><i class="fa fa-github fa-4x"></i></el-col>
-            <el-col :span="3" :offset=1><i class="fa fa-google fa-4x"></i></el-col>
-            <el-col :span="3" :offset=1><i class="fa fa-free-code-camp fa-4x"></i></el-col>
-            <el-col :span="3" :offset=1><i class="fa fa-amazon fa-4x"></i></el-col>
-        </el-row>
+    <div id="sponsors" class="row">
+        <div class="line col-md-12"></div>
+        <br>
+        <div class="title col-md-12">赞助商</div>
+        <br>
+        <div class="sponsor dark_green">
+            <i class="col-md-1 fa fa-facebook fa-2x mr-2"></i>
+            <i class="col-md-1 fa fa-twitter fa-2x mr-2"></i>
+            <i class="col-md-1 fa fa-github fa-2x mr-2"></i>
+            <i class="col-md-1 fa fa-google fa-2x mr-2"></i>
+            <i class="col-md-1 fa fa-amazon fa-2x mr-2"></i>
+            <i class="col-md-1 fa fa-free-code-camp fa-2x mr-2"></i>
+        </div>
     </div>
 
 </div>
 </body>
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<!-- import JavaScript -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
   new Vue({
     el: '#app',
     data: {
         activeIndex: '1',
         activeIndex2: '1'
+
     },
     methods: {
       handleSelect(key, keyPath) {
