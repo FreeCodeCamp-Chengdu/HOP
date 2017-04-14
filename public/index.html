@@ -9,87 +9,95 @@
     <link rel="stylesheet" href="css/index.css">
     <script src="https://use.fontawesome.com/ff0e763f8f.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <title>黑客马拉松开放平台 - HOP</title>
 </head>
 <body>
-<div id="app" class="container">
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" :default-active="activeIndex">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">FCC</a>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active" ><a class="nav-link" href="#about" >关于黑客松</a></li>
-            <li class="nav-item" ><a class="nav-link" href="#events" >寻觅活动</a></li>
-            <li class="nav-item" ><a class="nav-link" href="#products" >发掘作品</a></li>
-            <li class="nav-item" ><a class="nav-link" href="#sponsors" >赞助商</a></li>
-            <li class="nav-item" style="position: absolute; right: 0">
-                <a class="nav-item" href="#"><i class="fa fa-github fa-2x" aria-hidden="true">Github登录</i></a>
-            </li>
-        </ul>
-    </nav>
-    <br><br><br><br>
+<div id="app">
+    <section id="nav">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" :default-active="activeIndex">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="fa fa-free-code-camp fa-2x"></i></a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" ><a class="nav-link" href="#about" >关于黑客松</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#events" >寻觅活动</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#products" >发掘作品</a></li>
+                <li class="nav-item" ><a class="nav-link" href="#sponsors" >赞助商</a></li>
+                <li class="nav-item" style="position: absolute; right: 0">
+                    <a class="nav-item" href="#"><i class="fa fa-github fa-2x" aria-hidden="true">Github登录</i></a>
+                </li>
+            </ul>
+        </nav>
+    </section>
 
-    <div id="about" class="card">
-        <img class="card-img main_image" src="image/freecodecamp.jpg" alt="Card Image">
-        <!-- <div class="card-img-overlay">
-            <h4>Title</h4>
-            <p>Wider card</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div> -->
-    </div>
-
-    <br>
-
-    <div id="events" class="row">
-        <div class="title col-md-12">寻觅活动</div>
-        <br>
-        <div class="line col-md-12"></div>
-        <br>
-        <div v-for="item in 4" class="col-md-6 px-1">
-            <a class="card card-block" href="#">
-                <div class="card-title"><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div>
-                <h3 class="card-header">xxx hackathon</h3>
-                <p class="card-text">This is the first hackathon in Chengdu Fcc group. And both of us will wait for you. Please booking
-                as soon as possible. There are only 20 sits here XD</p>
-                <div class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>  Local</div>
-            </a>
+    <section id="about">
+        <div class="container">
+            <h1>FCC 成都黑客马拉松</h1>
+            <p>挑战自己，认识同好，在一天的时间内激发自己与团队最大的潜力，这里有志同道合的朋友，有并肩奋斗的队友，有创意碰撞的火花。如果你自认为是一个黑客，或者想知道什么才是黑客，来试试吧。</p>
+            <p>Talk is cheap, show me your code.</p>
         </div>
-    </div>
-    <div id="products" class="row">
-        <div class="title col-md-12">发掘作品</div>
-        <br>
-        <div class="line col-md-12"></div>
-        <br>
-        <div  v-for="product in 6" class="col-md-4 px-1" id="product">
-            <a class="card my-1" href="#">
-                <img class="card-img-top img-fluid image-product" src="image/temp_img.png" alt="project image">
-                <h4 class="card-title col-md-12">
-                    FCC 官网
-                </h4>
-                <div v-for="o in 3" class="card-text col-md-12">
-                    {{'功能点 ' + o }}
+    </section>
+
+    <section id="events">
+        <div class="container">
+            <div class="title col-md-12">寻觅活动</div>
+            <hr>
+            <div class="row">
+                <div v-for="item in 4" class="col-md-6 px-1">
+                    <a class="card card-block" href="#">
+                        <div class="card-title"><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div>
+                        <h3 class="card-header">xxx hackathon</h3>
+                        <p class="card-text">This is the first hackathon in Chengdu Fcc group. And both of us will wait for you. Please booking
+                        as soon as possible. There are only 20 sits here XD</p>
+                        <div class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>  Local</div>
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="sponsors" class="row">
-        <div class="line col-md-12"></div>
-        <br>
-        <div class="title col-md-12">赞助商</div>
-        <br>
-        <div class="sponsor dark_green">
-            <i class="col-md-1 fa fa-facebook fa-2x mr-2"></i>
-            <i class="col-md-1 fa fa-twitter fa-2x mr-2"></i>
-            <i class="col-md-1 fa fa-github fa-2x mr-2"></i>
-            <i class="col-md-1 fa fa-google fa-2x mr-2"></i>
-            <i class="col-md-1 fa fa-amazon fa-2x mr-2"></i>
-            <i class="col-md-1 fa fa-free-code-camp fa-2x mr-2"></i>
+    <section id="products">
+        <div class="container">
+            <div class="title col-md-12">发掘作品</div>
+            <hr>
+            <div class="row">
+                <div  v-for="product in 6" class="col-md-4 px-1" id="product">
+                    <a class="card my-1" href="#">
+                        <img class="card-img-top img-fluid image-product" src="image/temp_img.png" alt="project image">
+                        <h4 class="card-title col-md-12">
+                            FCC 官网
+                        </h4>
+                        <div v-for="o in 3" class="card-text col-md-12">
+                            {{'功能点 ' + o }}
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <section id="sponsors">
+        <div class="container">
+            <div class="title col-md-12">赞助商</div>
+            <hr>
+            <div class="sponsor dark_green">
+                <i class="col-md-1 fa fa-facebook fa-2x mr-2"></i>
+                <i class="col-md-1 fa fa-twitter fa-2x mr-2"></i>
+                <i class="col-md-1 fa fa-github fa-2x mr-2"></i>
+                <i class="col-md-1 fa fa-google fa-2x mr-2"></i>
+                <i class="col-md-1 fa fa-amazon fa-2x mr-2"></i>
+                <i class="col-md-1 fa fa-free-code-camp fa-2x mr-2"></i>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p class="text-center">FCC Chengdu Copyright &copy; 2017</p>
+    </footer>
 </div>
+
+<script src="javascript/Index.js"></script>
 </body>
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
