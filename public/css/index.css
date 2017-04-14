@@ -24,7 +24,7 @@ a {
 
 .main_image {
     width: 100%;
-    height: 150px;
+    height: 120px;
     display: block;
 }
 
@@ -41,19 +41,32 @@ a {
 }
 
 .card {
-    background-color: darkgreen;
-    border-color: white;
+    background-color: white;
+    border-color: darkgreen;
     border-radius: 0;
     color: white;
 
 }
 
 .card:hover {
-    background-color: white;
-    border-color: darkgreen;
+    background-color: darkgreen;
+    border-color: white;
 }
 
 .card:hover .card-title, .card:hover .card-text{
+    color: white;
+}
+
+.card-header{
+    background-color: darkgreen;
+}
+
+.card:hover .card-header{
+    color: darkgreen;
+    background-color: white;
+}
+
+.card-title, .card-text {
     color: darkgreen;
 }
 
