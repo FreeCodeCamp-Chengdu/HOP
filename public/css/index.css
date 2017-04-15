@@ -10,6 +10,18 @@ a {
     color: inherit;
 }
 
+#event_btn{
+    position: absolute;
+    right: 20px;
+    bottom: 31px;
+    border: none;
+    padding: 5px 10px;
+}
+
+.panel-heading {
+    margin-top: 0px;
+}
+
 .dark_green {
     color: darkgreen;
 }
