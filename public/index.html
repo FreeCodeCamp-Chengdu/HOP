@@ -48,9 +48,9 @@
     <section id="events">
         <div class="container">
             <div class="row">
-                <div v-for="item in 8" class="col-md-6">
+                <div v-for="events in 8" class="col-md-6">
                     <div class="panel panel-default event">
-                        <h3 class="panel-heading">xxx hackathon</h3>
+                        <h3 class="panel-heading">xxx hackathon {{ events }}</h3>
                         <div class="panel-body"><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div>
                         <p class="panel-body">This is the first hackathon in Chengdu Fcc group. And both of us will wait for you. Please booking
                         as soon as possible. There are only 20 sits here XD</p>
@@ -126,7 +126,7 @@
       duration: 2000,
       origin: 'bottom'
     });
-    sr.reveal('event', {
+    sr.reveal('.event', {
       duration: 2000,
       origin: 'left',
       distance: '100px',
