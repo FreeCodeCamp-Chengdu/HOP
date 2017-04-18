@@ -122,7 +122,8 @@ footer {
 
 #main_image #logo {
     outline: white solid 3px;
-    font-family: "Caslon";
+    font-family: "Bungee Inline", Serif, Helvetica, "Microsoft YaHei", serif;
+    padding: 10px 15px;
 }
 
 .tags{
