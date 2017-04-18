@@ -180,11 +180,20 @@ footer {
     border-bottom: darkgray solid 1px;
 }
 
+.event-image{
+    height: 100px;
+}
+
 #events .col-sm-4{
     padding: 10px 10px;
 }
 
 .event h3{
     margin-top: 0px;
+    color: #21bdb7;
+}
+
+.address-text{
+    color: #21bdb7;
 }
 

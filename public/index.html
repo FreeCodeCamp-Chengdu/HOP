@@ -68,10 +68,10 @@
                 <div class="col-md-4">
                     <h3>成都FCC VueJS 黑客松</h3>
                     <div><i class="fa fa-calendar event-icon"></i><span class="event-details">2017-4-22 周六早上10:00</span></div>
-                    <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details">保利中心B座19楼拾级咖啡</span></div>
+                    <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details address-text">保利中心B座19楼拾级咖啡</span></div>
                     <div><i class="fa fa-tags event-icon"></i><span class="tags event-details">面向学生</span></div>
                     <br>
-                    <button class="btn btn-primary btn-larger">马上报名</button>
+                    <button class="btn btn-default btn-larger">马上报名加入</button>
                     <hr>
                 </div>
                 <div class="col-md-4" id="event-details-right">
@@ -100,13 +100,18 @@
                 <div v-for="events in 2" class="row">
                     <div v-for="events in 3" class="col-sm-4">
                         <div class="col-sm-12 event">
-                            <img src="image/temp_img.png" class="img-responsive">
+                            <img src="image/temp_img.png" class="img-responsive event-img">
                             <h3>成都FCC VueJS 黑客松</h3>
                             <div><i class="fa fa-calendar event-icon"></i><span class="event-details">2017-4-22 周六早上10:00</span></div>
-                            <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details">保利中心B座19楼拾级咖啡</span></div>
+                            <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details address-text">保利中心B座19楼拾级咖啡</span></div>
                             <div><i class="fa fa-tags event-icon"></i><span class="tags event-details">面向学生</span></div>
                             <br>
-                            <button class="btn btn-default btn-larger">添加到日历</button>
+                            <div class="dropdown">
+                            <button class="btn btn-default btn-larger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                添加到日历
+                                <span class="caret"></span>
+                            </button>
+                            </div>
                             <hr>
                             <div class="event-details-right"><span>奖品</span><span class="pull-right">荣誉</span></div>
                             <br>
