@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <title>黑客马拉松开放平台 - HOP</title>
 </head>
-<body>
+<body class="background-color-default">
 <div id="app">
     <section id="nav">
         <nav class="navbar navbar-default navbar-fixed-top" :default-active="activeIndex">
@@ -38,19 +38,16 @@
     </section>
 
     <section id="main_image">
-
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <img src="image/fcc-chengdu-hackathon.png" class="main_image">
-                    <div class="post-content">
-                        <i class="fa fa-free-code-camp fa-4x col-md-12"></i>
-                        <h1 id="logo" class="col-md-2 col-md-offset-5">HACKATHON</h1>
-                        <h1 class="col-md-12">中国最好的黑客马拉松，尽收眼底</h1>
-                    </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="image/fcc-chengdu-hackathon.png" class="main_image">
+                <div class="post-content">
+                    <i class="fa fa-free-code-camp fa-4x col-md-12"></i>
+                    <h1 id="logo" class="col-md-2 col-md-offset-5">HACKATHON</h1>
+                    <h1 class="col-md-12">中国最好的黑客马拉松，尽收眼底</h1>
                 </div>
             </div>
-
-
+        </div>
     </section>
 
     <section id="about">
@@ -71,7 +68,7 @@
                 <div class="col-md-4">
                     <h3>成都FCC VueJS 黑客松</h3>
                     <div><i class="fa fa-calendar event-icon"></i><span class="event-details">2017-4-22 周六早上10:00</span></div>
-                    <div><i class="fa fa-map-marker event-icon" id="map-marker"></i><span class="event-details">保利中心B座19楼拾级咖啡</span></div>
+                    <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details">保利中心B座19楼拾级咖啡</span></div>
                     <div><i class="fa fa-tags event-icon"></i><span class="tags event-details">面向学生</span></div>
                     <br>
                     <button class="btn btn-primary btn-larger">马上报名</button>
@@ -83,7 +80,7 @@
                     <div class="col-sm-6 details-left">
                         <div class="event-details-right"><span>消费</span><span class="pull-right tags-green">免费</span></div>
                         <div class="event-details-right"><span>持续时间</span><span class="pull-right tags">12小时</span></div>
-                        <div class="event-details-right"><span>人数</span><span class="pull-right tags">～50</span></div>
+                        <div class="event-details-right"><span>人数</span><span class="pull-right tags">~50</span></div>
                     </div>
                     <div class="col-sm-6 details-right">
                         <div class="event-details-right"><span>赞助商</span><i class="fa fa-remove pull-right"></i></div>
@@ -93,19 +90,37 @@
                 </div>
             </div>
         </div>
-
     </section>
-    <hr>
+
     <section id="events">
         <div class="container">
+            <h3 class="title"><i class="fa fa-star-o"></i>即将到来的活动</h3>
+            <hr class="hr">
             <div class="row">
-                <div v-for="events in 8" class="col-md-6">
-                    <div class="panel panel-default event">
-                        <h3 class="panel-heading">xxx hackathon {{ events }}</h3>
-                        <div class="panel-body"><i class="fa fa-calendar" aria-hidden="true"></i>  Soon</div>
-                        <p class="panel-body">This is the first hackathon in Chengdu Fcc group. And both of us will wait for you. Please booking
-                        as soon as possible. There are only 20 sits here XD</p>
-                        <div class="panel-body"><i class="fa fa-map-marker" aria-hidden="true"></i>  Local <button id="event_btn" class="btn btn-primary">马上参加</button></div>
+                <div v-for="events in 2" class="row">
+                    <div v-for="events in 3" class="col-sm-4">
+                        <div class="col-sm-12 event">
+                            <img src="image/temp_img.png" class="img-responsive">
+                            <h3>成都FCC VueJS 黑客松</h3>
+                            <div><i class="fa fa-calendar event-icon"></i><span class="event-details">2017-4-22 周六早上10:00</span></div>
+                            <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details">保利中心B座19楼拾级咖啡</span></div>
+                            <div><i class="fa fa-tags event-icon"></i><span class="tags event-details">面向学生</span></div>
+                            <br>
+                            <button class="btn btn-default btn-larger">添加到日历</button>
+                            <hr>
+                            <div class="event-details-right"><span>奖品</span><span class="pull-right">荣誉</span></div>
+                            <br>
+                            <div class="col-sm-6 details-left">
+                                <div class="event-details-right"><span>消费</span><span class="pull-right tags-green">免费</span></div>
+                                <div class="event-details-right"><span>持续时间</span><span class="pull-right tags">12小时</span></div>
+                                <div class="event-details-right"><span>人数</span><span class="pull-right tags">~50</span></div>
+                            </div>
+                            <div class="col-sm-6 details-right">
+                                <div class="event-details-right"><span>赞助商</span><i class="fa fa-remove pull-right"></i></div>
+                                <div class="event-details-right"><span>导师</span><i class="fa fa-check pull-right"></i></div>
+                                <div class="event-details-right"><span>远程参赛</span><i class="fa fa-remove pull-right"></i></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
