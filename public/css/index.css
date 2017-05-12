@@ -138,7 +138,31 @@ footer {
     padding: 2px;
 }
 
-.event-details{
+.tags-blue{
+    background-color: dodgerblue;
+    color: white;
+    padding: 2px;
+}
+
+.event-details, .product-details{
+    padding: 2px 10px;
+    margin: 2px 5px;
+}
+
+.product-details-date{
+    padding: 2px 10px;
+    margin: 2px 5px;
+}
+.product-details-group{
+    padding: 2px 8px;
+    margin: 2px 5px;
+}
+.product-details-tag{
+    padding: 2px 10px;
+    margin: 2px 2px;
+}
+
+.product-details-button{
     padding: 2px 10px;
     margin: 2px 5px;
 }
@@ -150,6 +174,10 @@ footer {
 
 .map-marker{
     margin: 1px 4.5px;
+}
+
+.users{
+    padding-left: 4px;
 }
 
 .event-details-right{
@@ -174,7 +202,7 @@ footer {
     color: red;
 }
 
-.event{
+.event, .product{
     background-color: white;
     margin: 0px 0px;
     padding: 30px 5px;
@@ -189,12 +217,16 @@ footer {
     padding: 10px 10px;
 }
 
+#products .col-sm-6{
+    padding: 10px 10px;
+}
+
 .event h3{
     margin-top: 0px;
     color: #21bdb7;
 }
 
-.address-text{
+.address-text, .group-text{
     color: #21bdb7;
 }
 

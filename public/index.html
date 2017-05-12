@@ -99,7 +99,7 @@
             <hr class="hr">
             <div class="row">
                 <div v-for="events in 2" class="row">
-                    <div v-for="events in 3" class="col-sm-4">
+                    <div v-for="event in 3" class="col-sm-4">
                         <div class="col-sm-12 event">
                             <img src="image/temp_img.png" class="img-responsive event-img">
                             <h3>成都FCC VueJS 黑客松</h3>
@@ -132,20 +132,24 @@
             </div>
         </div>
     </section>
-    <hr class="hr">
     <section id="products">
         <div class="container">
+            <h3 class="title"><i class="fa fa-star-o"></i>优秀项目展</h3>
+            <hr class="hr">
             <div class="row">
-                <div  v-for="product in 6" class="col-md-4" id="product">
-                    <a class="card my-1" href="#">
-                        <img class="card-img-top img-fluid image-product" src="image/temp_img.png" alt="project image">
-                        <h4 class="card-title col-md-12">
-                            FCC 官网
-                        </h4>
-                        <div v-for="o in 3" class="card-text col-md-12">
-                            {{'功能点 ' + o }}
+                <div  v-for="products in 2" class="row">
+                    <div v-for="product in 2" class="col-sm-6">
+                        <div class="col-sm-12 product">
+                            <img src="image/temp_img.png" class="img-responsive event-img">
+                            <h3>文本编辑器</h3>
+                            <div><i class="fa fa-calendar event-icon"></i><span class="product-details-date">2017-4-22</span></div>
+                            <div><i class="fa fa-users event-icon users"></i><span class="product-details-group group-text">咸鱼小组</span></div>
+                            <div><i class="fa fa-tags event-icon"></i><span class="tags-blue product-details-tag">富文本编辑，云同步，自动补全</span></div>
+                            <button class="btn btn-success btn-larger product-details-button">
+                                查看详情
+                            </button>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,15 +157,17 @@
 
     <section id="sponsors">
         <div class="container">
-            <div class="title col-md-12">赞助商</div>
-            <hr>
-            <div class="sponsor dark_green">
-                <i class="col-md-1 fa fa-facebook fa-2x mr-2"></i>
-                <i class="col-md-1 fa fa-twitter fa-2x mr-2"></i>
-                <i class="col-md-1 fa fa-github fa-2x mr-2"></i>
-                <i class="col-md-1 fa fa-google fa-2x mr-2"></i>
-                <i class="col-md-1 fa fa-amazon fa-2x mr-2"></i>
-                <i class="col-md-1 fa fa-free-code-camp fa-2x mr-2"></i>
+            <h3 class="title"><i class="fa fa-star-o"></i>赞助商</h3>
+            <hr class="hr">
+            <div class="row">
+                <div class="sponsor dark_green">
+                    <i class="col-md-1 fa fa-facebook fa-2x mr-2"></i>
+                    <i class="col-md-1 fa fa-twitter fa-2x mr-2"></i>
+                    <i class="col-md-1 fa fa-github fa-2x mr-2"></i>
+                    <i class="col-md-1 fa fa-google fa-2x mr-2"></i>
+                    <i class="col-md-1 fa fa-amazon fa-2x mr-2"></i>
+                    <i class="col-md-1 fa fa-free-code-camp fa-2x mr-2"></i>
+                </div>
             </div>
         </div>
     </section>
@@ -199,6 +205,12 @@
     sr.reveal('.event', {
       duration: 2000,
       origin: 'left',
+      distance: '100px',
+      viewFactor: 0.2
+    });
+    sr.reveal('.product', {
+      duration: 2000,
+      origin: 'right',
       distance: '100px',
       viewFactor: 0.2
     })
