@@ -1,0 +1,134 @@
+<!DocType HTML>
+<html><head>
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+    <title>黑客马拉松开放平台 - HOP</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//cdn.bootcss.com/element-ui/1.2.7/theme-default/index.css" rel="stylesheet">
+    <style>
+      body {
+          font-family: "Helvetica Neue",Helvetica,"Lucida Grande",Arial,"Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei",sans-serif
+      }
+      #app {
+        margin-top: 60px;
+      }
+      .box-card {
+        width: 80%;
+        margin: auto;
+      }
+    </style>
+</head>
+<body>
+<div id="app">
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <span style="line-height: 36px;">创建活动</span>
+    </div>
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="活动名称" prop="title" placeholder="请输入活动名称">
+        <el-input v-model="ruleForm.title"></el-input>
+      </el-form-item>
+      <el-form-item label="主题关键词" prop="keyWord">
+        <el-input v-model="ruleForm.keyWord" placeholder="例如：'JavaScript,Node.JS'" ></el-input>
+      </el-form-item>
+      <el-form-item label="活动时间" required>
+        <el-col :span="11">
+          <el-form-item prop="date1">
+            <el-date-picker type="datetime" placeholder="选择活动开始时间" v-model="ruleForm.startTime" style="width: 100%;"></el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col class="line" :span="2" style="text-align:center">-</el-col>
+        <el-col :span="11">
+          <el-form-item prop="date2">
+            <el-date-picker type="datetime" placeholder="选择活动结束时间" v-model="ruleForm.endTime" style="width: 100%;"></el-time-picker>
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="活动地点" prop="location">
+        <el-input v-model="ruleForm.location" placeholder="例如：http://example.com/map/?lat_lgt=104.06,30.67"></el-input>
+      </el-form-item>
+      <el-form-item label="活动描述" prop="description">
+        <el-input type="textarea" v-model="ruleForm.description"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
+</div>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script src="//cdn.bootcss.com/element-ui/1.3.2/index.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+<script>
+  var app = new Vue({
+    el:'#app',
+    data:{
+      ruleForm: {
+        title: '',
+        keyWord: '',
+        startTime: '',
+        endTime: '',
+        location: '',
+        description: ''
+      },
+      rules: {
+        title: [
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
+        ],
+        keyWord: [
+          { required: true, message: '请选择活动主题关键字', trigger: 'change' }
+        ],
+        startTime: [
+          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+        ],
+        endTime: [
+          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+        ],
+        location: [
+          { required: true, message: '请填写活动地址', trigger: 'change' }
+        ],
+        description: [
+          { required: true, message: '请填写活动描述', trigger: 'blur' }
+        ]
+      }
+    },
+   methods: {
+     submitForm(formName) {
+       var _self = this;
+       this.$refs[formName].validate((valid) => {
+         if (valid) {
+           _self.createActivity();
+         } else {
+           console.log('error submit!!');
+           return false;
+         }
+       });
+     },
+     resetForm(formName) {
+       this.$refs[formName].resetFields();
+     },
+     createActivity:function() {
+       var parameter = Object.assign(this.ruleForm, {
+         startTime: +(new Date(this.ruleForm.startTime)),
+         endTime: +(new Date(this.ruleForm.endTime)),
+       });
+       console.log(parameter)
+     }
+   }
+  })
+</script>
