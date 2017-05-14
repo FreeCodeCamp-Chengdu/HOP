@@ -1,0 +1,172 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,"Lucida Grande",Arial,"Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei",sans-serif
+}
+.panel-title {
+  border-bottom: solid 1px #dedede;
+  padding: 15px;
+  margin-top: 0px;
+  background: #ededed;
+}
+/*
+  项目详情
+*/
+#info {
+  background-color: #4caf50;
+  text-align: center;
+  color: #f4f4f4;
+  padding: 70px 0px 60px 0px;
+}
+#info .title {
+  font-size: 56px;
+  text-shadow: -5px 5px 0 rgba(0,0,0,.1);
+}
+#info .describe {
+  font-size: 24px;
+}
+#info .info-time {
+  display: inline-block;
+  margin: 0px 10px;
+}
+
+
+#menu-list {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  text-align: center;
+}
+#menu-list ul {
+  list-style: none;
+  margin-bottom: 0px;
+}
+#menu-list ul li {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 15px 0px;
+  padding: 0px 10px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  color: #878787;
+}
+#menu-list ul li:hover {
+  col;or: #4caf50
+}
+
+/*
+  REDAME
+*/
+.bs-callout {
+    padding: 20px;
+    width: 80%;
+    margin:40px auto;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+
+/*
+ ISSUES LIST
+*/
+#project-info {
+  padding: 20px 30px;
+}
+#project-info .main-content {
+  border: solid 1px #dedede;
+  border-radius: 4px;
+  padding: 0px;
+  overflow: hidden;
+}
+#project-info .main-content ul {
+  list-style: none;
+  padding-left: 0px;
+}
+#project-info .main-content ul li {
+  border-bottom: solid 1px #dadada;
+  padding: 0px 15px 5px 15px;
+  background-color: #fefefe;
+}
+#project-info .main-content ul li .title {
+  font-size: 18px;
+  color: #676767;
+}
+.main-content ul li a {
+  color: #676767;
+}
+.main-content ul li a span {
+  font-weight: bold;
+}
+.main-content ul li a .open {
+  color: #4caf50
+}
+.main-content ul li a:hover {
+  color:  #4caf50;
+}
+.main-content ul li:last-child {
+  border-bottom: none!important;
+}
+.main-content ul li label {
+  font-size: 14px;
+  padding:4px 8px;
+  border-radius: 4px;
+  color: #FFF;
+}
+
+.main-content ul li .commit {
+  float: right;
+}
+
+.main-content ul li .commit i {
+  font-size: 20px;
+}
+
+
+/*
+ 成员列表
+*/
+#collaborator {
+  border: solid 1px #dedede;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#collaborator .peoper-list {
+  padding: 15px;
+}
+#collaborator .peoper {
+  display: inline-block;
+  width: auto;
+  margin: 5px;
+}
+
+/*
+  里程碑
+*/
+#milestone {
+  margin-top: 20px;
+  border: solid 1px #dedede;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#milestone .milestone {
+  margin: 15px;
+  border: 1px solid #ebebeb;
+  padding: 10px;
+  border-radius: 4px;
+}
+#milestone .milestone:hover {
+  border: solid 1px #a8a8a8;
+  box-shadow: 0px 0px 3px #ededed;
+  text-decoration: none;
+  background: rgba(6, 173, 12, 0.60);
+  color: #fff;
+}
+#milestone .milestone a{
+  color: inherit;
+}
+#milestone .milestone a:hover{
+  text-decoration: none;
+}
+#milestone .milestone-time {
+  font-size: 11px;
+  /*color: #adadad;*/
+  display: inline-block;
+  margin: 0px 10px 0px 4px;
+}

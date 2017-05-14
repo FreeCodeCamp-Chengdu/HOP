@@ -1,0 +1,121 @@
+<!DocType HTML>
+<html><head>
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+    <title>黑客马拉松开放平台 - HOP</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!-- <link href="//cdn.bootcss.com/element-ui/1.2.7/theme-default/index.css" rel="stylesheet"> -->
+    <link href="info.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+  <div id="info">
+    <p class="title"> {{ info.name }} </p>
+    <p class="describe"> {{ info.description }} </p>
+    <p class="info-time">
+      <span>创建时间：</span>
+      <span> {{ info.created_at }} </san>
+     </p>
+    <p class="info-time">
+      <span>最后更新：</span>
+      <span> {{ info.updated_at }} </san>
+    </p>
+  </div>
+  <div id="menu-list">
+    <ul>
+      <li @click="handleMenu('info')" style="border-right:solid 2px #a9a9a9;"> 项目详情 </li>
+      <li @click="handleMenu('readme')"> 项目介绍 <li>
+    </ul>
+  </div>
+  <div class="container-fluid" id="readme" v-if="setting.currentMenu == 'readme'">
+      <p class="bs-callout" v-html="readme">
+        {{ readme }}
+      </P>
+  </div>
+  <div class="container-fluid" id="project-info" v-if="setting.currentMenu == 'info'">
+    <div class="row">
+      <div class="col-xs-7 main-content">
+        <h4 class="panel-title"> 任务列表&nbsp;[ {{ issues.length }} ] </h4>
+        <ul>
+          <li v-for="issue in issues">
+            <div>
+              <h3 class="title">
+                <a :href="issue.html_url" target="_blank">
+                  [ <span :class="issue.state"> {{ issue.state }} </span> ] {{ issue.title }}
+                </a>
+                <a :href="issue.labels_url" target="_blank">
+                  <label v-for="label in issue.labels"
+                      v-bind:style="{ background: '#' + label.color}">
+                     {{ label.name}}
+                  </label>
+                </a>
+                <span class="commit">
+                  <i class="fa fa-comments-o"></i>
+                  {{ issue.comments }}
+                </span>
+              </h3>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <aside class="col-xs-5 sidebar">
+        <div id="collaborator">
+          <h4 class="panel-title">项目成员&nbsp;[ {{ collaborator.length }} ]</h4>
+          <div class="peoper-list">
+            <div class="peoper" v-for="peoper in collaborator">
+              <a :href="peoper.html_url" target="_blank" :title="peoper.login">
+                <img :src="peoper.avatar_url" width="50" height="50" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div id="milestone">
+          <h4 class="panel-title">里程碑&nbsp;[ {{ milestones.length }} ]</h4>
+          <div class="milestone-list">
+            <div class="milestone" v-for="milestone in milestones">
+              <a :href="milestone.html_url">
+                <h3> {{ milestone.title }} </h3>
+                <p class="milestone-time">
+                  <span>创建时间:</span>
+                  <span> {{ milestone.created_at }} </san>
+                 </p>
+                <p class="milestone-time">
+                  <span>最后更新:</span>
+                  <span> {{ milestone.updated_at }} </san>
+                </p>
+                <p> {{ milestone.description }} </p>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-warning" role="progressbar" :aria-valuenow="milestone.progress" aria-valuemin="0" aria-valuemax="100" style="width: 45%;font-weight:bold">
+                    Open: {{ milestone.open_issues }}&nbsp;&nbsp;/&nbsp;&nbsp;
+                    Close: {{ milestone.closed_issues }}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    <div>
+  </div>
+</div>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="//cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+<script src="info.js"></script>
