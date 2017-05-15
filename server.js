@@ -2,16 +2,16 @@
 
 var SQLite = require('sqlite3').verbose(),  DB_Scheme = require('./data/scheme');
 
-var DataBase = new SQLite.Database('data/SQLite.db');
+var DataBase = new SQLite.Database('data/SQLite.db'),  Default = DB_Scheme['*'];
+
+delete DB_Scheme['*'];
 
 
 Promise.all(Object.keys( DB_Scheme ).map(function (name) {
 
     return  new Promise(function (resolve, reject) {
 
-        var field = DB_Scheme[ name ];
-
-        field.id = field.id || 'Integer Primary Key';
+        var field = Object.assign(Default,  DB_Scheme[ name ]);
 
         field = Object.keys( field ).map(function (key) {
 

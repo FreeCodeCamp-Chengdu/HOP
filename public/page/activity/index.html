@@ -74,65 +74,70 @@
 <script src="//cdn.bootcss.com/element-ui/1.3.2/index.js"></script>
 <script src="//cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
 <script>
-  var app = new Vue({
-    el:'#app',
-    data:{
-      ruleForm: {
-        title: '',
-        keyWord: '',
-        startTime: '',
-        endTime: '',
-        location: '',
-        description: ''
-      },
-      rules: {
-        title: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
-        ],
-        keyWord: [
-          { required: true, message: '请选择活动主题关键字', trigger: 'change' }
-        ],
-        startTime: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        endTime: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        location: [
-          { required: true, message: '请填写活动地址', trigger: 'change' }
-        ],
-        description: [
-          { required: true, message: '请填写活动描述', trigger: 'blur' }
-        ]
-      }
-    },
-   methods: {
-     submitForm(formName) {
-       var _self = this;
-       this.$refs[formName].validate((valid) => {
-         if (valid) {
-           _self.createActivity();
-         } else {
-           console.log('error submit!!');
-           return false;
-         }
-       });
-     },
-     resetForm(formName) {
-       this.$refs[formName].resetFields();
-     },
-     createActivity:function() {
-       var parameter = Object.assign(this.ruleForm, {
-         startTime: +(new Date(this.ruleForm.startTime)),
-         endTime: +(new Date(this.ruleForm.endTime)),
-       });
+var app = new Vue({
+        el:'#app',
+        data:{
+            ruleForm: {
+                title: '',
+                keyWord: '',
+                startTime: '',
+                endTime: '',
+                location: '',
+                description: ''
+            },
+            rules: {
+                title: [
+                  { required: true, message: '请输入活动名称', trigger: 'blur' },
+                  { min: 3, max: 30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
+                ],
+                keyWord: [
+                  { required: true, message: '请选择活动主题关键字', trigger: 'change' }
+                ],
+                startTime: [
+                  { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+                ],
+                endTime: [
+                  { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+                ],
+                location: [
+                  { required: true, message: '请填写活动地址', trigger: 'change' }
+                ],
+                description: [
+                  { required: true, message: '请填写活动描述', trigger: 'blur' }
+                ]
+            }
+        },
+        methods: {
+            submitForm:        function (formName) {
+                var _this_ = this;
 
-       $.ajax('/activity', {
-           type:    'POST',
-           data:    parameter
-       });
-     }
-   }
-  })
+                this.$refs[ formName ].validate(function (valid) {
+                    if ( valid )
+                        _this_.createActivity();
+                    else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm:         function (formName) {
+
+                this.$refs[ formName ].resetFields();
+            },
+            createActivity:    function () {
+
+                $.ajax('/activity', {
+                    type:    'POST',
+                    data:    $.extend(this.ruleForm, {
+                        startTime:    (
+                            +(new Date( this.ruleForm.startTime ))  /  1000
+                        ).toFixed(0),
+                        endTime:      (
+                            +(new Date( this.ruleForm.endTime ))  /  1000
+                        ).toFixed(0),
+                    })
+                });
+            }
+        }
+    });
 </script>

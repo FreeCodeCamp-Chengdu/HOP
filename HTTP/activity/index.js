@@ -17,10 +17,14 @@ module.exports = function (url, request, response) {
                     `select * from ${model}${where}`,
                     function (error, row) {
 
-                        if ( error )
-                            reject( error );
-                        else
-                            resolve( row );
+                        if ( error )  return  reject( error );
+
+                        resolve(row.map(function (item) {
+
+                            item.ctime = +(new Date( item.ctime ))  /  1000;
+
+                            return item;
+                        }));
                     }
                 );
                 break;

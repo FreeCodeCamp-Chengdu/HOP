@@ -23,6 +23,8 @@ https://github.com/FreeCodeCamp-Chengdu/HOP/milestone/1
 
 ### （〇）本机运行
 
+向本项目管理员索要 `config.js`（内含 GitHub 应用令牌、密钥），并放于项目根目录。
+
 安装、启动命令 ——
 ```
 npm install
@@ -50,6 +52,15 @@ Web 服务 URL —— http://localhost:8000/
  - 每个相关的[功能模块 Issue](https://github.com/FreeCodeCamp-Chengdu/HOP/labels/feature) 中都列出了所需接口的基本文档
    - [GitHub API](https://developer.github.com/v3/)
    - [HOP API](data/scheme.js)
+
+
+### （三）编码规范
+
+ - 缩进：**4 半角空格**
+ - 行宽：**80 半角字符**
+ - 留白：分隔符间一空格，较长语句间一空行
+ - 语法：**ECMAScript 5**
+ - API：HTML 5、CSS 3、ECMAScript 6
 
 
 
