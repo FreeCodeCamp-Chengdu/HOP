@@ -24,7 +24,7 @@ https://github.com/FreeCodeCamp-Chengdu/HOP/milestone/1
 npm install
 ```
 
-运行Demo:
+运行项目:
 
 ```
 npm start
