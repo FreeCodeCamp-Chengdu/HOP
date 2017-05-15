@@ -16,7 +16,13 @@ https://github.com/FreeCodeCamp-Chengdu/HOP/milestone/1
 
 开发结束后，活动组织者 提交部署项目代码的请求，本平台程序猿审核代码安全性后，即可允许自动执行 git clone + npm start（后期考虑用 Docker 隔离运行环境）。
 
+## 【项目运行】
 
+>npm install
+
+>npm start
+
+>localhost:8000
 
 ## 【参考网址】
 
@@ -24,3 +30,5 @@ https://github.com/FreeCodeCamp-Chengdu/HOP/milestone/1
  - https://github.com/sahat/hackathon-starter
  - https://github.com/mikedeboer/node-github
  - https://github.com/pksunkara/octonode
+ 
+ 
