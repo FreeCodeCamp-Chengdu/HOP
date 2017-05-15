@@ -27,7 +27,7 @@ npm install
 运行Demo:
 
 ```
-make start
+npm start
 ```
 
 打开浏览器输入 http://localhost:8000
