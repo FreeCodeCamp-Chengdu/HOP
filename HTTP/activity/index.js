@@ -1,17 +1,14 @@
+var QS = require('querystring');
+
+
 module.exports = function (url, request, response) {
 
     var _this_ = this,  model = module.id.match(/([^\/\\]+)(\/|\\index)?\.js/)[1];
 
     var ID = (url.pathname.match(/(\d+)\/?/) || '')[1];
 
-    var where = ID  ?  ` where (id = ${ID})`  :  '',
-        data = {key:  Object.keys( request.params )};
+    var where = ID  ?  ` where (id = ${ID})`  :  '',  data;
 
-    data.value = data.key.map(function () {
-
-        return  request.params[ arguments[0] ];
-    });
-console.dir( data)
     return  new Promise(function (resolve, reject) {
 
         switch ( request.method ) {
@@ -27,7 +24,14 @@ console.dir( data)
                     }
                 );
                 break;
-            case 'POST':
+            case 'POST':      {
+                data = {key:  Object.keys( request.params )};
+
+                data.value = data.key.map(function () {
+
+                    return  JSON.stringify( request.params[ arguments[0] ] );
+                });
+
                 _this_.SQL_DB.run(
                     `insert into ${model} (${data.key}) values (${data.value})`,
                     function (error) {
@@ -39,9 +43,14 @@ console.dir( data)
                     }
                 );
                 break;
-            case 'PUT':
+            }
+            case 'PUT':       {
+                data = QS.stringify(request.params,  ', ',  ' = ',  {
+                    encodeURIComponent:    JSON.stringify
+                });
+
                 _this_.SQL_DB.run(
-                    `update ${model} ${data.value}${where}`,
+                    `update ${model} set ${data}${where}`,
                     function (error) {
 
                         if ( error )
@@ -51,6 +60,7 @@ console.dir( data)
                     }
                 );
                 break;
+            }
             case 'DELETE':
                 _this_.SQL_DB.run(
                     `delete from ${model}${where}`,

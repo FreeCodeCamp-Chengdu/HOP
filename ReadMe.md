@@ -16,21 +16,42 @@ https://github.com/FreeCodeCamp-Chengdu/HOP/milestone/1
 
 开发结束后，活动组织者 提交部署项目代码的请求，本平台程序猿审核代码安全性后，即可允许自动执行 git clone + npm start（后期考虑用 Docker 隔离运行环境）。
 
-## 【项目运行】
 
-安装依赖:
 
+## 【参与开发】
+
+
+### （〇）本机运行
+
+安装、启动命令 ——
 ```
 npm install
-```
-
-运行项目:
-
-```
 npm start
 ```
 
-打开浏览器输入 http://localhost:8000
+Web 服务 URL —— http://localhost:8000/
+
+
+### （一）前端架构
+
+ - CSS 框架：[BootStrap v3.3+](http://v3.bootcss.com/)
+
+ - 模块化规范：[AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
+
+ - MVVM 引擎：[Vue v2.3+](http://cn.vuejs.org/)
+
+ - CDN 服务：[BootCDN](http://www.bootcdn.cn/)（依赖库唯一来源，不要写在 `package.json` 中）
+
+
+### （二）后端架构
+
+ - HTTP 服务器：[EasyREST.js](http://git.oschina.net/Tech_Query/EasyREST.js)
+
+ - 每个相关的[功能模块 Issue](https://github.com/FreeCodeCamp-Chengdu/HOP/labels/feature) 中都列出了所需接口的基本文档
+   - [GitHub API](https://developer.github.com/v3/)
+   - [HOP API](data/scheme.js)
+
+
 
 ## 【参考网址】
 
@@ -38,5 +59,3 @@ npm start
  - https://github.com/sahat/hackathon-starter
  - https://github.com/mikedeboer/node-github
  - https://github.com/pksunkara/octonode
- 
- 

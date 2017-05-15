@@ -127,7 +127,11 @@
          startTime: +(new Date(this.ruleForm.startTime)),
          endTime: +(new Date(this.ruleForm.endTime)),
        });
-       console.log(parameter)
+
+       $.ajax('/activity', {
+           type:    'POST',
+           data:    parameter
+       });
      }
    }
   })
