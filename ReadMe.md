@@ -18,11 +18,19 @@ https://github.com/FreeCodeCamp-Chengdu/HOP/milestone/1
 
 ## 【项目运行】
 
->npm install
+安装依赖:
 
->npm start
+```
+npm install
+```
 
->localhost:8000
+运行Demo:
+
+```
+make start
+```
+
+打开浏览器输入 http://localhost:8000
 
 ## 【参考网址】
 
