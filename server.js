@@ -11,7 +11,7 @@ Promise.all(Object.keys( DB_Scheme ).map(function (name) {
 
     return  new Promise(function (resolve, reject) {
 
-        var field = Object.assign(Default,  DB_Scheme[ name ]);
+        var field = Object.assign({ },  Default,  DB_Scheme[ name ]);
 
         field = Object.keys( field ).map(function (key) {
 

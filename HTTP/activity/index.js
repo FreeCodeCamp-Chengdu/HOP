@@ -4,7 +4,7 @@ var DataModel = require('../DataModel.js');
 module.exports = function (url, request, response) {
 
     var model = new DataModel(
-            this.SQL_DB,  module.id.match(/([^\/\\]+)(\/|\\index)?\.js/)[1]
+            this.SQL_DB,  module.id.match(/([^\/\\]+)((\/|\\)index)?\.js/)[1]
         ),
         ID = (url.pathname.match(/(\d+)\/?/) || '')[1];
 
