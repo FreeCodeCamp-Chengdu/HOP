@@ -10,7 +10,9 @@ module.exports = function (url, request, response) {
 
     switch ( request.method ) {
         case 'GET':       return  model.search( ID );
-        case 'POST':      return  model.append( request.params );
+        case 'POST':      return model.append(
+            Object.assign({uid: request.session.get('uid')},  request.params)
+        );
         case 'PUT':       return  model.update(ID, request.params);
         case 'DELETE':    return  model.remove( ID );
     }

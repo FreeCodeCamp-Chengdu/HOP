@@ -1,45 +1,49 @@
-var HTTPS = require('https'),  QS = require('querystring');
+const NetRequest = require('../NetRequest.js'),
+      API_Proxy = require('./proxy.js'),
+      DataModel = require('../DataModel.js');
 
 
-module.exports = function (url, request, response, resolve) {
+module.exports = function (url, request, response) {
 
-    var data = QS.stringify({
+    var header = {
+            'User-Agent':    'HOP',
+            Accept:          'application/json'
+        },
+        model = new DataModel(this.SQL_DB, 'user');
+
+    return NetRequest(
+        'POST',
+        'https://github.com/login/oauth/access_token',
+        header,
+        {
             client_id:        this.App_ID,
             client_secret:    this.App_Secret,
             code:             url.query.code
-        }),
-        token = '';
+        }
+    ).then(function (token) {
 
-    var _request_ = HTTPS.request({
-            hostname:    'github.com',
-            method:      'POST',
-            path:        '/login/oauth/access_token',
-            headers:     {
-                'User-Agent':        'EasyREST',
-                'Content-Type':      'application/x-www-form-urlencoded',
-                'Content-Length':    Buffer.byteLength( data ),
-                Accept:              'application/json'
-            }
-        },  function (_response_) {
+        request.session.put('token', token.access_token);
 
-            _response_.on('data',  function () {
+        request.session.put('scope', token.scope.split(','));
 
-                token += arguments[0];
-            });
-
-            _response_.on('end',  function () {
-
-                token = JSON.parse( token );
-
-                request.session.put('token', token.access_token);
-
-                request.session.put('scope', token.scope.split(','));
-
-                resolve( response.writeHead(302,  {Location: '/'}) );
-            });
+        return API_Proxy({
+            path:    '/user'
+        },  {
+            method:     request.method,
+            headers:    header,
+            session:    request.session
         });
+    }).then(function (data) {
 
-    _request_.write( data );
+        return  model.unique('name', {
+            name:    data.login,
+            logo:    data.avatar_url,
+            www:     data.html_url
+        });
+    }).then(function (info) {
 
-    return _request_;
+        if ( info.lastID )  request.session.put('uid', info.lastID);
+
+        response.writeHead(302,  {Location: '/'});
+    });
 };

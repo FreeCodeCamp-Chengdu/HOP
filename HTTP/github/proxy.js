@@ -1,29 +1,25 @@
-var HTTPS = require('https'),  QS = require('querystring');
+const NetRequest = require('../NetRequest.js');
 
 
-module.exports = function (url, request, response, resolve) {
+module.exports = function (url, request, response) {
 
     delete request.headers.host;
+    delete request.headers['accept-encoding'];
 
-    request.headers.Authorization = 'token ' + request.session.get('token');
+    request.headers.Authorization = `token ${request.session.get('token')}`;
 
-    var _request_ = HTTPS.request({
-            hostname:    'api.github.com',
-            method:      request.method,
-            path:        url.path,
-            headers:     request.headers
-        },  function (_response_) {
+    return NetRequest(
+        request.method,
+        `https://api.github.com${url.path}`,
+        request.headers,
+        request.trailers,
+        function () {
+            if (typeof response != 'object')  return;
 
-            response.writeHead(
-                _response_.statusCode, _response_.statusMessage, _response_.headers
-            );
+            delete this.headers.status;
+            delete this.headers['content-length'];
 
-            _response_.on('data',  response.write.bind( response ));
-
-            _response_.on('end', resolve);
-        });
-
-    _request_.write(QS.stringify( request.trailers ));
-
-    return _request_;
+            response.writeHead(this.statusCode, this.statusMessage, this.headers);
+        }
+    );
 };

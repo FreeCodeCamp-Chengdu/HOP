@@ -1,46 +1,24 @@
-var Path = require('path');
-
-var Session = require('node-session');
-
-var Config = require('../../config');
+const Path = require('path');
 
 
 module.exports = function (url, request, response) {
 
-    var _this_ = this;
+    var path = url.pathname.split('/'),  _module_;
 
-    return  new Promise(function (resolve, reject) {
+    try {
+        _module_ = Path.join(
+            this.User_Root + 'HTTP',  'github',  path[2]
+        );
+        _module_ = require(_module_);
+    } catch (error) {
+        _module_ = require(_module_.replace(/[^\/\\]+$/, 'proxy'));
 
-        (new Session({
-            secret:      Config.App_Secret.slice(0, 32),
-            lifetime:    24 * 60 * 60 * 1000
-        })).startSession(request,  response,  function () {
+        path.splice(1, 1);
 
-            var path = url.pathname.split('/'),  _module_;
+        url.pathname = path.join('/');
 
-            try {
-                _module_ = Path.join(
-                    _this_.User_Root + 'HTTP',  'github',  path[2]
-                );
-                _module_ = require(_module_);
-            } catch (error) {
-                _module_ = require(_module_.replace(/[^\/\\]+$/, 'proxy'));
+        url.path = url.pathname + url.search;
+    }
 
-                path.splice(1, 1);
-
-                url.pathname = path.join('/');
-
-                url.path = url.pathname + url.search;
-            }
-
-            var _request_ = _module_.apply(
-                    Object.assign(_this_, Config),  [
-                        url,  request,  response,  resolve
-                    ]
-                );
-            _request_.on('error', reject);
-
-            _request_.end();
-        });
-    });
+    return  _module_.call(this, url, request, response);
 };

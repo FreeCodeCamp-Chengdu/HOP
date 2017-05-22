@@ -18,14 +18,34 @@ class DataModel {
         });
     }
 
+    run(statement) {
+
+        var DB = this.__DB__;
+
+        return  new Promise(function (resolve, reject) {
+
+            DB.run(statement,  function (error) {
+
+                if ( error )  return  reject( error );
+
+                delete this.sql;
+
+                resolve( this );
+            });
+        });
+    }
+
     search(ID) {
 
         var where = '';
 
         if (typeof ID != 'object')
             where = ID  ?  ` where (id = ${ID})`  :  '';
-        else
-            where = ` where (${DataModel.Hash2SQL(ID,  ' like %',  '%) and (')}%)`;
+        else {
+            for (var key in ID)  ID[key] = `%${ID[key]}%`;
+
+            where = ` where (${DataModel.Hash2SQL(ID,  ' like ',  ') and (')})`;
+        }
 
         return  new Promise((function (resolve, reject) {
 
@@ -53,55 +73,19 @@ class DataModel {
                 return  JSON.stringify( data[ arguments[0] ] );
             });
 
-        return  new Promise((function (resolve, reject) {
-
-            this.__DB__.run(
-                `insert into ${this.__name__} (${key}) values (${value})`,
-                function (error) {
-
-                    if ( error )
-                        reject( error );
-                    else
-                        resolve( this.lastID );
-                }
-            );
-        }).bind( this ));
+        return  this.run(`insert into ${this.__name__} (${key}) values (${value})`);
     }
 
     update(ID, data) {
 
-        data = DataModel.Hash2SQL(data,  ', ',  ' = ');
+        data = DataModel.Hash2SQL(data,  ' = ',  ', ');
 
-        return  new Promise((function (resolve, reject) {
-
-            this.__DB__.run(
-                `update ${this.__name__} set ${data} where (id = ${ID})`,
-                function (error) {
-
-                    if ( error )
-                        reject( error );
-                    else
-                        resolve( this.lastID );
-                }
-            );
-        }).bind( this ));
+        return  this.run(`update ${this.__name__} set ${data} where (id = ${ID})`);
     }
 
     remove(ID) {
 
-        return  new Promise((function (resolve, reject) {
-
-            this.__DB__.run(
-                `delete from ${this.__name__} where (id = ${ID})`,
-                function (error) {
-
-                    if ( error )
-                        reject( error );
-                    else
-                        resolve( this.lastID );
-                }
-            );
-        }).bind( this ));
+        return  this.run(`delete from ${this.__name__} where (id = ${ID})`);
     }
 
     unique(key, data) {
@@ -110,10 +94,15 @@ class DataModel {
 
         _data_[key] = data[key];
 
-        return  this.search(_data_).then(function (row) {
+        return  this.search(_data_).then(function (item) {
 
-            return  row[0] ?
-                _this_.update(row[0].id, data)  :  _this_.append( data );
+            return  item  ?  _this_.update(item.id, data).then(function (info) {
+
+                info.lastID = item.id;
+
+                return info;
+
+            })  :  _this_.append( data );
         });
     }
 }
