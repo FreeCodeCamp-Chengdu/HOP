@@ -1,0 +1,147 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,"Lucida Grande",Arial,"Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei",sans-serif;
+    background-color: #f5f5f5;
+}
+/*
+  活动详情,页面上半部分
+*/
+#info {
+    background-color: #000;
+    text-align: center;
+    color: #f5f5f5;
+    padding: 30px 0px;
+    margin: -10px -10px 0px -10px;
+    background-image: url(../../image/fcc-chengdu-hackathon.png);
+}
+
+#info .title {
+    font-size: 56px;
+}
+#info .describe {
+    font-size: 24px;
+}
+#info .number {
+    font-size: 20px;
+}
+#info .logo {
+    display: inline-block;
+    padding: 10px 15px;
+    border:2px solid #fff;
+}
+
+/*页面下半部分*/
+#content {
+    position: relative;
+}
+/*搜索部分*/
+#search {
+    display: inline-block;
+    width: 20%;
+    padding-left: 20px;
+}
+#search label {
+    display: block;
+}
+#search .searchbar {
+    text-align: left;
+    line-height: 50px;
+    margin-top: 20px;
+    padding-right: 20px;
+    position: relative;
+}
+.searchinput {
+    display: inline-block;
+    outline: none;
+    width: 95%;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 17px;
+    text-align: center;
+    border:1px solid #888;
+}
+#searchicon {
+    position: absolute;
+    right: 0px;
+}
+
+/*搜索选项*/
+#search p {
+    margin: 20px 0px;
+    font-size: 20px;
+}
+.option {
+    height: 30px;
+}
+.option>input{
+    width: 15px;
+    height: 15px;
+}
+
+/*活动列表展示*/
+#list {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    width: 79%;
+}
+.oneactivity {
+    width: 98%;
+    margin: 0 auto;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    border: 1px solid #E8E8E8;
+    margin:35px 10px;
+}
+.inner {
+    margin: 20px;
+    height: 100px;
+    padding: 0px;
+}
+.inner li {
+    float: left;
+    list-style: none;
+}
+/*时间icon*/
+li.innerdiv {
+    width: 120px;
+    height: 100px;
+    line-height: 100px;
+}
+/*活动图片*/
+li.imgdiv {
+    width: 100px;
+    height: 100px;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+/*展示活动详情，标题时间等*/
+li.oneactivityinfo {
+    width: 35%;
+    height: 100px;
+    padding-left:30px;
+}
+.oneactivityinfo p{
+    font-size: 25px;
+    margin: 5px;
+}
+.activitydescription{
+    font-size: 18px;
+    color: #383838;
+}
+.keyword {
+    font-size: 15px;
+}
+p.activitytime {
+    font-size: 15px;
+}
+/*展示地理位置*/
+li.addressdiv {
+    float: right;
+    width: 25%;
+    height: 100px;
+    line-height: 100px;
+    font-size: 13px;
+    text-align: right;
+}

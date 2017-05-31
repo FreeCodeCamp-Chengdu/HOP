@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+    <link rel="stylesheet" href="http://fonts.lug.ustc.edu.cn/css?family=Bungee Inline&effect=fire-animation">
+    <title>黑客马拉松开放平台 - HOP</title>
+    <link href="search.css" rel="stylesheet">
+</head>
+<body>
+<main id="app">
+    <!--上半部分-->
+    <div id="info">
+        <i class="fa fa-free-code-camp fa-3x"></i>
+        <h1 class="font-effect-fire-animation"><span class="logo">HACKATHONS</span></h1>
+        <h1 class="title"> 黑客马拉松活动信息</h1>
+        <h2 class="describe"> 这里有中国最好的黑客马拉松</h2>
+        <p class="number">活动次数：{{activity.length}}</p>
+    </div>
+    <!--下半部分-->
+    <div id="content">
+        <!--活动搜索部分-->
+        <div id="search">
+            <div class="searchbar">
+                <div >按活动名称搜索：</div>
+                <input type="text" placeholder="search hackathons" class="searchinput" v-model="searchTitle">
+                <!--<i class="fa fa-search fa-2x fa-fw" id="searchicon"></i>-->
+                <div >按主题关键词搜索：</div>
+                <input type="text" placeholder="search hackathons" class="searchinput" v-model="searchKeyword">
+                <!--<i class="fa fa-search fa-2x fa-fw" id="searchicon"></i>-->
+            </div>
+            <p><strong>Date</strong></p>
+            <label class="option"><input type="radio" name="date" value="Now" v-model="picked">Now</label>
+            <label class="option"><input type="radio" name="date" value="Upcoming" v-model="picked">Upcoming</label>
+            <label class="option"><input type="radio" name="date" value="7 Days" v-model="picked">7 Days</label>
+            <label class="option"><input type="radio" name="date" value="30 Days" v-model="picked">30 Days</label>
+            <label class="option"><input type="radio" name="date" value="Past" v-model="picked">Past</label>
+            <label class="option"><input type="radio" name="date" value="All" v-model="picked">All</label>
+        </div>
+        <!--活动列表显示部分-->
+        <div id="list">
+            <div v-for="n in filteredActivity.length" class="oneactivity">
+                <ul class="inner">
+                    <li class="innerdiv">
+                        <span><i class="fa fa-clock-o fa-lg" ></i></span>
+                        <span v-if="timeShowPast(filteredActivity[n-1].endTime)">&nbsp;Past</span>
+                        <span v-else-if="timeShowUpcoming(filteredActivity[n-1].startTime)">&nbsp;Upcoming</span>
+                        <span v-else>&nbsp;Now</span>
+                    </li>
+                    <li class="imgdiv">
+                        <img v-bind:src="imgs[n-1]"/>
+                    </li>
+                    <li class="oneactivityinfo">
+                        <p><strong>{{filteredActivity[n-1].title}}</strong></p>
+                        <p><strong class="activitydescription">{{filteredActivity[n-1].description}}</strong></p>
+                        <span class="keyword"><i class="fa fa-tags fa-lg"></i>&nbsp;{{filteredActivity[n-1].keyWord}}</span>
+                        <p v-text="time(filteredActivity[n-1].startTime,filteredActivity[n-1].endTime)" class="activitytime"></p>
+                    </li>
+                    <li class="addressdiv">
+                        <span class="address"><i class="fa fa-map-marker"></i></span>
+                        <span class="address">{{filteredActivity[n-1].location}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+<script src="search.js"></script>
