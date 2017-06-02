@@ -1,3 +1,6 @@
+'use strict';
+
+
 //  SQL Data Base
 
 var SQLite = require('sqlite3').verbose(),  DB_Scheme = require('./data/scheme');
@@ -39,23 +42,28 @@ Promise.all(Object.keys( DB_Scheme ).map(function (name) {
 
 //  HTTP Server
 
-var Session = require('node-session');
+const  Config = require('./config.js');
 
-var HTTP_Server = require('easy-rest').HTTP(function () {
+Config.SQL_DB = DataBase;
 
-        Object.assign(arguments[0], require('./config.js')).SQL_DB = DataBase;
 
-    },  function (config, url, request, response) {
+const RestApp = require('easy-rest').RestApp;
 
-        if ( url.pathname.match(/\.html?|\/\w+\/?$/) )
-            return  new Promise(function () {
+const App = new RestApp( Config );
 
-                (new Session({
-                    secret:      config.App_Secret.slice(0, 32),
-                    lifetime:    24 * 60 * 60 * 1000
-                })).startSession(request, response, arguments[0]);
-            });
-    }).listen(8000);
+App.server.listen(8000);
 
 console.log('HTTP Server runs at:');
-console.dir( HTTP_Server.address() );
+console.dir( App.server.address() );
+
+
+//  Custom API
+
+App.get(/\/github\?/, require('./router/github/oauth'));
+
+App.all('/github/', require('./router/github/proxy'));
+
+App.on('model',  function (_, data) {
+
+    data.uid = this.request.session.get('uid');
+});

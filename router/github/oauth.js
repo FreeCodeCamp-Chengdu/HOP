@@ -1,15 +1,17 @@
+'use strict';
+
 const NetRequest = require('../NetRequest.js'),
       API_Proxy = require('./proxy.js'),
-      DataModel = require('../DataModel.js');
+      user = require('../../data/user.js');
 
 
-module.exports = function (url, request, response) {
+module.exports = function () {
 
     var header = {
             'User-Agent':    'HOP',
             Accept:          'application/json'
         },
-        model = new DataModel(this.SQL_DB, 'user');
+        _this_ = this,  session = this.request.session;
 
     return NetRequest(
         'POST',
@@ -18,32 +20,33 @@ module.exports = function (url, request, response) {
         {
             client_id:        this.App_ID,
             client_secret:    this.App_Secret,
-            code:             url.query.code
+            code:             this.url.query.code
         }
     ).then(function (token) {
 
-        request.session.put('token', token.access_token);
+        session.put('token', token.access_token);
 
-        request.session.put('scope', token.scope.split(','));
+        session.put('scope', token.scope.split(','));
 
         return API_Proxy({
             path:    '/user'
         },  {
-            method:     request.method,
+            method:     _this_.request.method,
             headers:    header,
-            session:    request.session
+            session:    session
         });
     }).then(function (data) {
 
-        return  model.unique('name', {
+        return  (new user(this, {
             name:    data.login,
             logo:    data.avatar_url,
             www:     data.html_url
-        });
+        })).unique('name');
+
     }).then(function (info) {
 
-        if ( info.lastID )  request.session.put('uid', info.lastID);
+        if ( info.lastID )  session.put('uid', info.lastID);
 
-        response.writeHead(302,  {Location: '/'});
+        _this_.response.writeHead(302,  {Location: '/'});
     });
 };
