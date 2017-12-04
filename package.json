@@ -19,7 +19,8 @@
     "express": "^4.16.2",
     "express-github": "^0.4.0",
     "leancloud-storage": "^3.4.2",
-    "leanengine": "^3.0.2"
+    "leanengine": "^3.0.2",
+    "node-fetch": "^1.7.3"
   },
   "apidoc": {
     "name": "HOP",

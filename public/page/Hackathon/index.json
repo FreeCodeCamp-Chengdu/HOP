@@ -1,0 +1,81 @@
+{
+    "event":    [
+        {
+            "title":    "春季黑客松",
+            "date":     "2017-03-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "学生",
+            "loot":    "荣誉",
+            "cost":    false,
+            "time":    "12",
+            "member_limit":    "55",
+            "sponsor":    false
+        },
+        {
+            "title":    "夏季黑客松",
+            "date":     "2017-06-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "学生",
+            "loot":    "荣誉, 现金",
+            "cost":    false,
+            "time":    "12",
+            "member_limit":    "150",
+            "sponsor":    true
+        },
+        {
+            "title":    "秋季黑客松",
+            "date":     "2017-09-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "学生",
+            "loot":    "荣誉, Offer",
+            "cost":    true,
+            "time":    "12",
+            "member_limit":    "10",
+            "sponsor":    false
+        },
+        {
+            "title":    "Code For City",
+            "date":     "2017-10-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "所有人",
+            "loot":    "荣誉, Offer",
+            "cost":    true,
+            "time":    "8",
+            "member_limit":    "50",
+            "sponsor":    true
+        },
+        {
+            "title":    "秋季黑客松",
+            "date":     "2017-11-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "学生",
+            "loot":    "荣誉, Offer",
+            "cost":    true,
+            "time":    "12",
+            "member_limit":    "10",
+            "sponsor":    false
+        },
+        {
+            "title":    "秋季黑客松",
+            "date":     "2017-12-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "学生",
+            "loot":    "荣誉, Offer",
+            "cost":    true,
+            "time":    "12",
+            "member_limit":    "10",
+            "sponsor":    false
+        },
+        {
+            "title":    "秋季黑客松",
+            "date":     "2018-10-18",
+            "location":    "保利中心拾级咖啡",
+            "target":    "学生",
+            "loot":    "荣誉, Offer",
+            "cost":    true,
+            "time":    "12",
+            "member_limit":    "10",
+            "sponsor":    false
+        }
+    ]
+}

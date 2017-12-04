@@ -1,200 +1,108 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
+<!DocType HTML>
+<html lang="zh-CN"><head>
 
-    <title>黑客马拉松开放平台 - HOP</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
 
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://fonts.lug.ustc.edu.cn/css?family=Bungee Inline&effect=fire-animation">
+    <title>HOP - 黑客马拉松开放平台</title>
+    <link rel="icon" href="favicon.ico" />
 
-    <script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/layer/3.0.3/skin/default/layer.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/diff2html/2.3.1/diff2html.min.css" />
+    <link rel="stylesheet" href="style/index.css" />
+<!--[if lte IE 9]>
+    <script src="//cdn.bootcss.com/html5-history-api/4.2.8/history.min.js"></script>
+<![endif]-->
+    <script src="//cdn.bootcss.com/MutationObserver.js/0.3.2/mutationobserver.min.js"></script>
+    <script src="//cdn.bootcss.com/require.js/2.3.5/require.min.js"></script>
     <script>
         require.config({
-            baseUrl:    'javascript/',
+            baseUrl:    'script/',
             paths:      {
-                jquery:          '//cdn.bootcss.com/jquery/3.2.1/jquery.min',
-                BootStrap:       '//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
-                Vue:             '//cdn.bootcss.com/vue/2.3.3/vue.min',
-                'Vue-Router':    '//cdn.bootcss.com/vue-router/2.5.3/vue-router.common',
-                ScrollReveal:    '//cdn.bootcss.com/scrollReveal.js/3.3.5/scrollreveal.min'
+                jquery:
+                    'https://cdn.bootcss.com/jquery/3.2.1/jquery.min',
+                BootStrap:
+                    'https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
+                moment:
+                    'https://cdn.bootcss.com/moment.js/2.18.1/moment.min',
+                DateRangePicker:
+                    'https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.25/daterangepicker.min',
+                marked:
+                    'https://cdn.bootcss.com/marked/0.3.6/marked.min',
+                Layer:
+                    'https://cdn.bootcss.com/layer/3.0.3/layer.min',
+                ScrollReveal:
+                    'https://cdn.bootcss.com/scrollReveal.js/3.3.5/scrollreveal.min',
+                Media_Flow:    '../page/Media_Flow'
             },
             shim:       {
                 BootStrap:    ['jquery']
             }
         });
     </script>
-    <script src="index.js"></script>
-</head>
-<body class="background-color-default">
-<div id="app">
-    <section id="nav">
-        <nav class="navbar navbar-default navbar-fixed-top" :default-active="activeIndex">
-            <div class="navbar-header">
-                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><i id="brand" class="fa fa-free-code-camp"></i></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="nav-item active" ><a class="nav-link" href="#about" >关于黑客松</a></li>
-                    <li class="nav-item" ><a class="nav-link" href="#events" >寻觅活动</a></li>
-                    <li class="nav-item" ><a class="nav-link" href="#products" >发掘作品</a></li>
-                    <li class="nav-item" ><a class="nav-link" href="#sponsors" >赞助商</a></li>
-                    <li class="nav-item" style="position: absolute; right: 0">
-                        <a class="nav-item" href="https://github.com/login/oauth/authorize?client_id=375dd897b0bf093074ef&scope=user:follow%20public_repo">
-                            <i class="fa fa-github fa-2x" aria-hidden="true">GitHub 登录</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </section>
+    <script src="script/index.js"></script>
+</head><body>
+    <div data-href="component/NavBar.html?data=page/index.json" data-dark="true">
 
-    <section id="main_image">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <img src="image/fcc-chengdu-hackathon.png" class="main_image">
-                <div class="post-content">
-                    <i class="fa fa-free-code-camp fa-4x col-md-12"></i>
-                    <h1 class="col-md-12 font-effect-fire-animation"><span id="logo">HACKATHONS</span></h1>
-                    <h1 class="col-md-12">这里有中国最好的黑客马拉松</h1>
-                </div>
+        <form class="navbar-form navbar-left" slot="left">
+            <div class="form-group">
+                <input type="search" class="form-control"
+                       name="keyword" required
+                       placeholder="定位：用户 ID、仓库全名" />
             </div>
-        </div>
-    </section>
+        </form>
+        <div data-href="?data=user/OAuth">
 
-    <section id="about">
-        <div class="container">
-            <h1>华人黑客松圈</h1>
-            <p>挑战自己，认识同好，在一天的时间内激发自己与团队最大的潜力，这里有志同道合的朋友，有并肩奋斗的队友，有创意碰撞的火花。如果你自认为是一个黑客，或者想知道什么才是黑客，来试试吧。</p>
-            <p>Talk is cheap, show me your code.</p>
-            <button class="btn btn-primary col-md-2 col-md-offset-5">加入我们</button>
-        </div>
-    </section>
+            <ul class="nav navbar-nav navbar-right">
 
-    <section id="upcoming-event">
-        <div class="container">
-            <h3 class="title"><i class="fa fa-star-o"></i>下一个黑客松</h3>
-            <hr class="hr">
-            <div class="row event">
-                <img src="image/vuejs.jpg" id="upcoming-event-img" class="col-md-4 img-responsive" alt="Upcoming Image">
-                <div class="col-md-4">
-                    <h3>成都FCC VueJS 黑客松</h3>
-                    <div><i class="fa fa-calendar event-icon"></i><span class="event-details">2017-4-22 周六早上10:00</span></div>
-                    <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details address-text">保利中心B座19楼拾级咖啡</span></div>
-                    <div><i class="fa fa-tags event-icon"></i><span class="tags event-details">面向学生</span></div>
-                    <br>
-                    <button class="btn btn-default btn-larger">马上报名加入</button>
-                    <hr>
-                </div>
-                <div class="col-md-4" id="event-details-right">
-                    <div class="event-details-right"><span>奖品</span><span class="pull-right">荣誉</span></div>
-                    <br>
-                    <div class="col-sm-6 details-left">
-                        <div class="event-details-right"><span>消费</span><span class="pull-right tags-green">免费</span></div>
-                        <div class="event-details-right"><span>持续时间</span><span class="pull-right tags">12小时</span></div>
-                        <div class="event-details-right"><span>人数</span><span class="pull-right tags">~50</span></div>
-                    </div>
-                    <div class="col-sm-6 details-right">
-                        <div class="event-details-right"><span>赞助商</span><i class="fa fa-remove pull-right"></i></div>
-                        <div class="event-details-right"><span>导师</span><i class="fa fa-check pull-right"></i></div>
-                        <div class="event-details-right"><span>远程参赛</span><i class="fa fa-remove pull-right"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <li style="display: ${scope.github ? 'none' : ''}">
+                    <a target="_top"
+                       href="https://fcc-cdg.leanapp.cn/github/oAuth">
+                        GitHub 登录
+                    </a>
+                </li>
+                <li style="display: ${scope.github ? '' : 'none'}"
+                    class="dropdown">
 
-    <section id="events">
-        <div class="container">
-            <h3 class="title"><i class="fa fa-star-o"></i>即将到来的活动</h3>
-            <hr class="hr">
-            <div class="row">
-                <div v-for="events in 2" class="row">
-                    <div v-for="event in 3" class="col-sm-4">
-                        <div class="col-sm-12 event">
-                            <img src="image/temp_img.png" class="img-responsive event-img">
-                            <h3>成都FCC VueJS 黑客松</h3>
-                            <div><i class="fa fa-calendar event-icon"></i><span class="event-details">2017-4-22 周六早上10:00</span></div>
-                            <div><i class="fa fa-map-marker event-icon map-marker"></i><span class="event-details address-text">保利中心B座19楼拾级咖啡</span></div>
-                            <div><i class="fa fa-tags event-icon"></i><span class="tags event-details">面向学生</span></div>
+                    <a href="#" class="dropdown-toggle"
+                       data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">
 
-                            <div class="dropdown">
-                            <button class="btn btn-default btn-larger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                添加到日历
-                                <span class="caret"></span>
-                            </button>
-                            </div>
-                            <hr>
-                            <div class="event-details-right"><span>奖品</span><span class="pull-right">荣誉</span></div>
-                            <br>
-                            <div class="col-sm-6 details-left">
-                                <div class="event-details-right"><span>消费</span><span class="pull-right tags-green">免费</span></div>
-                                <div class="event-details-right"><span>持续时间</span><span class="pull-right tags">12小时</span></div>
-                                <div class="event-details-right"><span>人数</span><span class="pull-right tags">~50</span></div>
-                            </div>
-                            <div class="col-sm-6 details-right">
-                                <div class="event-details-right"><span>赞助商</span><i class="fa fa-remove pull-right"></i></div>
-                                <div class="event-details-right"><span>导师</span><i class="fa fa-check pull-right"></i></div>
-                                <div class="event-details-right"><span>远程参赛</span><i class="fa fa-remove pull-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <i class="glyphicon glyphicon-user"></i>
+                        <!--${view.github.name}-->
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="page/User/detail.html?data=github/users/${view.github.login}">
+                                用户主页
+                            </a>
+                        </li>
+                        <li>
+                            <a href="page/User/profile.html?data=user/profile">
+                                用户档案
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a target="_top" href="https://fcc-cdg.leanapp.cn/user/signOut">
+                                退出登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </section>
-    <section id="products">
-        <div class="container">
-            <h3 class="title"><i class="fa fa-star-o"></i>优秀项目展</h3>
-            <hr class="hr">
-            <div class="row">
-                <div  v-for="products in 2" class="row">
-                    <div v-for="product in 2" class="col-sm-6">
-                        <div class="col-sm-12 product">
-                            <img src="image/temp_img.png" class="img-responsive event-img">
-                            <h3>文本编辑器</h3>
-                            <div><i class="fa fa-calendar event-icon"></i><span class="product-details-date">2017-4-22</span></div>
-                            <div><i class="fa fa-users event-icon users"></i><span class="product-details-group group-text">咸鱼小组</span></div>
-                            <div><i class="fa fa-tags event-icon"></i><span class="tags-blue product-details-tag">富文本编辑，云同步，自动补全</span></div>
-                            <button class="btn btn-success btn-larger product-details-button">
-                                查看详情
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+<!--  SPA Page Container  -->
+    <div class="container" id="PageBox"></div>
 
-    <section id="sponsors">
-        <div class="container">
-            <h3 class="title"><i class="fa fa-star-o"></i>赞助商</h3>
-            <hr class="hr">
-            <div class="row">
-                <div class="sponsor dark_green">
-                    <i class="col-md-1 fa fa-facebook fa-2x mr-2"></i>
-                    <i class="col-md-1 fa fa-twitter fa-2x mr-2"></i>
-                    <i class="col-md-1 fa fa-github fa-2x mr-2"></i>
-                    <i class="col-md-1 fa fa-google fa-2x mr-2"></i>
-                    <i class="col-md-1 fa fa-amazon fa-2x mr-2"></i>
-                    <i class="col-md-1 fa fa-free-code-camp fa-2x mr-2"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <p class="text-center">FCC Chengdu Copyright &copy; 2017</p>
-    </footer>
-</div>
-</body>
-</html>
+<!--  AJAX loading  -->
+    <div data-href="component/loading.html"></div>
+</body></html>

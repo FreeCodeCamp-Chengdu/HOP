@@ -1,0 +1,81 @@
+<style>
+    [is] a:link {
+        text-decoration:    none;
+    }
+    [is] .img-thumbnail {
+        max-width:    4em;
+    }
+</style>
+<script>
+    require(['jquery', 'EasyWebApp'],  function ($, EWA) {
+
+        EWA.component(function (data) {
+
+            var user = (data.type === 'User');
+
+            $.extend(data, {
+                detailURL:      function (view) {
+
+                    return  (user ? 'orgs' : 'users')  +  '/'  +  view.login;
+                },
+                memberTitle:    user ? '参与组织' : '组织成员',
+                memberURL:      (
+                    data[user ? 'organizations_url' : 'public_members_url']  ||  ''
+                ).split('{')[0]
+            });
+        });
+    });
+</script>
+<div class="container-fluid"><div class="row">
+    <header class="col-md-4 text-center">
+        <a class="center-block" target="_blank" href="${view.html_url}">
+            <h2>${view.name}</h2>
+            <h3>${view.login}</h3>
+            <img class="img-thumbnail" src="${view.avatar_url}" />
+        </a>
+        <p>${view.bio || view.description}</p>
+        <p>${view.createdTime} 加入 G 圈，${view.updatedTime} 更新了资料</p>
+        <p>
+            <a href="index.html?data=github/users/${view.login}/followers">
+                粉丝 ${view.followers} 人
+            </a>
+            <a href="index.html?data=github/users/${view.login}/following">
+                偶像 ${view.following} 人
+            </a>
+        </p>
+        <p>
+            <a href="../Gist/index.html?user=${view.login}&total=${view.public_gists}">
+                锦囊 ${view.public_gists} 个
+            </a>
+            <a href="../Repository/index.html?user=${view.login}&total=${view.public_repos}">
+                仓库 ${view.public_repos} 个
+            </a>
+        </p>
+    </header>
+    <ul class="col-md-8">
+        <li><address>
+            电子邮箱：<a href="mailto:${view.email}">${view.email}</a>
+        </address></li>
+        <li><address>
+            官方网站：<a target="_blank" href="${view.blog}">${view.blog}</a>
+        </address></li>
+        <li><address>
+            所在地区：${view.location}
+        </address></li>
+        <li>所属机构：${view.company}</li>
+        <li>
+            ${view.memberTitle}：
+
+            <span is="ListView" data-href="?data=${view.memberURL}">
+
+                <a href="../User/detail.html?data=github/${scope.detailURL( view )}"
+                   title="${view.login}">
+
+                    <img class="img-thumbnail" src="${view.avatar_url}" />
+                </a>
+            </span>
+        </li>
+    </ul>
+    <section data-href="../Event.html?data=${view.events_url.split('{')[0]}">
+    </section>
+</div></div>

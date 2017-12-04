@@ -1,0 +1,120 @@
+<style disabled>
+    .Ellipsis {
+        max-width:    4em;
+    }
+    button {
+        margin-top:    1em;
+    }
+</style>
+<script>
+    require(['Media_Flow'],  function () {
+
+        arguments[0](function (VM, data) {
+
+            data.event = {
+                Create:                      '创建',
+                Delete:                      '删除',
+                Push:                        '推送',
+                Watch:                       '关注',
+                Issues:                      '问题',
+                IssueComment:                '回复',
+                Fork:                        '衍生',
+                PullRequest:                 '请求拉取',
+                PullRequestReviewComment:    '评审',
+                Release:                     '版本',
+                Member:                      '成员',
+                Gollum:                      '维基',
+                Public:                      '公开'
+            };
+
+            data.method = {
+                created:      '创建',
+                edited:       '编辑',
+                closed:       '关闭',
+                opened:       '开启',
+                started:      '星标',
+                published:    '发布',
+                added:        '添加'
+            };
+
+            data.detailURL = function () {
+
+                var model, path;
+
+                if (model = this.issue || this.pull_request)
+                    path = 'Repository/Issue/detail';
+                else if (model = this.release)
+                    path = 'Repository/Tag';
+                else if (model = this.member)
+                    path = 'User/index';
+                else
+                    return;
+
+                return  path + '.html?data=github/' + model.url;
+            };
+        });
+    });
+</script>
+
+<hr style="clear: both" />
+
+<h4>最新动态</h4>
+
+<div is="ListView" data-name="list">
+    <section class="media">
+        <div class="media-left media-middle col-md-1">
+            <a href="User/detail.html?data=${view.actor.url}"
+               title="${view.actor.login}">
+
+                <img class="media-object" src="${view.actor.avatar_url}" />
+
+                <div class="Ellipsis">${view.actor.display_login}</div>
+            </a>
+        </div>
+        <div class="media-body">
+            <h3 class="media-heading">
+                <a href="Repository/detail.html?data=${view.repo.url}">
+                    ${view.repo.name}
+                </a>
+            </h3>
+            <span title="${(new Date( view.created_at )).toLocaleString()}">
+                ${view.createdTime}
+            </span>
+
+            ${scope.method[ view.payload.action ]}
+
+            ${scope.event[ view.type.replace('Event', '') ]}
+
+            <span data-name="payload">
+                <a href="./${scope.detailURL()}">
+                    ${
+                        (view.ref || view.master_branch)  ||
+                        (view.issue || view.pull_request || '').title  ||
+                        (view.release || '').name  ||
+                        (view.member || '').login
+                    }
+                </a>
+                <ol data-name="pages"
+                    style="display: ${scope.pages ? '' : 'none'}">
+                    <li>
+                        ${scope.method[ view.action ]}
+
+                        <a target="_blank" href="${view.html_url}"
+                           title="${view.summary || view.sha}">
+
+                            ${view.title}
+                        </a>
+                    </li>
+                </ol>
+            </span>
+        </div>
+    </section>
+</div>
+
+<div class="text-center">
+    <button type="button" class="btn btn-primary" disabled="${!! view.ready}"
+            onclick="${view.loadMore}">
+
+        ${['加载更多', '正在加载……', '没有更多'][ view.ready ]}
+    </button>
+</div>

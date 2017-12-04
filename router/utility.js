@@ -75,7 +75,7 @@ exports.reply = function (response, promise) {
 
     },  function (error) {
 
-        response.status( 400 ).json({
+        response.status(error.status || 400).json({
             code:       error.code,
             message:    error.message || error.rawMessage
         }).end();

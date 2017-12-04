@@ -47,11 +47,11 @@ Web 服务 URL —— http://localhost:3000/
 
 ### （一）前端架构
 
- - CSS 框架：[BootStrap v3.3+](http://v3.bootcss.com/)
+ - UI 组件库：[BootEWA](https://boot-web.tk/)
 
  - 模块化规范：[AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
 
- - MVVM 引擎：[Vue v2.3+](http://cn.vuejs.org/)
+ - MVVM 引擎：[EasyWebApp v4.0+](https://tech_query.oschina.io/easywebapp/)
 
  - CDN 服务：[BootCDN](http://www.bootcdn.cn/)（依赖库唯一来源，不要写在 `package.json` 中）
 

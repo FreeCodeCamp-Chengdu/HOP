@@ -70,13 +70,13 @@ app.use(LeanCloud.Cloud.CookieSession({
  * @apiParam {Number} [page=1]  结果页码
  * @apiParam {String} [keyWord] 关键词
  *
- * @apiSuccess {Object[]} result          结果列表
- * @apiSuccess {Number}   result.id       唯一索引
- * @apiSuccess {Number}   result.creator  创建者 ID
- * @apiSuccess {Date}     result.createAt 创建时间
- * @apiSuccess {Number}   result.editor   编辑者 ID
- * @apiSuccess {Date}     result.updateAt 更新时间
- * @apiSuccess {Number}   total           结果总数
+ * @apiSuccess {Object[]} result           结果列表
+ * @apiSuccess {Number}   result.id        唯一索引
+ * @apiSuccess {Number}   result.creator   创建者 ID
+ * @apiSuccess {Date}     result.createdAt 创建时间
+ * @apiSuccess {Number}   result.editor    编辑者 ID
+ * @apiSuccess {Date}     result.updatedAt 更新时间
+ * @apiSuccess {Number}   total            结果总数
  */
 
 app.use( require('./GitHub') );
@@ -86,12 +86,10 @@ app.use( require('./Activity') );
 app.use( require('./Team') );
 
 app.use( require('./Member') );
-/*
+
 app.use('/openAPI', require('./OpenAPI'));
 
 app.use('/user', require('./User'));
-
-app.use('/hackathon', require('./api/hackathon'));*/
 
 
 

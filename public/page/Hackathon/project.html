@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="hackathon.css">
+<style disabled>
+    .col-sm-6{
+        padding: 10px 10px;
+    }
+    .product-details-date{
+        padding: 2px 10px;
+        margin: 2px 5px;
+    }
+    .product-details-group{
+        padding: 2px 8px;
+        margin: 2px 5px;
+    }
+    .product-details-tag{
+        padding: 2px 10px;
+        margin: 2px 2px;
+    }
+    .product-details-button{
+        padding: 2px 10px;
+        margin: 2px 5px;
+    }
+    .users{
+        padding-left: 4px;
+    }
+</style>
+<script>
+    require(['EasyWebApp', 'ScrollReveal'], function (EWA, ScrollReveal) {
+
+        EWA.component(function () {
+
+            var sr = ScrollReveal();
+
+            this.on('ready',  function () {
+
+                sr.reveal('.product', {
+                    duration:      2000,
+                    origin:        'right',
+                    distance:      '100px',
+                    viewFactor:    0.2
+                });
+            });
+        });
+    });
+</script>
+
+<h3 class="title">
+    <i class="glyphicon glyphicon-star-o"></i>
+    优秀项目展
+</h3>
+<hr class="hr">
+
+<div class="container">
+    <div class="row" is="ListView" data-name="list">
+        <div class="col-sm-6">
+            <div class="col-sm-12 product">
+                <img src="image/temp_img.png" class="img-responsive event-img">
+
+                <h3><!--${view.title}--></h3>
+                <div>
+                    <i class="glyphicon glyphicon-calendar event-icon"></i>
+
+                    <span class="product-details-date">
+                        <!--${(new Date( view.createdAt )).toLocaleString()}-->
+                    </span>
+                </div>
+                <div>
+                    <i class="glyphicon glyphicon-user event-icon users"></i>
+
+                    <span class="product-details-group group-text">
+                        咸鱼小组
+                    </span>
+                </div>
+                <div>
+                    <i class="glyphicon glyphicon-tags event-icon"></i>
+
+                    <span class="tags-blue product-details-tag">
+                        <!--${view.description}-->
+                    </span>
+                </div>
+                <a class="btn btn-success btn-larger product-details-button">
+                    查看详情
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

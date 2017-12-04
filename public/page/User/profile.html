@@ -1,0 +1,181 @@
+<style disabled>
+    #School, #Specialty {
+        padding:    0  15px;
+    }
+    [name="SMS_Code"] {
+        width:    66.66%;
+    }
+</style>
+<script src="profile.js"></script>
+
+<form class="form-horizontal"
+      method="PUT" action="?data=user/profile" ondata="${view.complete}">
+
+    <fieldset disabled="${! scope.edit}"><legend>个人简介</legend>
+
+        <small class="help-block">完善信息利于享受更方便的服务~</small>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">性别</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="-1"
+                           checked="${view.gender == this.value}" />
+                    <abbr title="不便透露">?</abbr>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="0"
+                           checked="${view.gender == this.value}" />
+                    <abbr title="美女">♀</abbr>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" value="1"
+                           checked="${view.gender == this.value}" />
+                    <abbr title="帅哥">♂</abbr>
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">出生年份</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control"
+                       name="year" required
+                       value="${scope.year || 1989}"
+                       max="${(new Date()).getFullYear()}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">学历 / 学位</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="小学"
+                           checked="${view.degree == this.value}" />
+                    小学
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="初中"
+                           checked="${view.degree == this.value}" />
+                    初中
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="高中"
+                           checked="${view.degree == this.value}" />
+                    高中
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="专科"
+                           checked="${view.degree == this.value}" />
+                    专科
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="本科"
+                           checked="${view.degree == this.value}" />
+                    本科
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="硕士"
+                           checked="${view.degree == this.value}" />
+                    硕士
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="degree" value="博士"
+                           checked="${view.degree == this.value}" />
+                    博士
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">毕业院校</label>
+
+            <div class="col-sm-10" id="School"
+                 data-href="../../component/Search.html"
+                 data-key="school" data-place-holder="在校生选当前学校"
+                 data-api="openAPI/university?keyWord="
+                 oncheck="${view.atSchool}">
+                <span slot="item">
+                    <!--${view.schoolname}-->
+                    <small class="pull-right"><!--${view.province}--></small>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">主修专业</label>
+
+            <div class="col-sm-10" id="Specialty"
+                 data-href="../../component/Search.html"
+                 data-key="specialty"
+                 data-api="openAPI/university/specialty?zycengci=${view.degree}&keyWord=">
+                <span slot="item">
+                    <!--${view.specialname}-->
+                    <small class="pull-right"><!--${view.zytype}--></small>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">常居地</label>
+            <div class="col-sm-10"
+                 data-href="../../component/Admin_District.html"
+                 data-adcode="${view.adcode}">
+            </div>
+        </div>
+    </fieldset>
+    <fieldset disabled="${! scope.edit}"><legend>联系方式</legend>
+
+        <div class="form-group has-feedback has-${view.emailStatus}"
+             title="${view.emailVerified ? '已' : '未'}验证">
+
+            <label class="control-label col-sm-2">
+                电邮地址
+            </label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control"
+                       name="email" required value="${view.email}"
+                       aria-describedby="verify-${view.emailStatus}" />
+
+                <i class="glyphicon form-control-feedback glyphicon-${view.emailStatus}-sign"
+                   aria-hidden="true"></i>
+
+                <span class="sr-only" id="verify-${view.emailStatus}">
+                    (<!--${view.emailStatus}-->)
+                </span>
+            </div>
+        </div>
+        <div class="form-group has-feedback has-${view.phoneStatus}"
+             title="${view.mobilePhoneVerified ? '已' : '未'}验证">
+
+            <label class="control-label col-sm-2">
+                手机号码
+            </label>
+            <div class="col-sm-10"><div class="row">
+                <div class="col-sm-5">
+                    <input type="tel" class="form-control"
+                           name="mobilePhoneNumber"
+                           value="${view.mobilePhoneNumber}"
+                           placeholder="暂只支持中国大陆运营商"
+                           aria-describedby="verify-${view.phoneStatus}" />
+
+                    <i class="glyphicon form-control-feedback glyphicon-${view.phoneStatus}-sign"
+                       aria-hidden="true"></i>
+
+                    <span class="sr-only" id="verify-${view.phoneStatus}">
+                        (<!--${view.phoneStatus}-->)
+                    </span>
+                </div>
+                <div class="col-sm-7" id="SMS_Code">
+                    <label class="control-label col-sm-4">
+                        短信验证码
+                    </label>
+                    <input type="text" class="form-control col-sm-8"
+                           name="SMS_Code"
+                           placeholder="保存本页后发送，收到后再填入此处" />
+                </div>
+            </div></div>
+        </div>
+    </fieldset>
+    <hr />
+    <button class="btn btn-primary btn-block btn-lg"
+            type="${scope.edit ? 'submit' : 'button'}" onclick="${view.switch}">
+
+        <!--${scope.edit ? '保存' : '编辑'}-->
+    </button>
+</form>

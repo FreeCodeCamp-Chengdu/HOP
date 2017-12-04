@@ -1,0 +1,32 @@
+<style disabled>
+    .Ellipsis {
+        max-width:    3.2em;
+    }
+    button {
+        margin-top:    1em;
+    }
+</style>
+<script>
+    require(['Media_Flow'],  function () {  arguments[0]();  });
+</script>
+
+<h2>G 名册</h2>
+
+<div class="row text-center" is="ListView" data-name="list">
+
+    <a class="col-md-1" title="${view.login}"
+       href="detail.html?data=${view.url}">
+
+        <img class="img-thumbnail" src="${view.avatar_url}" />
+
+        <div class="Ellipsis">${view.login}</div>
+    </a>
+</div>
+
+<div class="text-center">
+    <button type="button" class="btn btn-primary" disabled="${!! view.ready}"
+            onclick="${view.loadMore}">
+
+        ${['加载更多', '正在加载……', '没有更多'][ view.ready ]}
+    </button>
+</div>

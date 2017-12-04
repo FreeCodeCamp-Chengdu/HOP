@@ -1,0 +1,57 @@
+abbr[title] {
+    text-decoration:    none;
+}
+img {
+    display:       inline-block;
+    max-width:     100%;
+    max-height:    100%;
+}
+select:disabled {
+    background:    rgb(238, 238, 238);
+    cursor:        not-allowed;
+}
+
+
+.label {
+	margin-right:    0.5em;
+}
+.label a {
+    color:              white;
+	text-decoration:    none;
+}
+.media-left, .media-right {
+    width:    10%;
+}
+.Ellipsis {
+    overflow:         hidden;
+    white-space:      nowrap;
+    text-overflow:    ellipsis;
+}
+.Grid-Row {
+    display:          table;
+    width:            100%;
+    margin-bottom:    1em;
+}
+.Grid-Row > * {
+    display:           table-cell;
+    text-align:        center;
+    vertical-align:    middle;
+}
+
+
+body {
+    padding-top:    3.5em;
+}
+body > nav .navbar-brand {
+    color:    white  !important;
+}
+@media (min-width: 768px) {
+    .navbar-nav[data-name] {
+        max-width:     32em;
+        max-height:    3.5em;
+        overflow:      auto;
+    }
+}
+#PageBox {
+    padding:    1em;
+}
