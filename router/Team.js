@@ -1,7 +1,10 @@
 'use strict';
 
-const router = require('express').Router(), LeanCloud = require('leanengine');
+const router = require('express').Router(),
+      LeanCloud = require('leanengine'),
+      Utility = require('./utility');
 
+const Team = LeanCloud.Object.extend('Team');
 
 /**
  * @apiDefine Team_Model
@@ -12,11 +15,38 @@ const router = require('express').Router(), LeanCloud = require('leanengine');
  */
 
 /**
- * @api {get} /team 查询团队
+ * @api {post} /activity/:aid/team 发起团队
+ *
+ * @apiName    postTeam
+ * @apiVersion 1.0.0
+ * @apiGroup   Team
+ *
+ * @apiParam  {Number}  aid  活动 ID
+ *
+ * @apiUse Team_Model
+ *
+ * @apiSuccess {Number} id 唯一索引
+ */
+router.post('/activity/:aid/team',  function (request, response) {
+
+    var data = request.body;
+
+    data.activity = LeanCloud.Object.createWithoutData(
+        'Activity', request.params.aid
+    );
+
+    Utility.reply(response,  (new Team()).save( data ));
+});
+
+
+/**
+ * @api {get} /activity/:aid/team 查询团队
  *
  * @apiName    listTeam
  * @apiVersion 1.0.0
  * @apiGroup   Team
+ *
+ * @apiParam  {Number}  aid  活动 ID
  *
  * @apiUse List_Query
  *
@@ -24,26 +54,18 @@ const router = require('express').Router(), LeanCloud = require('leanengine');
  * @apiSuccess {String}   result.location    地址
  * @apiSuccess {String}   result.description 描述
  */
-router.post('/team',  function (request, response) {
+router.get('/activity/:aid/team',  function (request, response) {
 
+    var data = request.query;
 
-});
+    data.activity = LeanCloud.Object.createWithoutData(
+        'Activity', request.params.aid
+    );
 
-
-/**
- * @api {post} /team 发起团队
- *
- * @apiName    postTeam
- * @apiVersion 1.0.0
- * @apiGroup   Team
- *
- * @apiUse Team_Model
- *
- * @apiSuccess {Number} id 唯一索引
- */
-router.post('/team',  function (request, response) {
-
-
+    Utility.reply(
+        response,
+        Utility.query(data,  'Team',  ['title', 'description'],  ['activity'])
+    );
 });
 
 
@@ -64,8 +86,11 @@ router.post('/team',  function (request, response) {
  */
 router.get('/team/:id',  function (request, response) {
 
-    console.dir(request)
+    var query = new LeanCloud.Query('Team');
+
+    Utility.reply(response,  query.get( request.params.id ));
 });
+
 
 /**
  * @api {put} /team/:id 更新团队详情
@@ -80,8 +105,11 @@ router.get('/team/:id',  function (request, response) {
  */
 router.put('/team/:id',  function (request, response) {
 
+    var team = LeanCloud.Object.createWithoutData('Team', request.params.id);
 
+    Utility.reply(response,  team.save( request.body ));
 });
+
 
 /**
  * @api {delete} /team/:id 解散团队
@@ -94,7 +122,9 @@ router.put('/team/:id',  function (request, response) {
  */
 router.delete('/team/:id',  function (request, response) {
 
+    var team = LeanCloud.Object.createWithoutData('Team', request.params.id);
 
+    Utility.reply(response, team.destory());
 });
 
 

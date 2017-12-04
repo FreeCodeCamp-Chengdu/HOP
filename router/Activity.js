@@ -1,7 +1,10 @@
 'use strict';
 
-const router = require('express').Router(), LeanCloud = require('leanengine');
+const router = require('express').Router(),
+      LeanCloud = require('leanengine'),
+      Utility = require('./utility');
 
+const Activity = LeanCloud.Object.extend('Activity');
 
 /**
  * @apiDefine Activity_Model
@@ -12,6 +15,29 @@ const router = require('express').Router(), LeanCloud = require('leanengine');
  * @apiParam {String{3..100}} [location]  地址
  * @apiParam {String{100..}}  description 描述
  */
+
+/**
+ * @api {post} /activity 发起活动
+ *
+ * @apiName    postActivity
+ * @apiVersion 1.0.0
+ * @apiGroup   Activity
+ *
+ * @apiUse Activity_Model
+ *
+ * @apiSuccess {Number} id 唯一索引
+ */
+router.post('/activity',  function (request, response) {
+
+    var data = request.body;
+
+    data.startTime = new Date( data.startTime );
+
+    data.endTime = new Date( data.endTime );
+
+    Utility.reply(response,  (new Activity()).save( data ));
+});
+
 
 /**
  * @api {get} /activity 查询活动
@@ -28,26 +54,12 @@ const router = require('express').Router(), LeanCloud = require('leanengine');
  * @apiSuccess {String}   result.location    地址
  * @apiSuccess {String}   result.description 描述
  */
-router.post('/activity',  function (request, response) {
+router.get('/activity',  function (request, response) {
 
-
-});
-
-
-/**
- * @api {post} /activity 发起活动
- *
- * @apiName    postActivity
- * @apiVersion 1.0.0
- * @apiGroup   Activity
- *
- * @apiUse Activity_Model
- *
- * @apiSuccess {Number} id 唯一索引
- */
-router.post('/activity',  function (request, response) {
-
-
+    Utility.reply(
+        response,
+        Utility.query(request.query,  'Activity',  ['title', 'description'])
+    );
 });
 
 
@@ -70,8 +82,11 @@ router.post('/activity',  function (request, response) {
  */
 router.get('/activity/:id',  function (request, response) {
 
-    console.dir(request)
+    var query = new LeanCloud.Query('Activity');
+
+    Utility.reply(response,  query.get( request.params.id ));
 });
+
 
 /**
  * @api {put} /activity/:id 更新活动详情
@@ -86,8 +101,13 @@ router.get('/activity/:id',  function (request, response) {
  */
 router.put('/activity/:id',  function (request, response) {
 
+    var activity = LeanCloud.Object.createWithoutData(
+            'Activity', request.params.id
+        );
 
+    Utility.reply(response,  activity.save( request.body ));
 });
+
 
 /**
  * @api {delete} /activity/:id 删除活动
@@ -100,7 +120,11 @@ router.put('/activity/:id',  function (request, response) {
  */
 router.delete('/activity/:id',  function (request, response) {
 
+    var activity = LeanCloud.Object.createWithoutData(
+            'Activity', request.params.id
+        );
 
+    Utility.reply(response, activity.destory());
 });
 
 

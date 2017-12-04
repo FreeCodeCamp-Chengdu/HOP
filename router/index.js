@@ -56,11 +56,11 @@ app.use(LeanCloud.Cloud.CookieSession({
 /**
  * @apiDefine Model_Meta 模型元数据 后端自动生成的只读字段
  *
- * @apiSuccess {Number} id       唯一索引
- * @apiSuccess {Number} creator  创建者 ID
- * @apiSuccess {Date}   createAt 创建时间
- * @apiSuccess {Number} editor   编辑者 ID
- * @apiSuccess {Date}   updateAt 更新时间
+ * @apiSuccess {Number} id        唯一索引
+ * @apiSuccess {Number} creator   创建者 ID
+ * @apiSuccess {Date}   createdAt 创建时间
+ * @apiSuccess {Number} editor    编辑者 ID
+ * @apiSuccess {Date}   updatedAt 更新时间
  */
 
 /**
@@ -82,6 +82,10 @@ app.use(LeanCloud.Cloud.CookieSession({
 app.use( require('./GitHub') );
 
 app.use( require('./Activity') );
+
+app.use( require('./Team') );
+
+app.use( require('./Member') );
 /*
 app.use('/openAPI', require('./OpenAPI'));
 

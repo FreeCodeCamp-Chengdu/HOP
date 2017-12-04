@@ -98,7 +98,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "createAt",
+            "field": "createdAt",
             "description": "<p>创建时间</p>"
           },
           {
@@ -112,7 +112,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "updateAt",
+            "field": "updatedAt",
             "description": "<p>更新时间</p>"
           }
         ]
@@ -453,11 +453,47 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/member",
+    "url": "/team/:tid/member",
     "title": "查询队友",
     "name": "listMember",
     "version": "1.0.0",
     "group": "Member",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tid",
+            "description": "<p>团队 ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "rows",
+            "defaultValue": "10",
+            "description": "<p>结果行数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "page",
+            "defaultValue": "1",
+            "description": "<p>结果页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keyWord",
+            "description": "<p>关键词</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -535,44 +571,36 @@ define({ "api": [
       }
     },
     "filename": "router/Member.js",
-    "groupTitle": "Member",
+    "groupTitle": "Member"
+  },
+  {
+    "type": "post",
+    "url": "/team/:tid/member",
+    "title": "添加队友",
+    "name": "postMember",
+    "version": "1.0.0",
+    "group": "Member",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
             "type": "Number",
-            "optional": true,
-            "field": "rows",
-            "defaultValue": "10",
-            "description": "<p>结果行数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
-            "field": "page",
-            "defaultValue": "1",
-            "description": "<p>结果页码</p>"
+            "optional": false,
+            "field": "tid",
+            "description": "<p>团队 ID</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": true,
-            "field": "keyWord",
-            "description": "<p>关键词</p>"
+            "size": "3..100",
+            "optional": false,
+            "field": "name",
+            "description": "<p>GitHub ID</p>"
           }
         ]
       }
-    }
-  },
-  {
-    "type": "post",
-    "url": "/member",
-    "title": "添加队友",
-    "name": "postMember",
-    "version": "1.0.0",
-    "group": "Member",
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -587,21 +615,7 @@ define({ "api": [
       }
     },
     "filename": "router/Member.js",
-    "groupTitle": "Member",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "size": "3..100",
-            "optional": false,
-            "field": "name",
-            "description": "<p>GitHub ID</p>"
-          }
-        ]
-      }
-    }
+    "groupTitle": "Member"
   },
   {
     "type": "put",
@@ -719,7 +733,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "createAt",
+            "field": "createdAt",
             "description": "<p>创建时间</p>"
           },
           {
@@ -733,7 +747,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "updateAt",
+            "field": "updatedAt",
             "description": "<p>更新时间</p>"
           }
         ]
@@ -744,11 +758,47 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/team",
+    "url": "/activity/:aid/team",
     "title": "查询团队",
     "name": "listTeam",
     "version": "1.0.0",
     "group": "Team",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "aid",
+            "description": "<p>活动 ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "rows",
+            "defaultValue": "10",
+            "description": "<p>结果行数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "page",
+            "defaultValue": "1",
+            "description": "<p>结果页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keyWord",
+            "description": "<p>关键词</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -826,62 +876,25 @@ define({ "api": [
       }
     },
     "filename": "router/Team.js",
-    "groupTitle": "Team",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
-            "field": "rows",
-            "defaultValue": "10",
-            "description": "<p>结果行数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
-            "field": "page",
-            "defaultValue": "1",
-            "description": "<p>结果页码</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "keyWord",
-            "description": "<p>关键词</p>"
-          }
-        ]
-      }
-    }
+    "groupTitle": "Team"
   },
   {
     "type": "post",
-    "url": "/team",
+    "url": "/activity/:aid/team",
     "title": "发起团队",
     "name": "postTeam",
     "version": "1.0.0",
     "group": "Team",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>唯一索引</p>"
-          }
-        ]
-      }
-    },
-    "filename": "router/Team.js",
-    "groupTitle": "Team",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "aid",
+            "description": "<p>活动 ID</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -908,7 +921,22 @@ define({ "api": [
           }
         ]
       }
-    }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>唯一索引</p>"
+          }
+        ]
+      }
+    },
+    "filename": "router/Team.js",
+    "groupTitle": "Team"
   },
   {
     "type": "put",

@@ -1,7 +1,10 @@
 'use strict';
 
-const router = require('express').Router(), LeanCloud = require('leanengine');
+const router = require('express').Router(),
+      LeanCloud = require('leanengine'),
+      Utility = require('./utility');
 
+const Member = LeanCloud.Object.extend('Member');
 
 /**
  * @apiDefine Member_Model
@@ -10,11 +13,37 @@ const router = require('express').Router(), LeanCloud = require('leanengine');
  */
 
 /**
- * @api {get} /member 查询队友
+ * @api {post} /team/:tid/member 添加队友
+ *
+ * @apiName    postMember
+ * @apiVersion 1.0.0
+ * @apiGroup   Member
+ *
+ * @apiParam  {Number}  tid  团队 ID
+ *
+ * @apiUse Member_Model
+ *
+ * @apiSuccess {Number} id 唯一索引
+ */
+
+router.post('/team/:tid/member',  function (request, response) {
+
+    var data = request.body;
+
+    data.team = LeanCloud.Object.createWithoutData('Team', request.params.tid);
+
+    Utility.reply(response,  (new Member()).save( data ));
+});
+
+
+/**
+ * @api {get} /team/:tid/member 查询队友
  *
  * @apiName    listMember
  * @apiVersion 1.0.0
  * @apiGroup   Member
+ *
+ * @apiParam  {Number}  tid  团队 ID
  *
  * @apiUse List_Query
  *
@@ -22,26 +51,16 @@ const router = require('express').Router(), LeanCloud = require('leanengine');
  * @apiSuccess {String}   result.location    地址
  * @apiSuccess {String}   result.description 描述
  */
-router.post('/member',  function (request, response) {
+router.get('/team/:tid/member',  function (request, response) {
 
+    var data = request.body;
 
-});
+    data.team = LeanCloud.Object.createWithoutData('Team', request.params.tid);
 
-
-/**
- * @api {post} /member 添加队友
- *
- * @apiName    postMember
- * @apiVersion 1.0.0
- * @apiGroup   Member
- *
- * @apiUse Member_Model
- *
- * @apiSuccess {Number} id 唯一索引
- */
-router.post('/member',  function (request, response) {
-
-
+    Utility.reply(
+        response,
+        Utility.query(data,  'Member',  ['name', 'description'],  ['team'])
+    );
 });
 
 
@@ -60,7 +79,9 @@ router.post('/member',  function (request, response) {
  */
 router.get('/member/:id',  function (request, response) {
 
-    console.dir(request)
+    var query = new LeanCloud.Query('Member');
+
+    Utility.reply(response,  query.get( request.params.id ));
 });
 
 /**
@@ -76,7 +97,9 @@ router.get('/member/:id',  function (request, response) {
  */
 router.put('/member/:id',  function (request, response) {
 
+    var member = LeanCloud.Object.createWithoutData('Member', request.params.id);
 
+    Utility.reply(response,  member.save( request.body ));
 });
 
 /**
@@ -90,7 +113,9 @@ router.put('/member/:id',  function (request, response) {
  */
 router.delete('/member/:id',  function (request, response) {
 
+    var member = LeanCloud.Object.createWithoutData('Member', request.params.id);
 
+    Utility.reply(response, member.destory());
 });
 
 
