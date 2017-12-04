@@ -10,6 +10,7 @@ const Team = LeanCloud.Object.extend('Team');
  * @apiDefine Team_Model
  *
  * @apiParam {String{3..10}}   title       标题
+ * @apiParam {String}          [logoURL]   标志 URL
  * @apiParam {String{3..100}}  [location]  地址
  * @apiParam {String{10..100}} description 描述
  */
@@ -31,6 +32,8 @@ router.post('/activity/:aid/team',  function (request, response) {
 
     var data = request.body;
 
+    data.creator = request.currentUser;
+
     data.activity = LeanCloud.Object.createWithoutData(
         'Activity', request.params.aid
     );
@@ -40,9 +43,9 @@ router.post('/activity/:aid/team',  function (request, response) {
 
 
 /**
- * @api {get} /activity/:aid/team 查询团队
+ * @api {get} /activity/:aid/team 查询活动团队
  *
- * @apiName    listTeam
+ * @apiName    listActivityTeam
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
@@ -50,9 +53,10 @@ router.post('/activity/:aid/team',  function (request, response) {
  *
  * @apiUse List_Query
  *
- * @apiSuccess {String}   result.title       标题
- * @apiSuccess {String}   result.location    地址
- * @apiSuccess {String}   result.description 描述
+ * @apiSuccess {String}   list.title       标题
+ * @apiSuccess {String}   list.logoURL     标志 URL
+ * @apiSuccess {String}   list.location    地址
+ * @apiSuccess {String}   list.description 描述
  */
 router.get('/activity/:aid/team',  function (request, response) {
 
@@ -70,6 +74,31 @@ router.get('/activity/:aid/team',  function (request, response) {
 
 
 /**
+ * @api {get} /team 全局查询团队
+ *
+ * @apiName    listTeam
+ * @apiVersion 1.0.0
+ * @apiGroup   Team
+ *
+ * @apiUse List_Query
+ *
+ * @apiSuccess {String}   list.title       标题
+ * @apiSuccess {String}   list.logoURL     标志 URL
+ * @apiSuccess {String}   list.location    地址
+ * @apiSuccess {String}   list.description 描述
+ */
+router.get('/team',  function (request, response) {
+
+    Utility.reply(
+        response,
+        Utility.query(
+            request.query,  'Team',  ['title', 'description'],  ['activity']
+        )
+    );
+});
+
+
+/**
  * @api {get} /team/:id 查看团队详情
  *
  * @apiName    getTeam
@@ -81,6 +110,7 @@ router.get('/activity/:aid/team',  function (request, response) {
  * @apiUse Model_Meta
  *
  * @apiSuccess {String} title       标题
+ * @apiSuccess {String} logoURL     标志 URL
  * @apiSuccess {String} location    地址
  * @apiSuccess {String} description 描述
  */
@@ -105,9 +135,28 @@ router.get('/team/:id',  function (request, response) {
  */
 router.put('/team/:id',  function (request, response) {
 
-    var team = LeanCloud.Object.createWithoutData('Team', request.params.id);
+    Utility.reply(
+        response,
+        LeanCloud.Object.createWithoutData(
+            'Team', request.params.id
+        ).fetch({
+            include:    ['creator']
+        }).then(function (team) {
 
-    Utility.reply(response,  team.save( request.body ));
+            if (request.currentUser.id === team.get('creator').id) {
+
+                request.body.editor = request.currentUser;
+
+                return  team.save( request.body );
+            }
+
+            var error = Error('This team can be edited by its creator only');
+
+            error.status = 403;
+
+            throw error;
+        })
+    );
 });
 
 
@@ -122,9 +171,24 @@ router.put('/team/:id',  function (request, response) {
  */
 router.delete('/team/:id',  function (request, response) {
 
-    var team = LeanCloud.Object.createWithoutData('Team', request.params.id);
+    Utility.reply(
+        response,
+        LeanCloud.Object.createWithoutData(
+            'Team', request.params.id
+        ).fetch({
+            include:    ['creator']
+        }).then(function (team) {
 
-    Utility.reply(response, team.destory());
+            if (request.currentUser.id === team.get('creator').id)
+                return team.destory();
+
+            var error = Error('This team can be deleted by its creator only');
+
+            error.status = 403;
+
+            throw error;
+        })
+    );
 });
 
 

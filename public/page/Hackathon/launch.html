@@ -1,0 +1,41 @@
+<script src="launch.js"></script>
+
+<form class="form-horizontal"
+      method="post" action="?data=activity/" ondata="${view.goBack}">
+
+    <div class="form-group">
+        <div class="input-group col-md-offset-2 col-md-8 col-md-offset-2">
+            <label class="input-group-addon" id="title">名字</label>
+            <input type="text" class="form-control"
+                   name="title" required
+                   placeholder="为你的G客松想个酷炫的名字吧" aria-describedby="title">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group col-md-offset-2 col-md-8 col-md-offset-2">
+            <label class="input-group-addon" id="location">地址</label>
+            <input type="text" class="form-control"
+                   name="location"
+                   placeholder="准备在哪里举行呢?" aria-describedby="location">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group col-md-offset-2 col-md-8 col-md-offset-2">
+            <label class="input-group-addon" id="date">时间</label>
+            <input type="text" class="form-control" id="date_select" aria-describedby="date">
+            <input type="hidden" name="startTime">
+            <input type="hidden" name="endTime">
+        </div>
+    </div>
+
+    <div class="form-group" id="Editor">
+
+        <textarea class="form-control"
+                  name="description" required value="${scope.description}"
+                  placeholder="活动详情"></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-primary btn-block btn-lg">
+</form>

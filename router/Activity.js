@@ -10,6 +10,7 @@ const Activity = LeanCloud.Object.extend('Activity');
  * @apiDefine Activity_Model
  *
  * @apiParam {String{3..100}} title       标题
+ * @apiParam {String}         [imageURL]  题图 URL
  * @apiParam {Date}           startTime   开始时间
  * @apiParam {Date}           endTime     结束时间
  * @apiParam {String{3..100}} [location]  地址
@@ -31,6 +32,8 @@ router.post('/activity',  function (request, response) {
 
     var data = request.body;
 
+    data.creator = request.currentUser;
+
     data.startTime = new Date( data.startTime );
 
     data.endTime = new Date( data.endTime );
@@ -48,11 +51,12 @@ router.post('/activity',  function (request, response) {
  *
  * @apiUse List_Query
  *
- * @apiSuccess {String}   result.title       标题
- * @apiSuccess {Date}     result.startTime   开始时间
- * @apiSuccess {Date}     result.endTime     结束时间
- * @apiSuccess {String}   result.location    地址
- * @apiSuccess {String}   result.description 描述
+ * @apiSuccess {String}   list.title       标题
+ * @apiSuccess {String}   list.imageURL    题图 URL
+ * @apiSuccess {Date}     list.startTime   开始时间
+ * @apiSuccess {Date}     list.endTime     结束时间
+ * @apiSuccess {String}   list.location    地址
+ * @apiSuccess {String}   list.description 描述
  */
 router.get('/activity',  function (request, response) {
 
@@ -75,6 +79,7 @@ router.get('/activity',  function (request, response) {
  * @apiUse Model_Meta
  *
  * @apiSuccess {String} title       标题
+ * @apiSuccess {String} imageURL    题图 URL
  * @apiSuccess {Date}   startTime   开始时间
  * @apiSuccess {Date}   endTime     结束时间
  * @apiSuccess {String} location    地址
@@ -101,11 +106,28 @@ router.get('/activity/:id',  function (request, response) {
  */
 router.put('/activity/:id',  function (request, response) {
 
-    var activity = LeanCloud.Object.createWithoutData(
+    Utility.reply(
+        response,
+        LeanCloud.Object.createWithoutData(
             'Activity', request.params.id
-        );
+        ).fetch({
+            include:    ['creator']
+        }).then(function (activity) {
 
-    Utility.reply(response,  activity.save( request.body ));
+            if (request.currentUser.id === activity.get('creator').id) {
+
+                request.body.editor = request.currentUser;
+
+                return  activity.save( request.body );
+            }
+
+            var error = Error('This activity can be edited by its creator only');
+
+            error.status = 403;
+
+            throw error;
+        })
+    );
 });
 
 
@@ -120,11 +142,24 @@ router.put('/activity/:id',  function (request, response) {
  */
 router.delete('/activity/:id',  function (request, response) {
 
-    var activity = LeanCloud.Object.createWithoutData(
+    Utility.reply(
+        response,
+        LeanCloud.Object.createWithoutData(
             'Activity', request.params.id
-        );
+        ).fetch({
+            include:    ['creator']
+        }).then(function (activity) {
 
-    Utility.reply(response, activity.destory());
+            if (request.currentUser.id === activity.get('creator').id)
+                return activity.destory();
+
+            var error = Error('This activity can be deleted by its creator only');
+
+            error.status = 403;
+
+            throw error;
+        })
+    );
 });
 
 

@@ -70,12 +70,12 @@ app.use(LeanCloud.Cloud.CookieSession({
  * @apiParam {Number} [page=1]  结果页码
  * @apiParam {String} [keyWord] 关键词
  *
- * @apiSuccess {Object[]} result           结果列表
- * @apiSuccess {Number}   result.id        唯一索引
- * @apiSuccess {Number}   result.creator   创建者 ID
- * @apiSuccess {Date}     result.createdAt 创建时间
- * @apiSuccess {Number}   result.editor    编辑者 ID
- * @apiSuccess {Date}     result.updatedAt 更新时间
+ * @apiSuccess {Object[]} list           结果列表
+ * @apiSuccess {Number}   list.id        唯一索引
+ * @apiSuccess {Number}   list.creator   创建者 ID
+ * @apiSuccess {Date}     list.createdAt 创建时间
+ * @apiSuccess {Number}   list.editor    编辑者 ID
+ * @apiSuccess {Date}     list.updatedAt 更新时间
  * @apiSuccess {Number}   total            结果总数
  */
 

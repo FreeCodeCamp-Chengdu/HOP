@@ -28,11 +28,28 @@ const Member = LeanCloud.Object.extend('Member');
 
 router.post('/team/:tid/member',  function (request, response) {
 
-    var data = request.body;
+    Utility.reply(
+        response,
+        LeanCloud.Object.createWithoutData(
+            'Team', request.params.tid
+        ).fetch({
+            include:    ['creator']
+        }).then(function (team) {
 
-    data.team = LeanCloud.Object.createWithoutData('Team', request.params.tid);
+            var data = request.body;
 
-    Utility.reply(response,  (new Member()).save( data ));
+            data.team = team;
+
+            if (request.currentUser.id === team.get('creator').id)
+                return  (new Member()).save( data );
+
+            var error = Error('This team can be edited by its creator only');
+
+            error.status = 403;
+
+            throw error;
+        })
+    );
 });
 
 
@@ -47,9 +64,10 @@ router.post('/team/:tid/member',  function (request, response) {
  *
  * @apiUse List_Query
  *
- * @apiSuccess {String}   result.name        GitHub ID
- * @apiSuccess {String}   result.location    地址
- * @apiSuccess {String}   result.description 描述
+ * @apiSuccess {String}   list.name        GitHub ID
+ * @apiSuccess {String}   list.avatarURL   头像 URL
+ * @apiSuccess {String}   list.location    地址
+ * @apiSuccess {String}   list.description 描述
  */
 router.get('/team/:tid/member',  function (request, response) {
 
@@ -74,6 +92,7 @@ router.get('/team/:tid/member',  function (request, response) {
  * @apiParam {Number} id 唯一索引
  *
  * @apiSuccess {String} name        GitHub ID
+ * @apiSuccess {String} avatarURL   头像 URL
  * @apiSuccess {String} location    地址
  * @apiSuccess {String} description 描述
  */
@@ -103,19 +122,39 @@ router.put('/member/:id',  function (request, response) {
 });
 
 /**
- * @api {delete} /member/:id 移除队友
+ * @api {delete} /team/:tid/member/:id 移除队友
  *
  * @apiName    deleteMember
  * @apiVersion 1.0.0
  * @apiGroup   Member
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam  {Number}  tid  团队 ID
+ * @apiParam  {Number}  id   唯一索引
  */
-router.delete('/member/:id',  function (request, response) {
+router.delete('/team/:tid/member/:id',  function (request, response) {
 
-    var member = LeanCloud.Object.createWithoutData('Member', request.params.id);
+    Utility.reply(
+        response,
+        LeanCloud.Object.createWithoutData(
+            'Team', request.params.tid
+        ).fetch({
+            include:    ['creator']
+        }).then(function (team) {
 
-    Utility.reply(response, member.destory());
+            var data = request.body;
+
+            if (request.currentUser.id === team.get('creator').id)
+                return LeanCloud.Object.createWithoutData(
+                    'Member', request.params.id
+                ).destroy();
+
+            var error = Error('This team can be edited by its creator only');
+
+            error.status = 403;
+
+            throw error;
+        })
+    );
 });
 
 

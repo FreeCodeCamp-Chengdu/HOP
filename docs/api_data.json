@@ -54,6 +54,13 @@
           },
           {
             "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "imageURL",
+            "description": "<p>题图 URL</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "startTime",
@@ -135,77 +142,84 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.title",
+            "field": "list.title",
             "description": "<p>标题</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.imageURL",
+            "description": "<p>题图 URL</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.startTime",
+            "field": "list.startTime",
             "description": "<p>开始时间</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.endTime",
+            "field": "list.endTime",
             "description": "<p>结束时间</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.location",
+            "field": "list.location",
             "description": "<p>地址</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.description",
+            "field": "list.description",
             "description": "<p>描述</p>"
           },
           {
             "group": "Success 200",
             "type": "Object[]",
             "optional": false,
-            "field": "result",
+            "field": "list",
             "description": "<p>结果列表</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.id",
+            "field": "list.id",
             "description": "<p>唯一索引</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.creator",
+            "field": "list.creator",
             "description": "<p>创建者 ID</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.createAt",
+            "field": "list.createdAt",
             "description": "<p>创建时间</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.editor",
+            "field": "list.editor",
             "description": "<p>编辑者 ID</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.updateAt",
+            "field": "list.updatedAt",
             "description": "<p>更新时间</p>"
           },
           {
@@ -285,6 +299,13 @@
           },
           {
             "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "imageURL",
+            "description": "<p>题图 URL</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "Date",
             "optional": false,
             "field": "startTime",
@@ -344,6 +365,13 @@
           },
           {
             "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "imageURL",
+            "description": "<p>题图 URL</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "Date",
             "optional": false,
             "field": "startTime",
@@ -380,7 +408,7 @@
   },
   {
     "type": "delete",
-    "url": "/member/:id",
+    "url": "/team/:tid/member/:id",
     "title": "移除队友",
     "name": "deleteMember",
     "version": "1.0.0",
@@ -388,6 +416,13 @@
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tid",
+            "description": "<p>团队 ID</p>"
+          },
           {
             "group": "Parameter",
             "type": "Number",
@@ -430,6 +465,13 @@
             "optional": false,
             "field": "name",
             "description": "<p>GitHub ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "avatarURL",
+            "description": "<p>头像 URL</p>"
           },
           {
             "group": "Success 200",
@@ -501,63 +543,70 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.name",
+            "field": "list.name",
             "description": "<p>GitHub ID</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.location",
+            "field": "list.avatarURL",
+            "description": "<p>头像 URL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.location",
             "description": "<p>地址</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.description",
+            "field": "list.description",
             "description": "<p>描述</p>"
           },
           {
             "group": "Success 200",
             "type": "Object[]",
             "optional": false,
-            "field": "result",
+            "field": "list",
             "description": "<p>结果列表</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.id",
+            "field": "list.id",
             "description": "<p>唯一索引</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.creator",
+            "field": "list.creator",
             "description": "<p>创建者 ID</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.createAt",
+            "field": "list.createdAt",
             "description": "<p>创建时间</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.editor",
+            "field": "list.editor",
             "description": "<p>编辑者 ID</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.updateAt",
+            "field": "list.updatedAt",
             "description": "<p>更新时间</p>"
           },
           {
@@ -705,6 +754,13 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
+            "field": "logoURL",
+            "description": "<p>标志 URL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
             "field": "location",
             "description": "<p>地址</p>"
           },
@@ -759,8 +815,8 @@
   {
     "type": "get",
     "url": "/activity/:aid/team",
-    "title": "查询团队",
-    "name": "listTeam",
+    "title": "查询活动团队",
+    "name": "listActivityTeam",
     "version": "1.0.0",
     "group": "Team",
     "parameter": {
@@ -806,63 +862,70 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.title",
+            "field": "list.title",
             "description": "<p>标题</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.location",
+            "field": "list.logoURL",
+            "description": "<p>标志 URL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.location",
             "description": "<p>地址</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "result.description",
+            "field": "list.description",
             "description": "<p>描述</p>"
           },
           {
             "group": "Success 200",
             "type": "Object[]",
             "optional": false,
-            "field": "result",
+            "field": "list",
             "description": "<p>结果列表</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.id",
+            "field": "list.id",
             "description": "<p>唯一索引</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.creator",
+            "field": "list.creator",
             "description": "<p>创建者 ID</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.createAt",
+            "field": "list.createdAt",
             "description": "<p>创建时间</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "result.editor",
+            "field": "list.editor",
             "description": "<p>编辑者 ID</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
-            "field": "result.updateAt",
+            "field": "list.updatedAt",
             "description": "<p>更新时间</p>"
           },
           {
@@ -877,6 +940,128 @@
     },
     "filename": "router/Team.js",
     "groupTitle": "Team"
+  },
+  {
+    "type": "get",
+    "url": "/team",
+    "title": "全局查询团队",
+    "name": "listTeam",
+    "version": "1.0.0",
+    "group": "Team",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.title",
+            "description": "<p>标题</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.logoURL",
+            "description": "<p>标志 URL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.location",
+            "description": "<p>地址</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.description",
+            "description": "<p>描述</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "list",
+            "description": "<p>结果列表</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.id",
+            "description": "<p>唯一索引</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.creator",
+            "description": "<p>创建者 ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "list.createdAt",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.editor",
+            "description": "<p>编辑者 ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "list.updatedAt",
+            "description": "<p>更新时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total",
+            "description": "<p>结果总数</p>"
+          }
+        ]
+      }
+    },
+    "filename": "router/Team.js",
+    "groupTitle": "Team",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "rows",
+            "defaultValue": "10",
+            "description": "<p>结果行数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "page",
+            "defaultValue": "1",
+            "description": "<p>结果页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keyWord",
+            "description": "<p>关键词</p>"
+          }
+        ]
+      }
+    }
   },
   {
     "type": "post",
@@ -902,6 +1087,13 @@
             "optional": false,
             "field": "title",
             "description": "<p>标题</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "logoURL",
+            "description": "<p>标志 URL</p>"
           },
           {
             "group": "Parameter",
@@ -966,6 +1158,13 @@
           {
             "group": "Parameter",
             "type": "String",
+            "optional": true,
+            "field": "logoURL",
+            "description": "<p>标志 URL</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
             "size": "3..100",
             "optional": true,
             "field": "location",
@@ -984,5 +1183,99 @@
     },
     "filename": "router/Team.js",
     "groupTitle": "Team"
+  },
+  {
+    "type": "get",
+    "url": "/university/specialty",
+    "title": "查询专业",
+    "name": "listSpecialty",
+    "version": "1.0.0",
+    "group": "University",
+    "filename": "router/OpenAPI.js",
+    "groupTitle": "University",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "rows",
+            "defaultValue": "10",
+            "description": "<p>结果行数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "page",
+            "defaultValue": "1",
+            "description": "<p>结果页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keyWord",
+            "description": "<p>关键词</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "list",
+            "description": "<p>结果列表</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.id",
+            "description": "<p>唯一索引</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.creator",
+            "description": "<p>创建者 ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "list.createdAt",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.editor",
+            "description": "<p>编辑者 ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "list.updatedAt",
+            "description": "<p>更新时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total",
+            "description": "<p>结果总数</p>"
+          }
+        ]
+      }
+    }
   }
 ]
