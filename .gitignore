@@ -1,8 +1,5 @@
-/node_modules
-/sessions
-.temp/
-/config.js
-*.db
-.idea/
-.DS_Store
+node_modules/*
 *.log
+.leancloud/*
+.idea/*
+.DS_Store

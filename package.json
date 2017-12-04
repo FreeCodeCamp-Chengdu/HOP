@@ -1,6 +1,6 @@
 {
   "name": "hop",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "A Open Platform with all kinds of services for Hackathon",
   "keywords": [
     "hackathon",
@@ -9,17 +9,27 @@
     "github"
   ],
   "engines": {
-    "node": "^5.0.0"
+    "node": "^6.5.0"
   },
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
-    "easy-rest": "^0.6.0",
-    "iconv-lite": "^0.4.17",
-    "jschardet": "^1.4.2",
-    "sqlite3": "^3.1.8"
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-github": "^0.4.0",
+    "leancloud-storage": "^3.4.2",
+    "leanengine": "^3.0.2"
+  },
+  "apidoc": {
+    "name": "HOP",
+    "url": "http://localhost:3000"
   },
   "scripts": {
-    "test": "node-debug server.js"
+    "start": "node index.js",
+    "dev": "nodemon --inspect index.js",
+    "build": "apidoc -i router/ -o docs/ -t node_modules/apidoc-ewa/source/",
+    "test": "node --inspect --debug-brk server.js"
   },
   "author": "FCC-CDG",
   "license": "AGPL-3.0",
@@ -30,5 +40,10 @@
   "homepage": "https://github.com/FreeCodeCamp-Chengdu/HOP#readme",
   "bugs": {
     "url": "https://github.com/FreeCodeCamp-Chengdu/HOP/issues"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.6",
+    "apidoc-ewa": "^1.0.1",
+    "nodemon": "^1.12.1"
   }
 }
