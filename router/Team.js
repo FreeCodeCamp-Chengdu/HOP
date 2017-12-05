@@ -22,11 +22,11 @@ const Team = LeanCloud.Object.extend('Team');
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam  {Number}  aid  活动 ID
+ * @apiParam  {String}  aid  活动 ID
  *
  * @apiUse Team_Model
  *
- * @apiSuccess {Number} id 唯一索引
+ * @apiSuccess {String} id 唯一索引
  */
 router.post('/activity/:aid/team',  function (request, response) {
 
@@ -49,7 +49,7 @@ router.post('/activity/:aid/team',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam  {Number}  aid  活动 ID
+ * @apiParam  {String}  aid  活动 ID
  *
  * @apiUse List_Query
  *
@@ -105,7 +105,7 @@ router.get('/team',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam {String} id 唯一索引
  *
  * @apiUse Model_Meta
  *
@@ -129,7 +129,7 @@ router.get('/team/:id',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam {String} id 唯一索引
  *
  * @apiUse Team_Model
  */
@@ -139,9 +139,7 @@ router.put('/team/:id',  function (request, response) {
         response,
         LeanCloud.Object.createWithoutData(
             'Team', request.params.id
-        ).fetch({
-            include:    ['creator']
-        }).then(function (team) {
+        ).fetch().then(function (team) {
 
             if (request.currentUser.id === team.get('creator').id) {
 
@@ -167,7 +165,7 @@ router.put('/team/:id',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam {String} id 唯一索引
  */
 router.delete('/team/:id',  function (request, response) {
 
@@ -175,12 +173,10 @@ router.delete('/team/:id',  function (request, response) {
         response,
         LeanCloud.Object.createWithoutData(
             'Team', request.params.id
-        ).fetch({
-            include:    ['creator']
-        }).then(function (team) {
+        ).fetch().then(function (team) {
 
             if (request.currentUser.id === team.get('creator').id)
-                return team.destory();
+                return team.destroy();
 
             var error = Error('This team can be deleted by its creator only');
 

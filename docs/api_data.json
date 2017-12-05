@@ -11,7 +11,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -34,7 +34,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -89,17 +89,31 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -110,10 +124,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -196,10 +224,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -210,10 +252,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -276,7 +332,7 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -350,7 +406,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -408,8 +464,8 @@
   },
   {
     "type": "delete",
-    "url": "/team/:tid/member/:id",
-    "title": "移除队友",
+    "url": "/member/:id",
+    "title": "移除队籍",
     "name": "deleteMember",
     "version": "1.0.0",
     "group": "Member",
@@ -418,14 +474,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "tid",
-            "description": "<p>团队 ID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -448,7 +497,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -463,29 +512,36 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>GitHub ID</p>"
+            "field": "role",
+            "description": "<p>用户角色</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "avatarURL",
-            "description": "<p>头像 URL</p>"
+            "field": "state",
+            "description": "<p>邀请状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>用户详情</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "location",
-            "description": "<p>地址</p>"
+            "field": "user.username",
+            "description": "<p>用户名</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
-            "field": "description",
-            "description": "<p>描述</p>"
+            "field": "user.github",
+            "description": "<p>GitHub 用户详情</p>"
           }
         ]
       }
@@ -505,7 +561,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "tid",
             "description": "<p>团队 ID</p>"
@@ -543,29 +599,36 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "list.name",
-            "description": "<p>GitHub ID</p>"
+            "field": "list.role",
+            "description": "<p>用户角色</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "list.avatarURL",
-            "description": "<p>头像 URL</p>"
+            "field": "list.state",
+            "description": "<p>邀请状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.user",
+            "description": "<p>用户详情</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "list.location",
-            "description": "<p>地址</p>"
+            "field": "list.user.username",
+            "description": "<p>用户名</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
-            "field": "list.description",
-            "description": "<p>描述</p>"
+            "field": "list.user.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -583,10 +646,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -597,10 +674,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -625,7 +716,7 @@
   {
     "type": "post",
     "url": "/team/:tid/member",
-    "title": "添加队友",
+    "title": "添加队籍",
     "name": "postMember",
     "version": "1.0.0",
     "group": "Member",
@@ -634,7 +725,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "tid",
             "description": "<p>团队 ID</p>"
@@ -642,10 +733,17 @@
           {
             "group": "Parameter",
             "type": "String",
-            "size": "3..100",
             "optional": false,
-            "field": "name",
-            "description": "<p>GitHub ID</p>"
+            "field": "uid",
+            "description": "<p>用户 ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "role",
+            "defaultValue": "member",
+            "description": "<p>用户角色</p>"
           }
         ]
       }
@@ -655,10 +753,17 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "state",
+            "description": "<p>邀请状态</p>"
           }
         ]
       }
@@ -678,7 +783,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -686,10 +791,17 @@
           {
             "group": "Parameter",
             "type": "String",
-            "size": "3..100",
             "optional": false,
-            "field": "name",
-            "description": "<p>GitHub ID</p>"
+            "field": "uid",
+            "description": "<p>用户 ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "role",
+            "defaultValue": "member",
+            "description": "<p>用户角色</p>"
           }
         ]
       }
@@ -709,7 +821,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -732,7 +844,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -773,17 +885,31 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -794,10 +920,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -824,7 +964,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "aid",
             "description": "<p>活动 ID</p>"
@@ -902,10 +1042,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -916,10 +1070,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -995,10 +1163,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -1009,10 +1191,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -1075,7 +1271,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "aid",
             "description": "<p>活动 ID</p>"
@@ -1119,7 +1315,7 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -1142,7 +1338,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
             "field": "id",
             "description": "<p>唯一索引</p>"
@@ -1241,10 +1437,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.creator",
-            "description": "<p>创建者 ID</p>"
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -1255,10 +1465,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "Object",
             "optional": false,
             "field": "list.editor",
-            "description": "<p>编辑者 ID</p>"
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor.github",
+            "description": "<p>GitHub 用户详情</p>"
           },
           {
             "group": "Success 200",
@@ -1273,6 +1497,142 @@
             "optional": false,
             "field": "total",
             "description": "<p>结果总数</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/user",
+    "title": "全局查询用户",
+    "name": "listUser",
+    "version": "1.0.0",
+    "group": "User",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.github",
+            "description": "<p>GitHub 用户详情</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "list",
+            "description": "<p>结果列表</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "list.id",
+            "description": "<p>唯一索引</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator",
+            "description": "<p>创建者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.creator.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.creator.github",
+            "description": "<p>GitHub 用户详情</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "list.createdAt",
+            "description": "<p>创建时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor",
+            "description": "<p>编辑者</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "list.editor.username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "list.editor.github",
+            "description": "<p>GitHub 用户详情</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "list.updatedAt",
+            "description": "<p>更新时间</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total",
+            "description": "<p>结果总数</p>"
+          }
+        ]
+      }
+    },
+    "filename": "router/User.js",
+    "groupTitle": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "rows",
+            "defaultValue": "10",
+            "description": "<p>结果行数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "page",
+            "defaultValue": "1",
+            "description": "<p>结果页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keyWord",
+            "description": "<p>关键词</p>"
           }
         ]
       }

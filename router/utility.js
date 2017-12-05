@@ -17,6 +17,8 @@ exports.fixData = function (data) {
         delete data.objectId;
     }
 
+    delete data.authData;
+
     return data;
 };
 
@@ -148,10 +150,11 @@ exports.query = function (parameter, table, where = [ ], include = [ ]) {
     return Promise.all([
         LeanCloud.Query.doCloudQuery(
             `select ${link}* from ${table} ${where} limit ${
-                (parameter.page - 1) * parameter.rows},${parameter.rows}`
+                (parameter.page - 1) * parameter.rows},${parameter.rows}`,
+            {user: this}
         ),
         LeanCloud.Query.doCloudQuery(
-            `select count(*) from ${table} ${where}`
+            `select count(*) from ${table} ${where}`,  {user: this}
         )
     ]).then(function (data) {
 

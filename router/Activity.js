@@ -26,7 +26,7 @@ const Activity = LeanCloud.Object.extend('Activity');
  *
  * @apiUse Activity_Model
  *
- * @apiSuccess {Number} id 唯一索引
+ * @apiSuccess {String} id 唯一索引
  */
 router.post('/activity',  function (request, response) {
 
@@ -74,7 +74,7 @@ router.get('/activity',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Activity
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam {String} id 唯一索引
  *
  * @apiUse Model_Meta
  *
@@ -100,7 +100,7 @@ router.get('/activity/:id',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Activity
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam {String} id 唯一索引
  *
  * @apiUse Activity_Model
  */
@@ -110,9 +110,7 @@ router.put('/activity/:id',  function (request, response) {
         response,
         LeanCloud.Object.createWithoutData(
             'Activity', request.params.id
-        ).fetch({
-            include:    ['creator']
-        }).then(function (activity) {
+        ).fetch().then(function (activity) {
 
             if (request.currentUser.id === activity.get('creator').id) {
 
@@ -138,7 +136,7 @@ router.put('/activity/:id',  function (request, response) {
  * @apiVersion 1.0.0
  * @apiGroup   Activity
  *
- * @apiParam {Number} id 唯一索引
+ * @apiParam {String} id 唯一索引
  */
 router.delete('/activity/:id',  function (request, response) {
 
@@ -146,12 +144,10 @@ router.delete('/activity/:id',  function (request, response) {
         response,
         LeanCloud.Object.createWithoutData(
             'Activity', request.params.id
-        ).fetch({
-            include:    ['creator']
-        }).then(function (activity) {
+        ).fetch().then(function (activity) {
 
             if (request.currentUser.id === activity.get('creator').id)
-                return activity.destory();
+                return activity.destroy();
 
             var error = Error('This activity can be deleted by its creator only');
 
