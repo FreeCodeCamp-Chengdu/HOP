@@ -14,13 +14,15 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect-multiparty": "^2.1.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "express-github": "^0.4.0",
+    "express-github": "^0.5.1",
     "leancloud-storage": "^3.4.2",
     "leanengine": "^3.0.2",
-    "node-fetch": "^1.7.3"
+    "node-fetch": "^1.7.3",
+    "qiniu": "^7.1.1"
   },
   "apidoc": {
     "name": "HOP",
@@ -28,9 +30,10 @@
   },
   "scripts": {
     "start": "node index.js",
+    "test": "node --inspect --debug-brk index.js",
     "dev": "nodemon --inspect index.js",
     "build": "apidoc -i router/ -o docs/ -t node_modules/apidoc-ewa/source/",
-    "test": "node --inspect --debug-brk server.js"
+    "help": "opn docs/index.html"
   },
   "author": "FCC-CDG",
   "license": "AGPL-3.0",
@@ -45,6 +48,7 @@
   "devDependencies": {
     "apidoc": "^0.17.6",
     "apidoc-ewa": "^1.0.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.7",
+    "opn-cli": "^3.1.0"
   }
 }

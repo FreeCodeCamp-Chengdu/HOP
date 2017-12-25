@@ -22,13 +22,21 @@ require(['jquery', 'EasyWebApp', 'DateRangePicker'],  function ($, EWA) {
 
             var args = arguments;
 
-            $('[type="hidden"]').val(function (index) {
+            $( this.element ).nextAll('[type="hidden"]').val(function (index) {
 
                 return args[ index ].utcOffset(8).format('YYYY-MM-DDTHH:mm:ss');
             });
         });
 
         var app = new EWA();
+
+    //  单图上传组件
+
+        data.setURL = function (event, data) {
+
+            this.imageURL = ((data || '').files instanceof Array)  ?
+                data.files[0].url  :  '';
+        };
 
         data.goBack = function () {
 

@@ -16,26 +16,26 @@ const Team = LeanCloud.Object.extend('Team');
  */
 
 /**
- * @api {post} /activity/:aid/team 发起团队
+ * @api {post} /hackathon/:hid/team 发起团队
  *
  * @apiName    postTeam
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam  {String}  aid  活动 ID
+ * @apiParam  {String}  hid  黑客松 ID
  *
  * @apiUse Team_Model
  *
  * @apiSuccess {String} id 唯一索引
  */
-router.post('/activity/:aid/team',  function (request, response) {
+router.post('/hackathon/:hid/team',  function (request, response) {
 
     var data = request.body;
 
     data.creator = request.currentUser;
 
-    data.activity = LeanCloud.Object.createWithoutData(
-        'Activity', request.params.aid
+    data.hackathon = LeanCloud.Object.createWithoutData(
+        'Hackathon', request.params.hid
     );
 
     Utility.reply(response,  (new Team()).save( data ));
@@ -43,13 +43,13 @@ router.post('/activity/:aid/team',  function (request, response) {
 
 
 /**
- * @api {get} /activity/:aid/team 查询活动团队
+ * @api {get} /hackathon/:hid/team 查询黑客松团队
  *
- * @apiName    listActivityTeam
+ * @apiName    listHackathonTeam
  * @apiVersion 1.0.0
  * @apiGroup   Team
  *
- * @apiParam  {String}  aid  活动 ID
+ * @apiParam  {String}  hid  黑客松 ID
  *
  * @apiUse List_Query
  *
@@ -58,17 +58,17 @@ router.post('/activity/:aid/team',  function (request, response) {
  * @apiSuccess {String}   list.location    地址
  * @apiSuccess {String}   list.description 描述
  */
-router.get('/activity/:aid/team',  function (request, response) {
+router.get('/hackathon/:hid/team',  function (request, response) {
 
     var data = request.query;
 
-    data.activity = LeanCloud.Object.createWithoutData(
-        'Activity', request.params.aid
+    data.hackathon = LeanCloud.Object.createWithoutData(
+        'Hackathon', request.params.hid
     );
 
     Utility.reply(
         response,
-        Utility.query(data,  'Team',  ['title', 'description'],  ['activity'])
+        Utility.query(data,  'Team',  ['title', 'description'],  ['hackathon'])
     );
 });
 
@@ -92,7 +92,7 @@ router.get('/team',  function (request, response) {
     Utility.reply(
         response,
         Utility.query(
-            request.query,  'Team',  ['title', 'description'],  ['activity']
+            request.query,  'Team',  ['title', 'description'],  ['hackathon']
         )
     );
 });

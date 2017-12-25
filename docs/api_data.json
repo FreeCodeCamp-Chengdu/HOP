@@ -1,11 +1,11 @@
 [
   {
     "type": "delete",
-    "url": "/activity/:id",
-    "title": "删除活动",
-    "name": "deleteActivity",
+    "url": "/hackathon/:id",
+    "title": "删除黑客松",
+    "name": "deleteHackathon",
     "version": "1.0.0",
-    "group": "Activity",
+    "group": "Hackathon",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -19,16 +19,16 @@
         ]
       }
     },
-    "filename": "router/Activity.js",
-    "groupTitle": "Activity"
+    "filename": "router/Hackathon.js",
+    "groupTitle": "Hackathon"
   },
   {
     "type": "get",
-    "url": "/activity/:id",
-    "title": "查看活动详情",
-    "name": "getActivity",
+    "url": "/hackathon/:id",
+    "title": "查看黑客松详情",
+    "name": "getHackathon",
     "version": "1.0.0",
-    "group": "Activity",
+    "group": "Hackathon",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -153,16 +153,16 @@
         ]
       }
     },
-    "filename": "router/Activity.js",
-    "groupTitle": "Activity"
+    "filename": "router/Hackathon.js",
+    "groupTitle": "Hackathon"
   },
   {
     "type": "get",
-    "url": "/activity",
-    "title": "查询活动",
-    "name": "listActivity",
+    "url": "/hackathon",
+    "title": "查询黑客松",
+    "name": "listHackathon",
     "version": "1.0.0",
-    "group": "Activity",
+    "group": "Hackathon",
     "success": {
       "fields": {
         "Success 200": [
@@ -288,8 +288,8 @@
         ]
       }
     },
-    "filename": "router/Activity.js",
-    "groupTitle": "Activity",
+    "filename": "router/Hackathon.js",
+    "groupTitle": "Hackathon",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -322,11 +322,11 @@
   },
   {
     "type": "post",
-    "url": "/activity",
-    "title": "发起活动",
-    "name": "postActivity",
+    "url": "/hackathon",
+    "title": "发起黑客松",
+    "name": "postHackathon",
     "version": "1.0.0",
-    "group": "Activity",
+    "group": "Hackathon",
     "success": {
       "fields": {
         "Success 200": [
@@ -340,8 +340,8 @@
         ]
       }
     },
-    "filename": "router/Activity.js",
-    "groupTitle": "Activity",
+    "filename": "router/Hackathon.js",
+    "groupTitle": "Hackathon",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -396,11 +396,11 @@
   },
   {
     "type": "put",
-    "url": "/activity/:id",
-    "title": "更新活动详情",
-    "name": "updateActivity",
+    "url": "/hackathon/:id",
+    "title": "更新黑客松详情",
+    "name": "updateHackathon",
     "version": "1.0.0",
-    "group": "Activity",
+    "group": "Hackathon",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -459,8 +459,8 @@
         ]
       }
     },
-    "filename": "router/Activity.js",
-    "groupTitle": "Activity"
+    "filename": "router/Hackathon.js",
+    "groupTitle": "Hackathon"
   },
   {
     "type": "delete",
@@ -954,9 +954,9 @@
   },
   {
     "type": "get",
-    "url": "/activity/:aid/team",
-    "title": "查询活动团队",
-    "name": "listActivityTeam",
+    "url": "/hackathon/:hid/team",
+    "title": "查询黑客松团队",
+    "name": "listHackathonTeam",
     "version": "1.0.0",
     "group": "Team",
     "parameter": {
@@ -966,8 +966,8 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "aid",
-            "description": "<p>活动 ID</p>"
+            "field": "hid",
+            "description": "<p>黑客松 ID</p>"
           },
           {
             "group": "Parameter",
@@ -1261,7 +1261,7 @@
   },
   {
     "type": "post",
-    "url": "/activity/:aid/team",
+    "url": "/hackathon/:hid/team",
     "title": "发起团队",
     "name": "postTeam",
     "version": "1.0.0",
@@ -1273,8 +1273,8 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "aid",
-            "description": "<p>活动 ID</p>"
+            "field": "hid",
+            "description": "<p>黑客松 ID</p>"
           },
           {
             "group": "Parameter",

@@ -53,6 +53,8 @@ app.use(LeanCloud.Cloud.CookieSession({
 
 /* ---------- RESTful API 路由 ---------- */
 
+app.use( require('./GitHub') );
+
 /**
  * @apiDefine Model_Meta 模型元数据 后端自动生成的只读字段
  *
@@ -87,17 +89,17 @@ app.use(LeanCloud.Cloud.CookieSession({
  * @apiSuccess {Number}   total                  结果总数
  */
 
-app.use( require('./GitHub') );
+app.use('/openAPI', require('./OpenAPI'));
 
-app.use( require('./Activity') );
+app.use( require('./File') );
+
+app.use( require('./User') );
+
+app.use( require('./Hackathon') );
 
 app.use( require('./Team') );
 
 app.use( require('./Member') );
-
-app.use('/openAPI', require('./OpenAPI'));
-
-app.use( require('./User') );
 
 
 

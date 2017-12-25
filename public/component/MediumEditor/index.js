@@ -67,7 +67,7 @@ require(['jquery', 'EasyWebApp', 'MediumEditor'],  function ($, EWA, MediumEdito
         ).then(function (option) {
 
             editor = MediumEditor(
-                text_input, option, data.imagePost, data.countText
+                text_input, option, data.imageApi, data.countText
             );
 
             data.countText();
