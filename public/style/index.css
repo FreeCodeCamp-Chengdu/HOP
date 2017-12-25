@@ -12,6 +12,9 @@ select:disabled {
 }
 
 
+.jumbotron h1 {
+	margin:    2rem  auto;
+}
 .label {
 	margin-right:    0.5em;
 }
@@ -28,14 +31,29 @@ select:disabled {
     text-overflow:    ellipsis;
 }
 .Grid-Row {
-    display:          table;
-    width:            100%;
-    margin-bottom:    1em;
+    display:    table;
+    width:      100%;
 }
 .Grid-Row > * {
     display:           table-cell;
-    text-align:        center;
     vertical-align:    middle;
+}
+.Card {
+    border:        1px  solid  lightgray;
+    transition:    0.25s;
+    margin:        1rem  auto;
+}
+.Card:hover {
+    box-shadow:    2px  2px  10px  lightgray;
+}
+.Card:first-child {
+    margin-top:    0;
+}
+.Card:last-child {
+    margin-bottom:    0;
+}
+.Card > * {
+	padding:    1.5rem;
 }
 
 

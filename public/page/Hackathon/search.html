@@ -1,0 +1,86 @@
+<style disabled>
+    .Card > header {
+        height:                 10em;
+        background-position:    center;
+        background-size:        100%;
+        transition:             0.25s;
+    }
+    .Card > header:hover {
+        background-size:    110%;
+    }
+    .Card > header > h3 {
+        margin:         0;
+        color:          white;
+        text-shadow:    1px  1px  10px  black;
+    }
+    .Card > header > *,  .Card > footer > *  {
+        text-align:    left;
+    }
+    .Card > .Grid-Row > *:last-child {
+        text-align:    right;
+    }
+</style>
+<script>
+    require(['jquery', 'EasyWebApp', 'TimeKit'],  function ($, EWA, TimeKit) {
+
+        EWA.component(function (data) {
+
+            data.timeDistance = function () {
+
+                return  TimeKit.distanceOf( this.startTime );
+            };
+
+            data.duration = function () {
+
+                return  TimeKit.distanceOf(this.startTime, this.endTime);
+            };
+        });
+    });
+</script>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>黑客马拉松</h1>
+        <p>
+            挑战自己、认识同好，在短时间内激发自己与团队的最大潜力！
+        </p>
+        <p>
+            这里有志同道合的朋友，有并肩奋斗的队友，有创意碰撞的火花！
+        </p>
+        <p>
+            如果你自认为是一个黑客，或者想知道什么才是黑客，来试试吧！
+        </p>
+        <p>
+            Talk is cheap, show me your code !
+        </p>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="launch.html">
+                发起黑客松
+            </a>
+        </div>
+    </div>
+</div>
+<div data-href="../../component/PageList.html" data-rows="10" data-page="1">
+    <div is="ListView"
+         data-href="?data=hackathon?rows=${view.rows}&page=${view.page}&keyWord=${view.keyWord}">
+        <section class="Card">
+            <header style="background-image: url('${view.imageURL}')">
+                <h3><!--${ view.title }--></h3>
+            </header>
+            <footer class="Grid-Row">
+                <span title="${(new Date( view.startTime )).toLocaleString()}">
+                    <i class="fa fa-calendar"></i>
+                    <!--${ scope.timeDistance() }-->
+                </span>
+                <span title="${(new Date( view.endTime )).toLocaleString()}">
+                    <i class="fa fa-clock-o"></i>
+                    <!--${ scope.duration() }-->
+                </span>
+                <span>
+                    <i class="fa fa-location-arrow"></i>
+                    <!--${ view.location }-->
+                </span>
+            </footer>
+        </section>
+    </div>
+</div>

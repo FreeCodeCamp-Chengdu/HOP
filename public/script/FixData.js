@@ -1,6 +1,6 @@
 //  GitHub API 数据整理
 
-define(['jquery', 'TimePassed', 'marked'],  function ($, TimePassed, marked) {
+define(['jquery', 'TimeKit', 'marked'],  function ($, TimeKit, marked) {
 
     function FixOne(item) {
 
@@ -19,7 +19,7 @@ define(['jquery', 'TimePassed', 'marked'],  function ($, TimePassed, marked) {
                     data[ key ] = value;
 
                     data[name.slice(0, -1).join('_') + 'Time'] =
-                        TimePassed( this );
+                        TimeKit.distanceOf( this );
                     break;
                 }
                 case 'url':

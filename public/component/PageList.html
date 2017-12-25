@@ -1,0 +1,85 @@
+<style disabled>
+    header > *,  footer > *  {
+        margin:        1em  auto;
+        text-align:    center;
+    }
+    thead th {
+        white-space:    nowrap;
+        text-align:     center;
+    }
+    tbody {
+        counter-reset:    index;
+    }
+    tbody td {
+        vertical-align:    middle;
+    }
+    tbody td.index:before {
+        counter-increment:    index;
+        content:              counter( index );
+    }
+</style>
+<script src="PageList.js"></script>
+
+<div class="form-inline">
+    <header class="row">
+        <label class="col-md-3 form-group">
+            显示
+            <select class="form-control"
+                    name="rows" value="${view.rows}" onchange="${view.pageChange}">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+            </select>
+            行
+        </label>
+        <div class="col-md-9 form-group">
+            <slot name="toolbar"></slot>
+            <input type="search" class="form-control"
+                   name="keyWord" onchange="${view.search}"
+                   placeholder="回车搜索" />
+        </div>
+    </header>
+
+    <slot><!-- Default Slot for ListView --></slot>
+
+    <footer class="row">
+        <span class="col-md-3 form-group">
+            共
+            <output class="form-control"><!-- ${view.total} --></output>
+            行
+        </span>
+        <label class="col-md-4 form-group">
+            跳转到
+            <input type="number" class="form-control"
+                   name="page" value="${view.page}"
+                   min="1" max="${view.pageSum}" onchange="${view.pageChange}" />
+            页
+        </label>
+        <ul class="col-md-5 pagination" onclick="${view.pageChange}">
+
+            <li style="display: ${(view.page < 3) ? 'none' : ''}">
+                <span>1</span>
+            </li>
+            <li style="display: ${(view.pageSum < 7) || (view.page < 4) ? 'none' : ''}"
+                class="disabled">
+                <span>…</span>
+            </li>
+            <li style="display: ${(view.page < 2) ? 'none' : ''}">
+                <span><!--${view.page - 1}--></span>
+            </li>
+            <li class="active">
+                <span><!--${view.page}--></span>
+            </li>
+            <li style="display: ${(+view.page + 1 > view.pageSum) ? 'none' : ''}">
+                <span><!--${+view.page + 1}--></span>
+            </li>
+            <li style="display: ${(view.pageSum < 6) || (+view.page + 3 > view.pageSum) ? 'none' : ''}"
+                class="disabled">
+                <span>…</span>
+            </li>
+            <li style="display: ${(+view.page + 2 > view.pageSum) ? 'none' : ''}">
+                <span><!--${view.pageSum}--></span>
+            </li>
+        </ul>
+    </footer>
+</div>
