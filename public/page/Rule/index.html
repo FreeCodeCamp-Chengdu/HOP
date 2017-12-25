@@ -1,0 +1,55 @@
+<style>
+    .swiper-wrapper {
+        height: 20rem;
+        padding: 2em;
+    }
+
+    .swiper-slide {
+        overflow: hidden;
+        height: 100%;
+        width: 920px;
+        max-width: 80%;
+        height: 430px;
+        border-radius: 4px;
+        color: #fff;
+        padding: 80px 60px;
+        background: linear-gradient(to right, #275BF3, #577EDE);
+    }
+
+    .swiper-pagination-bullet {
+        width: 180px;
+        height: 2px;
+        border-radius: 2px;
+        background: #696F77;
+    }
+    .swiper-pagination-bullet-active{
+        background: #007aff;
+    }
+    .Tips {
+        font-size: 0.85em;
+        position: relative;
+        left: 0;
+        top: -2rem;
+        height: 5rem;
+        padding: 0 2rem;
+    }
+
+    @media (max-width: 860px) {
+        .swiper-wrapper {
+            height: 10rem;
+        }
+        .Tips {
+            height: 7rem;
+        }
+    }
+</style>
+<script src="index.js"></script>
+
+<div class="swiper-container">
+    <ul class="swiper-wrapper" data-name="list">
+        <li class="swiper-slide">
+            ${view.content}
+        </li>
+    </ul>
+    <div class="swiper-pagination"></div>
+</div>

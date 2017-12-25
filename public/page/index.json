@@ -4,6 +4,11 @@
         {
             "title":    "G 客松",
             "name":     "黑客松",
+            "URL":      "page/hackathon.html"
+        },
+        {
+            "title":    "G 客松",
+            "name":     "黑客松",
             "URL":      "page/Hackathon/index.html?data=page/Hackathon/index.json"
         },
         {
