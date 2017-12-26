@@ -6,7 +6,7 @@ define([
     var iWebApp = new EWA();
 
 
-    return  function (text_input, option, upload_URL, onInput) {
+    return  function (text_input, option, image_API, onInput) {
 
         var editor = new MediumEditor(text_input, $.extend({
                 elementsContainer:
@@ -32,25 +32,24 @@ define([
         if (onInput instanceof Function)
             editor.subscribe('editableInput',  onInput.bind( editor ));
 
-        if ( upload_URL )
+        if ( image_API ) {
+
+            image_API = new URL(image_API, iWebApp.apiRoot);
+
             $( text_input ).mediumInsert({
                 editor:    editor,
                 addons:    {
                     images:    {
                         fileUploadOptions:    {
-                            url:          '' + (new URL(
-                                upload_URL, iWebApp.apiRoot
-                            )),
+                            url:          image_API + '',
                             paramName:    'file',
                         },
-                        deleteMethod:         'GET',
-                        deleteScript:         ''  +  new URL(
-                            'ImageDelete.json',
-                            new URL(module.uri, self.location)
-                        )
+                        deleteMethod:         'DELETE',
+                        deleteScript:         image_API + ''
                     }
                 }
             });
+        }
 
         return editor;
     };

@@ -1,13 +1,14 @@
 'use strict';
 
 const router = require('express').Router(),
+      Multiparty = require('connect-multiparty'),
       LeanCloud = require('leanengine'),
       Utility = require('./utility');
 
-const Activity = LeanCloud.Object.extend('Activity');
+const Hackathon = LeanCloud.Object.extend('Hackathon');
 
 /**
- * @apiDefine Activity_Model
+ * @apiDefine Hackathon_Model
  *
  * @apiParam {String{3..100}} title       标题
  * @apiParam {String}         [imageURL]  题图 URL
@@ -18,17 +19,17 @@ const Activity = LeanCloud.Object.extend('Activity');
  */
 
 /**
- * @api {post} /activity 发起活动
+ * @api {post} /hackathon 发起黑客松
  *
- * @apiName    postActivity
+ * @apiName    postHackathon
  * @apiVersion 1.0.0
- * @apiGroup   Activity
+ * @apiGroup   Hackathon
  *
- * @apiUse Activity_Model
+ * @apiUse Hackathon_Model
  *
  * @apiSuccess {String} id 唯一索引
  */
-router.post('/activity',  function (request, response) {
+router.post('/hackathon',  Multiparty(),  function (request, response) {
 
     var data = request.body;
 
@@ -38,16 +39,16 @@ router.post('/activity',  function (request, response) {
 
     data.endTime = new Date( data.endTime );
 
-    Utility.reply(response,  (new Activity()).save( data ));
+    Utility.reply(response,  (new Hackathon()).save( data ));
 });
 
 
 /**
- * @api {get} /activity 查询活动
+ * @api {get} /hackathon 查询黑客松
  *
- * @apiName    listActivity
+ * @apiName    listHackathon
  * @apiVersion 1.0.0
- * @apiGroup   Activity
+ * @apiGroup   Hackathon
  *
  * @apiUse List_Query
  *
@@ -58,21 +59,21 @@ router.post('/activity',  function (request, response) {
  * @apiSuccess {String}   list.location    地址
  * @apiSuccess {String}   list.description 描述
  */
-router.get('/activity',  function (request, response) {
+router.get('/hackathon',  function (request, response) {
 
     Utility.reply(
         response,
-        Utility.query(request.query,  'Activity',  ['title', 'description'])
+        Utility.query(request.query,  'Hackathon',  ['title', 'description'])
     );
 });
 
 
 /**
- * @api {get} /activity/:id 查看活动详情
+ * @api {get} /hackathon/:id 查看黑客松详情
  *
- * @apiName    getActivity
+ * @apiName    getHackathon
  * @apiVersion 1.0.0
- * @apiGroup   Activity
+ * @apiGroup   Hackathon
  *
  * @apiParam {String} id 唯一索引
  *
@@ -85,41 +86,41 @@ router.get('/activity',  function (request, response) {
  * @apiSuccess {String} location    地址
  * @apiSuccess {String} description 描述
  */
-router.get('/activity/:id',  function (request, response) {
+router.get('/hackathon/:id',  function (request, response) {
 
-    var query = new LeanCloud.Query('Activity');
+    var query = new LeanCloud.Query('Hackathon');
 
     Utility.reply(response,  query.get( request.params.id ));
 });
 
 
 /**
- * @api {put} /activity/:id 更新活动详情
+ * @api {put} /hackathon/:id 更新黑客松详情
  *
- * @apiName    updateActivity
+ * @apiName    updateHackathon
  * @apiVersion 1.0.0
- * @apiGroup   Activity
+ * @apiGroup   Hackathon
  *
  * @apiParam {String} id 唯一索引
  *
- * @apiUse Activity_Model
+ * @apiUse Hackathon_Model
  */
-router.put('/activity/:id',  function (request, response) {
+router.put('/hackathon/:id',  Multiparty(),  function (request, response) {
 
     Utility.reply(
         response,
         LeanCloud.Object.createWithoutData(
-            'Activity', request.params.id
-        ).fetch().then(function (activity) {
+            'Hackathon', request.params.id
+        ).fetch().then(function (hackathon) {
 
-            if (request.currentUser.id === activity.get('creator').id) {
+            if (request.currentUser.id === hackathon.get('creator').id) {
 
                 request.body.editor = request.currentUser;
 
-                return  activity.save( request.body );
+                return  hackathon.save( request.body );
             }
 
-            var error = Error('This activity can be edited by its creator only');
+            var error = Error('This hackathon can be edited by its creator only');
 
             error.status = 403;
 
@@ -130,26 +131,26 @@ router.put('/activity/:id',  function (request, response) {
 
 
 /**
- * @api {delete} /activity/:id 删除活动
+ * @api {delete} /hackathon/:id 删除黑客松
  *
- * @apiName    deleteActivity
+ * @apiName    deleteHackathon
  * @apiVersion 1.0.0
- * @apiGroup   Activity
+ * @apiGroup   Hackathon
  *
  * @apiParam {String} id 唯一索引
  */
-router.delete('/activity/:id',  function (request, response) {
+router.delete('/hackathon/:id',  function (request, response) {
 
     Utility.reply(
         response,
         LeanCloud.Object.createWithoutData(
-            'Activity', request.params.id
-        ).fetch().then(function (activity) {
+            'Hackathon', request.params.id
+        ).fetch().then(function (hackathon) {
 
-            if (request.currentUser.id === activity.get('creator').id)
-                return activity.destroy();
+            if (request.currentUser.id === hackathon.get('creator').id)
+                return hackathon.destroy();
 
-            var error = Error('This activity can be deleted by its creator only');
+            var error = Error('This hackathon can be deleted by its creator only');
 
             error.status = 403;
 

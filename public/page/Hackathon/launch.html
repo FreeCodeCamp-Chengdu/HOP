@@ -1,43 +1,66 @@
 <script src="launch.js"></script>
 
-<form class="form-horizontal"
-      method="post" action="?data=activity/" ondata="${view.goBack}">
+<h3>编辑黑客松</h3>
 
-    <div class="form-group">
-        <div class="input-group col-md-offset-2 col-md-8 col-md-offset-2">
-            <label class="input-group-addon" id="title">名字</label>
-            <input type="text" class="form-control"
-                   name="title" required
-                   placeholder="为你的G客松想个酷炫的名字吧" aria-describedby="title">
+<form class="form-horizontal col-md-offset-2 col-md-8"
+      method="post" action="?data=hackathon/" ondata="${view.goBack}">
+    <fieldset>
+        <legend>基本信息</legend>
+
+        <div class="form-group"
+             data-href="../../component/ImageUploader/index.html"
+             data-key="file" data-required="true" data-value="${view.imageURL}"
+             data-action="file"
+             onupload="${view.setURL}" onclean="${view.setURL}">
         </div>
-    </div>
+        <input type="hidden" name="imageURL" value="${view.imageURL}" />
 
-    <div class="form-group">
-        <div class="input-group col-md-offset-2 col-md-8 col-md-offset-2">
-            <label class="input-group-addon" id="location">地址</label>
-            <input type="text" class="form-control"
-                   name="location"
-                   placeholder="准备在哪里举行呢?" aria-describedby="location">
+        <div class="form-group">
+            <div class="input-group">
+
+                <label class="input-group-addon" for="title">名字</label>
+
+                <input type="text" class="form-control" id="title"
+                       name="title" required
+                       placeholder="为你的G客松想个酷炫的名字吧" aria-describedby="title">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="input-group col-md-offset-2 col-md-8 col-md-offset-2">
-            <label class="input-group-addon" id="date">时间</label>
-            <input type="text" class="form-control" id="date_select" aria-describedby="date">
-            <input type="hidden" name="startTime">
-            <input type="hidden" name="endTime">
+        <div class="form-group">
+            <div class="input-group">
+
+                <label class="input-group-addon" for="date_select">时间</label>
+
+                <input type="text" class="form-control" id="date_select" aria-describedby="date">
+                <input type="hidden" name="startTime">
+                <input type="hidden" name="endTime">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group" id="Editor"
-         data-href="../../component/MediumEditor/index.html"
-         data-locale="zh-CN">
+        <div class="form-group">
+            <div class="input-group">
 
-        <textarea class="form-control"
-                  name="description" required value="${scope.description}"
-                  placeholder="活动详情"></textarea>
-    </div>
+                <label class="input-group-addon" id="location">地址</label>
 
-    <input type="submit" class="btn btn-primary btn-block btn-lg">
+                <input type="text" class="form-control" id="location"
+                       name="location"
+                       placeholder="准备在哪里举行呢?" aria-describedby="location">
+            </div>
+        </div>
+
+        <div class="form-group" id="Editor"
+             data-href="../../component/MediumEditor/index.html"
+             data-locale="zh-CN"
+             data-image-api="file">
+
+            <textarea class="form-control"
+                      name="description" required value="${scope.description}"
+                      placeholder="黑客松详情"></textarea>
+        </div>
+
+        <div class="form-group text-center">
+            <input type="submit" class="btn btn-primary btn-lg">
+            <input type="reset" class="btn btn-danger btn-lg">
+        </div>
+    </fieldset>
 </form>
