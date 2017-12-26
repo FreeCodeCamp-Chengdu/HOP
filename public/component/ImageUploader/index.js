@@ -12,15 +12,32 @@ require([
             VM = this,
             path = (new URL(data.action, (new EWA()).apiRoot))  +  '';
 
+        function fallback(error) {
+
+            VM.emit(
+                {
+                    type:    'error',
+                    src:     data.action
+                },
+                error
+            );
+        }
+
         $.extend(data, {
             value:      data.value || '',
             percent:    data.value ? 100 : 0,
             preview:    function () {
 
-                FileKit.read( File_DOM.files[0] ).then(function () {
+                Promise.resolve(
+                    this.value ?
+                        $.delete(data.action, {file: this.value})  :  ''
+                ).then(
+                    FileKit.read.bind(FileKit, File_DOM.files[0])
+                ).then(function () {
 
                     VM.value = arguments[0];    VM.percent = 0;
-                });
+
+                }).catch( fallback );
             },
             clean:      function () {
 
@@ -49,7 +66,7 @@ require([
                         },
                         arguments[0]
                     );
-                });
+                }).catch( fallback );
             }
         });
     });

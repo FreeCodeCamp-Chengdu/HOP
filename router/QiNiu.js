@@ -17,33 +17,38 @@ const uploader = new QiNiu.form_up.FormUploader( config ),
       putExtra = new QiNiu.form_up.PutExtra();
 
 
-exports.upload = function (name, path) {
+function promisify(factory) {
 
-    return  new Promise(function (resolve, reject) {
+    return  function () {
 
-        uploader.putFile(
-            token,  name,  path,  putExtra,  function (error, _, data) {
+        var _this_ = this, param = Array.from( arguments );
 
-                if ( error )
+        return  new Promise(function (resolve, reject) {
+
+            factory.apply(_this_,  param.concat(function (error, data, response) {
+
+                if (error = error || (data || '').error) {
+
+                    error = new Error(error.message || error);
+
+                    error.status = response.statusCode;
+
                     reject( error );
-                else
-                    resolve( data );
-            }
-        );
-    });
-};
-
-
-exports.delete = function (name) {
-
-    return  new Promise(function (resolve, reject) {
-
-        manager.delete(scope,  name,  function (error, _, data) {
-
-            if ( error )
-                reject( error );
-            else
-                resolve( data );
+                } else
+                    resolve( response );
+            }));
         });
-    });
-};
+    };
+}
+
+
+exports.upload = promisify(function (name, path, callback) {
+
+    uploader.putFile(token, name, path, putExtra, callback);
+});
+
+
+exports.delete = promisify(function (name, callback) {
+
+    manager.delete(scope, name, callback);
+});
