@@ -10,6 +10,7 @@
         height: 4px;
         display: block;
         margin-bottom: 10px;
+        margin-left: -40px;
         background: #5583F6;
     }
 
@@ -22,7 +23,8 @@
         background: #00050B;
         color: #fff;
         /* padding:0; */
-        width: 100%
+        width: 100%;
+        font-family: serif, cursive!important;
     }
 
     .introduce {
@@ -40,6 +42,16 @@
         margin-top: 1rem;
         margin-left: -2rem;
         padding-left: 0;
+    }
+
+    .line-center::after{
+        content: '';
+        width: 36px;
+        height: 4px;
+        display: block;
+        background: #5583F6;
+        margin: auto;
+        margin-top: 10px;
     }
 
     button.channel {
@@ -124,6 +136,14 @@
         text-align: left;
         height: 50rem;
     }
+    div#guest-list{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+    }
+
     .logo-list {
         background-color: #030f1f
     }
@@ -148,12 +168,13 @@
 
     /*  嘉宾 */
     .guest{
+        width: 30%;
         /* height: 0px; */
         background: #021024;
         text-align: left;
         border-radius: 4px;
         padding: 15px;
-        margin: 10px;
+        margin: 10px 10px 40px;
     }
 
     .guest:first-child{
@@ -241,7 +262,7 @@
             </div>
         </div>
         <div class="col-md-12 col-xs-12 award-list">
-            <h4 class="title">大赛奖项</h4>
+            <h4 class="title line-center">大赛奖项</h4>
             <div class="col-md-12 col-xs-12 award-line">
                 <div class="col-md-2 col-xs-4 col-md-offset-3 ">
                     <h5>一等奖</h5>
@@ -278,12 +299,12 @@
                     <small>1000 - 10000</small>
                 </div>
             </div>
-            <small>所有奖项以现金或同等价值奖品发放</small>
+            <small style="color: #3C424C">所有奖项以现金或同等价值奖品发放</small>
         </div>
     </div>
     <div class="row rule-list content">
         <div class="col-xs-12 col-md-12 ">
-            <h4 class="title">大赛参赛队伍规模及规则</h4>
+            <h4 class="title line-center">大赛参赛队伍规模及规则</h4>
             <span class="remarks">
                 <small>海选期：不限</small>
             </span>
@@ -295,22 +316,19 @@
     </div>
     <div class="row guest-list content">
         <div class="col-xs-12 col-md-12 ">
-            <h4 class="title">嘉宾评委介绍</h4>
+            <h4 class="title line-center">嘉宾评委介绍</h4>
             <div class="col-md-4 col-xs-12"></div>
         </div>
     </div>
-    <div class="row guest-list content" data-name="guests">
-        <div class="col-xs-12 col-md-4">
-            <div class="guest">
-                <img class="guest-avatar" src=${view.avatar} />
-                <div class="guest-title">
-                    <span class="guest-name">${view.name}</span>
-                    <span class="guest-role">${view.role}</span>
-                    <div class="guest-identity">${view.identity}</div>
-                </div>
-
-                <div class="guest-describe">${view.describe}</div>
+    <div id="guest-list" class="row guest-list content" is="ListView" data-name="guests">
+        <div class="guest">
+            <img class="guest-avatar" src="image/${view.avatar}" />
+            <div class="guest-title">
+                <span class="guest-name">${view.name}</span>
+                <span class="guest-role">${view.role}</span>
+                <div class="guest-identity">${view.identity}</div>
             </div>
+            <div class="guest-describe">${view.describe}</div>
         </div>
     </div>
     <div class="row guest-list content">
