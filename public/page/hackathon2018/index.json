@@ -1,0 +1,28 @@
+{
+    "logos": [
+        {
+            "title": "FCC",
+            "url": "page/hackathon2018/image/logo/FCC.png"
+        },
+        {
+            "title": "BBD",
+            "url": "page/hackathon2018/image/logo/BBD.png"
+        },
+        {
+            "title": "GDG",
+            "url": "page/hackathon2018/image/logo/GDG.png"
+        },
+        {
+            "title": "CDFHQ",
+            "url": "page/hackathon2018/image/logo/cdfhq.png"
+        },
+        {
+            "title": "OSCHINA",
+            "url": "page/hackathon2018/image/logo/oschina.png"
+        },
+        {
+            "title": "Microsoft",
+            "url": "page/hackathon2018/image/logo/microsoft-logo.png"
+        }       
+    ]
+}

@@ -90,11 +90,15 @@
         text-align: left;
         height: 50rem;
     }
-    div.logo-list {
+    .logo-list {
         background-color: #030f1f
     }
-    div.logo{
+    .logo{
         padding:1rem;
+        margin: 0;
+    }
+    .logo img{
+        height: 35px;
     }
     footer {
         background: url("page/hackathon2018/image/footer-bg.png");
@@ -102,6 +106,8 @@
         background-repeat: no-repeat;
     }
 </style>
+
+<script src="index.js"></script>
 
 <div class="container">
     <div class="row introduce content">
@@ -257,68 +263,11 @@
             </div>
         </div>
     </div>
-    <div class="row content logo-list">
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/BBD.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/DevEco.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-        <div class="col-md-2 col-xs-3 logo">
-            <img src="./image/logo/FCC.png" class="img-responsive" alt="logo">
-        </div>
-    </div>
+    <ul class="row content logo-list" data-name="logos">
+        <li class="col-md-2 col-xs-3 logo"> 
+            <img src=${view.url} class="img-responsive center-block" alt=${view.title}>
+        </li>
+    </ul>
     <footer class="row content">
         <div class="col-md-3">
             <h5>线上学习平台</h5>
