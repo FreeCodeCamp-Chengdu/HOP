@@ -1,11 +1,6 @@
-<script src="launch.js"></script>
+<script src="edit.js"></script>
 
-<h3>编辑黑客松</h3>
-
-<form class="form-horizontal col-md-offset-2 col-md-8"
-      method="post" action="?data=hackathon/" ondata="${view.goBack}">
-    <fieldset>
-        <legend>基本信息</legend>
+        <legend>活动概况</legend>
 
         <div class="form-group"
              data-href="../../component/ImageUploader/index.html"
@@ -22,7 +17,7 @@
 
                 <input type="text" class="form-control" id="title"
                        name="title" required
-                       placeholder="为你的G客松想个酷炫的名字吧" aria-describedby="title">
+                       placeholder="为你的活动想个酷炫的名字吧" aria-describedby="title">
             </div>
         </div>
 
@@ -55,12 +50,5 @@
 
             <textarea class="form-control"
                       name="description" required value="${scope.description}"
-                      placeholder="黑客松详情"></textarea>
+                      placeholder="图文介绍"></textarea>
         </div>
-
-        <div class="form-group text-center">
-            <input type="submit" class="btn btn-primary btn-lg">
-            <input type="reset" class="btn btn-danger btn-lg">
-        </div>
-    </fieldset>
-</form>

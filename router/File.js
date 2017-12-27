@@ -1,10 +1,7 @@
 'use strict';
 
-const Path = require('path'),
-      URL_Utility = require('url'),
-      FS = require('fs');
-
-const router = require('express').Router(),
+const FS = require('fs'),
+      router = require('express').Router(),
       Multiparty = require('connect-multiparty'),
       LeanCloud = require('leanengine'),
       QiNiu = require('./QiNiu');
@@ -33,27 +30,33 @@ router.post('/file',  Multiparty(),  function (request, response) {
 
     var file = request.files.file;
 
-    (new File()).save({
-        name:       file.name,
-        type:       file.type,
-        size:       file.size,
-        creator:    request.currentUser
+    QiNiu.upload(null, file.path).then(function (data) {
+
+        return  (new LeanCloud.Query('xFile')).equalTo(
+            'hash',  file.hash = data.data.hash
+        ).find();
+
+    }).then(function (list) {
+
+        return  list[0] ||
+            (new File()).save(
+                {
+                    name:       file.name,
+                    type:       file.type,
+                    size:       file.size,
+                    hash:       file.hash,
+                    creator:    request.currentUser
+                },
+                {user:  request.currentUser}
+            );
     }).then(function (_file_) {
 
-        return QiNiu.upload(
-            URL_Utility.resolve(
-                file.type,  _file_.id + Path.parse( file.name ).ext
-            ),
-            file.path
-        );
-    }).then(function (data) {
-
-        response.status( data.statusCode ).json({
-            files:    [
-                {url:  `${process.env.QINIU_BUCKET_DOMAIN}/${data.data.key}`}
-            ]
+        response.json({
+            files:    [{
+                url:    `${process.env.QINIU_BUCKET_DOMAIN}/${_file_.get('hash')}`
+            }]
         });
-    }).catch(fallback.bind(null, response)).then(function () {
+    }).catch( fallback.bind(null, response) ).then(function () {
 
         for (var name in request.files)
             FS.unlinkSync( request.files[ name ].path );
@@ -71,32 +74,40 @@ router.post('/file',  Multiparty(),  function (request, response) {
  */
 router.delete('/file',  function (request, response) {
 
-    var file = URL_Utility.parse( request.body.file );
+    var hash = request.body.file.split('/').slice(-1)[0], _file_;
 
-    var _file_ = LeanCloud.Object.createWithoutData(
-            'xFile',  Path.parse( file.pathname ).name
-        );
+    (new LeanCloud.Query('xFile')).equalTo('hash', hash).find().then(
+        function (list) {
 
-    _file_.fetch().then(function (_file_) {
+            var error;
 
-        if ((request.currentUser || '').id  ===  (_file_.get('creator') || '').id)
-            return  QiNiu.delete( file.pathname.slice(1) );
+            if (! list[0]) {
 
-        var error = Error('This file can be deleted by its creator only');
+                error = Error('Not found');
 
-        error.status = 403;
+                error.status = 404;
 
-        throw error;
+            } else if (
+                (request.currentUser || '').id  !==
+                (list[0].get('creator') || '').id
+            ) {
+                error = Error('This file can be deleted by its creator only');
 
-    }).then(function () {
+                error.status = 403;
+            } else
+                return  list[0].destroy({user: request.currentUser});
 
-        return _file_.destroy();
+            throw error;
+        }
+    ).then(function () {
+
+        return  QiNiu.delete( hash );
 
     }).then(function () {
 
         response.status( 204 ).end();
 
-    }).catch(fallback.bind(null, response));
+    }).catch( fallback.bind(null, response) );
 });
 
 

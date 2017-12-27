@@ -30,9 +30,9 @@ app.use(CORS({
 
 app.use( require('cookie-parser')() );
 
-app.use( bodyParser.json() );
-
 app.use( bodyParser.urlencoded({ extended: false }) );
+
+app.use( bodyParser.json() );
 
 //  LeanCloud 云引擎中间件
 /*

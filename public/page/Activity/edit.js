@@ -28,19 +28,12 @@ require(['jquery', 'EasyWebApp', 'DateRangePicker'],  function ($, EWA) {
             });
         });
 
-        var app = new EWA();
-
     //  单图上传组件
 
         data.setURL = function (event, data) {
 
             this.imageURL = ((data || '').files instanceof Array)  ?
                 data.files[0].url  :  '';
-        };
-
-        data.goBack = function () {
-
-            app.loadPage( -1 );
         };
     });
 });

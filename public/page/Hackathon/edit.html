@@ -1,0 +1,133 @@
+<style disabled>
+    th, td {
+        text-align:        center;
+        vertical-align:    middle;
+    }
+    table img {
+        max-width:    20rem;
+    }
+</style>
+<script src="edit.js"></script>
+
+<h3>编辑黑客松</h3>
+
+<form class="form-horizontal col-md-offset-2 col-md-8"
+      method="post" action="?data=hackathon/" enctype="application/json"
+      ondata="${view.goBack}">
+
+    <fieldset data-href="../Activity/edit.html"></fieldset>
+
+    <fieldset disabled="${view.submitting}">
+
+        <legend>备选主题</legend>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon">标题</label>
+
+                <input type="text" class="form-control"
+                       name="title" placeholder="如“信息无障碍”" />
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control"
+                      name="description" placeholder="基本要求"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary pull-right"
+                    onclick="${view.addOne}">
+                添加
+            </button>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead><tr>
+                <th>主题</th><th>简介</th><th>操作</th>
+            </tr></thead>
+            <tbody data-name="theme">
+                <tr>
+                    <td><!--${view.title}--></td>
+                    <td><!--${view.description}--></td>
+                    <td>
+                        <button type="button" class="btn btn-danger"
+                                onclick="${scope.removeOne}">
+                            删除
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <input type="hidden" name="theme" />
+
+    <fieldset disabled="${view.submitting}">
+
+        <legend>奖项设置</legend>
+
+        <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon">奖项</label>
+
+                <input type="text" class="form-control"
+                       name="level" placeholder="如“一等奖”" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon">奖品</label>
+
+                <input type="text" class="form-control"
+                       name="name" placeholder="如“现金”" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon" title="价值">￥　</label>
+
+                <input type="number" class="form-control"
+                       name="value" step="100" placeholder="如“50000”" />
+            </div>
+        </div>
+        <div class="form-group"
+             data-href="../../component/ImageUploader/index.html"
+             data-key="file" data-value="${view.imageURL}"
+             data-action="file"
+             onupload="${view.setURL}" onclean="${view.setURL}">
+        </div>
+        <input type="hidden" name="imageURL" value="${view.imageURL}" />
+
+        <div class="form-group">
+            <button type="button" class="btn btn-primary pull-right"
+                    onclick="${view.addOne}">
+                添加
+            </button>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead><tr>
+                <th>奖项</th><th>奖品</th><th>价值</th><th>操作</th>
+            </tr></thead>
+            <tbody data-name="award">
+                <tr>
+                    <td><!--${view.level}--></td>
+                    <td>
+                        <img src="${view.imageURL}"
+                             alt="${view.name}" title="${view.name}" />
+                    </td>
+                    <td><!--￥${view.value}--></td>
+                    <td>
+                        <button type="button" class="btn btn-danger"
+                                onclick="${scope.removeOne}">
+                            删除
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <input type="hidden" name="award" />
+
+    <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary btn-lg"
+               onclick="${view.submit}">
+        <input type="reset" class="btn btn-danger btn-lg">
+    </div>
+</form>

@@ -645,7 +645,7 @@ var InnerLink = (function ($, Observer) {
 
             var header;
 
-            var iOption = {
+            var option = {
                     method:         this.method,
                     url:            this.src,
                     beforeSend:     arguments[0],
@@ -659,32 +659,38 @@ var InnerLink = (function ($, Observer) {
                     }
                 };
 
-            if ( this.$_View[0].tagName.match(/^(a|area)$/i) ) {
+            switch ( this.$_View[0].tagName.toLowerCase() ) {
+                case 'form':
+                    option.data = $.paramJSON('?' + this.$_View.serialize());
+                    break;
+                case 'area':    ;
+                case 'a':       {
+                    option.data = $.extend({ }, this.$_View[0].dataset);
 
-                iOption.data = $.extend({ }, this.$_View[0].dataset);
-
-                delete iOption.data.method;
-                delete iOption.data.autofocus;
-
-            } else if (! this.$_View.find('input[type="file"]')[0]) {
-
-                iOption.data = $.paramJSON('?' + this.$_View.serialize());
-
-            } else if (iOption.type != 'GET') {
-
-                iOption.data = new self.FormData( this.$_View[0] );
-
-                iOption.contentType = iOption.processData = false;
+                    delete option.data.method;
+                    delete option.data.autofocus;
+                }
             }
 
-            if ( this.contentType.match(/^application\/json/) ) {
+            switch ( this.contentType.split(';')[0] ) {
 
-                iOption.data = JSON.stringify( iOption.data );
+                case 'multipart/form-data':
 
-                iOption.processData = false;
+                    $.extend(option, {
+                        data:           new self.FormData( this.$_View[0] ),
+                        contentType:    false,
+                        processData:    false
+                    });
+                    break;
+                case 'application/json': {
+
+                    option.data = JSON.stringify( option.data );
+
+                    option.processData = false;
+                }
             }
 
-            return  Promise.resolve( $.ajax( iOption ) ).then(function (data) {
+            return  Promise.resolve( $.ajax( option ) ).then(function (data) {
 
                 return  {head: header,  body: data};
             });
@@ -1767,6 +1773,13 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
             }));
 
             return this;
+        },
+        valueOf:    function () {
+
+            return  $.each(this.__data__.valueOf(),  function () {
+
+                delete  this.__index__;
+            });
         }
     });
 
@@ -2270,7 +2283,7 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
  *
  * @module    {function} WebApp
  *
- * @version   4.0 (2017-12-22) stable
+ * @version   4.0 (2017-12-27) stable
  *
  * @requires  jquery
  * @see       {@link http://jquery.com/ jQuery}

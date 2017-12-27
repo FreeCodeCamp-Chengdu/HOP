@@ -37,12 +37,14 @@ require(['jquery', 'EasyWebApp', 'MediumEditor'],  function ($, EWA, MediumEdito
                     'justifyLeft', 'justifyCenter', 'justifyRight', 'removeFormat'
                 ]
             ),
-            text_input = this.$_View.find('textarea')[0];
+            $_Input = this.$_View.find('textarea');
 
 
         data.countText = function () {
 
-            VM.plainText = text_input.previousElementSibling.textContent.trim();
+            VM.plainText = $_Input.prev()
+                .children().not('[contenteditable="false"]')
+                .text().trim();
         };
 
         (
@@ -66,14 +68,13 @@ require(['jquery', 'EasyWebApp', 'MediumEditor'],  function ($, EWA, MediumEdito
                 Promise.resolve({ })
         ).then(function (option) {
 
-            editor = MediumEditor(
-                text_input, option, data.imageApi, data.countText
+            editor = MediumEditor.call(
+                $_Input, option, data.imageApi, data.countText
             );
 
             data.countText();
         });
 
-        this.$_View.on('click', 'a[href]', false);
 
         this.serialize = function () {
 
@@ -81,5 +82,11 @@ require(['jquery', 'EasyWebApp', 'MediumEditor'],  function ($, EWA, MediumEdito
 
             for (var key in data)  return  data[ key ].value;
         };
+
+        this.$_View.on('click', 'a[href]', false)
+            .parents('form').submit(function () {
+
+                $_Input[0].value = VM.serialize();
+            });
     });
 });

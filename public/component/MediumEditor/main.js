@@ -6,13 +6,13 @@ define([
     var iWebApp = new EWA();
 
 
-    return  function (text_input, option, image_API, onInput) {
+    return  function (option, image_API, onInput) {
 
-        var editor = new MediumEditor(text_input, $.extend({
+        var editor = new MediumEditor(this[0], $.extend({
                 elementsContainer:
-                    $( text_input ).offsetParent().is('html, body')  ?
-                        text_input.parentNode  :  null,
-                placeholder:          {text:  text_input.placeholder},
+                    this.offsetParent().is('html, body')  ?
+                        this[0].parentNode  :  null,
+                placeholder:          {text:  this[0].placeholder},
                 autoLink:             true,
                 imageDragging:        false,
                 paste:                {
@@ -36,7 +36,7 @@ define([
 
             image_API = new URL(image_API, iWebApp.apiRoot);
 
-            $( text_input ).mediumInsert({
+            this.mediumInsert({
                 editor:    editor,
                 addons:    {
                     images:    {
