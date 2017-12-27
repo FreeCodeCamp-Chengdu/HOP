@@ -8,26 +8,11 @@
     background: #5583F6;
 }
 
-#PageBox {
-    padding: 0;
-    width: 100%
-}
-
-.container {
-    background: #00050B;
-    color: #fff;
-    /* padding:0; */
-    width: 100%;
-}
-
-.introduce {
-    background: url("page/hackathon2018/image/BG.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
-.content {
-    padding: 4rem 10% 4rem 10%;
+.Background {
+    background:         url("page/hackathon2018/image/BG.png")  no-repeat;
+    background-size:    cover;
+    color:              white;
+    padding:            2rem  0;
 }
 
 ul li {

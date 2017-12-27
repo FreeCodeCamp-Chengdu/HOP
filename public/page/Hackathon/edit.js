@@ -25,7 +25,9 @@ require(['jquery', 'EasyWebApp'],  function ($, EWA) {
                 imageUploader =
                     $_Fieldset.find('[type="file"]').parents(':view').view();
 
-            tBody.insert( $.paramJSON('?' + $_Fieldset.serialize()) );
+            tBody.insert(
+                $.paramJSON('?' + $_Fieldset.serialize()),  tBody.length
+            );
 
             if ( imageUploader )  imageUploader.clean();
 
@@ -38,7 +40,7 @@ require(['jquery', 'EasyWebApp'],  function ($, EWA) {
 
             var tBody = this.$_View.parent().view();
 
-            tBody.remove( this );
+            tBody.remove( this.$_View );
 
             update.call(tBody.$_View.parents('fieldset'), tBody);
         };

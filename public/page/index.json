@@ -1,8 +1,8 @@
 {
-    "title":      "HOP - 黑客松平台",
+    "title":      "freeCodeCamp 成都社区",
     "channel":    [
         {
-            "title":    "G 客松",
+            "title":    "Code for City",
             "name":     "黑客松",
             "URL":      "page/hackathon2018/index.html?data=page/hackathon2018/index.json"
         },
@@ -12,28 +12,9 @@
             "URL":      "page/Hackathon/search.html"
         },
         {
-            "title":    "G 品",
-            "name":     "项目展",
-            "URL":      "page/Hackathon/project.html?data=team/"
-        },
-        {
-            "title":    "G 流",
-            "name":     "事件流",
-            "URL":      "page/Event.html?data=github/events"
-        },
-        {
-            "title":    "G 友",
-            "name":     "程序员",
-            "URL":      "page/User/index.html?data=github/users"
-        },
-        {
             "title":     "关于黑客松",
             "target":    "_blank",
             "URL":       "http://zhihu.sogou.com/zhihu?p=40351207&ie=utf8&query=%E9%BB%91%E5%AE%A2%E9%A9%AC%E6%8B%89%E6%9D%BE"
-        },
-        {
-            "title":    "关于作者",
-            "URL":      "page/User/detail.html?data=github/orgs/FreeCodeCamp-Chengdu"
         },
         {
             "title":     "编程训练营",

@@ -66,10 +66,10 @@ body > nav .navbar-brand {
 @media (min-width: 768px) {
     .navbar-nav[data-name] {
         max-width:     32em;
-        max-height:    3.5em;
+        max-height:    3.6em;
         overflow:      auto;
     }
 }
-#PageBox {
-    padding:    1em;
+footer > .row {
+    padding:    4rem  10%;
 }

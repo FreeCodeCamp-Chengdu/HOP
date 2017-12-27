@@ -64,13 +64,6 @@
 </head><body>
     <div data-href="component/NavBar.html?data=page/index.json" data-dark="true">
 
-        <form class="navbar-form navbar-left" slot="left">
-            <div class="form-group">
-                <input type="search" class="form-control"
-                       name="keyword" required
-                       placeholder="定位：用户 ID、仓库全名" />
-            </div>
-        </form>
         <div data-href="?data=user/OAuth">
 
             <ul class="nav navbar-nav navbar-right">
@@ -115,7 +108,45 @@
         </div>
     </div>
 <!--  SPA Page Container  -->
-    <div class="container" id="PageBox"></div>
+    <div id="PageBox"></div>
+
+    <footer class="container-fluid"><div class="row">
+        <div class="col-md-3">
+            <h5>线上学习平台</h5>
+            <a href="http://www.freecodecamp.org">
+                <small>英文版：http://www.freecodecamp.org</small>
+            </a>
+            <br/>
+            <a href="http://www.freecodecamp.cn">
+                <small>中文版：http://www.freecodecamp.cn</small>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h5>关于我们</h5>
+            <a href="http://chengdu.freecodecamp.cn">
+                <small>社区官网：http://chengdu.freecodecamp.cn</small>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-5">
+                <img src="image/qr-wechat.png" class="img-responsive" alt="wechat-qr">
+            </div>
+            <div class="col-md-7">
+                <h5>官方微信</h5>
+                <small>关注微信公众号</small>
+                <br/>
+                <small>回复“入群”</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-5">
+                <img src="image/qr-qq.png" class="img-responsive" alt="qq-qr">
+            </div>
+            <div class="col-md-7">
+                <h5>官方QQ群</h5>
+            </div>
+        </div>
+    </div></footer>
 
 <!--  AJAX loading  -->
     <div data-href="component/loading.html"></div>
