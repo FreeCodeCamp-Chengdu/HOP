@@ -87,6 +87,14 @@
                        name="value" step="100" placeholder="如“50000”" />
             </div>
         </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label class="input-group-addon">数量</label>
+
+                <input type="number" class="form-control"
+                       name="count" value="1" />
+            </div>
+        </div>
         <div class="form-group"
              data-href="../../component/ImageUploader/index.html"
              data-key="file" data-value="${view.imageURL}"
@@ -103,7 +111,7 @@
         </div>
         <table class="table table-striped table-hover">
             <thead><tr>
-                <th>奖项</th><th>奖品</th><th>价值</th><th>操作</th>
+                <th>奖项</th><th>奖品</th><th>价值</th><th>数量</th><th>操作</th>
             </tr></thead>
             <tbody data-name="award">
                 <tr>
@@ -113,6 +121,7 @@
                              alt="${view.name}" title="${view.name}" />
                     </td>
                     <td><!--￥${view.value}--></td>
+                    <td><!--￥${view.count}--></td>
                     <td>
                         <button type="button" class="btn btn-danger"
                                 onclick="${scope.removeOne}">

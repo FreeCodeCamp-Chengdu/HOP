@@ -1,0 +1,145 @@
+<style disabled>
+    header[style] {
+        height:                 20em;
+        background-position:    center;
+        background-size:        100%;
+        padding:                2rem;
+    }
+    header[style] > * {
+        margin:         0  auto  2rem;
+        color:          white;
+        text-shadow:    1px  1px  10px  black;
+    }
+    header li > i {
+        margin:    1em;
+    }
+    header > ul, section > ul {
+        padding:       0;
+        list-style:    none;
+    }
+    li.Card {
+        width:    15em;
+    }
+    li.Card > header {
+        height:    10em;
+    }
+</style>
+<script>
+    require(['jquery', 'EasyWebApp', 'BootStrap'],  function ($, EWA) {
+
+        EWA.component(function (data) {
+
+            data.createTeam = function () {
+
+                $('#Team').modal('show');
+            };
+
+            var app = new EWA();
+
+            data.submit = function (event) {
+
+                $('#Team').modal('hide');
+
+                app.load( $('#Project').find('tbody') );
+            };
+        });
+    });
+</script>
+
+<header style="background-image: url('${view.imageURL}')">
+    <h2><!--${ view.title }--></h2>
+    <ul>
+        <li>
+            <i class="fa fa-calendar"></i><!--
+            ${(new Date( view.startTime )).toLocaleString()} ~
+            ${(new Date( view.endTime )).toLocaleString()}
+     --></li>
+        <li>
+            <i class="fa fa-location-arrow"></i><!--
+            ${ view.location }
+     --></li>
+    </ul>
+</header>
+
+<section>
+    <h3>奖项设置</h3>
+
+    <ul data-name="award">
+        <li class="Card">
+            <header style="background-image: url('${view.imageURL}')"></header>
+            <div class="Grid-Row">
+                <span><!--${view.name}--></span>
+                <span><!--￥${view.value}--></span>
+                <span><!--× ${view.count}--></span>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h3>备选主题</h3>
+
+    <table class="table table-striped table-hover">
+        <thead><tr>
+            <th>主题</th><th>简介</th><th>操作</th>
+        </tr></thead>
+        <tbody data-name="theme">
+            <tr>
+                <td><!--${view.title}--></td>
+                <td><!--${view.description}--></td>
+                <td>
+                    <button type="button" class="btn btn-success"
+                            onclick="${scope.createTeam}">
+                        组队
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<form method="post" action="?data=hackathon/${view.id}/team">
+
+    <div data-href="../../component/Dialog.html" data-id="Team">
+
+        <span slot="legend">团队概要</span>
+
+        <div class="form-group">
+            <input type="text" class="form-control"
+                   name="title" required pattern="\w{3,}" placeholder="英文名" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control"
+                   name="description" required placeholder="简介" />
+        </div>
+
+        <span slot="button">
+            <button type="submit" class="btn btn-primary"
+                    onclick="${scope.submit}">
+                创建
+            </button>
+        </span>
+    </div>
+</form>
+
+<section><!--${view.description}--></section>
+
+<section id="Project">
+
+    <h3>参赛团队</h3>
+
+    <div data-href="../../component/PageList.html" data-rows="10" data-page="1">
+
+        <table class="table table-striped table-hover">
+            <thead><tr>
+                <th>队名</th><th>简介</th>
+            </tr></thead>
+            <tbody data-href="?data=hackathon/${scope.id}/team">
+                <tr>
+                    <td><!--${view.title}--></td>
+                    <td><!--${view.description}--></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

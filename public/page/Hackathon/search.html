@@ -1,4 +1,8 @@
 <style disabled>
+    a.Card {
+        display:            block;
+        text-decoration:    none;
+    }
     .Card > header {
         height:                 10em;
         background-position:    center;
@@ -15,9 +19,6 @@
     }
     .Card > header > *,  .Card > footer > *  {
         text-align:    left;
-    }
-    .Card > .Grid-Row > *:last-child {
-        text-align:    right;
     }
     .Card > .Grid-Row > * {
         width:    25%;
@@ -36,6 +37,14 @@
             data.duration = function () {
 
                 return  TimeKit.distanceOf(this.startTime, this.endTime);
+            };
+
+            data.awardSum = function () {
+
+                return  (this.award || [ ]).reduce(function (sum, item) {
+
+                    return  sum + item.value * item.count;
+                }, 0);
             };
         });
     });
@@ -66,7 +75,9 @@
 <div data-href="../../component/PageList.html" data-rows="10" data-page="1">
     <div is="ListView"
          data-href="?data=hackathon?rows=${view.rows}&page=${view.page}&keyWord=${view.keyWord}">
-        <section class="Card">
+
+        <a class="Card" href="detail.html?data=hackathon/${view.id}">
+
             <header style="background-image: url('${view.imageURL}')">
                 <h3><!--${ view.title }--></h3>
             </header>
@@ -80,10 +91,14 @@
                     <!--${ scope.duration() }-->
                 </span>
                 <span>
+                    <i class="fa fa-money"></i>
+                    <!--￥${ scope.awardSum() }-->
+                </span>
+                <span>
                     <i class="fa fa-location-arrow"></i>
                     <!--${ view.location }-->
                 </span>
             </footer>
-        </section>
+        </a>
     </div>
 </div>
