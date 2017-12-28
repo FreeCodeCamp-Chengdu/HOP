@@ -2,8 +2,7 @@
 
 <script src="index.js"></script>
 
-<div class="Background"><div class="container">
-
+<div class="container">
     <div class="row introduce content">
         <div class="col-xs-12 col-md-6 banner1">
             <h1 class="title">2017年度黑客松大赛</h1>
@@ -55,37 +54,37 @@
             <div class="col-md-12 col-xs-12 award-line">
                 <div class="col-md-2 col-xs-4 col-md-offset-3 ">
                     <h5>一等奖</h5>
-                    <small>10000 - 50000</small>
+                    <small>10000+</small>
                 </div>
                 <div class="col-md-2 col-xs-4">
                     <h5>二等奖</h5>
-                    <small>5000 - 30000</small>
+                    <small>5000+</small>
                 </div>
                 <div class="col-md-2 col-xs-4">
                     <h5>三等奖</h5>
-                    <small>3000 - 20000</small>
+                    <small>3000+</small>
                 </div>
             </div>
             <div class="col-md-12 award-line">
                 <div class="col-md-2 col-md-offset-1">
                     <h5>最强创意奖</h5>
-                    <small>1000 - 10000</small>
+                    <small>1000-10000</small>
                 </div>
                 <div class="col-md-2">
                     <h5>最佳技术创新奖</h5>
-                    <small>1000 - 10000</small>
+                    <small>1000-10000</small>
                 </div>
                 <div class="col-md-2">
                     <h5>最佳用户体验奖</h5>
-                    <small>1000 - 10000</small>
+                    <small>1000-10000</small>
                 </div>
                 <div class="col-md-2">
                     <h5>最佳潜力奖</h5>
-                    <small>1000 - 10000</small>
+                    <small>1000-10000</small>
                 </div>
                 <div class="col-md-2">
                     <h5>最佳UI奖</h5>
-                    <small>1000 - 10000</small>
+                    <small>1000-10000</small>
                 </div>
             </div>
             <small style="color: #3C424C">所有奖项以现金或同等价值奖品发放</small>
@@ -94,33 +93,35 @@
     <div class="row rule-list content">
         <div class="col-xs-12 col-md-12 ">
             <h4 class="title line-center">大赛参赛队伍规模及规则</h4>
-            <span class="remarks">
+            <span class="remarks center-block">
                 <small>海选期：不限</small>
-            </span>
-            <span class="remarks">
                 <small>决赛日：8支</small>
             </span>
+            <!-- <span class="remarks center-block">
+                
+            </span> -->
             <div data-href="../Rule/index.html?data=page/Rule/index.json"></div>
         </div>
     </div>
     <div class="row guest-list content">
         <div class="col-xs-12 col-md-12 ">
             <h4 class="title line-center">嘉宾评委介绍</h4>
-            <div class="col-md-4 col-xs-12"></div>
-        </div>
-    </div>
-    <div id="guest-list" class="row guest-list content" is="ListView" data-name="guests">
-        <div class="guest">
-            <img class="guest-avatar" src="image/${view.avatar}" />
-            <div class="guest-title">
-                <span class="guest-name">${view.name}</span>
-                <span class="guest-role">${view.role}</span>
-                <div class="guest-identity">${view.identity}</div>
+            <div id="guest-list" is="ListView" data-name="guests">
+                <div class="col-md-4 col-xs-12">
+                    <div class="guest">
+                        <img class="guest-avatar" src="image/avatar/${view.avatar}" />
+                        <div class="guest-title">
+                            <span class="guest-name">${view.name}</span>
+                            <span class="guest-role">${view.role}</span>
+                            <div class="guest-identity">${view.identity}</div>
+                        </div>
+                        <div class="guest-describe">${view.describe}</div>
+                    </div>
+                </div>
             </div>
-            <div class="guest-describe">${view.describe}</div>
         </div>
     </div>
-    <div class="row guest-list content">
+    <div class="row guest-list content hidden-xs">
         <div class="col-md-12 sponsor">
             <h4>合作单位</h4>
             <br/>
@@ -175,7 +176,7 @@
     <ul class="row content logo-list" data-name="logos">
         <li class="col-md-2 col-xs-3 logo">
             <img class="img-responsive center-block" alt="${view.title}"
-                 src="image/logo/${view.url}" />
+                src="image/logo/${view.url}" />
         </li>
     </ul>
-</div></div>
+</div>

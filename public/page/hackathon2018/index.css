@@ -7,12 +7,23 @@
     margin-left: -40px;
     background: #5583F6;
 }
+.banner1 {
+    margin-bottom: 5rem;
+}
 
 .Background {
+    color:              white;
+}
+.container {
+    width: 100%;
+    color: white;
+}
+.content {
+    padding: 3rem 5% 3rem 5%;
+}
+.introduce {
     background:         url("page/hackathon2018/image/BG.png")  no-repeat;
     background-size:    cover;
-    color:              white;
-    padding:            2rem  0;
 }
 
 ul li {
@@ -86,8 +97,8 @@ div.rule-list {
     background: linear-gradient(to bottom, #000B19, #04101E)
 }
 
-span.remarks {
-    margin: 1rem 3rem;
+span.remarks small{
+    margin: 1rem 1rem ;
 }
 
 div.guest-list {
@@ -146,13 +157,13 @@ footer {
 
 /*  嘉宾 */
 .guest{
-    width: 30%;
+    /* width: 30%; */
     /* height: 0px; */
     background: #021024;
     text-align: left;
     border-radius: 4px;
     padding: 15px;
-    margin: 10px 10px 40px;
+    margin: 5rem .1rem 0 .1rem;
 }
 
 .guest:first-child{
