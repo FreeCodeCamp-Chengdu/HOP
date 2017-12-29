@@ -307,7 +307,7 @@ footer {
         margin-bottom: 2rem;
     }
     .banner1 .title::before{
-        margin-left: 0px;
+        margin-left: 0;
     }
     .banner1 h1{
         font-size: 2.5rem;
@@ -334,7 +334,7 @@ footer {
         padding: 2rem 1rem 0;
     }
     .card-content ul li{
-        font-size: 0.8px;
+        font-size: 1.4rem;
         margin-top: 0.8rem;
     }
 
@@ -345,7 +345,7 @@ footer {
 
     /* 奖项 */
     div.award-list{
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
 
     .sponsor {
@@ -354,7 +354,7 @@ footer {
         padding-bottom: 40px!important;
     }
     .sponsors ul {
-        margin-top: 0px;
+        margin-top: 0;
         margin-bottom: 2rem;
     }
 }
