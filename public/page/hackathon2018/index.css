@@ -149,8 +149,8 @@ div.guest-list {
 }
 
 div.guest-list .guest-avatar {
-    width: 100px;
-    height: 100px;
+    /*width: 100px ;*/
+    /*height: 100px;*/
 }
 
 div.guest-list .guest-title {
@@ -158,7 +158,7 @@ div.guest-list .guest-title {
 }
 
 div.sponsor {
-    background: url("page/hackathon2018/image/sponsor-bg.png");
+    background: url("image/sponsor-bg.png");
     font-size: 1.4rem;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -213,13 +213,19 @@ footer {
     margin-left: 0px;
 }
 
-.guest .guest-avatar{
-    width: 100px;
+.guest .guest-avatar-size {
+    width: 150px;
     height: 100px;
-    border: solid 2px #fff;
-    margin-top: -50px;
-    margin-right: 10px;
     vertical-align: bottom;
+    overflow: hidden;
+}
+
+.guest .guest-avatar{
+    /*width: 100px;*/
+    /*height: 100px;*/
+    border: solid 2px #fff;
+    /*margin-top: -50px;*/
+    /*margin-right: 10px;*/
 }
 .guest .guest-title{
     vertical-align: bottom;
@@ -301,7 +307,7 @@ footer {
         margin-bottom: 2rem;
     }
     .banner1 .title::before{
-        margin-left: 0px;
+        margin-left: 0;
     }
     .banner1 h1{
         font-size: 2.5rem;
@@ -328,7 +334,7 @@ footer {
         padding: 2rem 1rem 0;
     }
     .card-content ul li{
-        font-size: 0.8px;
+        font-size: 1.4rem;
         margin-top: 0.8rem;
     }
 
@@ -339,7 +345,7 @@ footer {
 
     /* 奖项 */
     div.award-list{
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
 
     .sponsor {
@@ -348,7 +354,7 @@ footer {
         padding-bottom: 40px!important;
     }
     .sponsors ul {
-        margin-top: 0px;
+        margin-top: 0;
         margin-bottom: 2rem;
     }
 }
