@@ -246,7 +246,12 @@ footer {
     display: flex;
     justify-content: flex-start;
     align-content: center;
+    margin-top: 1rem;
 }
 .sponsors{
+    padding:0 1%; 
     flex: 1;
+}
+.sponsors ul{
+    margin-top: 2rem;
 }
