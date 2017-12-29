@@ -7,23 +7,81 @@
         {
             "title": "BBD",
             "url": "BBD.png"
+        }, 
+        {
+            "title": "CDFHQ",
+            "url": "cdfhq.png"
         },
+        {
+            "title": "DevEco",
+            "url": "DevEco.png"
+        },
+        {
+            "title": "Eleme",
+            "url": "eleme.png"
+        },
+        
         {
             "title": "GDG",
             "url": "GDG.png"
         },
         {
-            "title": "CDFHQ",
-            "url": "cdfhq.png"
+            "title": "Github",
+            "url": "github.png"
+        },
+        {
+            "title": "HCXY",
+            "url": "hcxy.png"
+        },
+        {
+            "title": "ITdks",
+            "url": "ITdks.png"
+        },
+        {
+            "title": "JRsquare",
+            "url": "JRsquare.png"
+        },
+        {
+            "title": "juejin",
+            "url": "juejin.png"
+        },
+        {
+            "title": "Microsoft",
+            "url": "microsoft.png"
+        },
+        {
+            "title": "Monstarlab",
+            "url": "monstarlab.png"
         },
         {
             "title": "OSCHINA",
             "url": "oschina.png"
         },
         {
-            "title": "Microsoft",
-            "url": "microsoft-logo.png"
+            "title": "segmeentfault",
+            "url": "segmeentfault.png"
+        },
+        {
+            "title": "shiyanlou",
+            "url": "shiyanlou.png"
+        },
+        {
+            "title": "TEDx",
+            "url": "TEDx.png"
+        },
+        {
+            "title": "TEDxCD",
+            "url": "TEDxCd.png"
+        },
+        {
+            "title": "ThoughtWorks",
+            "url": "ThoughtWorks.png"
+        },
+        {
+            "title": "xinyaoxing",
+            "url": "xinyaoxing.png"
         }
+       
     ],
     "guests": [
         {

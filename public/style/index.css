@@ -70,6 +70,10 @@ body > nav .navbar-brand {
         overflow:      auto;
     }
 }
+
+.qr-code{
+    padding: 2rem 0;
+}
 footer > .row {
-    padding:    4rem  10%;
+    padding:    2rem  3%;
 }
