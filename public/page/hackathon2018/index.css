@@ -149,8 +149,8 @@ div.guest-list {
 }
 
 div.guest-list .guest-avatar {
-    width: 100px;
-    height: 100px;
+    width: 100px ;
+    /*height: 100px;*/
 }
 
 div.guest-list .guest-title {
@@ -158,7 +158,7 @@ div.guest-list .guest-title {
 }
 
 div.sponsor {
-    background: url("page/hackathon2018/image/sponsor-bg.png");
+    background: url("image/sponsor-bg.png");
     font-size: 1.4rem;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -214,8 +214,8 @@ footer {
 }
 
 .guest .guest-avatar{
-    width: 100px;
-    height: 100px;
+    /*width: 100px;*/
+    /*height: 100px;*/
     border: solid 2px #fff;
     margin-top: -50px;
     margin-right: 10px;
