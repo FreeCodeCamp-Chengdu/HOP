@@ -1,15 +1,1 @@
-define({
-  "name": "HOP",
-  "url": "http://localhost:3000",
-  "version": "1.0.0",
-  "description": "A Open Platform with all kinds of services for Hackathon",
-  "sampleUrl": false,
-  "defaultVersion": "0.0.0",
-  "apidoc": "0.3.0",
-  "generator": {
-    "name": "apidoc",
-    "time": "2017-12-25T20:52:37.832Z",
-    "url": "http://apidocjs.com",
-    "version": "0.17.6"
-  }
-});
+define({  "name": "HOP",  "url": "http://localhost:3000",  "version": "1.0.0",  "description": "A Open Platform with all kinds of services for Hackathon",  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2017-12-29T13:07:51.855Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }});
