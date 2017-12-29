@@ -13,7 +13,7 @@ require(['jquery', 'EasyWebApp','Swiper'],  function ($, EWA, Swiper) {
                 paginationClickable:    true,
                 effect:                 'coverflow',
                 coverflow:              {
-                    rotate: 10,
+                    rotate: 3,
                     stretch: 30,
                     depth: 30,
                     modifier: 5,

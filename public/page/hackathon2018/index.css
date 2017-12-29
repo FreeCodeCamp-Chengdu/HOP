@@ -169,7 +169,7 @@ div#guest-list{
 .logo{
     padding: 1.5rem;
     margin: 0;
-    height: 48px;
+    height: 60px;
     border: solid 1px rgb(24, 37, 54);
     display: flex;
     vertical-align: center;
@@ -177,7 +177,7 @@ div#guest-list{
     align-items: center;
 }
 .logo img{
-    max-height: 30px;
+    max-height: 56px;
     width: 120px;
 }
 
@@ -251,7 +251,7 @@ footer {
 }
 
 .logo-list img{
-    max-width: 80%;
+    max-width: 96%;
 }
 
 /* 合作单位 */
@@ -327,13 +327,13 @@ footer {
         margin-top: 2rem;
     }
 
-    div.award-list{
-        
-    }
-
     .sponsor {
         /* background: none; */
         height: auto!important;
         padding-bottom: 40px!important;
+    }
+    .sponsors ul {
+        margin-top: 0px;
+        margin-bottom: 2rem;
     }
 }
