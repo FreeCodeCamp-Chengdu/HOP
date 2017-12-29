@@ -189,8 +189,7 @@ div#guest-list{
     align-items: center;
 }
 .logo img{
-    max-height: 56px;
-    width: 120px;
+    max-width: 150%;
 }
 
 footer {
