@@ -1,12 +1,11 @@
 <link rel="stylesheet" href="index.css" />
-
 <script src="index.js"></script>
 
 <div class="container">
     <div class="row introduce content">
         <div class="col-xs-12 col-md-6 banner1">
-            <h1 class="title">2017年度黑客松大赛</h1>
-            <h2 class="theme">Code for city</h2>
+            <h1 class="title white">2017年度黑客松大赛</h1>
+            <h2 class="theme white">Code for city</h2>
             <a class="btn btn-primary channel" href="../Hackathon/search.html">
                 参赛通道
                 <span class="glyphicon glyphicon-arrow-right"></span>
@@ -24,7 +23,7 @@
         </div>
         <div class="col-xs-12 card-group">
             <div class="card-title col-md-2 left">
-                <h4 class="title"> 大赛精神</h4>
+                <h4 class="title line-right white"> 大赛精神</h4>
             </div>
             <div class="card-content col-md-10 col-md-offset-1">
                 <ul>
@@ -38,7 +37,7 @@
         </div>
         <div class="col-xs-12  card-group">
             <div class="card-title col-md-2 right">
-                <h4 class="title">大赛目的</h4>
+                <h4 class="title line-left white">大赛目的</h4>
             </div>
             <div class="card-content col-md-10 col-md-offset-1">
                 <ul>
@@ -50,7 +49,7 @@
             </div>
         </div>
         <div class="col-md-12 col-xs-12 award-list">
-            <h4 class="title line-center">大赛奖项</h4>
+            <h4 class="title line-center white">大赛奖项</h4>
             <div class="col-md-12 col-xs-12 award-line">
                 <div class="col-md-2 col-xs-4 col-md-offset-3 ">
                     <h5>一等奖</h5>
@@ -66,25 +65,17 @@
                 </div>
             </div>
             <div class="col-md-12 award-line">
-                <div class="col-md-2 col-md-offset-1">
-                    <h5>最强创意奖</h5>
-                    <small>1000-10000</small>
+                <div class="col-md-2 col-md-offset-3">
+                    <h5>最具创意奖</h5>
+                    <small>1000 - 10000</small>
                 </div>
                 <div class="col-md-2">
-                    <h5>最佳技术创新奖</h5>
-                    <small>1000-10000</small>
+                    <h5>技术创新奖</h5>
+                    <small>1000 - 10000</small>
                 </div>
                 <div class="col-md-2">
-                    <h5>最佳用户体验奖</h5>
-                    <small>1000-10000</small>
-                </div>
-                <div class="col-md-2">
-                    <h5>最佳潜力奖</h5>
-                    <small>1000-10000</small>
-                </div>
-                <div class="col-md-2">
-                    <h5>最佳UI奖</h5>
-                    <small>1000-10000</small>
+                    <h5>用户体验奖</h5>
+                    <small>1000 - 10000</small>
                 </div>
             </div>
             <small style="color: #3C424C">所有奖项以现金或同等价值奖品发放</small>
@@ -92,7 +83,7 @@
     </div>
     <div class="row rule-list content">
         <div class="col-xs-12 col-md-12 ">
-            <h4 class="title line-center">大赛参赛队伍规模及规则</h4>
+            <h4 class="title line-center white">大赛参赛队伍规模及规则</h4>
             <span class="remarks center-block">
                 <small>海选期：不限</small>
                 <small>决赛日：8支</small>
@@ -105,13 +96,13 @@
     </div>
     <div class="row guest-list content">
         <div class="col-xs-12 col-md-12 ">
-            <h4 class="title line-center">嘉宾评委介绍</h4>
+            <h4 class="title line-center white">嘉宾评委介绍</h4>
             <div id="guest-list" is="ListView" data-name="guests">
                 <div class="col-md-4 col-xs-12">
                     <div class="guest">
                         <img class="guest-avatar" src="image/avatar/${view.avatar}" />
                         <div class="guest-title">
-                            <span class="guest-name">${view.name}</span>
+                            <span class="guest-name white">${view.name}</span>
                             <span class="guest-role">${view.role}</span>
                             <div class="guest-identity">${view.identity}</div>
                         </div>
@@ -123,26 +114,27 @@
     </div>
     <div class="row guest-list content hidden-xs">
         <div class="col-md-12 sponsor">
-            <h4 class="title">合作单位</h4>
+            <h4 class="white line-left">合作单位</h4>
+            <br/>
             <br/>
             <br/>
             <br/>  
             <div class="col-md-12">
                 <div class="col-md-2 col-md-offset-1">
-                    <h5>大赛支持单位：</h5>
+                    <h5 class="blue">大赛支持单位：</h5>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛主办方：</h5>
+                    <h5 class="blue">大赛主办方：</h5>
                     <small>高新区创新创业中心</small>
                     <br/>
                     <small>FCC成都社区</small>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛平台独家提供方：</h5>
+                    <h5 class="blue">大赛平台独家提供方：</h5>
                     <small>梦斯特科技(成都)有限公司</small>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛协办单位：</h5>
+                    <h5 class="blue">大赛协办单位：</h5>
                     <smal>国内知名地产企业</smal>
                     <br>
                     <smal>ThoughtWorks</smal>
@@ -150,33 +142,32 @@
                     <smal>BBD</smal>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛冠名单位：</h5>
+                    <h5 class="blue">大赛冠名单位：</h5>
                     <small>BBD</small>
                 </div>
             </div>
             <div class="col-md-12 col-md-offset-1">
                 <div class="col-md-2">
-                    <h5>大赛铂金赞助单位：</h5>
+                    <h5 class="blue">大赛铂金赞助单位：</h5>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛支持单位：</h5>
+                    <h5 class="blue">大赛支持单位：</h5>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛合作伙伴：</h5>
+                    <h5 class="blue">大赛合作伙伴：</h5>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛合作社区：</h5>
+                    <h5 class="blue">大赛合作社区：</h5>
                 </div>
                 <div class="col-md-2">
-                    <h5>大赛媒体伙伴：</h5>
+                    <h5 class="blue">大赛媒体伙伴：</h5>
                 </div>
             </div>
         </div>
     </div>
     <ul class="row content logo-list" data-name="logos">
         <li class="col-md-2 col-xs-3 logo">
-            <img class="img-responsive center-block" alt="${view.title}"
-                src="image/logo/${view.url}" />
+            <img class="img-responsive center-block" alt="${view.title}" src="image/logo/${view.url}" />
         </li>
     </ul>
 </div>
