@@ -3,3 +3,4 @@ node_modules/*
 .leancloud/*
 .idea/*
 .DS_Store
+package-lock.json
