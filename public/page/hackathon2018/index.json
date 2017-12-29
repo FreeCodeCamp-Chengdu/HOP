@@ -1,4 +1,35 @@
 {
+    "banners": [
+        {
+            "title": "0",
+            "url": "0.png"
+        },
+        {
+            "title": "1",
+            "url": "1.jpg"
+        }, 
+        {
+            "title": "2",
+            "url": "2.jpg"
+        },
+        {
+            "title": "3",
+            "url": "3.jpg"
+        },
+        {
+            "title": "4",
+            "url": "4.jpg"
+        },
+        
+        {
+            "title": "5",
+            "url": "5.jpg"
+        },
+        {
+            "title": "6",
+            "url": "6.jpg"
+        }
+    ],
     "logos": [
         {
             "title": "FCC",

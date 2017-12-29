@@ -17,8 +17,12 @@
             </ul>
         </div>
         <div class="col-xs-12 col-md-6 banner1">
-            <div class="banner">
-                <img src="image/banner.png" class="img-responsive" alt="这是banner">
+            <div class="banner swiper-container">
+                <div class="swiper-wrapper" is="ListView" data-name="banners">
+                    <div class="swiper-slide">
+                        <img src="image/banner/${view.url}" class="img-responsive" alt="这是banner">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 card-group">
