@@ -149,7 +149,7 @@ div.guest-list {
 }
 
 div.guest-list .guest-avatar {
-    width: 100px ;
+    /*width: 100px ;*/
     /*height: 100px;*/
 }
 
@@ -213,13 +213,19 @@ footer {
     margin-left: 0px;
 }
 
+.guest .guest-avatar-size {
+    width: 150px;
+    height: 100px;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
 .guest .guest-avatar{
     /*width: 100px;*/
     /*height: 100px;*/
     border: solid 2px #fff;
-    margin-top: -50px;
-    margin-right: 10px;
-    vertical-align: bottom;
+    /*margin-top: -50px;*/
+    /*margin-right: 10px;*/
 }
 .guest .guest-title{
     vertical-align: bottom;
