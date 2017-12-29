@@ -17,7 +17,7 @@ require(['jquery', 'EasyWebApp', 'Swiper'],  function ($, EWA, Swiper) {
                 effect:                 'coverflow',
                 coverflow:              {
                     rotate: 10,
-                    stretch: 30,
+                    stretch: 40,
                     depth: 30,
                     modifier: 5,
                     slideShadows : true
