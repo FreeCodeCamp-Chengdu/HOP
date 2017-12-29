@@ -6,14 +6,12 @@ require(['jquery', 'EasyWebApp', 'Swiper'],  function ($, EWA, Swiper) {
 
             var VM = this;
 
-            new Swiper('.swiper-container', {
+            new Swiper('.swiper-rule', {
                 centeredSlides:         true,
                 slidesPerView:          'auto',
                 slideToClickedSlide:    true,
                 grabCursor:             true,
                 loop:                   true,
-                pagination:             '.swiper-pagination',
-                paginationClickable:    true,
                 effect:                 'coverflow',
                 coverflow:              {
                     rotate: 10,

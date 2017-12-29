@@ -3,6 +3,7 @@ require(['jquery', 'EasyWebApp','Swiper'],  function ($, EWA, Swiper) {
     EWA.component(function () {
         this.on('ready',  function () {
             var VM = this;
+<<<<<<< HEAD
             new Swiper('.swiper-guest', {
                 centeredSlides:         true,
                 slidesPerView:          'auto',
@@ -23,6 +24,13 @@ require(['jquery', 'EasyWebApp','Swiper'],  function ($, EWA, Swiper) {
 
                     VM.current = swiper.realIndex;
                 }
+=======
+            new Swiper('.banner', {
+                autoplay: 6000,
+                speed: 4000,
+                spaceBetween: 20,
+                loop: true,
+>>>>>>> e59681de140c088a8cf68aa3c310f58298b0d6bd
             });
         });
     });
