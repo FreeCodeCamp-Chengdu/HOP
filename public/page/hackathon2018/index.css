@@ -213,3 +213,28 @@ footer {
     font-size: 0.8rem;
     margin-top: 20px;
 }
+
+.logo-list img{
+    max-width: 80%;
+}
+
+/* 合作单位 */
+.sponsor {
+    text-align: left;
+}
+.sponsor-name{
+    padding-left: 30px;
+}
+.sponsor-name li{
+    line-height: 18px;
+    font-weight: bold;
+}
+
+.sponsor-lists{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+}
+.sponsors{
+    flex: 1;
+}
