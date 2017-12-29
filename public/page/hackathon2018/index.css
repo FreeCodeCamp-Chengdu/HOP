@@ -179,10 +179,10 @@ div#guest-list{
     margin-bottom: 0px;
 }
 .logo{
-    padding: 1.5rem;
+    padding: 0 0.5rem;
     margin: 0;
     height: 60px;
-    border: solid 1px rgb(24, 37, 54);
+    /*border: solid 1px rgb(24, 37, 54);*/
     display: flex;
     vertical-align: center;
     justify-content: center;
