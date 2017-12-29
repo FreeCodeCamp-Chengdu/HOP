@@ -1,54 +1,54 @@
 <script src="edit.js"></script>
 
-        <legend>活动概况</legend>
+<legend>活动概况</legend>
 
-        <div class="form-group"
-             data-href="../../component/ImageUploader/index.html"
-             data-key="file" data-required="true" data-value="${view.imageURL}"
-             data-action="file"
-             onupload="${view.setURL}" onclean="${view.setURL}">
-        </div>
-        <input type="hidden" name="imageURL" value="${view.imageURL}" />
+<div class="form-group"
+     data-href="../../component/ImageUploader/index.html"
+     data-key="file" data-required="true" data-value="${view.imageURL}"
+     data-action="file"
+     onupload="${view.setURL}" onclean="${view.setURL}">
+</div>
+<input type="hidden" name="imageURL" value="${view.imageURL}" />
 
-        <div class="form-group">
-            <div class="input-group">
+<div class="form-group">
+    <div class="input-group">
 
-                <label class="input-group-addon" for="title">名字</label>
+        <label class="input-group-addon" for="title">名字</label>
 
-                <input type="text" class="form-control" id="title"
-                       name="title" required
-                       placeholder="为你的活动想个酷炫的名字吧" aria-describedby="title">
-            </div>
-        </div>
+        <input type="text" class="form-control" id="title"
+               name="title" required
+               placeholder="为你的活动想个酷炫的名字吧" aria-describedby="title">
+    </div>
+</div>
 
-        <div class="form-group">
-            <div class="input-group">
+<div class="form-group">
+    <div class="input-group">
 
-                <label class="input-group-addon" for="date_select">时间</label>
+        <label class="input-group-addon" for="date_select">时间</label>
 
-                <input type="text" class="form-control" id="date_select" aria-describedby="date">
-                <input type="hidden" name="startTime">
-                <input type="hidden" name="endTime">
-            </div>
-        </div>
+        <input type="text" class="form-control" id="date_select" aria-describedby="date">
+        <input type="hidden" name="startTime">
+        <input type="hidden" name="endTime">
+    </div>
+</div>
 
-        <div class="form-group">
-            <div class="input-group">
+<div class="form-group">
+    <div class="input-group">
 
-                <label class="input-group-addon" id="location">地址</label>
+        <label class="input-group-addon" id="location">地址</label>
 
-                <input type="text" class="form-control" id="location"
-                       name="location"
-                       placeholder="准备在哪里举行呢?" aria-describedby="location">
-            </div>
-        </div>
+        <input type="text" class="form-control" id="location"
+               name="location"
+               placeholder="准备在哪里举行呢?" aria-describedby="location">
+    </div>
+</div>
 
-        <div class="form-group" id="Editor"
-             data-href="../../component/MediumEditor/index.html"
-             data-locale="zh-CN"
-             data-image-api="file">
+<div class="form-group" id="Editor"
+     data-href="../../component/MediumEditor/index.html"
+     data-locale="zh-CN"
+     data-image-api="file">
 
-            <textarea class="form-control"
-                      name="description" required value="${scope.description}"
-                      placeholder="图文介绍"></textarea>
-        </div>
+    <textarea class="form-control"
+              name="description" required value="${scope.description}"
+              placeholder="图文介绍"></textarea>
+</div>

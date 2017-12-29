@@ -1,4 +1,8 @@
 <style>
+    .Grid-Row > * {
+        float:             none;
+        vertical-align:    middle;
+    }
     [is] a:link {
         text-decoration:    none;
     }
@@ -6,6 +10,7 @@
         max-width:    4em;
     }
 </style>
+
 <script>
     require(['jquery', 'EasyWebApp'],  function ($, EWA) {
 
@@ -26,7 +31,9 @@
         });
     });
 </script>
-<div class="container-fluid"><div class="row">
+
+<div class="container"><div class="Grid-Row">
+
     <header class="col-md-4 text-center">
         <a class="center-block" target="_blank" href="${view.html_url}">
             <h2>${view.name}</h2>
@@ -52,6 +59,7 @@
             </a>
         </p>
     </header>
+
     <ul class="col-md-8">
         <li><address>
             电子邮箱：<a href="mailto:${view.email}">${view.email}</a>
@@ -76,6 +84,6 @@
             </span>
         </li>
     </ul>
-    <section data-href="../Event.html?data=${view.events_url.split('{')[0]}">
-    </section>
 </div></div>
+
+<section data-href="../Event.html?data=${view.events_url.split('{')[0]}"></section>

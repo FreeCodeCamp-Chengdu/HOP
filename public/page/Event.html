@@ -6,6 +6,7 @@
         margin-top:    1em;
     }
 </style>
+
 <script>
     require(['Media_Flow'],  function () {
 
@@ -56,62 +57,64 @@
     });
 </script>
 
-<hr style="clear: both" />
+<div class="container">
 
-<h4>最新动态</h4>
+    <h4>最新动态</h4>
 
-<div is="ListView" data-name="list">
-    <section class="media">
-        <div class="media-left media-middle col-md-1">
-            <a href="User/detail.html?data=${view.actor.url}"
-               title="${view.actor.login}">
+    <div is="ListView" data-name="list">
+        <section class="media">
+            <div class="media-left media-middle col-md-1">
+                <a href="User/detail.html?data=${view.actor.url}"
+                   title="${view.actor.login}">
 
-                <img class="media-object" src="${view.actor.avatar_url}" />
+                    <img class="media-object" src="${view.actor.avatar_url}" />
 
-                <div class="Ellipsis">${view.actor.display_login}</div>
-            </a>
-        </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="Repository/detail.html?data=${view.repo.url}">
-                    ${view.repo.name}
+                    <div class="Ellipsis">${view.actor.display_login}</div>
                 </a>
-            </h3>
-            <span title="${(new Date( view.created_at )).toLocaleString()}">
-                ${view.createdTime}
-            </span>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    <a href="Repository/detail.html?data=${view.repo.url}">
+                        ${view.repo.name}
+                    </a>
+                </h3>
+                <span title="${(new Date( view.created_at )).toLocaleString()}">
+                    ${view.createdTime}
+                </span>
 
-            ${scope.method[ view.payload.action ]}
+                ${scope.method[ view.payload.action ]}
 
-            ${scope.event[ view.type.replace('Event', '') ]}
+                ${scope.event[ view.type.replace('Event', '') ]}
 
-            <span data-name="payload">
-                <a href="./${scope.detailURL()}">
-                    ${
-                        (view.ref || view.master_branch)  ||
-                        (view.issue || view.pull_request || '').title  ||
-                        (view.release || '').name  ||
-                        (view.member || '').login
-                    }
-                </a>
-                <ol data-name="pages"
-                    style="display: ${scope.pages ? '' : 'none'}">
-                    <li>
-                        ${scope.method[ view.action ]}
+                <span data-name="payload">
+                    <a href="./${scope.detailURL()}">
+                        ${
+                            (view.ref || view.master_branch)  ||
+                            (view.issue || view.pull_request || '').title  ||
+                            (view.release || '').name  ||
+                            (view.member || '').login
+                        }
+                    </a>
+                    <ol data-name="pages"
+                        style="display: ${scope.pages ? '' : 'none'}">
+                        <li>
+                            ${scope.method[ view.action ]}
 
-                        <a target="_blank" href="${view.html_url}"
-                           title="${view.summary || view.sha}">
+                            <a target="_blank" href="${view.html_url}"
+                               title="${view.summary || view.sha}">
 
-                            ${view.title}
-                        </a>
-                    </li>
-                </ol>
-            </span>
-        </div>
-    </section>
+                                ${view.title}
+                            </a>
+                        </li>
+                    </ol>
+                </span>
+            </div>
+        </section>
+    </div>
 </div>
 
-<div class="text-center">
+<div class="form-group text-center">
+
     <button type="button" class="btn btn-primary" disabled="${!! view.ready}"
             onclick="${view.loadMore}">
 

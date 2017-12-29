@@ -68,7 +68,9 @@ router.get('/hackathon/:hid/team',  function (request, response) {
 
     Utility.reply(
         response,
-        Utility.query(data,  'Team',  ['title', 'description'],  ['hackathon'])
+        Utility.query(
+            data,  'Team',  ['title', 'description'],  ['creator', 'hackathon']
+        )
     );
 });
 
@@ -92,7 +94,10 @@ router.get('/team',  function (request, response) {
     Utility.reply(
         response,
         Utility.query(
-            request.query,  'Team',  ['title', 'description'],  ['hackathon']
+            request.query,
+            'Team',
+            ['title', 'description'],
+            ['creator', 'hackathon']
         )
     );
 });

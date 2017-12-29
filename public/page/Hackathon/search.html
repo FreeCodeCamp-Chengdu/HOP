@@ -24,6 +24,7 @@
         width:    25%;
     }
 </style>
+
 <script>
     require(['jquery', 'EasyWebApp', 'TimeKit'],  function ($, EWA, TimeKit) {
 
@@ -50,29 +51,31 @@
     });
 </script>
 
-<div class="jumbotron">
-    <div class="container">
-        <h1>黑客马拉松</h1>
-        <p>
-            挑战自己、认识同好，在短时间内激发自己与团队的最大潜力！
-        </p>
-        <p>
-            这里有志同道合的朋友，有并肩奋斗的队友，有创意碰撞的火花！
-        </p>
-        <p>
-            如果你自认为是一个黑客，或者想知道什么才是黑客，来试试吧！
-        </p>
-        <p>
-            Talk is cheap, show me your code !
-        </p>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="edit.html">
-                发起黑客松
-            </a>
-        </div>
+<div class="jumbotron"><div class="container">
+
+    <h1>黑客马拉松</h1>
+    <p>
+        挑战自己、认识同好，在短时间内激发自己与团队的最大潜力！
+    </p>
+    <p>
+        这里有志同道合的朋友，有并肩奋斗的队友，有创意碰撞的火花！
+    </p>
+    <p>
+        如果你自认为是一个黑客，或者想知道什么才是黑客，来试试吧！
+    </p>
+    <p>
+        Talk is cheap, show me your code !
+    </p>
+    <div class="pull-right">
+        <a class="btn btn-primary" href="edit.html">
+            发起黑客松
+        </a>
     </div>
-</div>
-<div data-href="../../component/PageList.html" data-rows="10" data-page="1">
+</div></div>
+
+<div class="container"
+     data-href="../../component/PageList.html" data-rows="10" data-page="1">
+
     <div is="ListView"
          data-href="?data=hackathon?rows=${view.rows}&page=${view.page}&keyWord=${view.keyWord}">
 

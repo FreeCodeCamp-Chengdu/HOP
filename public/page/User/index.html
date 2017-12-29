@@ -6,24 +6,29 @@
         margin-top:    1em;
     }
 </style>
+
 <script>
     require(['Media_Flow'],  function () {  arguments[0]();  });
 </script>
 
-<h2>G 名册</h2>
+<div class="container">
 
-<div class="row text-center" is="ListView" data-name="list">
+    <h2>G 名册</h2>
 
-    <a class="col-md-1" title="${view.login}"
-       href="detail.html?data=${view.url}">
+    <div class="row text-center" is="ListView" data-name="list">
 
-        <img class="img-thumbnail" src="${view.avatar_url}" />
+        <a class="col-md-1" title="${view.login}"
+           href="detail.html?data=${view.url}">
 
-        <div class="Ellipsis">${view.login}</div>
-    </a>
+            <img class="img-thumbnail" src="${view.avatar_url}" />
+
+            <div class="Ellipsis">${view.login}</div>
+        </a>
+    </div>
 </div>
 
-<div class="text-center">
+<div class="form-group text-center">
+
     <button type="button" class="btn btn-primary" disabled="${!! view.ready}"
             onclick="${view.loadMore}">
 

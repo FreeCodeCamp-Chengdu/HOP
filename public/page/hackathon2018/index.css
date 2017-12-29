@@ -1,3 +1,15 @@
+#introduce {
+    background:         url("image/BG.png")  no-repeat;
+    background-size:    100% 100%;
+}
+#detail {
+    background:    linear-gradient(to bottom, #000B19, #04101E);
+}
+.container > .row {
+    color:     rgba(255, 255, 255, 0.8);
+    padding:   2.5rem  1rem;
+}
+
 .banner1 .title::before{
     content: '';
     width: 40px;
@@ -27,25 +39,11 @@
 }
 
 .white {
-    color:  rgba(255, 255, 255, 1);
+    color:  white;
 }
 .blue {
     color: #1B49AC;
     font-size: 1.6rem;
-}
-
-.container {
-    width: 100%;
-    color: rgba(255, 255, 255, 0.8);
-}
-.content {
-    padding: 3rem 5% 3rem 5%;
-    position: relative;
-}
-.introduce {
-    background:         url("page/hackathon2018/image/BG.png")  no-repeat;
-    background-size:    100% 100%;
-    padding-bottom: 10rem;
 }
 
 .title{
@@ -135,7 +133,6 @@ div.award-list {
 
 div.rule-list {
     text-align: center;
-    background: linear-gradient(to bottom, #000B19, #04101E)
 }
 
 span.remarks small{
@@ -144,14 +141,9 @@ span.remarks small{
 
 div.guest-list {
     text-align: center;
-    background-color: #000B19;
     position: relative;
 }
 
-div.guest-list .guest-avatar {
-    /*width: 100px ;*/
-    /*height: 100px;*/
-}
 
 div.guest-list .guest-title {
     display: inline-block;
@@ -175,7 +167,6 @@ div#guest-list{
 }
 
 .logo-list {
-    background-color: #030f1f;
     margin-bottom: 0px;
 }
 .logo{
@@ -190,12 +181,6 @@ div#guest-list{
 }
 .logo img{
     max-width: 150%;
-}
-
-footer {
-    background: url("page/hackathon2018/image/footer-bg.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
 }
 
 /*  嘉宾 */
@@ -213,19 +198,13 @@ footer {
     margin-left: 0px;
 }
 
-.guest .guest-avatar-size {
-    width: 150px;
-    height: 100px;
-    vertical-align: bottom;
-    overflow: hidden;
-}
-
 .guest .guest-avatar{
-    /*width: 100px;*/
-    /*height: 100px;*/
-    border: solid 2px #fff;
-    /*margin-top: -50px;*/
-    /*margin-right: 10px;*/
+    width:                  6.25rem;
+    height:                 6.25rem;
+    background-repeat:      no-repeat;
+    background-position:    center;
+    background-size:        cover;
+    border:                 2px  solid  white;
 }
 .guest .guest-title{
     vertical-align: bottom;
@@ -246,25 +225,6 @@ footer {
 .guest .guest-describe{
     font-size: 1.4rem;
     margin-top: 20px;
-}
-.guest-describe-hover{
-    display: none;
-}
-.guest:hover .guest-describe-hover{
-    display: block;
-    height: 100%;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    margin-right: 1.2rem;
-    position: absolute;
-    top: 0px;
-    background-image: linear-gradient(to right, rgb(39, 91, 243), rgb(87, 126, 222));
 }
 
 .logo-list img{
@@ -298,10 +258,6 @@ footer {
     .banner img {
         width: 100%;
         height: 200px;
-    }
-    .content {
-        padding: 3rem 15px;
-        position: relative;
     }
     .banner1 {
         margin-bottom: 2rem;
@@ -338,10 +294,6 @@ footer {
         margin-top: 0.8rem;
     }
 
-    .guest-list .guest-avatar{
-        width: 80px!important;
-        height: 80px!important;
-    }
 
     /* 奖项 */
     div.award-list{

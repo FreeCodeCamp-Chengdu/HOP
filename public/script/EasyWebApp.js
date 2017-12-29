@@ -393,7 +393,7 @@ var view_RenderNode = (function ($) {
 
     RenderNode.expression = /\$\{([\s\S]+?)\}/g;
 
-    RenderNode.reference = /(\w+)(?:\.|\[(?:'|")|\()(\w+)?/g;
+    RenderNode.reference = /(\w+)(\.|\[(?:'|")|\()(\w+)?/g;
 
     RenderNode.Reference_Mask = {
         view:     1,
@@ -417,44 +417,45 @@ var view_RenderNode = (function ($) {
         }
     }
 
-    $.extend(RenderNode.prototype, {
-        splice:      Array.prototype.splice,
-        indexOf:     Array.prototype.indexOf,
-        push:        Array.prototype.push,
-        scan:        function () {
+    $.extend(RenderNode.prototype = [ ],  {
+        constructor:    RenderNode,
+        add:            function (key) {
+
+            if (key  &&  (this.indexOf( key )  <  0))
+                this.push( key );
+        },
+        scan:           function () {
 
             var _This_ = this,  node = this.ownerNode;
 
             this.splice(0, Infinity);    this.type = 0;
 
-            node.nodeValue = this.raw.replace(
+            node.nodeValue = (this.raw = this.raw.replace(
                 RenderNode.expression,  function (_, expression) {
 
                     if (/\w+\s*\([\s\S]*?\)/.test( expression ))
                         _This_.type = _This_.type | 2;
 
                     expression.replace(
-                        RenderNode.reference,  function (_, scope, key) {
+                        RenderNode.reference,  function (_, scope, symbol, key) {
 
-                            var global;
+                            var global = self[ scope ];
 
-                            _This_.type = _This_.type | (
-                                RenderNode.Reference_Mask[ scope ]  ||  (
-                                    (global = self[ scope ])  &&  16
-                                )
-                            );
+                            if ( global )
+                                return  _This_.type = _This_.type | 16;
 
-                            if (
-                                (! global)  &&  (scope !== 'this')  &&
-                                key  &&  (_This_.indexOf( key )  <  0)
-                            )
-                                _This_.push( key );
+                            if (symbol[0] === '(')  return;
+
+                            _This_.type = _This_.type |
+                                RenderNode.Reference_Mask[ scope ];
+
+                            if (scope !== 'this')  _This_.add( key );
                         }
                     );
 
-                    return '';
+                    return  '${' + expression.trim() + '}';
                 }
-            );
+            )).replace(RenderNode.expression, '');
 
             if (
                 this[0]  &&  (node instanceof Attr)  &&  (! node.value)  &&  (
@@ -463,7 +464,7 @@ var view_RenderNode = (function ($) {
             )
                 this.ownerElement.removeAttribute( node.name );
         },
-        eval:        function (context, scope) {
+        eval:           function (context, scope) {
 
             var refer,  _This_ = this.ownerElement;
 
@@ -479,7 +480,7 @@ var view_RenderNode = (function ($) {
 
             return  (this.raw == text)  ?  refer  :  text;
         },
-        render:      function (context, scope) {
+        render:         function (context, scope) {
 
             var value = this.eval(context, scope),
                 node = this.ownerNode,
@@ -522,7 +523,7 @@ var view_RenderNode = (function ($) {
          *
          * @returns  {string} Text Value of this template
          */
-        toString:    function () {
+        toString:       function () {
 
             return  this.value + '';
         }
@@ -1081,8 +1082,10 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
          * @returns  {View}   Current View
          */
         watch:         function (key, get_set) {
-
-            if (! (key in Object.getPrototypeOf( this )))
+            if (
+                !(key  in  Object.getPrototypeOf( this ))  &&
+                !((typeof this.length === 'number')  &&  $.isNumeric( key ))
+            )
                 this.setPublic(key, get_set, {
                     get:    function () {
 
@@ -1138,31 +1141,71 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
     var Invalid_Style = $.makeSet('inherit', 'initial'),
         URL_Prefix = $.makeSet('?', '#');
 
+    function mapStyle(style, filter) {
+
+        var context = this, key_value = { };
+
+        $.each(style,  function () {
+
+            var value = style.getPropertyValue( this ), _value_,
+                priority = style.getPropertyPriority( this );
+
+            if ( filter ) {
+
+                if (null  !=  (_value_ = filter.call(
+                    context,  value,  this + '',  priority,  style
+                )))
+                    value = _value_;
+                else
+                    return;
+            }
+
+            if ( priority )  value += ' !' + priority;
+
+            if (! (value in Invalid_Style))  key_value[ this ] = value;
+        });
+
+        return  key_value;
+    }
+
+    function pathToRoot(base, path) {
+
+        return (
+            !(path[0] in URL_Prefix)  &&  path.replace(RenderNode.expression, '')
+        )  &&
+            decodeURI(
+                new URL(path,  new URL(base, self.location))
+            ).replace(
+                $.filePath(), ''
+            );
+    }
+
+    function fixCSSURL(base, value) {
+
+        return  value.replace(
+            /\s?url\(\s*(?:'|")(\S+)(?:'|")\)/g,
+            function (_, path) {
+
+                return  'url("'  +  (pathToRoot(base, path) || path)  +  '")';
+            }
+        );
+    }
 
     return {
-        cssRule:      function cssRule(sheet) {
+        cssRule:      function cssRule(sheet, mapFilter) {
+
+            mapFilter = (mapFilter instanceof Function)  &&  mapFilter;
 
             var rule = { };
 
             $.each(sheet.cssRules,  function () {
 
                 if ( this.cssRules )
-                    return (
-                        rule[ this.cssText.split( /\s*\{/ )[0] ] = cssRule( this )
-                    );
-
-                var _rule_ = rule[this.selectorText || this.keyText] = { };
-
-                for (var i = 0, value, priority;  this.style[i];  i++) {
-
-                    value = this.style.getPropertyValue( this.style[i] );
-
-                    if (priority = this.style.getPropertyPriority( this.style[i] ))
-                        value += ' !' + priority;
-
-                    if (! (value in Invalid_Style))
-                        _rule_[ this.style[i] ] = value;
-                }
+                    rule[ this.cssText.split( /\s*\{/ )[0] ] =
+                        cssRule(this, mapFilter);
+                else
+                    rule[this.selectorText || this.keyText] =
+                        mapStyle.call(sheet, this.style, mapFilter);
             });
 
             return rule;
@@ -1171,7 +1214,12 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
 
             if ( iDOM.classList.contains('iQuery_CSS-Rule') )  return iDOM;
 
-            var rule = this.cssRule( iDOM.sheet );    iDOM = [ ];
+            var rule = this.cssRule(
+                    iDOM.sheet,
+                    iDOM.sheet.href  &&  fixCSSURL.bind(null, iDOM.sheet.href)
+                );
+
+            iDOM = [ ];
 
             $.each(rule,  function (selector) {
 
@@ -1222,7 +1270,10 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
         },
         fixURL:       function (base) {
 
-            var key, URI;  base = new URL(base, self.location);
+            var key, URI, $_This = $( this );
+
+            if (this.style.cssText.indexOf('url(') > 0)
+                $_This.css( mapStyle(this.style,  fixCSSURL.bind(null, base)) );
 
             switch ( this.tagName.toLowerCase() ) {
                 case 'a':         ;
@@ -1246,25 +1297,23 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
                     ) {
                         this.target = '_blank';
 
-                    } else if (
-                        !(URI[0] in URL_Prefix)  &&
-                        URI.replace(RenderNode.expression, '')
-                    ) {
-                        this.setAttribute(
-                            key,
-                            decodeURI(new URL(URI, base)).replace(
-                                $.filePath(), ''
-                            )
-                        );
+                    } else if (URI = pathToRoot(base, URI)) {
 
-                        if ($( this ).is(
+                        this.setAttribute(key, URI);
+
+                        if ($_This.is(
                             InnerLink.HTML_Link + ', ' + InnerLink.Self_Link
                         ))
                             new InnerLink( this );
                     }
                 }
             }
-        }
+        },
+        URL_DOM:      [
+            'a', 'area', 'link', 'form',
+            'img', 'iframe', 'audio', 'video', 'script',
+            '[style]', '[data-href]'
+        ].join(', ')
     };
 })(jquery, view_RenderNode, InnerLink);
 
@@ -1392,9 +1441,7 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
 
             if (! this.$_View[0].parentElement)  $_Link = $_Link.addBack();
 
-            $_Link.filter(
-                'a, area, link, form, img, iframe, audio, video, script, [data-href]'
-            ).not('head > *').each(
+            $_Link.filter( DOMkit.URL_DOM ).not('head > *').each(
                 $.proxy(DOMkit.fixURL, null, this.__base__)
             );
         },
@@ -2283,7 +2330,7 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
  *
  * @module    {function} WebApp
  *
- * @version   4.0 (2017-12-27) stable
+ * @version   4.0 (2017-12-29) stable
  *
  * @requires  jquery
  * @see       {@link http://jquery.com/ jQuery}

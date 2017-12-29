@@ -8,8 +8,10 @@
 </style>
 <script src="profile.js"></script>
 
-<form class="form-horizontal"
+<form class="form-horizontal container"
       method="PUT" action="?data=user/profile" ondata="${view.complete}">
+
+    <h3>编辑资料</h3>
 
     <fieldset disabled="${! scope.edit}"><legend>个人简介</legend>
 
@@ -173,9 +175,11 @@
         </div>
     </fieldset>
     <hr />
-    <button class="btn btn-primary btn-block btn-lg"
-            type="${scope.edit ? 'submit' : 'button'}" onclick="${view.switch}">
+    <div class="form-group">
+        <button class="btn btn-primary btn-block btn-lg"
+                type="${scope.edit ? 'submit' : 'button'}" onclick="${view.switch}">
 
-        <!--${scope.edit ? '保存' : '编辑'}-->
-    </button>
+            <!--${scope.edit ? '保存' : '编辑'}-->
+        </button>
+    </div>
 </form>

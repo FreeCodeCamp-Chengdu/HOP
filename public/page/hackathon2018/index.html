@@ -1,93 +1,95 @@
 <link rel="stylesheet" href="index.css" />
-<script src="index.js"></script>
 
-<div class="container">
-    <div class="row introduce content">
-        <div class="col-xs-12 col-md-6 banner1">
-            <h1 class="title white">2018黑客松大赛</h1>
-            <h2 class="theme white">Code for city</h2>
-            <a class="btn btn-primary channel" href="../Hackathon/search.html">
-                参赛通道
-                <span class="glyphicon glyphicon-arrow-right"></span>
-            </a>
-            <ul>
-                <li>线上预赛：2018年1月12日 20:00 -- 2018年1月14日 20:00 </li>
-                <li>决赛日期：2018年1月20日 9:00 -- 19:00 </li>
-                <li>决赛地址：高新天府五街200号菁蓉国际广场7栋1号菁蓉汇主会场</li>
-            </ul>
-        </div>
-        <div class="col-xs-12 col-md-6 banner1">
-            <div class="banner swiper-container">
-                <div class="swiper-wrapper" is="ListView" data-name="banners">
-                    <div class="swiper-slide">
-                        <img src="image/banner/${view.url}" class="img-responsive" alt="这是banner">
-                    </div>
+<div id="introduce"><div class="container"><div class="row">
+
+    <div class="col-xs-12 col-md-6 banner1">
+        <h1 class="title white">2018黑客松大赛</h1>
+        <h2 class="theme white">Code for city</h2>
+        <a class="btn btn-primary channel" href="../Hackathon/search.html">
+            参赛通道
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </a>
+        <ul>
+            <li>线上预赛：2018年1月12日 20:00 -- 2018年1月14日 20:00 </li>
+            <li>决赛日期：2018年1月20日 9:00 -- 19:00 </li>
+            <li>决赛地址：高新天府五街200号菁蓉国际广场7栋1号菁蓉汇主会场</li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-md-6 banner1">
+        <div class="banner swiper-container">
+            <div class="swiper-wrapper" is="ListView" data-name="banners">
+                <div class="swiper-slide">
+                    <img src="image/banner/${view.url}" class="img-responsive" alt="这是banner">
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-12 card-group">
-            <div class="card-title col-md-2 left">
-                <h4 class="title line-right white"> 大赛精神</h4>
-            </div>
-            <div class="card-content col-md-10 col-md-offset-1">
-                <ul>
-                    <li>激发创意，实际创新，一展成都程序员风采 紧跟时代</li>
-                    <li>力争一流，彰显成都IT新一线城市风貌 </li>
-                    <li>Code For City，用实际的编程行动改变天府生活，让成都更加美好</li>
-                    <li>倡导人人皆可编程理念，传达编程的美妙</li>
-                    <li>为成都高新科技人才提供一个展示擂台，扩展各大高新企业的人才储备</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-12  card-group">
-            <div class="card-title col-md-2 right">
-                <h4 class="title line-left white">大赛目的</h4>
-            </div>
-            <div class="card-content col-md-10 col-md-offset-1">
-                <ul >
-                    <li>企业高科技产品展示、程序员的狂欢节、提高成都软件行业社区影响力、鼓励创新创意与实践</li>
-                    <li>打通技术人员与企业之间的沟通通道，促进企业相互交流</li>
-                    <li>创造有潜力的IDEA与产品，吸引投资方投资有实力的团队</li>
-                    <li>提高团队协作能力，加强高新区与软件园对人才的吸引力、积累企业之间互相协助沟通的经验</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12 award-list">
-            <h3 class="title line-center white">大赛奖项</h3>
-            <div class="col-md-12 col-xs-12 award-line">
-                <div class="col-md-2 col-xs-4 col-md-offset-3 ">
-                    <h4>一等奖</h4>
-                    <p>10000+</p>
-                </div>
-                <div class="col-md-2 col-xs-4">
-                    <h4>二等奖</h4>
-                    <p>5000+</p>
-                </div>
-                <div class="col-md-2 col-xs-4">
-                    <h4>三等奖</h4>
-                    <p>3000+</p>
-                </div>
-            </div>
-            <div class="col-md-12 award-line">
-                <div class="col-md-2 col-xs-4 col-md-offset-3">
-                    <h4>最具创意奖</h4>
-                    <p>1000+</p>
-                </div>
-                <div class="col-md-2 col-xs-4">
-                    <h4>技术创新奖</h4>
-                    <p>1000+</p>
-                </div>
-                <div class="col-md-2 col-xs-4">
-                    <h4>用户体验奖</h4>
-                    <p>1000+</p>
-                </div>
-            </div>
-            <div class="col-md-12 award-line">
-            <p>所有奖项以现金或同等价值奖品发放</p>
             </div>
         </div>
     </div>
-    <div class="row rule-list content">
+    <div class="col-xs-12 card-group">
+        <div class="card-title col-md-2 left">
+            <h4 class="title line-right white"> 大赛精神</h4>
+        </div>
+        <div class="card-content col-md-10 col-md-offset-1">
+            <ul>
+                <li>激发创意，实际创新，一展成都程序员风采 紧跟时代</li>
+                <li>力争一流，彰显成都IT新一线城市风貌 </li>
+                <li>Code For City，用实际的编程行动改变天府生活，让成都更加美好</li>
+                <li>倡导人人皆可编程理念，传达编程的美妙</li>
+                <li>为成都高新科技人才提供一个展示擂台，扩展各大高新企业的人才储备</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12  card-group">
+        <div class="card-title col-md-2 right">
+            <h4 class="title line-left white">大赛目的</h4>
+        </div>
+        <div class="card-content col-md-10 col-md-offset-1">
+            <ul >
+                <li>企业高科技产品展示、程序员的狂欢节、提高成都软件行业社区影响力、鼓励创新创意与实践</li>
+                <li>打通技术人员与企业之间的沟通通道，促进企业相互交流</li>
+                <li>创造有潜力的IDEA与产品，吸引投资方投资有实力的团队</li>
+                <li>提高团队协作能力，加强高新区与软件园对人才的吸引力、积累企业之间互相协助沟通的经验</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 award-list">
+        <h3 class="title line-center white">大赛奖项</h3>
+        <div class="col-md-12 col-xs-12 award-line">
+            <div class="col-md-2 col-xs-4 col-md-offset-3 ">
+                <h4>一等奖</h4>
+                <p>10000+</p>
+            </div>
+            <div class="col-md-2 col-xs-4">
+                <h4>二等奖</h4>
+                <p>5000+</p>
+            </div>
+            <div class="col-md-2 col-xs-4">
+                <h4>三等奖</h4>
+                <p>3000+</p>
+            </div>
+        </div>
+        <div class="col-md-12 award-line">
+            <div class="col-md-2 col-xs-4 col-md-offset-3">
+                <h4>最具创意奖</h4>
+                <p>1000+</p>
+            </div>
+            <div class="col-md-2 col-xs-4">
+                <h4>技术创新奖</h4>
+                <p>1000+</p>
+            </div>
+            <div class="col-md-2 col-xs-4">
+                <h4>用户体验奖</h4>
+                <p>1000+</p>
+            </div>
+        </div>
+        <div class="col-md-12 award-line">
+        <p>所有奖项以现金或同等价值奖品发放</p>
+        </div>
+    </div>
+</div></div></div>
+
+<div id="detail"><div class="container">
+
+    <div class="row rule-list">
         <div class="col-xs-12 col-md-12 ">
             <h4 class="title line-center white">大赛参赛队伍规模及规则</h4>
             <span class="remarks center-block">
@@ -100,42 +102,53 @@
             <div data-href="../Rule/index.html?data=page/Rule/index.json"></div>
         </div>
     </div>
-    <div class="row guest-list content">
+    <div class="row guest-list">
         <div class="col-xs-12 col-md-12 ">
             <h4 class="title line-center white">嘉宾评委介绍</h4>
             <div id="guest-list" is="ListView" data-name="vips">
                 <div class="col-md-6 col-xs-12">
                     <div class="guest">
-                        <div class="guest-avatar-size">
-                            <img class="guest-avatar" src="image/avatar/${view.avatar}" />
+                        <div class="guest-avatar"
+                             style="background-image: url('image/avatar/${view.avatar}')">
                         </div>
                         <div class="guest-title">
-                            <span class="guest-name white">${view.name}</span>
-                            <span class="guest-role">${view.role}</span>
-                            <div class="guest-identity">${view.identity}</div>
+                            <span class="guest-name white">
+                                <!--${view.name}-->
+                            </span>
+                            <span class="guest-role">
+                                <!--${view.role}-->
+                            </span>
+                            <div class="guest-identity">
+                                <!--${view.identity}-->
+                            </div>
                         </div>
-                        <div class="guest-describe">${view.describe}</div>
+                        <div class="guest-describe"><!--${
+                            (view.describe.length < 100) ?
+                                view.describe  :
+                                (view.describe.slice(0, 100)  +  '……')
+                    }--></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row guest-list content hidden-xs">
+    <div class="row guest-list hidden-xs">
         <div class="col-md-12 sponsor">
             <h4 class="white line-left">合作单位</h4>
             <div class="sponsor-lists" is="ListView" data-name="sponsors">
                 <div class="sponsors">
-                    <h5 class="blue">${view.title}</h5>
+                    <h5 class="blue"><!--${view.title}--></h5>
+
                     <ul data-name="list" class="sponsor-name">
-                        <li>${view.title}</li>
+                        <li><!--${view.title}--></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <ul class="row content logo-list  hidden-xs" data-name="logos">
-        <li class="col-lg-1 col-xs-3 logo">
+    <ul class="row logo-list hidden-xs" data-name="logos">
+        <li class="col-lg-2 col-md-3 logo">
             <img class="img-responsive center-block" alt="${view.title}" src="image/logo/${view.url}" />
         </li>
     </ul>
-</div>
+</div></div>

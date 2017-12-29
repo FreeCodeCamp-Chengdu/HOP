@@ -57,23 +57,42 @@ select:disabled {
 }
 
 
-body {
-    padding-top:    3.5em;
-}
-body > nav .navbar-brand {
-    color:    white  !important;
-}
 @media (min-width: 768px) {
-    .navbar-nav[data-name] {
-        max-width:     32em;
-        max-height:    3.6em;
-        overflow:      auto;
+    .navbar-fixed-top {
+        background:    black;
+    }
+    a.navbar-brand,  .navbar-nav > li > a  {
+        padding:    2rem  1rem  !important;
+    }
+    .navbar-brand {
+        height:    auto;
+    }
+    .navbar-nav > li > a {
+        font-size:      1.75rem;
+        line-height:    45px;
+    }
+    #PageBox {
+        padding-top:    7.75rem;
+    }
+    form.container {
+        width:    970px;
     }
 }
-
-.qr-code{
-    padding: 2rem 0;
+@media (min-width: 992px) {
+    form.container {
+        width:    750px;
+    }
 }
-footer > .row {
-    padding:    2rem  3%;
+body > footer {
+    background:    black;
+    color:         white;
+}
+footer > .container > .row > * {
+    padding:    2rem  0;
+}
+footer a {
+    font-size:    0.85rem;
+}
+.qr-code img {
+    border:    0.25rem  solid  white;
 }
