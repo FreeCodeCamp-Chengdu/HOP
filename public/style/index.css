@@ -38,6 +38,15 @@ select:disabled {
     display:           table-cell;
     vertical-align:    middle;
 }
+.Background-Image {
+    min-width:              3em;
+    min-height:             3em;
+    background-repeat:      no-repeat;
+    background-position:    center;
+    background-size:        cover;
+}
+
+
 .Card {
     border:        1px  solid  lightgray;
     transition:    0.25s;
@@ -88,7 +97,7 @@ body > footer {
     color:         white;
 }
 footer > .container > .row > * {
-    padding:    2rem  0;
+    padding:    2rem;
 }
 footer a {
     font-size:    0.85rem;

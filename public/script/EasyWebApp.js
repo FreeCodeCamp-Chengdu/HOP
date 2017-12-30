@@ -1433,6 +1433,32 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
                         );
             }
         },
+        parseVM:       function () {
+
+            return  this.scan(function (node) {
+
+                var $_View = this.$_View,
+                    type = (node.nodeName || '').toLowerCase();
+
+                if ((node instanceof Node)  &&  (node !== $_View[0]))
+                    switch ( type ) {
+                        case 'style':     return  DOMkit.fixStyle($_View, node);
+                        case 'link':      {
+
+                            node.onload = function () {
+
+                                $( this ).replaceWith(
+                                    DOMkit.fixStyle($_View, this)
+                                );
+                            };
+                            return;
+                        }
+                        case 'script':    return  DOMkit.fixScript( node );
+                    }
+
+                return  this.parseNode(type, node);
+            });
+        },
         fixLink:       function () {
 
             if (! this.__base__)  return;
@@ -1468,31 +1494,28 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
 
             this.$_Slot = $_Slot;
         },
-        parseVM:       function () {
+        parseHTML:     function (template) {
 
-            return  this.scan(function (node) {
+        //  Compatible with <template />
 
-                var $_View = this.$_View,
-                    type = (node.nodeName || '').toLowerCase();
+            this.$_View.children('template').replaceWith(function () {
 
-                if ((node instanceof Node)  &&  (node !== $_View[0]))
-                    switch ( type ) {
-                        case 'style':     return  DOMkit.fixStyle($_View, node);
-                        case 'link':      {
-
-                            node.onload = function () {
-
-                                $( this ).replaceWith(
-                                    DOMkit.fixStyle($_View, this)
-                                );
-                            };
-                            return;
-                        }
-                        case 'script':    return  DOMkit.fixScript( node );
-                    }
-
-                return  this.parseNode(type, node);
+                return  $( this ).contents();
             });
+
+        //  Literal Relative URL & <slot />
+
+            if (template = (template || '').trim()) {
+
+                if ( this.$_View[0].innerHTML.trim() )
+                    this.$_Slot = this.$_View.contents().remove();
+
+                this.$_View[0].innerHTML = template;
+            }
+
+            this.fixLink();
+
+            this.parseSlot();
         },
         /**
          * HTML 模板解析
@@ -1507,35 +1530,7 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
          */
         parse:         function (template) {
 
-            if (this.__parse__)  return this;
-
-        //  Compatible with <template />
-
-            this.$_View.children('template').replaceWith(function () {
-
-                return  $( this ).contents();
-            });
-
-        //  Literal Relative URL & <slot />
-
-            if (template = (template || '').trim()) {
-
-                if ( this.$_View[0].innerHTML.trim() ) {
-
-                    this.$_Slot = this.$_View.contents().remove();
-
-                    this.$_View[0].innerHTML = template;
-
-                    this.fixLink();
-
-                    this.parseSlot();
-                } else {
-                    this.$_View[0].innerHTML = template;
-
-                    this.fixLink();
-                }
-            } else
-                this.fixLink();
+            if (! this.__parse__)  this.parseHTML( template );
 
             return this.parseVM();
         },

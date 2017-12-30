@@ -3,52 +3,45 @@
 <div id="introduce"><div class="container"><div class="row">
 
     <div class="col-xs-12 col-md-6 banner1">
-        <h1 class="title white">2018黑客松大赛</h1>
-        <h2 class="theme white">Code for city</h2>
-        <a class="btn btn-primary channel" href="../Hackathon/search.html">
+        <h1 class="title white">2018 黑客松大赛</h1>
+        <h2 class="theme white">Code for City</h2>
+        <a class="btn btn-primary channel" href="https://fcc.hackerearth.com/zh/">
             参赛通道
             <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
         <ul>
-            <li>线上预赛：2018年1月12日 20:00 -- 2018年1月14日 20:00 </li>
-            <li>决赛日期：2018年1月20日 9:00 -- 19:00 </li>
+            <li>线上预赛：2018年1月12日 20:00 -- 2018年1月14日 20:00</li>
+            <li>决赛日期：2018年1月20日 9:00 -- 19:00</li>
             <li>决赛地址：高新天府五街200号菁蓉国际广场7栋1号菁蓉汇主会场</li>
         </ul>
     </div>
-    <div class="col-xs-12 col-md-6 banner1">
-        <div class="banner swiper-container">
-            <div class="swiper-wrapper" is="ListView" data-name="banners">
-                <div class="swiper-slide">
-                    <img src="image/banner/${view.url}" class="img-responsive" alt="这是banner">
-                </div>
-            </div>
-        </div>
+
+    <div class="col-xs-12 col-md-6"
+         data-href="../../component/Gallery.html?data=page/hackathon2018/gallery.json">
+
+        <div class="Background-Image"
+             style="background-image: url('image/banner/${view.imageURL}')"></div>
     </div>
+
     <div class="col-xs-12 card-group">
         <div class="card-title col-md-2 left">
-            <h4 class="title line-right white"> 大赛精神</h4>
+            <h4 class="title line-right white">大赛宗旨</h4>
         </div>
         <div class="card-content col-md-10 col-md-offset-1">
             <ul>
-                <li>激发创意，实际创新，一展成都程序员风采 紧跟时代</li>
-                <li>力争一流，彰显成都IT新一线城市风貌 </li>
-                <li>Code For City，用实际的编程行动改变天府生活，让成都更加美好</li>
-                <li>倡导人人皆可编程理念，传达编程的美妙</li>
-                <li>为成都高新科技人才提供一个展示擂台，扩展各大高新企业的人才储备</li>
+                <li>关注城市生活：以“Code For City”为主题，旨在用实际编程行动改变城市生活，让城市更美好</li>
+                <li>鼓励技术创新：创意与实践相互结合，想象与行动二者并重，是本次大赛的重要评判标准之一</li>
+                <li>提升行业氛围：创造有价值的产品，挖掘有潜力的团队，加强高新区对人才、企业资本的吸引力</li>
+                <li>展现成都风采：打造一个广泛聚焦的舞台，一展成都程序员风采，彰显成都IT新一线的城市风貌</li>
             </ul>
         </div>
     </div>
     <div class="col-xs-12  card-group">
         <div class="card-title col-md-2 right">
-            <h4 class="title line-left white">大赛目的</h4>
+            <h4 class="title line-left white">品牌理念</h4>
         </div>
         <div class="card-content col-md-10 col-md-offset-1">
-            <ul >
-                <li>企业高科技产品展示、程序员的狂欢节、提高成都软件行业社区影响力、鼓励创新创意与实践</li>
-                <li>打通技术人员与企业之间的沟通通道，促进企业相互交流</li>
-                <li>创造有潜力的IDEA与产品，吸引投资方投资有实力的团队</li>
-                <li>提高团队协作能力，加强高新区与软件园对人才的吸引力、积累企业之间互相协助沟通的经验</li>
-            </ul>
+            Code for City 是 freeCodeCamp China 的品牌活动，通过联合企业、高校、技术社区、公益组织等机构，以编程工作坊或黑客松等形式，赋能青年人为社会问题设计解决方案，旨在推动编程的普及，用技术影响世界。
         </div>
     </div>
     <div class="col-md-12 col-xs-12 award-list">
@@ -108,7 +101,7 @@
             <div id="guest-list" is="ListView" data-name="vips">
                 <div class="col-md-6 col-xs-12">
                     <div class="guest">
-                        <div class="guest-avatar"
+                        <div class="Background-Image guest-avatar"
                              style="background-image: url('image/avatar/${view.avatar}')">
                         </div>
                         <div class="guest-title">
@@ -122,11 +115,7 @@
                                 <!--${view.identity}-->
                             </div>
                         </div>
-                        <div class="guest-describe"><!--${
-                            (view.describe.length < 100) ?
-                                view.describe  :
-                                (view.describe.slice(0, 100)  +  '……')
-                    }--></div>
+                        <div class="guest-describe"><!--${view.describe}--></div>
                     </div>
                 </div>
             </div>
@@ -146,9 +135,10 @@
             </div>
         </div>
     </div>
-    <ul class="row logo-list hidden-xs" data-name="logos">
-        <li class="col-md-1 logo">
-            <img class="img-responsive center-block" alt="${view.title}" src="image/logo/${view.url}" />
+    <ul class="logo-list text-center hidden-xs" data-name="logos">
+        <li>
+            <img class="img-responsive center-block"
+                 src="image/logo/${view.url}" alt="${view.title}" />
         </li>
     </ul>
 </div></div>

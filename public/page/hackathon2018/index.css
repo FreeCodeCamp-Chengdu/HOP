@@ -22,18 +22,10 @@
 .banner1 {
     margin-bottom: 5rem;
 }
-.banner{
-    width:100%;
-    height: 100%;
-}
-.banner img{
-    width: 100%;
+#introduce .Background-Image {
+    height:    20rem;
 }
 
-.swiper-banner {
-    width: 100%;
-    height: 100%;
-  }
 .btn{
     background-image: linear-gradient(to right, rgb(39, 91, 243), rgb(87, 126, 222));
 }
@@ -51,12 +43,13 @@
 }
 
 ul {
-    padding-left: 0px;
+    margin:     0;
+    padding:    0;
 }
 ul li {
-    list-style-type: none;
-    margin-top: 1rem;
-    padding-left: 0;
+    list-style:     none;
+    padding:        0;
+    line-height:    2rem
 }
 
 .line-center::after,
@@ -114,10 +107,9 @@ button.channel {
 }
 
 .card-content {
-    border-style: solid;
-    border-color: #182536;
-    padding: 0 10%;
-    /* height: 15rem; */
+    border-style:    solid;
+    border-color:    #182536;
+    padding:         3rem  9%;
 }
 
 div.award-list {
@@ -166,22 +158,14 @@ div#guest-list{
     align-content: flex-start;
 }
 
-.logo-list {
-    margin-bottom: 0px;
+.logo-list > li {
+	display:           inline-block;
+    vertical-align:    middle;
+    width:             12rem;
+    padding:           1rem;
 }
-.logo{
-    padding: 0 0.5rem;
-    margin: 0;
-    height: 50px;
-    /*border: solid 1px rgb(24, 37, 54);*/
-    display: flex;
-    vertical-align: center;
-    justify-content: center;
-    align-items: center;
-}
-.logo img{
-    max-width: 100%;
-    padding: 1%;
+.logo-list img {
+    max-height:    4rem;
 }
 
 /*  嘉宾 */
@@ -199,13 +183,10 @@ div#guest-list{
     margin-left: 0px;
 }
 
-.guest .guest-avatar{
-    width:                  6.25rem;
-    height:                 6.25rem;
-    background-repeat:      no-repeat;
-    background-position:    center;
-    background-size:        cover;
-    border:                 2px  solid  white;
+.guest .guest-avatar {
+    width:     6.25rem;
+    height:    6.25rem;
+    border:    2px  solid  white;
 }
 .guest .guest-title{
     vertical-align: bottom;

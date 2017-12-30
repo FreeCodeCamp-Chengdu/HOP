@@ -8,10 +8,14 @@
 </style>
 <script>
     require(['jquery', 'EasyWebApp', 'BootStrap'],  function ($, EWA) {
+
         EWA.component(function (data) {
+
             this.on('ready',  function () {
+
                 this.$_View.find('.carousel').carousel();
             });
+
             return {
                 id:      data.id,
                 list:    data
