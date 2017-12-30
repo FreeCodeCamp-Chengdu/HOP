@@ -172,7 +172,7 @@ div#guest-list{
 .logo{
     padding: 0 0.5rem;
     margin: 0;
-    height: 60px;
+    height: 80px;
     /*border: solid 1px rgb(24, 37, 54);*/
     display: flex;
     vertical-align: center;
@@ -180,7 +180,8 @@ div#guest-list{
     align-items: center;
 }
 .logo img{
-    max-width: 150%;
+    max-width: 100%;
+    padding: 1%;
 }
 
 /*  嘉宾 */
@@ -225,10 +226,6 @@ div#guest-list{
 .guest .guest-describe{
     font-size: 1.4rem;
     margin-top: 20px;
-}
-
-.logo-list img{
-    max-width: 96%;
 }
 
 /* 合作单位 */
