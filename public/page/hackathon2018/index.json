@@ -64,6 +64,10 @@
             "url": "BBD.png"
         },
         {
+            "title": "TEDx",
+            "url": "tedx-logo.png"
+        },
+        {
             "title": "Monstarlab",
             "url": "Monstarlab.png"
         },
@@ -103,14 +107,6 @@
         {
             "title": "shiyanlou",
             "url": "shiyanlou.png"
-        },
-        {
-            "title": "TEDx",
-            "url": "tedx-logo.png"
-        },
-        {
-            "title": "TEDxCD",
-            "url": "tedxChengDu-logo.png"
         }
 
     ],
