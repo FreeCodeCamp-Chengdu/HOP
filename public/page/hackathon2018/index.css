@@ -172,7 +172,7 @@ div#guest-list{
 .logo{
     padding: 0 0.5rem;
     margin: 0;
-    height: 80px;
+    height: 50px;
     /*border: solid 1px rgb(24, 37, 54);*/
     display: flex;
     vertical-align: center;
