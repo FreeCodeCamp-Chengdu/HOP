@@ -72,10 +72,6 @@
             "url": "Microsoft-logo_rgb_wht.png"
         },
         {
-            "title": "CDFHQ",
-            "url": "cdfhq.png"
-        },
-        {
             "title": "DevEco",
             "url": "DevEco.png"
         },
@@ -101,8 +97,8 @@
             "url": "oschina.png"
         },
         {
-            "title": "segmeentfault",
-            "url": "segmeentfault.png"
+            "title": "segmentfault",
+            "url": "segmentfault.png"
         },
         {
             "title": "shiyanlou",
