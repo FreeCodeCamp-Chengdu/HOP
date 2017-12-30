@@ -64,16 +64,16 @@
             "url": "BBD.png"
         },
         {
+            "title": "TEDx",
+            "url": "tedx-logo.png"
+        },
+        {
             "title": "Monstarlab",
             "url": "Monstarlab.png"
         },
         {
             "title": "Microsoft",
             "url": "Microsoft-logo_rgb_wht.png"
-        },
-        {
-            "title": "CDFHQ",
-            "url": "cdfhq.png"
         },
         {
             "title": "DevEco",
@@ -101,20 +101,12 @@
             "url": "oschina.png"
         },
         {
-            "title": "segmeentfault",
-            "url": "segmeentfault.png"
+            "title": "segmentfault",
+            "url": "segmentfault.png"
         },
         {
             "title": "shiyanlou",
             "url": "shiyanlou.png"
-        },
-        {
-            "title": "TEDx",
-            "url": "tedx-logo.png"
-        },
-        {
-            "title": "TEDxCD",
-            "url": "tedxChengDu-logo.png"
         }
 
     ],
