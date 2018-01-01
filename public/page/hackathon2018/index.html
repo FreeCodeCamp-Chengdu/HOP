@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-xs-12 col-md-6"
-         data-href="../../component/Gallery.html?data=page/hackathon2018/gallery.json">
+         data-href="../../component/Gallery/index.html?data=page/hackathon2018/gallery.json">
 
         <div class="Background-Image"
              style="background-image: url('image/banner/${view.imageURL}')"></div>
@@ -82,17 +82,27 @@
 
 <div id="detail"><div class="container">
 
-    <div class="row rule-list">
-        <div class="col-xs-12 col-md-12 ">
+    <div class="row text-center">
+        <div class="col-xs-12 col-md-12">
             <h4 class="title line-center white">大赛参赛队伍规模及规则</h4>
             <span class="remarks center-block">
                 <p>海选期：不限</p>
                 <p>决赛日：6支</p>
             </span>
-            <!-- <span class="remarks center-block">
-
-            </span> -->
-            <div data-href="../Rule/index.html?data=page/Rule/index.json"></div>
+            <ol class="rule-list hidden-xs col-md-10 col-md-offset-1">
+                <li>
+                    参赛队长、队员在 FCC 黑客松官网用 GitHub 账号登录，并点选参加某个黑客松（首次使用需在注册邮箱中点邀请链接）
+                </li>
+                <li>
+                    队长在参赛页面上创建团队、添加队员、命名主代码库（GitHub 对应的 team、repository 自动创建）
+                </li>
+                <li>
+                    参赛队成员在比赛开始时才被赋予代码库 push 权限，在评选阶段暂时失去 push 权限，赛后会取得 admin 权限以便继续开发
+                </li>
+                <li>
+                    队伍主代码库 master 分支的每次 push 都会自动部署至大赛官网演示服务器，请有后端服务的项目务必写好 Dockerfile
+                </li>
+            </ol>
         </div>
     </div>
     <div class="row guest-list">

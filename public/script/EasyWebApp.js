@@ -842,19 +842,22 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
             if (box.dataset.href  &&  (box.dataset.href[0] !== '?'))
                 return  $.filePath( box.dataset.href );
         },
-        getSub:    function (iDOM, base) {
+        getSub:    function ($_View, scope, base) {
 
-            var is_View = iDOM.getAttribute('is');
+            $_View = $( $_View );
+
+            var is_View = $_View.attr('is');
 
             for (var i = Sub_Class.length - 1;  Sub_Class[i];  i--)
                 if (
                     is_View ?
                         (is_View === Sub_Class[i].name)  :
-                        Sub_Class[i].is( iDOM )
+                        Sub_Class[i].is( $_View[0] )
                 )
                     return  new Sub_Class[i](
-                        iDOM,
-                        (this.instanceOf( iDOM.parentNode )  ||  '').__data__,
+                        $_View,
+                        scope  ||
+                            (this.instanceOf( $_View.parent() )  ||  '').__data__,
                         base
                     );
         },
@@ -1043,7 +1046,8 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
                         ) {
                             parser.call(this, node);
 
-                            iView = iView  ||  View.getSub(node, this.__base__);
+                            if (! iView)
+                                iView = View.getSub(node,  null,  this.__base__);
 
                             Sub_View.push(iView.parse ? iView.parse() : iView);
 
@@ -1705,7 +1709,7 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
          */
         insert:     function (data, index, delay) {
 
-            var Item = (new HTMLView(this.__HTML__, this.__data__)).parse();
+            var Item = View.getSub(this.__HTML__, this.__data__).parse();
 
             Item.$_View.find( InnerLink.HTML_Link ).addBack( InnerLink.HTML_Link )
                 .each(function () {
@@ -2093,7 +2097,7 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
             HTML = this._emit('template', link, HTML);
 
-            var view = View.getSub(target, link.href);
+            var view = View.getSub(target, null, link.href);
 
             if ( view.parse )  view.parse( HTML );
 
@@ -2325,14 +2329,14 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
  *
  * @module    {function} WebApp
  *
- * @version   4.0 (2017-12-29) stable
+ * @version   4.0 (2018-01-01) stable
  *
  * @requires  jquery
  * @see       {@link http://jquery.com/ jQuery}
  * @requires  jQueryKit
  * @see       {@link https://techquery.github.io/iQuery.js iQuery}
  *
- * @copyright TechQuery <shiy2008@gmail.com> 2015-2017
+ * @copyright TechQuery <shiy2008@gmail.com> 2015-2018
  */
 
 return  (function ($, WebApp, InnerLink) {

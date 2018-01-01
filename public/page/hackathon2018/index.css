@@ -23,7 +23,8 @@
     margin-bottom: 5rem;
 }
 #introduce .Background-Image {
-    height:    20rem;
+    height:        25rem;
+    box-shadow:    0  2px  1.25rem  0  rgba(170, 170, 170, 0.5);
 }
 
 .btn{
@@ -123,8 +124,11 @@ div.award-list {
     padding: 0;
 }
 
-div.rule-list {
-    text-align: center;
+.rule-list {
+    text-align:    left;
+    padding:       2.5rem  4rem;
+    background:    linear-gradient(to right, #275BF3, #577EDE);
+    margin-top:    2rem;
 }
 
 span.remarks small{
