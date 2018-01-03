@@ -10,17 +10,18 @@
     padding:   2.5rem  1rem;
 }
 
+.title{
+    margin-bottom: 1.8rem;
+}
+
 .banner1 .title::before{
     content: '';
-    width: 40px;
-    height: 4px;
+    width: 3rem;
+    height: 3px;
     display: block;
-    margin-bottom: 10px;
-    margin-left: -40px;
+    margin-bottom: 1.8rem;
     background: #5583F6;
-}
-.banner1 {
-    margin-bottom: 5rem;
+    margin-left: -3rem;
 }
 #introduce .Background-Image {
     height:        25rem;
@@ -28,6 +29,7 @@
 }
 
 .btn{
+    margin: 1.8rem 0px;
     background-image: linear-gradient(to right, rgb(39, 91, 243), rgb(87, 126, 222));
 }
 
@@ -39,10 +41,6 @@
     font-size: 1.6rem;
 }
 
-.title{
-    margin-bottom: 2rem;
-}
-
 ul {
     margin:     0;
     padding:    0;
@@ -50,23 +48,23 @@ ul {
 ul li {
     list-style:     none;
     padding:        0;
-    line-height:    2rem
+    line-height:    2.5rem
 }
 
 .line-center::after,
 .line-left::after,
 .line-right::after {
     content: '';
-    width: 36px;
-    height: 4px;
+    width: 2rem;
+    height: 2px;
     display: block;
     background: #5583F6;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 2rem;
 }
 
 .line-left::after {
-    margin: 10px 0px 0px;
+    margin: 2rem 0px 0px;
 }
 
 .line-right::after {
@@ -84,13 +82,21 @@ button.channel {
     /* height: 20rem; */
     margin: 3rem 0;
 }
+.banner1{
+    padding-left: 3rem;
+}
+
+.card-frist{
+    margin-top: 11rem;
+}
 
 .card-title {
     border-style: solid;
+    border-width: 2px;
     border-color: #2557c8;
     position: absolute;
     background-color: #000000;
-    height: 10rem;
+    height: 13rem;
     padding-top: 3.5rem;
     z-index: 99;
 }
@@ -111,11 +117,13 @@ button.channel {
     border-style:    solid;
     border-color:    #182536;
     padding:         3rem  9%;
+    min-height:      13rem;
+    line-height:     2.5rem;
 }
 
 div.award-list {
     text-align: center;
-    margin-top: 10rem;
+    margin-top: 13rem;
     margin-bottom: -5rem;
 }
 
@@ -123,12 +131,17 @@ div.award-list {
     margin: 2rem 0;
     padding: 0;
 }
-
+.rule-panel {
+    margin-top: 7rem;
+}
 .rule-list {
     text-align:    left;
-    padding:       2.5rem  4rem;
+    padding:       7rem  4rem;
     background:    linear-gradient(to right, #275BF3, #577EDE);
     margin-top:    2rem;
+    min-height:    27rem;
+    line-height:   3rem;
+    border-radius: 4px;
 }
 
 span.remarks small{
@@ -147,7 +160,7 @@ div.guest-list .guest-title {
 
 div.sponsor {
     background: url("image/sponsor-bg.png");
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     padding: 5%;
@@ -161,15 +174,24 @@ div#guest-list{
     justify-content: flex-start;
     align-content: flex-start;
 }
+.logo-list {
+    margin: 3rem auto;
 
+}
 .logo-list > li {
-	display:           inline-block;
+	display:           inline-flex;
     vertical-align:    middle;
     width:             12rem;
-    padding:           1rem;
+    max-width:         12rem;
+    justify-content: flex-start;
+    align-content: center;
+    max-height:        6rem;
+    margin:            0.8rem auto;
 }
-.logo-list img {
-    max-height:    4rem;
+.logo-list li img {
+    max-height:    3rem;
+    max-width:     80%;
+    margin:  1.5rem auto;
 }
 
 /*  嘉宾 */
@@ -181,6 +203,7 @@ div#guest-list{
     border-radius: 4px;
     padding: 15px;
     margin: 5rem .1rem 0 .1rem;
+    min-height: 15rem;
 }
 
 .guest:first-child{
@@ -188,29 +211,34 @@ div#guest-list{
 }
 
 .guest .guest-avatar {
-    width:     6.25rem;
-    height:    6.25rem;
+    width:     8rem;
+    height:    8rem;
     border:    2px  solid  white;
+    display: inline-block;
+    margin-top: -3rem;
 }
 .guest .guest-title{
     vertical-align: bottom;
     display: inline-block;
+    margin-left: 0.5rem;
+    line-height: 2rem;
 }
 .guest .guest-name{
-    font-size: 2.6rem;
+    font-size: 1.6rem;
     font-weight: bold;
 }
 .guest .guest-role{
     color: #2B57C9;
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
 .guest .guest-identity{
     color: #696F79;
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
 .guest .guest-describe{
-    font-size: 1.4rem;
+    font-size: 1rem;
     margin-top: 20px;
+    line-height: 1.6rem;
 }
 
 /* 合作单位 */
@@ -218,7 +246,7 @@ div#guest-list{
     text-align: left;
 }
 .sponsor-name li{
-    line-height: 18px;
+    line-height: 2.5rem;
     font-weight: bold;
 }
 
@@ -243,6 +271,7 @@ div#guest-list{
     }
     .banner1 {
         margin-bottom: 2rem;
+        padding-left: 0px;
     }
     .banner1 .title::before{
         margin-left: 0;
@@ -269,17 +298,54 @@ div#guest-list{
         padding-top: 0.5rem;
     }
     .card-content {
-        padding: 2rem 1rem 0;
+        padding: 2rem 1rem 1rem;
     }
     .card-content ul li{
         font-size: 1.4rem;
         margin-top: 0.8rem;
     }
 
+    .card-frist{
+        margin-top: 6rem;
+    }
+
+    #PageBox .guest {
+        padding:    15px 0px;
+        min-height: 1rem;
+    }
+
+    .guest .guest-avatar {
+        width:     5rem;
+        height:    5rem;
+        border:    2px  solid  white;
+        display: inline-block;
+        margin-top: -3rem;
+    }
+
+    .line-center::after,
+    .line-left::after,
+    .line-right::after {
+        margin-top: 0.8rem;
+    }
+
+    #PageBox ul li {
+        line-height: 1.8rem;
+        font-size:   12px;
+    }
+
 
     /* 奖项 */
     div.award-list{
         margin-top: 1rem;
+    }
+    div.award-list .title{
+        font-size: 18px;
+    }
+    .award-list h4{
+        font-size: 1.4rem;
+    }
+    .award-list p{
+        font-size: 1rem;
     }
 
     .sponsor {
@@ -290,5 +356,12 @@ div#guest-list{
     .sponsors ul {
         margin-top: 0;
         margin-bottom: 2rem;
+    }
+
+    .rule-list {
+        line-height: 2rem;
+        font-size:   12px;
+        padding:  4rem 2rem;
+        min-height:  1rem;
     }
 }
