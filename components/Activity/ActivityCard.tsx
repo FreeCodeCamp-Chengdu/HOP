@@ -1,6 +1,6 @@
 import { faCalendarDay, faMapLocationDot, faTags } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Hackathon } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon } from '@freecodecamp-chengdu/hop-service';
 import classNames from 'classnames';
 import { FC, useContext } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';

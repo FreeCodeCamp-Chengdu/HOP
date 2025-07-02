@@ -1,4 +1,4 @@
-import { Answer } from '@kaiyuanshe/openhackathon-service';
+import { Answer } from '@freecodecamp-chengdu/hop-service';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';

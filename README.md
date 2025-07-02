@@ -1,19 +1,19 @@
-# Open Hackathon - Web App
+# Hackathon Open Platform - Web App
 
 Open-source [Hackathon][1] Platform with **Git-based Cloud Development Environment**
 
-[![CI & CD](https://github.com/kaiyuanshe/OpenHackathon-Web/actions/workflows/main.yml/badge.svg)][2]
+[![CI & CD](https://github.com/FreeCodeCamp-Chengdu/HOP/actions/workflows/main.yml/badge.svg)][2]
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)][3]
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)][4]
 
 ## Key links
 
-- [Task kanban](https://github.com/orgs/kaiyuanshe/projects/9/)
+- [Task kanban](https://github.com/orgs/FreeCodeCamp-Chengdu/projects/9/)
 - [UI design](https://www.figma.com/file/HKPV8IB4kxrAVAuuSBZKd1/Open-Hackathon)
 - Web entry
-  - testing: https://test.hackathon.kaiyuanshe.cn/
-  - production: https://hackathon.kaiyuanshe.cn/
+  - testing: https://test.hackathon.fcc-cd.dev/
+  - production: https://hackathon.fcc-cd.dev/
 - RESTful API
   - production: https://openhackathon-service.onrender.com/
 
@@ -62,12 +62,12 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform][11] f
 
 Check out our [Next.js deployment documentation][16] for more details.
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaiyuanshe%2FOpenHackathon-Web.svg?type=large)][17]
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFreeCodeCamp-Chengdu%2FHOP.svg?type=large)][17]
 
 [1]: https://en.wikipedia.org/wiki/Hackathon
-[2]: https://github.com/kaiyuanshe/OpenHackathon-Web/actions/workflows/main.yml
-[3]: https://codespaces.new/kaiyuanshe/OpenHackathon-Web
-[4]: https://gitpod.io/?autostart=true#https://github.com/kaiyuanshe/OpenHackathon-Web
+[2]: https://github.com/FreeCodeCamp-Chengdu/HOP/actions/workflows/main.yml
+[3]: https://codespaces.new/FreeCodeCamp-Chengdu/HOP
+[4]: https://gitpod.io/?autostart=true#https://github.com/FreeCodeCamp-Chengdu/HOP
 [5]: https://www.typescriptlang.org/
 [6]: https://nextjs.org/
 [7]: https://getbootstrap.com/
@@ -80,4 +80,4 @@ Check out our [Next.js deployment documentation][16] for more details.
 [14]: https://nextjs.org/learn
 [15]: https://github.com/vercel/next.js/
 [16]: https://nextjs.org/docs/deployment
-[17]: https://app.fossa.com/projects/git%2Bgithub.com%2Fkaiyuanshe%2FOpenHackathon-Web?ref=badge_large
+[17]: https://app.fossa.com/projects/git%2Bgithub.com%2FFreeCodeCamp-Chengdu%2FHOP?ref=badge_large

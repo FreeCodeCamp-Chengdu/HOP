@@ -1,6 +1,6 @@
 import { faGithub, faQq, faWeibo, faWeixin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { User } from '@kaiyuanshe/openhackathon-service';
+import { User } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';

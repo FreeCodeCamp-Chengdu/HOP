@@ -1,4 +1,4 @@
-import { TeamWorkType } from '@kaiyuanshe/openhackathon-service';
+import { TeamWorkType } from '@freecodecamp-chengdu/hop-service';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';

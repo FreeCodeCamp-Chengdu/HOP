@@ -1,10 +1,9 @@
-import { TeamWork } from '@kaiyuanshe/openhackathon-service';
+import { TeamWork } from '@freecodecamp-chengdu/hop-service';
 import { FC } from 'react';
 
 import { XScrollListProps } from '../layout/ScrollList';
 
-export interface SimpleTeamWorkListLayoutProps
-  extends XScrollListProps<TeamWork> {
+export interface SimpleTeamWorkListLayoutProps extends XScrollListProps<TeamWork> {
   size?: 'sm' | 'lg';
   onDelete?: (id: TeamWork['id']) => any;
 }

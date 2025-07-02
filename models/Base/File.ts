@@ -1,4 +1,4 @@
-import { SignedLink } from '@kaiyuanshe/openhackathon-service';
+import { SignedLink } from '@freecodecamp-chengdu/hop-service';
 import { toggle } from 'mobx-restful';
 import { FileModel } from 'mobx-restful-table';
 import { blobOf, uniqueID } from 'web-utility';

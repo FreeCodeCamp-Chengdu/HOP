@@ -15,7 +15,7 @@ import {
   faUserSecret,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { StaffType } from '@kaiyuanshe/openhackathon-service';
+import { StaffType } from '@freecodecamp-chengdu/hop-service';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';

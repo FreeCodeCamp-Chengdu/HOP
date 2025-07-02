@@ -1,4 +1,4 @@
-import { PlatformAdmin } from '@kaiyuanshe/openhackathon-service';
+import { PlatformAdmin } from '@freecodecamp-chengdu/hop-service';
 import { observable } from 'mobx';
 import { IDType, toggle } from 'mobx-restful';
 
@@ -6,10 +6,7 @@ import { Filter, TableModel } from '../Base';
 
 export type PlatformAdminFilter = Filter<PlatformAdmin>;
 
-export class PlatformAdminModel extends TableModel<
-  PlatformAdmin,
-  PlatformAdminFilter
-> {
+export class PlatformAdminModel extends TableModel<PlatformAdmin, PlatformAdminFilter> {
   baseURI = 'platform/admin';
 
   @observable
@@ -26,9 +23,7 @@ export class PlatformAdminModel extends TableModel<
 
   @toggle('uploading')
   async addOnePlatformAdmin(id: IDType) {
-    const { body } = await this.client.put<PlatformAdmin>(
-      `${this.baseURI}/${id}`,
-    );
+    const { body } = await this.client.put<PlatformAdmin>(`${this.baseURI}/${id}`);
     return (this.currentOne = body!);
   }
 

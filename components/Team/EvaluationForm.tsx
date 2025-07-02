@@ -59,7 +59,7 @@ export class EvaluationForm extends ObservedComponent<EvaluationFormProps, typeo
       <Form className="d-flex flex-column gap-3" onSubmit={this.handleSubmit}>
         {loading && <Loading />}
 
-        {dimensions.map(({ name, description, maximuScore }) => {
+        {dimensions.map(({ name, description, maximumScore }) => {
           const { score, reason } = scores?.find(({ dimension }) => dimension === name) || {};
 
           return (
@@ -72,7 +72,7 @@ export class EvaluationForm extends ObservedComponent<EvaluationFormProps, typeo
                 className="text-warning"
                 icon={value => (value ? '★' : '☆')}
                 name="score"
-                max={maximuScore}
+                max={maximumScore}
                 required
                 disabled={!evaluatable}
                 defaultValue={score?.toString()}

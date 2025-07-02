@@ -1,4 +1,4 @@
-import { ActivityLog } from '@kaiyuanshe/openhackathon-service';
+import { ActivityLog } from '@freecodecamp-chengdu/hop-service';
 
 import { TableModel } from '../Base';
 

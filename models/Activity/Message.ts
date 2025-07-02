@@ -1,4 +1,4 @@
-import { Announcement, BaseFilter } from '@kaiyuanshe/openhackathon-service';
+import { Announcement, BaseFilter } from '@freecodecamp-chengdu/hop-service';
 
 import { Filter, TableModel } from '../Base';
 import { i18n } from '../Base/Translation';

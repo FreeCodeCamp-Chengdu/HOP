@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { StaffType, TeamMemberRole } from '@kaiyuanshe/openhackathon-service';
+import { StaffType, TeamMemberRole } from '@freecodecamp-chengdu/hop-service';
 
 import { i18n } from '../models/Base/Translation';
 

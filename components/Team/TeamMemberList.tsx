@@ -1,4 +1,4 @@
-import { TeamMember } from '@kaiyuanshe/openhackathon-service';
+import { TeamMember } from '@freecodecamp-chengdu/hop-service';
 import { Avatar } from 'idea-react';
 
 import { XScrollListProps } from '../layout/ScrollList';

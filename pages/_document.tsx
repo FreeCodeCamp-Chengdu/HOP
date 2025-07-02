@@ -23,7 +23,7 @@ export default class CustomDocument extends Document<CustomDocumentProps> {
         <Head>
           <link rel="icon" href="https://hackathon-api.static.kaiyuanshe.cn/static/logo.jpg" />
           <link rel="manifest" href="/manifest.json" />
-          <script src="https://polyfill.kaiyuanshe.cn/feature/PWAManifest.js" />
+          <script src="https://polyfill.web-cell.dev/feature/PWAManifest.js" />
 
           <link
             rel="stylesheet"

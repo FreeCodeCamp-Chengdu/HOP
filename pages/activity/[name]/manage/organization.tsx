@@ -1,4 +1,4 @@
-import { Organizer } from '@kaiyuanshe/openhackathon-service';
+import { Organizer } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';

@@ -1,4 +1,4 @@
-import { Evaluation, Standard } from '@kaiyuanshe/openhackathon-service';
+import { Evaluation, Standard } from '@freecodecamp-chengdu/hop-service';
 import { observable } from 'mobx';
 import { persist, restore, toggle } from 'mobx-restful';
 

@@ -1,4 +1,4 @@
-import { Base, ListChunk } from '@kaiyuanshe/openhackathon-service';
+import { Base, ListChunk } from '@freecodecamp-chengdu/hop-service';
 import { Filter as BaseFilter, IDType, ListModel, RESTClient, toggle } from 'mobx-restful';
 import { buildURLData } from 'web-utility';
 

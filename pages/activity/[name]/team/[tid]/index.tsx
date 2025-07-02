@@ -1,4 +1,4 @@
-import { Hackathon, Team, TeamMember, TeamWork } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon, Team, TeamMember, TeamWork } from '@freecodecamp-chengdu/hop-service';
 import { Icon } from 'idea-react';
 import { HTTPError } from 'koajax';
 import { computed, observable } from 'mobx';

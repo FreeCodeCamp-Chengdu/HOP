@@ -1,13 +1,10 @@
-import { User } from '@kaiyuanshe/openhackathon-service';
-import { Base, Media, Team } from '@kaiyuanshe/openhackathon-service';
+import { User, Base, Media, Team } from '@freecodecamp-chengdu/hop-service';
 import { ListModel, Stream, toggle } from 'mobx-restful';
 
 import { createListStream, InputData } from '../Base';
 import sessionStore from '../User/Session';
 
-export interface Award
-  extends Record<'hackathonName' | 'name' | 'description', string>,
-    Base {
+export interface Award extends Record<'hackathonName' | 'name' | 'description', string>, Base {
   quantity: number;
   target: 'team' | 'individual';
   pictures: Media[];
@@ -32,9 +29,7 @@ export class AwardModel extends Stream<Award>(ListModel) {
   }
 
   assignmentOf(tid = this.currentOne.id) {
-    return (this.currentAssignment = new AwardAssignmentModel(
-      `${this.baseURI}/${tid}`,
-    ));
+    return (this.currentAssignment = new AwardAssignmentModel(`${this.baseURI}/${tid}`));
   }
 
   openStream() {

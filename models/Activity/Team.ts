@@ -6,7 +6,7 @@ import {
   TeamWork,
   TeamWorkFilter,
   Score,
-} from '@kaiyuanshe/openhackathon-service';
+} from '@freecodecamp-chengdu/hop-service';
 import { action, computed, observable } from 'mobx';
 import { ListModel, persist, restore, Stream, toggle } from 'mobx-restful';
 import { buildURLData } from 'web-utility';

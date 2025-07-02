@@ -1,4 +1,4 @@
-import { Staff } from '@kaiyuanshe/openhackathon-service';
+import { Staff } from '@freecodecamp-chengdu/hop-service';
 import { computed } from 'mobx';
 import { toggle } from 'mobx-restful';
 import { groupBy } from 'web-utility';
@@ -13,18 +13,13 @@ export class StaffModel extends TableModel<Staff> {
   @computed
   get typeCount() {
     return Object.fromEntries(
-      Object.entries(groupBy(this.allItems, 'type')).map(
-        ([type, { length }]) => [type, length],
-      ),
+      Object.entries(groupBy(this.allItems, 'type')).map(([type, { length }]) => [type, length]),
     ) as Record<Staff['type'], number>;
   }
 
   @toggle('uploading')
   async updateOne({ type, ...data }: InputData<Staff>, userId: number) {
-    const { body } = await this.client.put<Staff>(
-      `${this.baseURI}/${type}/${userId}`,
-      data,
-    );
+    const { body } = await this.client.put<Staff>(`${this.baseURI}/${type}/${userId}`, data);
     const index = this.indexOf(userId);
 
     if (index > -1) this.changeOne(body!, userId);
@@ -34,8 +29,7 @@ export class StaffModel extends TableModel<Staff> {
 
   @toggle('uploading')
   async deleteOne(userId: number) {
-    const { type } =
-      this.allItems.find(({ user: { id } }) => id === userId) || {};
+    const { type } = this.allItems.find(({ user: { id } }) => id === userId) || {};
 
     if (!type) return;
 

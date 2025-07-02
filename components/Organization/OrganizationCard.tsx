@@ -1,4 +1,4 @@
-import { Organizer } from '@kaiyuanshe/openhackathon-service';
+import { Organizer } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { FC, useContext } from 'react';
 import { Card } from 'react-bootstrap';

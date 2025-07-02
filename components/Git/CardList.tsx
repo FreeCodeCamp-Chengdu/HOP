@@ -1,4 +1,4 @@
-import { GitTemplate } from '@kaiyuanshe/openhackathon-service';
+import { GitTemplate } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { BadgeBar } from 'mobx-restful-table';
 import { FC, useContext } from 'react';

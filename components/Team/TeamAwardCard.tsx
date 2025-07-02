@@ -1,6 +1,6 @@
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Base, Team } from '@kaiyuanshe/openhackathon-service';
+import { Base, Team } from '@freecodecamp-chengdu/hop-service';
 import classNames from 'classnames';
 import { Avatar } from 'idea-react';
 import { observer } from 'mobx-react';

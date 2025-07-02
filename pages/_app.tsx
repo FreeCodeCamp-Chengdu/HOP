@@ -82,7 +82,7 @@ export default class CustomApp extends App<I18nProps> {
                   <a
                     className="stretched-link"
                     target="_blank"
-                    href="https://monitor.kaiyuanshe.cn/status/service"
+                    href="https://monitor.fcc-cd.dev/status/service"
                     rel="noreferrer"
                   >
                     <Icon name="hdd-network" size={1.5} />

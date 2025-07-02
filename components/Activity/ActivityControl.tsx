@@ -1,4 +1,4 @@
-import { Hackathon } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { FC, useContext } from 'react';
 import { Button } from 'react-bootstrap';

@@ -1,4 +1,4 @@
-import { Base, User } from '@kaiyuanshe/openhackathon-service';
+import { Base, User } from '@freecodecamp-chengdu/hop-service';
 import { HTTPClient } from 'koajax';
 import { computed, observable } from 'mobx';
 import { setCookie } from 'mobx-i18n';

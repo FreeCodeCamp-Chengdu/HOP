@@ -1,4 +1,4 @@
-import { TeamMember, TeamMemberStatus } from '@kaiyuanshe/openhackathon-service';
+import { TeamMember, TeamMemberStatus } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';

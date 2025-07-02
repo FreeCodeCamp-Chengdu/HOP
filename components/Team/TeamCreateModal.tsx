@@ -1,4 +1,4 @@
-import { Team } from '@kaiyuanshe/openhackathon-service';
+import { Team } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { NewData } from 'mobx-restful';
 import { FC, FormEvent, useContext } from 'react';

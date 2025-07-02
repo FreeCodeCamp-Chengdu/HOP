@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCloud, faTrophy, faUser, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { StaffType, TeamMemberRole } from '@kaiyuanshe/openhackathon-service';
+import { StaffType, TeamMemberRole } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { HTTPError } from 'koajax';
 import { computed, observable } from 'mobx';

@@ -1,4 +1,4 @@
-import { User } from '@kaiyuanshe/openhackathon-service';
+import { User } from '@freecodecamp-chengdu/hop-service';
 import { JsonWebTokenError, verify } from 'jsonwebtoken';
 import { Context, Middleware, ParameterizedContext } from 'koa';
 import JWT from 'koa-jwt';
@@ -92,7 +92,7 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
 const client_id = process.env.GITHUB_OAUTH_CLIENT_ID!,
   client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET!;
 
-export const ProxyBaseURL = 'https://test.hackathon.kaiyuanshe.cn/proxy';
+export const ProxyBaseURL = 'https://test.hackathon.fcc-cd.dev/proxy';
 
 export const githubSigner = githubOAuth2({
   rootBaseURL: VERCEL ? undefined : `${ProxyBaseURL}/github.com/`,

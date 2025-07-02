@@ -1,4 +1,4 @@
-import { Staff, StaffType } from '@kaiyuanshe/openhackathon-service';
+import { Staff, StaffType } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';

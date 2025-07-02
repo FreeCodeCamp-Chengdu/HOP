@@ -1,4 +1,4 @@
-import { Hackathon, Media } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon, Media } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { textJoin } from 'mobx-i18n';

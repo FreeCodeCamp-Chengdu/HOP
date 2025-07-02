@@ -1,4 +1,4 @@
-import { Organizer } from '@kaiyuanshe/openhackathon-service';
+import { Organizer } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { createRef, FormEvent } from 'react';

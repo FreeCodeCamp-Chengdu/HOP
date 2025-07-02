@@ -6,7 +6,7 @@ import {
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { EnrollmentStatus, Hackathon, Media, Organizer } from '@kaiyuanshe/openhackathon-service';
+import { EnrollmentStatus, Hackathon, Media, Organizer } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { computed, observable } from 'mobx';
 import { textJoin } from 'mobx-i18n';

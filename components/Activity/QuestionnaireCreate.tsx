@@ -1,4 +1,4 @@
-import { Question } from '@kaiyuanshe/openhackathon-service';
+import { Question } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { BadgeInput } from 'mobx-restful-table';
 import { FC, FormEvent, useContext } from 'react';

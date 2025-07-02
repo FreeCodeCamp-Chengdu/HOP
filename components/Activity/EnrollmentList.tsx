@@ -1,4 +1,4 @@
-import { Enrollment } from '@kaiyuanshe/openhackathon-service';
+import { Enrollment } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { ScrollList } from 'mobx-restful-table';
 import { FC, PureComponent, useContext } from 'react';

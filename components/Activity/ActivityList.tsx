@@ -1,4 +1,4 @@
-import { Hackathon } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon } from '@freecodecamp-chengdu/hop-service';
 import { ScrollList } from 'mobx-restful-table';
 import { FC, PureComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';

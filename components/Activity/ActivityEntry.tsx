@@ -1,4 +1,4 @@
-import { Hackathon } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon } from '@freecodecamp-chengdu/hop-service';
 import { FC, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { diffTime } from 'web-utility';

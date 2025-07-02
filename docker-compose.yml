@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  open-hackathon-web:
-    image: kaiyuanshe/openhackathon-web
+  hop:
+    image: freecodecamp-chengdu/hop
     ports:
       - 3003:3000
     healthcheck:

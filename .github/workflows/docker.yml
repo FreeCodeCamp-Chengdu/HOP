@@ -34,12 +34,12 @@ jobs:
           echo "BOX_URL=${BOX_URL@L}" >> "${GITHUB_ENV}"
           cat >> .npmrc <<EOF
           //npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
-          @kaiyuanshe:registry=https://npm.pkg.github.com
+          @freecodecamp-chengdu:registry=https://npm.pkg.github.com
           always-auth=true
           EOF
           cat > .env.local <<EOF
           ${{ secrets.ENV_FILE }}
-          VERCEL_PROJECT_PRODUCTION_URL=hackathon.kaiyuanshe.cn
+          VERCEL_PROJECT_PRODUCTION_URL=hackathon.fcc-cd.dev
           EOF
       - name: Build and Push image
         uses: docker/build-push-action@v6

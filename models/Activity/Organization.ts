@@ -1,4 +1,4 @@
-import { Organizer, OrganizerType } from '@kaiyuanshe/openhackathon-service';
+import { Organizer, OrganizerType } from '@freecodecamp-chengdu/hop-service';
 import { computed } from 'mobx';
 import { groupBy } from 'web-utility';
 

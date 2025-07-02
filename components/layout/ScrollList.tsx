@@ -1,4 +1,4 @@
-import { Base } from '@kaiyuanshe/openhackathon-service';
+import { Base } from '@freecodecamp-chengdu/hop-service';
 import { ScrollListProps } from 'mobx-restful-table';
 
 export interface XScrollListProps<T extends Base = Base>

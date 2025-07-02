@@ -2,7 +2,7 @@ import Giscus from '@giscus/react';
 
 export const CommentBox = () => (
   <Giscus
-    repo="kaiyuanshe/OpenHackathon-Web"
+    repo="FreeCodeCamp-Chengdu/HOP"
     repoId="MDEwOlJlcG9zaXRvcnkyNDMxNzUyMTk="
     category="Comments"
     categoryId="DIC_kwDODn6PM84CRwTn"

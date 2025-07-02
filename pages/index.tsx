@@ -1,4 +1,4 @@
-import { Hackathon, UserRank } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon, UserRank } from '@freecodecamp-chengdu/hop-service';
 import { UserRankView } from 'idea-react';
 import { observer } from 'mobx-react';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';

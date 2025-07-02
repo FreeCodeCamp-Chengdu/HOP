@@ -1,4 +1,4 @@
-import { ActivityLog } from '@kaiyuanshe/openhackathon-service';
+import { ActivityLog } from '@freecodecamp-chengdu/hop-service';
 import { ScrollListProps } from 'mobx-restful-table';
 import { FC } from 'react';
 import { Badge, ListGroup } from 'react-bootstrap';
@@ -16,24 +16,22 @@ export const OperationName = {
   delete: 'Delete',
 };
 
-export const ActivityLogListLayout: FC<
-  Pick<ActivityLogListProps, 'defaultData'>
-> = ({ defaultData = [] }) => (
+export const ActivityLogListLayout: FC<Pick<ActivityLogListProps, 'defaultData'>> = ({
+  defaultData = [],
+}) => (
   <ListGroup as="ol" numbered>
-    {defaultData.map(
-      ({ id, createdAt, createdBy, operation, tableName, recordId }) => (
-        <ListGroup.Item
-          key={id}
-          as="li"
-          className="d-flex justify-content-between align-items-center gap-2"
-        >
-          <time dateTime={createdAt}>{formatDate(createdAt)}</time>
-          {createdBy.name}
-          <Badge>{OperationName[operation]}</Badge>
-          <code>{tableName}</code>
-          {recordId}
-        </ListGroup.Item>
-      ),
-    )}
+    {defaultData.map(({ id, createdAt, createdBy, operation, tableName, recordId }) => (
+      <ListGroup.Item
+        key={id}
+        as="li"
+        className="d-flex justify-content-between align-items-center gap-2"
+      >
+        <time dateTime={createdAt}>{formatDate(createdAt)}</time>
+        {createdBy.name}
+        <Badge>{OperationName[operation]}</Badge>
+        <code>{tableName}</code>
+        {recordId}
+      </ListGroup.Item>
+    ))}
   </ListGroup>
 );

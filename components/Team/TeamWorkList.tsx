@@ -1,6 +1,6 @@
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TeamWork } from '@kaiyuanshe/openhackathon-service';
+import { TeamWork } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { FilePreview, ScrollList } from 'mobx-restful-table';
 import { FC, PureComponent, useContext } from 'react';

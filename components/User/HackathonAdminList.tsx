@@ -1,4 +1,4 @@
-import { PlatformAdmin, User } from '@kaiyuanshe/openhackathon-service';
+import { PlatformAdmin, User } from '@freecodecamp-chengdu/hop-service';
 import { Column, RestForm, SearchableInput } from 'mobx-restful-table';
 import { FC } from 'react';
 

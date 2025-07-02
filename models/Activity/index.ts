@@ -4,7 +4,7 @@ import {
   HackathonStatus,
   Question,
   Questionnaire,
-} from '@kaiyuanshe/openhackathon-service';
+} from '@freecodecamp-chengdu/hop-service';
 import { action, observable } from 'mobx';
 import { persist, restore, toggle } from 'mobx-restful';
 

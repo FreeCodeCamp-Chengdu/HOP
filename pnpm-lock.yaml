@@ -136,7 +136,7 @@ importers:
       '@eslint/js':
         specifier: ^9.30.0
         version: 9.30.0
-      '@kaiyuanshe/openhackathon-service':
+      '@freecodecamp-chengdu/hop-service':
         specifier: ^1.0.0-rc.0
         version: 1.0.0-rc.0(mobx@6.13.7)(typescript@5.8.3)
       '@next/eslint-plugin-next':
@@ -1112,6 +1112,9 @@ packages:
       '@fortawesome/fontawesome-svg-core': ~1 || ~6
       react: '>=16.3'
 
+  '@freecodecamp-chengdu/hop-service@1.0.0-rc.0':
+    resolution: {integrity: sha512-5F0jl2adEUqlSd/nE7vzGTANHf8+LLauOFGXJf7wtpDVWxLvFcNE3VjmPEWx1F3n9As8soxIICwpC2Pwwo5CVw==, tarball: https://npm.pkg.github.com/download/@freecodecamp-chengdu/hop-service/1.0.0-rc.0/484d1bf41770fd0122670c73f66ab7b8a345bf0e}
+
   '@giscus/react@3.1.0':
     resolution: {integrity: sha512-0TCO2TvL43+oOdyVVGHDItwxD1UMKP2ZYpT6gXmhFOqfAJtZxTzJ9hkn34iAF/b6YzyJ4Um89QIt9z/ajmAEeg==}
     peerDependencies:
@@ -1272,9 +1275,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.27':
     resolution: {integrity: sha512-VO95AxtSFMelbg3ouljAYnfvTEwSWVt/2YLf+U5Ejd8iT5mXE2Sa/1LGyvySMne2CGsepGLI7KpF3EzE3Aq9Mg==}
-
-  '@kaiyuanshe/openhackathon-service@1.0.0-rc.0':
-    resolution: {integrity: sha512-+ig7Ac0L+h0SuEGNymQEzfVSvpq2tJTixi25FXxvGRQklgKLamgZ6iaBxQkazIzMi7q4QQ4TF5F873foV1EJpA==, tarball: https://npm.pkg.github.com/download/@kaiyuanshe/openhackathon-service/1.0.0-rc.0/ab549e244e403ccee70bd7cf83f69c1da0a5decc}
 
   '@koa/bodyparser@5.1.2':
     resolution: {integrity: sha512-eGJm9/66iUX+LUH03Cz0e94unbSKrmSPCick4MO5UorAAomcjC5Kl+SkoZ6CSyPew3neMYjj7n+djnlGYBSJAg==}
@@ -6326,6 +6326,18 @@ snapshots:
       prop-types: 15.8.1
       react: 19.1.0
 
+  '@freecodecamp-chengdu/hop-service@1.0.0-rc.0(mobx@6.13.7)(typescript@5.8.3)':
+    dependencies:
+      '@types/jsonwebtoken': 9.0.10
+      '@types/koa': 2.15.0
+      mobx-github: 0.3.11(typescript@5.8.3)
+      mobx-restful: 2.1.0(mobx@6.13.7)(typescript@5.8.3)
+    transitivePeerDependencies:
+      - core-js
+      - jsdom
+      - mobx
+      - typescript
+
   '@giscus/react@3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       giscus: 1.6.0
@@ -6446,18 +6458,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.2
-
-  '@kaiyuanshe/openhackathon-service@1.0.0-rc.0(mobx@6.13.7)(typescript@5.8.3)':
-    dependencies:
-      '@types/jsonwebtoken': 9.0.10
-      '@types/koa': 2.15.0
-      mobx-github: 0.3.11(typescript@5.8.3)
-      mobx-restful: 2.1.0(mobx@6.13.7)(typescript@5.8.3)
-    transitivePeerDependencies:
-      - core-js
-      - jsdom
-      - mobx
-      - typescript
 
   '@koa/bodyparser@5.1.2(koa@3.0.0)':
     dependencies:

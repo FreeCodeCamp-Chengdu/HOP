@@ -1,4 +1,4 @@
-import { Announcement } from '@kaiyuanshe/openhackathon-service';
+import { Announcement } from '@freecodecamp-chengdu/hop-service';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';

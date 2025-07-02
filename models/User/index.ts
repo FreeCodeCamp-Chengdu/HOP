@@ -1,4 +1,4 @@
-import { User, UserRankListChunk } from '@kaiyuanshe/openhackathon-service';
+import { User, UserRankListChunk } from '@freecodecamp-chengdu/hop-service';
 
 import { Filter, TableModel } from '../Base';
 
@@ -10,9 +10,7 @@ export class UserModel extends TableModel<User, UserFilter> {
   baseURI = 'user';
 
   async getUserTopList() {
-    const { body } = await this.client.get<UserRankListChunk>(
-      `activity-log/user-rank`,
-    );
+    const { body } = await this.client.get<UserRankListChunk>(`activity-log/user-rank`);
     return body!.list;
   }
 }

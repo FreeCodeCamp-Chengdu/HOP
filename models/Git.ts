@@ -1,6 +1,6 @@
 import 'array-unique-proposal';
 
-import { GitTemplate } from '@kaiyuanshe/openhackathon-service';
+import { GitTemplate } from '@freecodecamp-chengdu/hop-service';
 import { components } from '@octokit/openapi-types';
 import { githubClient, RepositoryFilter, RepositoryModel } from 'mobx-github';
 import { toggle } from 'mobx-restful';
@@ -55,9 +55,9 @@ export const SourceRepository = [
     'kaiyuanshe/cloudengine',
   ],
   [
-    'kaiyuanshe/OpenHackathon-Web',
-    'kaiyuanshe/OpenHackathon-service',
-    'kaiyuanshe/OpenHackathon-server',
+    'FreeCodeCamp-Chengdu/HOP',
+    'FreeCodeCamp-Chengdu/HOP-service',
+    'FreeCodeCamp-Chengdu/HOP-server',
   ],
 ];
 

@@ -1,4 +1,4 @@
-import { Hackathon } from '@kaiyuanshe/openhackathon-service';
+import { Hackathon } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { ScrollList } from 'mobx-restful-table';

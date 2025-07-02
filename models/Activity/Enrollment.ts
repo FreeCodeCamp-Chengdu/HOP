@@ -1,4 +1,4 @@
-import { Enrollment, User } from '@kaiyuanshe/openhackathon-service';
+import { Enrollment, User } from '@freecodecamp-chengdu/hop-service';
 import { computed, observable } from 'mobx';
 import { Statistic, toggle } from 'mobx-restful';
 import { countBy, groupBy } from 'web-utility';
