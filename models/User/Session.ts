@@ -1,9 +1,8 @@
 import { Base, User } from '@freecodecamp-chengdu/hop-service';
 import { HTTPClient } from 'koajax';
 import { computed, observable } from 'mobx';
-import { setCookie } from 'mobx-i18n';
 import { BaseModel, persist, restore, toggle } from 'mobx-restful';
-import { buildURLData } from 'web-utility';
+import { buildURLData, setCookie } from 'web-utility';
 
 import { API_HOST, isServer, JWT, token } from '../../configuration';
 
