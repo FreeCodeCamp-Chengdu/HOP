@@ -55,38 +55,136 @@ export default class CustomApp extends App<I18nProps> {
 
         <MainNavigation />
 
-        <div className="mt-5 pt-2">
+        <main className="app-shell pt-5 mt-4">
           <Component {...pageProps} />
-        </div>
+        </main>
 
         {!/manage|admin/.test(router.pathname) && (
-          <footer className="border-top bg-light text-secondary py-5">
+          <footer className="modern-footer text-white mt-5 py-5">
             <Container>
-              <Row className="align-items-center small text-center g-2">
-                <Col xs={12} sm={11}>
-                  <Row xs={1} md={2} className="align-items-center">
+              <Row className="gy-4">
+                <Col lg={5}>
+                  <div className="d-flex align-items-center gap-3 mb-3">
+                    <Image
+                      className="rounded-3"
+                      src="https://hackathon-api.static.kaiyuanshe.cn/static/logo.jpg"
+                      alt="logo"
+                      width={56}
+                      height={56}
+                    />
+                    <div>
+                      <div className="fw-semibold">{t('open_hackathon_platform')}</div>
+                      <small className="text-white-50 d-block">{t('platform_tagline')}</small>
+                    </div>
+                  </div>
+                  <p className="text-white-50 mb-4">{t('hero_subtitle')}</p>
+
+                  <div className="d-flex gap-3">
                     <a
-                      href="https://github.com/idea2app/Next-Bootstrap-ts"
+                      className="footer-icon"
+                      href="https://github.com/FreeCodeCamp-Chengdu/HOP"
                       target="_blank"
                       rel="noreferrer"
+                      aria-label="GitHub"
                     >
-                      {t('powered_by')}
-                      <span className="mx-2">
-                        <Image src="/nextjs.png" alt="Next Logo" width={48} />
-                      </span>
-                      {t('idea2app_scaffolding')}
+                      <i className="bi bi-github" />
                     </a>
-                  </Row>
+                    <a
+                      className="footer-icon"
+                      href="https://monitor.fcc-cd.dev/status/service"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Status"
+                    >
+                      <Icon name="hdd-network" size={1.1} />
+                    </a>
+                    <a
+                      className="footer-icon"
+                      href="mailto:hackathon@kaiyuanshe.cn"
+                      aria-label="Email"
+                    >
+                      <i className="bi bi-envelope" />
+                    </a>
+                  </div>
                 </Col>
-                <Col xs={12} sm={1} className="position-relative">
-                  <a
-                    className="stretched-link"
-                    target="_blank"
-                    href="https://monitor.fcc-cd.dev/status/service"
-                    rel="noreferrer"
-                  >
-                    <Icon name="hdd-network" size={1.5} />
-                  </a>
+
+                <Col xs={6} md={4} lg={3}>
+                  <h6 className="text-uppercase small text-white-50 mb-3">
+                    {t('footer_links_resources')}
+                  </h6>
+                  <ul className="list-unstyled text-white-50">
+                    <li className="mb-2">
+                      <a className="footer-link" href="/activity/">
+                        {t('all_activity')}
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a className="footer-link" href="/open-source">
+                        {t('open_source_code')}
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a
+                        className="footer-link"
+                        href="https://kaiyuanshe.feishu.cn/wiki/wikcnR3wHyfVDrYW2TteaUzAnlh"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t('get_started')}
+                      </a>
+                    </li>
+                  </ul>
+                </Col>
+
+                <Col xs={6} md={4} lg={2}>
+                  <h6 className="text-uppercase small text-white-50 mb-3">
+                    {t('footer_links_actions')}
+                  </h6>
+                  <ul className="list-unstyled text-white-50">
+                    <li className="mb-2">
+                      <a className="footer-link" href="/activity/create">
+                        {t('create_activity')}
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a className="footer-link" href="/activity/">
+                        {t('register')}
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a className="footer-link" href="/activity/index">
+                        {t('hackathons')}
+                      </a>
+                    </li>
+                  </ul>
+                </Col>
+
+                <Col xs={12} md={4} lg={2}>
+                  <h6 className="text-uppercase small text-white-50 mb-3">
+                    {t('footer_links_connect')}
+                  </h6>
+                  <ul className="list-unstyled text-white-50">
+                    <li className="mb-2">
+                      <a className="footer-link" href="mailto:hackathon@kaiyuanshe.cn">
+                        hackathon@kaiyuanshe.cn
+                      </a>
+                    </li>
+                    <li className="mb-2">
+                      <a className="footer-link" href="https://kaiyuanshe.feishu.cn/wiki/">
+                        Feishu Wiki
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="footer-link"
+                        href="https://monitor.fcc-cd.dev/status/service"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Status
+                      </a>
+                    </li>
+                  </ul>
                 </Col>
               </Row>
             </Container>

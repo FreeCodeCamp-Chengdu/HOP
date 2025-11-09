@@ -137,7 +137,7 @@ importers:
         specifier: ^9.39.1
         version: 9.39.1
       '@freecodecamp-chengdu/hop-service':
-        specifier: 1.0.0-rc.0
+        specifier: ^1.0.0-rc.0
         version: 1.0.0-rc.0(mobx@6.15.0)(typescript@5.9.3)
       '@next/eslint-plugin-next':
         specifier: ^16.0.1
