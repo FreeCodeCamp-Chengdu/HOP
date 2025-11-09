@@ -23,3 +23,149 @@ div:has(.next-error-h1) {
     width: auto !important;
   }
 }
+
+body {
+  background-color: #f5f7fb;
+  color: #101828;
+}
+
+.app-shell {
+  min-height: calc(100vh - 200px);
+}
+
+.glass-nav {
+  backdrop-filter: blur(18px);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 32, 0.7);
+
+  .nav-link {
+    transition: color 0.2s ease;
+
+    &:hover,
+    &.active {
+      color: #fff !important;
+    }
+  }
+}
+
+.glass-nav--scrolled {
+  box-shadow: 0 1rem 2.5rem rgba(3, 7, 18, 0.45);
+  background: rgba(10, 14, 32, 0.92);
+}
+
+.hero-section {
+  margin-top: 0;
+  background: radial-gradient(circle at top left, #312e81, #0f172a 55%, #020617);
+  padding-bottom: 4rem;
+}
+
+.hero-carousel-card {
+  border-radius: 1.75rem;
+  background: rgba(15, 23, 42, 0.45);
+  overflow: hidden;
+}
+
+.hero-carousel-img {
+  height: 420px;
+  object-fit: cover;
+}
+
+.section-heading h2 {
+  font-weight: 600;
+}
+
+.icon-circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background: rgba(59, 130, 246, 0.12);
+  width: 3rem;
+  height: 3rem;
+  color: #2563eb;
+  font-size: 1.25rem;
+}
+
+.feature-card {
+  border-radius: 1.25rem;
+}
+
+.activity-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  border-radius: 1.5rem;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1.5rem 3rem rgba(15, 23, 42, 0.15);
+  }
+}
+
+.activity-card__cover {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background-position: center;
+  background-size: cover;
+  padding: 1.5rem;
+  min-height: 180px;
+}
+
+.activity-card__progress {
+  border-radius: 999px;
+  background-color: rgba(16, 185, 129, 0.15);
+  height: 0.5rem;
+  overflow: hidden;
+
+  .progress-bar {
+    background-image: linear-gradient(90deg, #22d3ee, #14b8a6);
+  }
+}
+
+.user-rank-panel {
+  border-radius: 1.5rem;
+}
+
+.cta-card {
+  box-shadow: 0 1.25rem 3rem rgba(2, 6, 23, 0.35);
+  background: linear-gradient(120deg, #4338ca, #2575fc);
+}
+
+.modern-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: #050c1c;
+}
+
+.footer-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  width: 44px;
+  height: 44px;
+  color: inherit;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+}
+
+.footer-link {
+  opacity: 0.85;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 1;
+    color: #fff;
+  }
+}
