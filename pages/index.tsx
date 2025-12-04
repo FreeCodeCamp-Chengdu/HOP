@@ -1,6 +1,7 @@
 import { Hackathon, UserRank } from '@freecodecamp-chengdu/hop-service';
 import classNames from 'classnames';
 import { Icon, UserRankView } from 'idea-react';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
@@ -31,8 +32,9 @@ export const getServerSideProps = compose<{}, HomePageProps>(cache(), errorLogge
 export default class HomePage extends ObservedComponent<HomePageProps, typeof i18n> {
   static contextType = I18nContext;
 
-  private get stats() {
-    const { activities, topUsers } = this.props;
+  @computed
+  get stats() {
+    const { activities, topUsers } = this.observedProps;
     const { t } = this.observedContext;
 
     const totalParticipants = activities.reduce(
@@ -56,7 +58,8 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
     ];
   }
 
-  private get features() {
+  @computed
+  get features() {
     const { t } = this.observedContext;
 
     return [
@@ -78,11 +81,12 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
     ];
   }
 
-  private get bannerActivities() {
-    return this.props.activities.filter(({ banners }) => banners?.[0]);
+  @computed
+  get bannerActivities() {
+    return this.observedProps.activities.filter(({ banners }) => banners?.[0]);
   }
 
-  private renderPrimaryActions() {
+  renderPrimaryActions() {
     const { t } = this.observedContext;
 
     return (
@@ -97,8 +101,29 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
     );
   }
 
+  renderBanner = () => (
+    <Carousel>
+      {this.bannerActivities.map(({ name: key, displayName, ribbon, banners: [{ uri, name }] }) => (
+        <Carousel.Item key={key}>
+          <a className="d-block stretched-link" href={`/activity/${key}/`}>
+            <Image
+              className={classNames('w-100 object-fit-cover', styles['hero-carousel-img'])}
+              src={uri}
+              alt={name}
+            />
+          </a>
+          <Carousel.Caption className="text-shadow">
+            <h3>{displayName}</h3>
+            <p>{ribbon}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
+    </Carousel>
+  );
+
   render() {
-    const { t } = this.observedContext;
+    const { t } = this.observedContext,
+      { activities, topUsers } = this.props;
 
     return (
       <>
@@ -106,8 +131,8 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
 
         <section className={classNames(styles['hero-section'], 'text-white pt-5')}>
           <Container className="position-relative">
-            <Row className="align-items-center gy-5">
-              <Col lg={6}>
+            <Row className="align-items-center gy-5" lg={2}>
+              <Col>
                 <Badge bg="light" text="dark" className="text-uppercase mb-3">
                   {t('open_hackathon_platform')}
                 </Badge>
@@ -128,32 +153,11 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
                 </ul>
               </Col>
 
-              <Col lg={6}>
+              <Col>
                 <Card className={classNames(styles['hero-carousel-card'], 'border-0 shadow-lg')}>
                   <Card.Body className="p-0">
                     {this.bannerActivities.length ? (
-                      <Carousel>
-                        {this.bannerActivities.map(
-                          ({ name: key, displayName, ribbon, banners: [{ uri, name }] }) => (
-                            <Carousel.Item key={key}>
-                              <a className="d-block stretched-link" href={`/activity/${key}/`}>
-                                <Image
-                                  className={classNames(
-                                    'w-100 object-fit-cover',
-                                    styles['hero-carousel-img'],
-                                  )}
-                                  src={uri}
-                                  alt={name}
-                                />
-                              </a>
-                              <Carousel.Caption className="text-shadow">
-                                <h3>{displayName}</h3>
-                                <p>{ribbon}</p>
-                              </Carousel.Caption>
-                            </Carousel.Item>
-                          ),
-                        )}
-                      </Carousel>
+                      this.renderBanner()
                     ) : (
                       <div className="p-5 text-center text-white-50">{t('no_news_yet')}</div>
                     )}
@@ -166,17 +170,17 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
 
         <section className="py-5 bg-body-tertiary">
           <Container>
-            <div className={classNames(styles['section-heading'], 'text-center mb-5')}>
+            <hgroup className={classNames(styles['section-heading'], 'text-center mb-5')}>
               <Badge className="text-uppercase bg-primary-subtle text-primary">
                 {t('features_section_title')}
               </Badge>
               <h2 className="mt-3">{t('features_section_subtitle')}</h2>
               <p className="text-muted">{t('platform_tagline')}</p>
-            </div>
+            </hgroup>
 
-            <Row className="g-4">
+            <Row className="g-4" md={3}>
               {this.features.map(({ icon, title, description }) => (
-                <Col key={title} md={4}>
+                <Col key={title}>
                   <Card
                     className={classNames(styles['feature-card'], 'h-100 border-0 shadow-sm')}
                     body
@@ -196,19 +200,19 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
         <section className="py-5">
           <Container>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
-              <div>
+              <hgroup>
                 <small className="text-uppercase text-muted fw-semibold">
                   {t('featured_section_subtitle')}
                 </small>
                 <h2 className="mt-2">{t('featured_section_title')}</h2>
-              </div>
+              </hgroup>
 
               <Button variant="outline-primary" href="/activity/">
                 {t('more_events')}
               </Button>
             </div>
 
-            <ActivityListLayout defaultData={this.props.activities} size="lg" />
+            <ActivityListLayout defaultData={activities} size="lg" />
           </Container>
         </section>
 
@@ -236,15 +240,13 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
                         'url(https://hackathon-api.static.kaiyuanshe.cn/6342619375fa1817e0f56ce1/2022/10/09/logo22.jpg)',
                     }}
                     title={t('hacker_pavilion')}
-                    rank={this.props.topUsers.map(
-                      ({ userId, user: { name, avatar, email }, score }) => ({
-                        id: userId,
-                        name,
-                        avatar,
-                        email,
-                        score,
-                      }),
-                    )}
+                    rank={topUsers.map(({ userId, user: { name, avatar, email }, score }) => ({
+                      id: userId,
+                      name,
+                      avatar,
+                      email,
+                      score,
+                    }))}
                     linkOf={({ id }) => `/user/${id}`}
                   />
                 </div>

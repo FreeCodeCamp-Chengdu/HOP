@@ -6,7 +6,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(10, 14, 32, 0.7);
 
-  .nav-link {
+  :global(.nav-link) {
     transition: color 0.2s ease;
 
     &:hover,
@@ -14,15 +14,13 @@
       color: #fff !important;
     }
   }
-}
-
-.glass-nav--scrolled {
-  box-shadow: 0 1rem 2.5rem rgba(3, 7, 18, 0.45);
-  background: rgba(10, 14, 32, 0.92);
-}
-
-.main-nav__logo {
-  border-radius: 0.75rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  .scrolled {
+    box-shadow: 0 1rem 2.5rem rgba(3, 7, 18, 0.45);
+    background: rgba(10, 14, 32, 0.92);
+  }
+  .logo {
+    border-radius: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }

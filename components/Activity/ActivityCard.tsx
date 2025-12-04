@@ -71,7 +71,7 @@ export const ActivityCard: FC<ActivityCardProps> = ({
     >
       {cover && (
         <div
-          className={classNames(styles['activity-card__cover'], 'rounded-top')}
+          className={`${styles.cover} d-flex justify-content-end align-items-start p-4 rounded-top`}
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(14,22,40,.35), rgba(14,22,40,.8)), url(${cover})`,
           }}
@@ -91,26 +91,26 @@ export const ActivityCard: FC<ActivityCardProps> = ({
           {displayName}
         </Card.Title>
 
-        <div className="d-flex flex-column gap-2 small text-muted mt-3">
-          <span className="text-truncate" title={eventStartedAtText}>
+        <ul className="list-unstyled d-flex flex-column gap-2 small text-muted mt-3">
+          <li className="text-truncate" title={eventStartedAtText}>
             <FontAwesomeIcon className="text-success me-2" icon={faCalendarDay} />
             {eventStartedAtText}
-          </span>
-          <span className="text-truncate" title={location}>
+          </li>
+          <li className="text-truncate" title={location}>
             <FontAwesomeIcon className="text-success me-2" icon={faMapLocationDot} />
             {location}
-          </span>
-        </div>
+          </li>
+        </ul>
 
         {!!tags?.length && (
-          <div className="d-flex flex-wrap gap-2 mt-3">
+          <ul className="list-unstyled d-flex flex-wrap gap-2 mt-3">
             {tags.map(tag => (
-              <Badge key={tag} bg="success-subtle" text="success" pill>
+              <Badge as="li" key={tag} bg="success-subtle" text="success" pill>
                 <FontAwesomeIcon className="me-1" icon={faTags} />
                 {tag}
               </Badge>
             ))}
-          </div>
+          </ul>
         )}
       </Card.Body>
       <Card.Footer className="bg-transparent border-0 pt-0">
@@ -121,12 +121,8 @@ export const ActivityCard: FC<ActivityCardProps> = ({
               {enrollment ?? 0} / {hasCapacity ? maxEnrollment : t('unlimited')}
             </span>
           </div>
-          {hasCapacity && progress !== undefined && (
-            <ProgressBar
-              now={progress}
-              variant="success"
-              className={styles['activity-card__progress']}
-            />
+          {hasCapacity && progress != null && (
+            <ProgressBar now={progress} variant="success" className={styles.progress} />
           )}
         </div>
 

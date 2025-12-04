@@ -26,22 +26,16 @@ export const MainNavigation = observer(() => {
       fixed="top"
       expand="lg"
       collapseOnSelect
-      className={classNames(
-        styles['glass-nav'],
-        'py-3',
-        isScrolled && styles['glass-nav--scrolled'],
-      )}
+      className={classNames(styles['glass-nav'], 'py-3', isScrolled && styles.scrolled)}
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex align-items-center gap-3 text-white">
           <Image
-            className={classNames('align-top', styles['main-nav__logo'])}
+            className={classNames('align-top', styles.logo)}
             src="https://hackathon-api.static.kaiyuanshe.cn/static/logo.jpg"
             alt="logo"
           />
-          <div>
-            <div className="fw-semibold">{t('open_hackathon_platform')}</div>
-          </div>
+          <div className="fw-semibold">{t('open_hackathon_platform')}</div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-inner" />
 
