@@ -1,0 +1,26 @@
+.glass-nav {
+  backdrop-filter: blur(18px);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 32, 0.7);
+
+  :global(.nav-link) {
+    transition: color 0.2s ease;
+
+    &:hover,
+    &.active {
+      color: #fff !important;
+    }
+  }
+  .scrolled {
+    box-shadow: 0 1rem 2.5rem rgba(3, 7, 18, 0.45);
+    background: rgba(10, 14, 32, 0.92);
+  }
+  .logo {
+    border-radius: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
