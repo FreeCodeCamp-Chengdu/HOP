@@ -1,0 +1,32 @@
+.activity-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  border-radius: 1.5rem;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1.5rem 3rem rgba(15, 23, 42, 0.15);
+  }
+}
+
+.activity-card__cover {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background-position: center;
+  background-size: cover;
+  padding: 1.5rem;
+  min-height: 180px;
+}
+
+.activity-card__progress {
+  border-radius: 999px;
+  background-color: rgba(16, 185, 129, 0.15);
+  height: 0.5rem;
+  overflow: hidden;
+
+  .progress-bar {
+    background-image: linear-gradient(90deg, #22d3ee, #14b8a6);
+  }
+}

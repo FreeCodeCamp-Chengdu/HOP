@@ -2,9 +2,10 @@ import classNames from 'classnames';
 import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
 import { useContext, useEffect, useState } from 'react';
-import { Button, Container, Image, Nav, Navbar } from 'react-bootstrap';
+import { Container, Image, Nav, Navbar } from 'react-bootstrap';
 
 import { I18nContext } from '../../models/Base/Translation';
+import styles from './MainNavigation.module.less';
 
 const UserBar = dynamic(() => import('../User/UserBar'), { ssr: false });
 
@@ -25,13 +26,16 @@ export const MainNavigation = observer(() => {
       fixed="top"
       expand="lg"
       collapseOnSelect
-      className={classNames('glass-nav', 'py-3', isScrolled && 'glass-nav--scrolled')}
+      className={classNames(
+        styles['glass-nav'],
+        'py-3',
+        isScrolled && styles['glass-nav--scrolled'],
+      )}
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex align-items-center gap-3 text-white">
           <Image
-            className="align-top"
-            style={{ width: '2.5rem', height: '2.5rem', borderRadius: '0.75rem' }}
+            className={classNames('align-top', styles['main-nav__logo'])}
             src="https://hackathon-api.static.kaiyuanshe.cn/static/logo.jpg"
             alt="logo"
           />
@@ -54,9 +58,6 @@ export const MainNavigation = observer(() => {
               >
                 {t('get_started')}
               </Nav.Link>
-              {/* <Nav.Link className="text-white-50" href="/open-source">
-                {t('open_source_code')}
-              </Nav.Link> */}
             </Nav>
 
             <div className="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-3 w-100 justify-content-sm-end ms-lg-auto justify-content-lg-end">

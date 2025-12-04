@@ -9,6 +9,7 @@ import { I18nContext } from '../../models/Base/Translation';
 import { convertDatetime } from '../../utils/time';
 import { ActivityControl, ActivityControlProps } from './ActivityControl';
 import { ActivityEntry, getActivityStatusText } from './ActivityEntry';
+import styles from './ActivityCard.module.less';
 
 export interface ActivityCardProps extends Hackathon, ActivityControlProps {
   className?: string;
@@ -41,8 +42,10 @@ export const ActivityCard: FC<ActivityCardProps> = ({
   const eventStartedAtText = convertDatetime(eventStartedAt);
 
   const cover = banners?.[0]?.uri;
-  const capacity = maxEnrollment || Math.max(enrollment || 0, 1);
-  const progress = Math.min(100, Math.round(((enrollment || 0) / capacity) * 100));
+  const hasCapacity = typeof maxEnrollment === 'number' && maxEnrollment > 0;
+  const progress = hasCapacity
+    ? Math.min(100, Math.round(((enrollment || 0) / maxEnrollment) * 100))
+    : undefined;
   const statusText = getActivityStatusText(i18nStore, {
     status,
     enrollmentStartedAt,
@@ -61,13 +64,14 @@ export const ActivityCard: FC<ActivityCardProps> = ({
   return (
     <Card
       className={classNames(
-        'activity-card border-0 shadow-sm h-100 position-relative overflow-hidden',
+        styles['activity-card'],
+        'border-0 shadow-sm h-100 position-relative overflow-hidden',
         className,
       )}
     >
       {cover && (
         <div
-          className="activity-card__cover rounded-top"
+          className={classNames(styles['activity-card__cover'], 'rounded-top')}
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(14,22,40,.35), rgba(14,22,40,.8)), url(${cover})`,
           }}
@@ -114,10 +118,16 @@ export const ActivityCard: FC<ActivityCardProps> = ({
           <div className="d-flex justify-content-between small text-muted">
             <span>{t('people_registered')}</span>
             <span>
-              {enrollment} / {maxEnrollment || t('unlimited')}
+              {enrollment ?? 0} / {hasCapacity ? maxEnrollment : t('unlimited')}
             </span>
           </div>
-          <ProgressBar now={progress} variant="success" className="activity-card__progress" />
+          {hasCapacity && progress !== undefined && (
+            <ProgressBar
+              now={progress}
+              variant="success"
+              className={styles['activity-card__progress']}
+            />
+          )}
         </div>
 
         {controls ? (
