@@ -5,7 +5,14 @@ import { computed } from 'mobx';
 import { textJoin } from 'mobx-i18n';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { ArrayField, ArrayFieldProps, Field, FileUploader, RestForm } from 'mobx-restful-table';
+import {
+  ArrayField,
+  ArrayFieldProps,
+  Field,
+  FileUploader,
+  FormField,
+  RestForm,
+} from 'mobx-restful-table';
 
 import activityStore from '../../models/Activity';
 import fileStore from '../../models/Base/File';
@@ -135,25 +142,41 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
   }
 
   renderMedia =
-    (_: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
-    ({ uri }) => (
-      <div
-        className={classNames(
-          styles['media-item'],
-          'd-flex flex-column flex-md-row align-items-stretch gap-3',
-        )}
-      >
-        <div className="flex-shrink-0" style={{ minWidth: '180px' }}>
-          <FileUploader
-            store={fileStore}
-            name="uri"
-            accept="image/*"
-            multiple
-            defaultValue={uri ? [uri] : []}
-          />
+    (i18nContext: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
+    media => {
+      const { t } = i18nContext;
+      const { uri, name, description } = media as Media & {
+        name?: string;
+        description?: string;
+      };
+
+      return (
+        <div
+          className={classNames(
+            styles['media-item'],
+            'd-flex flex-column flex-md-row align-items-stretch gap-3',
+          )}
+        >
+          <div className="flex-shrink-0" style={{ minWidth: '180px' }}>
+            <FileUploader
+              store={fileStore}
+              name="uri"
+              accept="image/*"
+              multiple
+              defaultValue={uri ? [uri] : []}
+            />
+            <FormField label={t('name')} name="name" defaultValue={name} />
+            <FormField
+              label={t('description')}
+              as="textarea"
+              rows={3}
+              name="description"
+              defaultValue={description}
+            />
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
   render() {
     const i18n = this.observedContext,

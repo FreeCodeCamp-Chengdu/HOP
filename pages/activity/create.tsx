@@ -21,31 +21,21 @@ const ActivityCreatePage: FC<JWTProps> = observer(() => {
       <PageHead title={t('create_activity')} />
 
       <section className={classNames(styles['hero-section'], 'text-white')}>
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={8} className="text-center">
-              <Badge bg="light" text="dark" className="text-uppercase mb-3">
-                {t('open_hackathon_platform')}
-              </Badge>
-              <h1 className="display-6 fw-semibold mb-3">{t('create_activity')}</h1>
-              <p className="text-white-50 fs-5">{t('platform_tagline')}</p>
-            </Col>
-          </Row>
+        <Container className="text-center">
+          <Badge bg="light" text="dark" className="text-uppercase mb-3">
+            {t('open_hackathon_platform')}
+          </Badge>
+          <h1 className="display-6 fw-semibold mb-3">{t('create_activity')}</h1>
+          <p className="text-white-50 fs-5">{t('platform_tagline')}</p>
         </Container>
       </section>
 
       <section className="pb-5 bg-body-tertiary">
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={10} xl={9}>
-              <Card className={classNames(styles['form-card'], 'border-0')}>
-                <Card.Body className="p-4 p-md-5">
-                  <ActivityEditor />
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
+        <Card className={classNames(styles['form-card'], 'border-0 mx-auto')}>
+          <Card.Body className="p-4 p-md-5">
+            <ActivityEditor />
+          </Card.Body>
+        </Card>
       </section>
     </>
   );
