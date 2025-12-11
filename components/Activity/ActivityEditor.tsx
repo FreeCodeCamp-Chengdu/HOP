@@ -1,4 +1,5 @@
 import { Hackathon, Media } from '@freecodecamp-chengdu/hop-service';
+import classNames from 'classnames';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { textJoin } from 'mobx-i18n';
@@ -18,6 +19,7 @@ import fileStore from '../../models/Base/File';
 import { i18n, I18nContext } from '../../models/Base/Translation';
 import { DateTimeInput } from '../DateTimeInput';
 import { CustomTools } from '../HTMLEditor';
+import styles from './ActivityEditor.module.less';
 
 export interface ActivityEditorProps {
   name?: string;
@@ -142,22 +144,31 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
   renderMedia =
     ({ t }: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
     ({ uri, name, description }) => (
-      <div className="d-flex align-items-center gap-2">
-        <FileUploader
-          store={fileStore}
-          name="uri"
-          accept="image/*"
-          multiple
-          defaultValue={uri ? [uri] : []}
-        />
-        <FormField label={t('name')} name="name" defaultValue={name} />
-        <FormField
-          label={t('description')}
-          as="textarea"
-          rows={3}
-          name="description"
-          defaultValue={description}
-        />
+      <div
+        className={classNames(
+          styles['media-item'],
+          'd-flex flex-column flex-md-row align-items-stretch gap-3',
+        )}
+      >
+        <div className="flex-shrink-0" style={{ minWidth: '180px' }}>
+          <FileUploader
+            store={fileStore}
+            name="uri"
+            accept="image/*"
+            multiple
+            defaultValue={uri ? [uri] : []}
+          />
+        </div>
+        <div className="flex-grow-1 d-flex flex-column gap-2">
+          <FormField label={t('name')} name="name" defaultValue={name} />
+          <FormField
+            label={t('description')}
+            as="textarea"
+            rows={2}
+            name="description"
+            defaultValue={description}
+          />
+        </div>
       </div>
     );
 
@@ -170,7 +181,6 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
     return (
       <>
         <RestForm
-          className="container-fluid"
           translator={i18n}
           store={activityStore}
           fields={this.fields}
