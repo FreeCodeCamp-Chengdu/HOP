@@ -5,14 +5,7 @@ import { computed } from 'mobx';
 import { textJoin } from 'mobx-i18n';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import {
-  ArrayField,
-  ArrayFieldProps,
-  Field,
-  FileUploader,
-  FormField,
-  RestForm,
-} from 'mobx-restful-table';
+import { ArrayField, ArrayFieldProps, Field, FileUploader, RestForm } from 'mobx-restful-table';
 
 import activityStore from '../../models/Activity';
 import fileStore from '../../models/Base/File';
@@ -142,8 +135,8 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
   }
 
   renderMedia =
-    ({ t }: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
-    ({ uri, name, description }) => (
+    (_: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
+    ({ uri }) => (
       <div
         className={classNames(
           styles['media-item'],
@@ -157,16 +150,6 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
             accept="image/*"
             multiple
             defaultValue={uri ? [uri] : []}
-          />
-        </div>
-        <div className="flex-grow-1 d-flex flex-column gap-2">
-          <FormField label={t('name')} name="name" defaultValue={name} />
-          <FormField
-            label={t('description')}
-            as="textarea"
-            rows={2}
-            name="description"
-            defaultValue={description}
           />
         </div>
       </div>

@@ -40,16 +40,6 @@ const ActivityCreatePage: FC<JWTProps> = observer(() => {
             <Col lg={10} xl={9}>
               <Card className={classNames(styles['form-card'], 'border-0')}>
                 <Card.Body className="p-4 p-md-5">
-                  <div className="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
-                    <div className={styles['icon-circle']}>
-                      <Icon name="bi-calendar-plus" />
-                    </div>
-                    <div>
-                      <h5 className="mb-0 fw-semibold">{t('create_activity')}</h5>
-                      <small className="text-muted">{t('activity_detail')}</small>
-                    </div>
-                  </div>
-
                   <ActivityEditor />
                 </Card.Body>
               </Card>
