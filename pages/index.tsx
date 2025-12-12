@@ -103,13 +103,13 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
 
   renderBanner = () => (
     <Carousel>
-      {this.bannerActivities.map(({ name: key, displayName, ribbon, banners: [{ uri, name }] }) => (
+      {this.bannerActivities.map(({ name: key, displayName, ribbon, banners: [{ uri }] }) => (
         <Carousel.Item key={key}>
           <a className="d-block stretched-link" href={`/activity/${key}/`}>
             <Image
               className={classNames('w-100 object-fit-cover', styles['hero-carousel-img'])}
               src={uri}
-              alt={name}
+              alt={displayName}
             />
           </a>
           <Carousel.Caption className="text-shadow">
