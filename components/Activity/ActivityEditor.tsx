@@ -142,41 +142,33 @@ export class ActivityEditor extends ObservedComponent<ActivityEditorProps, typeo
   }
 
   renderMedia =
-    (i18nContext: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
-    media => {
-      const { t } = i18nContext;
-      const { uri, name, description } = media as Media & {
-        name?: string;
-        description?: string;
-      };
-
-      return (
-        <div
-          className={classNames(
-            styles['media-item'],
-            'd-flex flex-column flex-md-row align-items-stretch gap-3',
-          )}
-        >
-          <div className="flex-shrink-0" style={{ minWidth: '180px' }}>
-            <FileUploader
-              store={fileStore}
-              name="uri"
-              accept="image/*"
-              multiple
-              defaultValue={uri ? [uri] : []}
-            />
-            <FormField label={t('name')} name="name" defaultValue={name} />
-            <FormField
-              label={t('description')}
-              as="textarea"
-              rows={3}
-              name="description"
-              defaultValue={description}
-            />
-          </div>
+    ({ t }: typeof i18n): ArrayFieldProps<Media>['renderItem'] =>
+    ({ uri, name, description }) => (
+      <div
+        className={classNames(
+          styles['media-item'],
+          'd-flex flex-column flex-md-row align-items-stretch gap-3',
+        )}
+      >
+        <div className="flex-shrink-0" style={{ minWidth: '180px' }}>
+          <FileUploader
+            store={fileStore}
+            name="uri"
+            accept="image/*"
+            multiple
+            defaultValue={uri ? [uri] : []}
+          />
+          <FormField label={t('name')} name="name" defaultValue={name} />
+          <FormField
+            label={t('description')}
+            as="textarea"
+            rows={3}
+            name="description"
+            defaultValue={description}
+          />
         </div>
-      );
-    };
+      </div>
+    );
 
   render() {
     const i18n = this.observedContext,

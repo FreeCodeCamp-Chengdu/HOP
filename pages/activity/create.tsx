@@ -21,13 +21,13 @@ const ActivityCreatePage: FC<JWTProps> = observer(() => {
       <PageHead title={t('create_activity')} />
 
       <section className={classNames(styles['hero-section'], 'text-white')}>
-        <Container className="text-center">
+        <hgroup className="d-flex flex-column align-items-center">
           <Badge bg="light" text="dark" className="text-uppercase mb-3">
             {t('open_hackathon_platform')}
           </Badge>
           <h1 className="display-6 fw-semibold mb-3">{t('create_activity')}</h1>
           <p className="text-white-50 fs-5">{t('platform_tagline')}</p>
-        </Container>
+        </hgroup>
       </section>
 
       <section className="pb-5 bg-body-tertiary">
