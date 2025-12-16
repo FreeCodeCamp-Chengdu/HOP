@@ -10,12 +10,7 @@ export interface MainBreadcrumbProps {
 export const MainBreadcrumb: FC<MainBreadcrumbProps> = ({ currentRoute }) => (
   <Breadcrumb className="p-1 bg-light rounded">
     {currentRoute.map(({ href, title }, index, { length }) => (
-      <Breadcrumb.Item
-        key={title}
-        className="mt-3"
-        href={href}
-        active={index + 1 === length}
-      >
+      <Breadcrumb.Item key={title} className="mt-3" href={href} active={index + 1 === length}>
         {title}
       </Breadcrumb.Item>
     ))}
