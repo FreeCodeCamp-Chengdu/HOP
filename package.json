@@ -72,14 +72,8 @@
 	"resolutions": {
 		"next": "$next"
 	},
-	"prettier": {
-		"singleQuote": true,
-		"trailingComma": "all",
-		"arrowParens": "avoid",
-		"printWidth": 100
-	},
 	"lint-staged": {
-		"*.{html,md,less,json,yml,js,ts,tsx}": "biome check --apply-unsafe"
+		"*.{html,md,less,json,yml,js,ts,tsx}": "biome check --write"
 	},
 	"scripts": {
 		"prepare": "husky || true",
