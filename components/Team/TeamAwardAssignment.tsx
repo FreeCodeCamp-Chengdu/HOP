@@ -3,8 +3,7 @@ import { FC } from 'react';
 import { AwardAssignment } from '../../models/Activity/Award';
 import { XScrollListProps } from '../layout/ScrollList';
 
-export interface TeamAwardAssignmentLayoutProps
-  extends XScrollListProps<AwardAssignment> {
+export interface TeamAwardAssignmentLayoutProps extends XScrollListProps<AwardAssignment> {
   size?: 'sm' | 'lg';
   onDelete?: (id: AwardAssignment['id']) => any;
 }

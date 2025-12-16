@@ -46,27 +46,16 @@
     "@babel/plugin-proposal-decorators": "^7.28.0",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
-    "@cspell/eslint-plugin": "^9.4.0",
-    "@eslint/js": "^9.39.2",
+    "@biomejs/biome": "^1.9.4",
     "@freecodecamp-chengdu/hop-service": "^1.0.0-rc.1",
-    "@next/eslint-plugin-next": "^16.0.10",
     "@octokit/openapi-types": "^27.0.0",
-    "@softonus/prettier-plugin-duplicate-remover": "^1.1.2",
-    "@stylistic/eslint-plugin": "^5.6.1",
-    "@types/eslint-config-prettier": "^6.11.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/koa": "^3.0.1",
     "@types/leaflet": "^1.9.21",
     "@types/next-pwa": "^5.6.9",
     "@types/node": "^22.19.3",
     "@types/react": "^19.2.7",
-    "eslint": "^9.39.2",
-    "eslint-config-next": "^16.0.10",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "git-utility": "^0.3.0",
-    "globals": "^16.5.0",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "less": "^4.5.1",
@@ -74,35 +63,17 @@
     "lint-staged": "^16.2.7",
     "next-pwa": "^5.6.0",
     "next-with-less": "^3.0.1",
-    "prettier": "^3.7.4",
-    "prettier-plugin-css-order": "^2.1.2",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.50.0",
     "webpack": "^5.104.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "@sentry/cli",
-      "less",
-      "sharp",
-      "unrs-resolver"
-    ]
+    "onlyBuiltDependencies": ["@biomejs/biome", "@sentry/cli", "less", "sharp", "unrs-resolver"]
   },
   "resolutions": {
     "next": "$next"
   },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "arrowParens": "avoid",
-    "printWidth": 100,
-    "plugins": [
-      "prettier-plugin-css-order",
-      "@softonus/prettier-plugin-duplicate-remover"
-    ]
-  },
   "lint-staged": {
-    "*.{html,md,less,json,yml,js,ts,tsx}": "prettier --write"
+    "*.{html,md,less,json,yml,js,ts,tsx}": "biome check --write"
   },
   "scripts": {
     "prepare": "husky || true",
