@@ -89,15 +89,26 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
   }
 };
 
-const client_id = process.env.GITHUB_OAUTH_CLIENT_ID!,
-  client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET!;
+const client_id = process.env.GITHUB_OAUTH_CLIENT_ID,
+  client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET;
+
+if (!client_id || !client_secret) {
+  console.error(
+    '[OAuth Config Error] Missing required environment variables:\n' +
+      '  - GITHUB_OAUTH_CLIENT_ID\n' +
+      '  - GITHUB_OAUTH_CLIENT_SECRET\n' +
+      'Please configure them in .env.local or environment settings.',
+  );
+}
 
 export const ProxyBaseURL = 'https://test.hackathon.fcc-cd.dev/proxy';
 
+const useProxy = !VERCEL && !process.env.SKIP_OAUTH_PROXY;
+
 export const githubSigner = githubOAuth2({
-  rootBaseURL: VERCEL ? undefined : `${ProxyBaseURL}/github.com/`,
-  client_id,
-  client_secret,
+  rootBaseURL: useProxy ? `${ProxyBaseURL}/github.com/` : undefined,
+  client_id: client_id!,
+  client_secret: client_secret!,
   scopes: ['user:email', 'read:user', 'public_repo', 'read:project'],
 });
 

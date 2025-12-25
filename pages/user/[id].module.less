@@ -1,0 +1,46 @@
+.hero-section {
+  background: radial-gradient(circle at top left, #312e81, #0f172a 55%, #020617);
+  padding: 3rem 0 6rem;
+}
+
+.social-btn {
+  transition: all 0.2s ease;
+  background: rgba(59, 130, 246, 0.08);
+  color: #64748b;
+
+  &:hover {
+    background: #2563eb;
+    color: white;
+  }
+
+  &.active {
+    background: #2563eb;
+    color: white;
+  }
+}
+
+.custom-tabs {
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border: none;
+
+  :global(.nav-link) {
+    transition: all 0.2s ease;
+    border: none;
+    border-radius: 0.75rem;
+    background: rgba(59, 130, 246, 0.05);
+    padding: 0.75rem 1.5rem;
+    color: #64748b;
+    font-weight: 500;
+
+    &:hover {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+    }
+
+    &:global(.active) {
+      background: #2563eb;
+      color: white;
+    }
+  }
+}
