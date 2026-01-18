@@ -42,7 +42,7 @@ body:
     - type: input
       id: payer
       attributes:
-          label: Payer
+          label: Reward payer
           description: GitHub username of the payer (optional, defaults to issue creator)
       validations:
           required: false
