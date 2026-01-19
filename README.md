@@ -26,6 +26,35 @@ Open-source [Hackathon][1] Platform with **Git-based Cloud Development Environme
 - PWA framework: [Workbox v6][9]
 - CI / CD: GitHub [Actions][10] + [Vercel][11]
 
+## Environment Configuration
+
+Copy `.env` to `.env.local` and configure the following required variables:
+
+```bash
+# GitHub OAuth (required for login)
+GITHUB_OAUTH_CLIENT_ID=your_client_id
+GITHUB_OAUTH_CLIENT_SECRET=your_client_secret
+
+# JWT Secret (required for session)
+JWT_SECRET=your_jwt_secret
+
+# API Host
+NEXT_PUBLIC_API_HOST=https://openhackathon-service.onrender.com
+
+# Skip OAuth proxy for local development (optional, already set in .env.development)
+SKIP_OAUTH_PROXY=1
+```
+
+### Creating GitHub OAuth App
+
+1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
+2. Click "New OAuth App"
+3. Fill in:
+   - **Application name**: HOP Local Dev
+   - **Homepage URL**: `http://localhost:3000`
+   - **Authorization callback URL**: `http://localhost:3000/login`
+4. Copy the Client ID and generate a Client Secret
+
 ## Getting Started
 
 First, run the development server:

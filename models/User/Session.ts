@@ -1,23 +1,39 @@
 import { Base, User } from '@freecodecamp-chengdu/hop-service';
-import { HTTPClient } from 'koajax';
+import { HTTPClient, HTTPError } from 'koajax';
 import { computed, observable } from 'mobx';
 import { BaseModel, persist, restore, toggle } from 'mobx-restful';
 import { buildURLData, setCookie } from 'web-utility';
 
 import { API_HOST, isServer, JWT, token } from '../../configuration';
 
-export const ownClient = new HTTPClient({ baseURI: API_HOST, responseType: 'json' }).use(
-  ({ request }, next) => {
+export const ownClient = new HTTPClient({ baseURI: API_HOST, responseType: 'json' })
+  .use(({ request }, next) => {
     if (JWT) request.headers = { ...request.headers, Authorization: `Bearer ${JWT}` };
 
     return next();
-  },
-);
+  })
+  .use(async ({ request }, next) => {
+    try {
+      return await next();
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        const { status } = error.response;
+
+        if (status === 401 || status === 403) {
+          if (!isServer()) {
+            const currentPath = globalThis.location?.pathname || '/';
+            const loginUrl = `/login?redirect=${encodeURIComponent(currentPath)}`;
+
+            globalThis.location?.assign(loginUrl);
+          }
+        }
+      }
+      throw error;
+    }
+  });
 
 export interface SessionUser
-  extends Base,
-    Record<'username' | 'email', string>,
-    Record<'confirmed' | 'blocked', boolean> {
+  extends Base, Record<'username' | 'email', string>, Record<'confirmed' | 'blocked', boolean> {
   provider: 'local' | 'github';
   gender?: 'Female' | 'Male' | 'Other';
 }
