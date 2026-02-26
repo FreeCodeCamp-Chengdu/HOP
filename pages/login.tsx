@@ -18,8 +18,12 @@ const LoginPage: FC<JWTProps<User>> = ({ jwtPayload }) => {
     if (jwtPayload) {
       sessionStore.user = jwtPayload;
 
-      const targetUrl = typeof redirect === 'string' ? redirect : '/';
-      router.replace(targetUrl);
+      const rawRedirect = typeof redirect === 'string' ? redirect : '/';
+      const targetUrl =
+        rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/';
+      router.replace(targetUrl).catch(error => {
+        console.error('Redirect failed:', error);
+      });
     }
   }, [jwtPayload, redirect, router]);
 

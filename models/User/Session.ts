@@ -25,6 +25,7 @@ export const ownClient = new HTTPClient({ baseURI: API_HOST, responseType: 'json
             const loginUrl = `/login?redirect=${encodeURIComponent(currentPath)}`;
 
             globalThis.location?.assign(loginUrl);
+            return;
           }
         }
       }

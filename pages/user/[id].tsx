@@ -73,50 +73,22 @@ const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
                 {email && <p className="text-muted small mb-3">{email}</p>}
 
                 <div className="d-flex justify-content-center gap-2">
-                  <a
-                    href={`https://github.com/${name}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={classNames(
-                      styles['social-btn'],
-                      styles.active,
-                      'd-flex align-items-center justify-content-center rounded-2',
-                    )}
-                    style={{ width: 40, height: 40 }}
-                    title="GitHub"
-                  >
-                    <Icon name="github" />
-                  </a>
-                  <span
-                    className={classNames(
-                      styles['social-btn'],
-                      'd-flex align-items-center justify-content-center rounded-2',
-                    )}
-                    style={{ width: 40, height: 40 }}
-                    title="QQ"
-                  >
-                    <Icon name="chat-dots" />
-                  </span>
-                  <span
-                    className={classNames(
-                      styles['social-btn'],
-                      'd-flex align-items-center justify-content-center rounded-2',
-                    )}
-                    style={{ width: 40, height: 40 }}
-                    title="WeChat"
-                  >
-                    <Icon name="wechat" />
-                  </span>
-                  <span
-                    className={classNames(
-                      styles['social-btn'],
-                      'd-flex align-items-center justify-content-center rounded-2',
-                    )}
-                    style={{ width: 40, height: 40 }}
-                    title="Weibo"
-                  >
-                    <Icon name="broadcast" />
-                  </span>
+                  {name && (
+                    <a
+                      href={`https://github.com/${encodeURIComponent(name)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={classNames(
+                        styles['social-btn'],
+                        styles.active,
+                        'd-flex align-items-center justify-content-center rounded-2',
+                      )}
+                      style={{ width: 40, height: 40 }}
+                      title="GitHub"
+                    >
+                      <Icon name="github" />
+                    </a>
+                  )}
                 </div>
               </Card.Body>
             </Card>

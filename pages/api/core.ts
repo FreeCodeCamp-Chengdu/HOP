@@ -83,7 +83,14 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
 
     const user = await SessionModel.signInWithGitHub(token!);
 
-    res.setHeader('Set-Cookie', `JWT=${user.token}; Path=/`);
+    const isProd = process.env.NODE_ENV === 'production';
+
+    res.setHeader(
+      'Set-Cookie',
+      [`JWT=${user.token}`, 'Path=/', 'HttpOnly', isProd ? 'Secure' : '', 'SameSite=Lax']
+        .filter(Boolean)
+        .join('; '),
+    );
 
     return { props: { jwtPayload: JSON.parse(JSON.stringify(user)) } };
   }
