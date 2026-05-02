@@ -18,11 +18,11 @@ export default {
   sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `您确定删除 ${keys.join('、')} 吗？`,
 
   select: '选择',
-  open_hackathon_platform: '开放黑客松',
+  open_hackathon_platform: '黑客松开放',
   platform_tagline: '用标准化流程规划、发布并扩展全球黑客松。',
   hero_title: '用现代化流程打造更出彩的黑客松',
   hero_subtitle:
-    '开放黑客松平台把主办方、导师、赞助商与参赛团队汇聚在同一个空间，让每场活动都更易用、更开放。',
+    '黑客松开放平台把主办方、导师、赞助商与参赛团队汇聚在同一个空间，让每场活动都更易用、更开放。',
   hero_stat_events: '已上线黑客松',
   hero_stat_builders: '活跃创客',
   hero_stat_cities: '覆盖城市',
