@@ -1,12 +1,16 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "linter": {
     "enabled": true,
@@ -14,7 +18,8 @@
       "recommended": true,
       "correctness": {
         "noUnusedVariables": "warn",
-        "noConstantCondition": "warn"
+        "noConstantCondition": "warn",
+        "useValidTypeof": "error"
       },
       "style": {
         "useConst": "error",
@@ -25,7 +30,6 @@
         "useSingleVarDeclarator": "off",
         "useImportType": "off",
         "useTemplate": "error",
-        "noCommaOperator": "error",
         "noImplicitBoolean": "off",
         "noInferrableTypes": "error",
         "noNegationElse": "error",
@@ -33,7 +37,6 @@
         "noParameterAssign": "error",
         "noShoutyConstants": "warn",
         "noUnusedTemplateLiteral": "error",
-        "noVar": "error",
         "useConsistentBuiltinInstantiation": "error",
         "useForOf": "error"
       },
@@ -63,21 +66,25 @@
         "noUnsafeDeclarationMerging": "warn",
         "noUnsafeNegation": "error",
         "useAwait": "error",
-        "useValidTypeof": "error"
+        "noVar": "error"
       },
       "performance": {
         "noAccumulatingSpread": "warn"
       },
       "security": {
         "noGlobalEval": "error"
+      },
+      "complexity": {
+        "noCommaOperator": "error"
       }
     },
-    "ignore": [
-      "**/node_modules/**",
-      "**/public/**",
-      "**/.next/**",
-      ".github/scripts/**",
-      "pnpm-lock.yaml"
+    "includes": [
+      "**",
+      "!**/node_modules/**",
+      "!**/public/**",
+      "!**/.next/**",
+      "!**/.github/scripts/**",
+      "!**/pnpm-lock.yaml"
     ]
   },
   "formatter": {
@@ -86,12 +93,13 @@
     "indentWidth": 2,
     "lineWidth": 100,
     "lineEnding": "lf",
-    "ignore": [
-      "**/node_modules/**",
-      "**/public/**",
-      "**/.next/**",
-      ".github/scripts/**",
-      "pnpm-lock.yaml"
+    "includes": [
+      "**",
+      "!**/node_modules/**",
+      "!**/public/**",
+      "!**/.next/**",
+      "!**/.github/scripts/**",
+      "!**/pnpm-lock.yaml"
     ]
   },
   "javascript": {

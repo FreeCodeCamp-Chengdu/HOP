@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
-import { FC, FormEventHandler, useContext } from 'react';
+import { FC, SubmitEventHandler, useContext } from 'react';
 import { Button, Col, Form, Modal, ModalProps } from 'react-bootstrap';
 
 import { I18nContext } from '../../models/Base/Translation';
 
 export interface JoinTeamModalProps extends Pick<ModalProps, 'show' | 'onHide'> {
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  onSubmit: SubmitEventHandler<HTMLFormElement>;
 }
 
 export const JoinTeamModal: FC<JoinTeamModalProps> = observer(({ show, onHide, onSubmit }) => {

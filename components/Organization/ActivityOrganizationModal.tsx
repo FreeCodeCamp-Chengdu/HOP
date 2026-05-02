@@ -1,12 +1,12 @@
 import { Organizer } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { createRef, FormEvent } from 'react';
+import { createRef, SubmitEvent } from 'react';
 import { Button, Form, Modal, ModalProps } from 'react-bootstrap';
 import { formToJSON } from 'web-utility';
 
 import { OrganizerModel, OrganizerTypeName } from '../../models/Activity/Organization';
-import { i18n, I18nContext } from '../../models/Base/Translation';
+import { I18nContext, i18n } from '../../models/Base/Translation';
 
 export interface OrganizationModalProps extends Pick<ModalProps, 'show' | 'onHide'> {
   store: OrganizerModel;
@@ -23,7 +23,7 @@ export class OrganizationModal extends ObservedComponent<OrganizationModalProps,
 
   private form = createRef<HTMLFormElement>();
 
-  handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
