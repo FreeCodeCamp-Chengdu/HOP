@@ -13,8 +13,7 @@ import {
   withKoa,
 } from 'next-ssr-middleware';
 
-import { JWT_SECRET } from '../../configuration';
-import { VERCEL } from '../../configuration';
+import { isProduction, JWT_SECRET, VERCEL } from '../../configuration';
 import { SessionModel } from '../../models/User/Session';
 
 export type JWTContext = ParameterizedContext<
@@ -83,11 +82,9 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
 
     const user = await SessionModel.signInWithGitHub(token!);
 
-    const isProd = process.env.NODE_ENV === 'production';
-
     res.setHeader(
       'Set-Cookie',
-      [`JWT=${user.token}`, 'Path=/', 'HttpOnly', isProd ? 'Secure' : '', 'SameSite=Lax']
+      [`JWT=${user.token}`, 'Path=/', 'HttpOnly', isProduction ? 'Secure' : '', 'SameSite=Lax']
         .filter(Boolean)
         .join('; '),
     );
@@ -100,7 +97,7 @@ const client_id = process.env.GITHUB_OAUTH_CLIENT_ID,
   client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET;
 
 if (!client_id || !client_secret) {
-  console.error(
+  throw new ReferenceError(
     '[OAuth Config Error] Missing required environment variables:\n' +
       '  - GITHUB_OAUTH_CLIENT_ID\n' +
       '  - GITHUB_OAUTH_CLIENT_SECRET\n' +
@@ -114,8 +111,8 @@ const useProxy = !VERCEL && !process.env.SKIP_OAUTH_PROXY;
 
 export const githubSigner = githubOAuth2({
   rootBaseURL: useProxy ? `${ProxyBaseURL}/github.com/` : undefined,
-  client_id: client_id!,
-  client_secret: client_secret!,
+  client_id,
+  client_secret,
   scopes: ['user:email', 'read:user', 'public_repo', 'read:project'],
 });
 

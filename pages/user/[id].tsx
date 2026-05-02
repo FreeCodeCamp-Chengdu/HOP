@@ -5,10 +5,11 @@ import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
-import { Badge, Card, Col, Container, Image, Nav, Row, Tab } from 'react-bootstrap';
+import { Badge, Button, Card, Col, Container, Image, Nav, Row, Tab } from 'react-bootstrap';
 
 import { PageHead } from '../../components/layout/PageHead';
 import { I18nContext } from '../../models/Base/Translation';
+import sessionStore from '../../models/User/Session';
 import userStore from '../../models/User';
 import styles from './[id].module.less';
 
@@ -25,6 +26,8 @@ export const getServerSideProps = compose<{ id?: string }, User>(
 
 const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
   const { t } = useContext(I18nContext);
+  const isOwner = sessionStore.user?.id === id;
+  const visibleEmail = isOwner ? sessionStore.user?.email || email : undefined;
 
   return (
     <>
@@ -36,7 +39,13 @@ const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
             {t('hacker_pavilion')}
           </Badge>
           <h1 className="display-6 fw-semibold">{name || t('mystery_hacker')}</h1>
-          {email && <p className="text-white-50 mb-0">{email}</p>}
+          {visibleEmail && (
+            <p className="mb-0">
+              <a className="text-white-50" href={`mailto:${visibleEmail}`}>
+                {visibleEmail}
+              </a>
+            </p>
+          )}
         </Container>
       </section>
 
@@ -70,26 +79,29 @@ const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
             <Card className="border-0 shadow-lg rounded-4 text-center">
               <Card.Body className="p-4">
                 <h4 className="fw-semibold mb-1">{name || t('mystery_hacker')}</h4>
-                {email && <p className="text-muted small mb-3">{email}</p>}
-
-                <div className="d-flex justify-content-center gap-2">
-                  {name && (
-                    <a
-                      href={`https://github.com/${encodeURIComponent(name)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={classNames(
-                        styles['social-btn'],
-                        styles.active,
-                        'd-flex align-items-center justify-content-center rounded-2',
-                      )}
-                      style={{ width: 40, height: 40 }}
-                      title="GitHub"
-                    >
-                      <Icon name="github" />
+                {visibleEmail && (
+                  <p className="text-muted small mb-3">
+                    <a className="text-muted" href={`mailto:${visibleEmail}`}>
+                      {visibleEmail}
                     </a>
-                  )}
-                </div>
+                  </p>
+                )}
+                {isOwner && sessionStore.user?.mobilePhone && (
+                  <p className="text-muted small mb-3">{sessionStore.user.mobilePhone}</p>
+                )}
+
+                {isOwner && (
+                  <Button
+                    variant="outline-secondary"
+                    href="https://github.com/settings/profile"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-100 mt-4 rounded-3"
+                  >
+                    <Icon name="pencil" className="me-2" />
+                    {t('edit_profile')}
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           </Col>

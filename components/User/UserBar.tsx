@@ -26,7 +26,6 @@ const UserBar = observer(() => {
         <Dropdown>
           <Dropdown.Toggle>{showName}</Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="/me">{t('profile')}</Dropdown.Item>
             <Dropdown.Item href={`/user/${user.id}`}>{t('home_page')}</Dropdown.Item>
             <Dropdown.Item
               title={t('edit_profile_tips')}

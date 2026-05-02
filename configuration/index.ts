@@ -8,6 +8,7 @@ export const Name = process.env.NEXT_PUBLIC_SITE_NAME,
 export const { JWT_SECRET, GITHUB_PAT, VERCEL } = process.env;
 
 export const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+export const isProduction = process.env.NODE_ENV === 'production';
 
 export const { token, JWT } = (globalThis.document ? parseCookie() : {}) as Record<
   'token' | 'JWT',

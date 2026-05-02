@@ -28,7 +28,7 @@ Open-source [Hackathon][1] Platform with **Git-based Cloud Development Environme
 
 ## Environment Configuration
 
-Copy `.env` to `.env.local` and configure the following required variables:
+Configure the following required variables in your local environment:
 
 ```bash
 # GitHub OAuth (required for login)
@@ -52,7 +52,7 @@ SKIP_OAUTH_PROXY=1
 3. Fill in:
    - **Application name**: HOP Local Dev
    - **Homepage URL**: `http://localhost:3000`
-   - **Authorization callback URL**: `http://localhost:3000/login`
+   - **Authorization callback URL**: `http://localhost:3000`
 4. Copy the Client ID and generate a Client Secret
 
 ## Getting Started

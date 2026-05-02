@@ -11,8 +11,7 @@ import Link from 'next/link';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 
 import { MainNavigation } from '../components/layout/MainNavigation';
-import { isServer, JWT } from '../configuration';
-import sessionStore from '../models/User/Session';
+import { isServer } from '../configuration';
 import {
   createI18nStore,
   i18n,
@@ -46,19 +45,6 @@ export default class CustomApp extends App<I18nProps> {
 
       if (tips) alert(tips);
     });
-
-    this.initSession();
-  }
-
-  async initSession() {
-    if (!JWT) return;
-
-    try {
-      await sessionStore.getProfile();
-    } catch (error) {
-      console.error('Session restore failed:', error);
-      sessionStore.signOut();
-    }
   }
 
   render() {
