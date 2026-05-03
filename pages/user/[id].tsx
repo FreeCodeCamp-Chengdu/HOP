@@ -4,7 +4,7 @@ import { Icon } from 'idea-react';
 import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
 import { cache, compose, errorLogger } from 'next-ssr-middleware';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Badge, Button, Card, Col, Container, Image, Nav, Row, Tab } from 'react-bootstrap';
 
 import { PageHead } from '../../components/layout/PageHead';
@@ -17,17 +17,34 @@ const ActivityList = dynamic(() => import('../../components/Activity/ActivityLis
   ssr: false,
 });
 
-export const getServerSideProps = compose<{ id?: string }, User>(
+type PublicUser = Omit<User, 'email' | 'mobilePhone' | 'password' | 'token'>;
+
+export const getServerSideProps = compose<{ id?: string }, PublicUser>(
   cache(),
   errorLogger,
-  async ({ params: { id = '' } = {} }) =>
-    JSON.parse(JSON.stringify({ props: await userStore.getOne(id) })),
+  async ({ params: { id = '' } = {} }) => {
+    const {
+      email: _email,
+      mobilePhone: _mobilePhone,
+      password: _password,
+      token: _token,
+      ...user
+    } = await userStore.getOne(id);
+
+    return JSON.parse(JSON.stringify({ props: user }));
+  },
 );
 
-const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
+const UserDetailPage: FC<PublicUser> = observer(({ id, name, avatar }) => {
   const { t } = useContext(I18nContext);
-  const isOwner = sessionStore.user?.id === id;
-  const visibleEmail = isOwner ? sessionStore.user?.email || email : undefined;
+  const { user } = sessionStore;
+  const [isOwner, setIsOwner] = useState(false);
+
+  useEffect(() => {
+    setIsOwner(user?.id === id);
+  }, [id, user?.id]);
+
+  const visibleEmail = isOwner ? user?.email : undefined;
 
   return (
     <>
@@ -64,12 +81,10 @@ const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
                 />
               ) : (
                 <div
-                  className="rounded-circle d-inline-flex align-items-center justify-content-center border border-4 border-white shadow"
-                  style={{
-                    width: 120,
-                    height: 120,
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  }}
+                  className={classNames(
+                    styles['avatar-placeholder'],
+                    'rounded-circle d-inline-flex align-items-center justify-content-center border border-4 border-white shadow',
+                  )}
                 >
                   <Icon name="person" size={3} className="text-white" />
                 </div>
@@ -86,8 +101,13 @@ const UserDetailPage: FC<User> = observer(({ id, name, avatar, email }) => {
                     </a>
                   </p>
                 )}
-                {isOwner && sessionStore.user?.mobilePhone && (
-                  <p className="text-muted small mb-3">{sessionStore.user.mobilePhone}</p>
+                {isOwner && user?.mobilePhone && (
+                  <a
+                    className="text-muted small mb-3 d-inline-block"
+                    href={`tel:${user.mobilePhone}`}
+                  >
+                    {user.mobilePhone}
+                  </a>
                 )}
 
                 {isOwner && (

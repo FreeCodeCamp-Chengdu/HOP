@@ -40,9 +40,6 @@ JWT_SECRET=your_jwt_secret
 
 # API Host
 NEXT_PUBLIC_API_HOST=https://openhackathon-service.onrender.com
-
-# Skip OAuth proxy for local development (optional, already set in .env.development)
-SKIP_OAUTH_PROXY=1
 ```
 
 ### Creating GitHub OAuth App

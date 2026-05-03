@@ -18,7 +18,7 @@ export default {
   sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `您確定刪除 ${keys.join('、')} 嗎？`,
 
   select: '選擇',
-  open_hackathon_platform: '黑客松開放',
+  open_hackathon_platform: '黑客松開放平台',
   platform_tagline: '用標準化流程規劃、發布並擴展全球黑客松。',
   hero_title: '用現代化流程打造更亮眼的黑客松',
   hero_subtitle:
