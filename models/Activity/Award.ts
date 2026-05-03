@@ -1,7 +1,7 @@
 import { User, Base, Media, Team } from '@freecodecamp-chengdu/hop-service';
 import { ListModel, Stream, toggle } from 'mobx-restful';
 
-import { createListStream, InputData } from '../Base';
+import { createListStream, InputData, TableModel } from '../Base';
 import sessionStore from '../User/Session';
 
 export interface Award extends Record<'hackathonName' | 'name' | 'description', string>, Base {
@@ -11,7 +11,8 @@ export interface Award extends Record<'hackathonName' | 'name' | 'description', 
 }
 
 export interface AwardAssignment
-  extends Omit<Base, 'id'>,
+  extends
+    Omit<Base, 'id'>,
     Omit<Award, 'name' | 'quantity' | 'target' | 'pictures'>,
     Record<'assignmentId' | 'assigneeId' | 'awardId', number> {
   user?: User;
@@ -19,11 +20,11 @@ export interface AwardAssignment
   award: Award;
 }
 
-export class AwardModel extends Stream<Award>(ListModel) {
+export class AwardModel extends TableModel<Award> {
   client = sessionStore.client;
   currentAssignment?: AwardAssignmentModel;
 
-  constructor(baseURI: string) {
+  constructor(public baseURI: string) {
     super();
     this.baseURI = `${baseURI}/award`;
   }

@@ -1,8 +1,9 @@
 import { Base, User } from '@freecodecamp-chengdu/hop-service';
+import { clear } from 'idb-keyval';
 import { HTTPClient } from 'koajax';
 import { computed, observable } from 'mobx';
 import { BaseModel, persist, restore, toggle } from 'mobx-restful';
-import { buildURLData, setCookie } from 'web-utility';
+import { buildURLData, setCookie, sleep } from 'web-utility';
 
 import { API_HOST, isServer, JWT, token } from '../../configuration';
 
@@ -23,11 +24,11 @@ export interface SessionUser
 export class SessionModel extends BaseModel {
   client = ownClient;
 
-  restored = !isServer() && restore(this, 'Session');
-
   @persist()
   @observable
   accessor user: User | undefined;
+
+  restored = !isServer() && restore(this, 'Session');
 
   @computed
   get metaOAuth() {
@@ -57,11 +58,13 @@ export class SessionModel extends BaseModel {
     return body!;
   }
 
-  signOut(reload = false) {
+  async signOut(reload = false) {
     setCookie('token', '', { path: '/', expires: new Date() });
     setCookie('JWT', '', { path: '/', expires: new Date() });
 
     this.user = undefined;
+    await sleep();
+    await clear();
 
     if (reload) location.reload();
   }

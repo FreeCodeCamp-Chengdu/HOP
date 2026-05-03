@@ -84,7 +84,7 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
 
     res.setHeader(
       'Set-Cookie',
-      [`JWT=${user.token}`, 'Path=/', 'HttpOnly', isProduction ? 'Secure' : '', 'SameSite=Lax']
+      [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
         .filter(Boolean)
         .join('; '),
     );
@@ -96,14 +96,13 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
 const client_id = process.env.GITHUB_OAUTH_CLIENT_ID,
   client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET;
 
-if (!client_id || !client_secret) {
+if (!client_id || !client_secret)
   throw new ReferenceError(
     `[OAuth Config Error] Missing required environment variables:
   - GITHUB_OAUTH_CLIENT_ID
   - GITHUB_OAUTH_CLIENT_SECRET
 Please configure them in .env.local or environment settings.`,
   );
-}
 
 export const ProxyBaseURL = 'https://test.hackathon.fcc-cd.dev/proxy';
 

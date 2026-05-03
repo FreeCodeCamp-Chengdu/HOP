@@ -72,12 +72,12 @@ const UserDetailPage: FC<PublicUser> = observer(({ id, name, avatar }) => {
             <div className="text-center mb-3">
               {avatar ? (
                 <Image
-                  src={avatar}
-                  alt={name || 'avatar'}
+                  className="border border-4 border-white shadow"
                   roundedCircle
                   width={120}
                   height={120}
-                  className="border border-4 border-white shadow"
+                  src={avatar}
+                  alt={name || 'avatar'}
                 />
               ) : (
                 <div
@@ -112,11 +112,12 @@ const UserDetailPage: FC<PublicUser> = observer(({ id, name, avatar }) => {
 
                 {isOwner && (
                   <Button
+                    className="w-100 mt-4 rounded-3"
                     variant="outline-secondary"
                     href="https://github.com/settings/profile"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-100 mt-4 rounded-3"
+                    onClick={() => sessionStore.signOut()}
                   >
                     <Icon name="pencil" className="me-2" />
                     {t('edit_profile')}
