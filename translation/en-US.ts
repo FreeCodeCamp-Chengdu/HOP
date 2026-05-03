@@ -18,7 +18,7 @@ export default {
   sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `Are you sure to delete ${keys.join(', ')}?`,
 
   select: 'select',
-  open_hackathon_platform: 'Open Hackathon',
+  open_hackathon_platform: 'Open Hackathon Platform',
   platform_tagline: 'Plan, launch, and scale global hackathons together.',
   hero_title: 'Design bold hackathons with a modern workflow',
   hero_subtitle:

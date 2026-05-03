@@ -18,7 +18,7 @@ const UserBar = observer(() => {
         {t('create_hackathons')}
       </Button>
 
-      {user && (
+      {user ? (
         <Dropdown>
           <Dropdown.Toggle>{showName}</Dropdown.Toggle>
           <Dropdown.Menu>
@@ -27,15 +27,20 @@ const UserBar = observer(() => {
               title={t('edit_profile_tips')}
               target="_blank"
               href="https://github.com/settings/profile"
-              onClick={() => sessionStore.signOut(true)}
+              onClick={() => sessionStore.signOut()}
             >
               {t('edit_profile')}
             </Dropdown.Item>
+            <Dropdown.Divider />
             <Dropdown.Item onClick={() => sessionStore.signOut(true)}>
               {t('sign_out')}
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+      ) : (
+        <Button variant="outline-light" href="/user/me">
+          {t('sign_in')}
+        </Button>
       )}
       <LanguageMenu />
     </>

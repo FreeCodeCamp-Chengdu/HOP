@@ -13,8 +13,7 @@ import {
   withKoa,
 } from 'next-ssr-middleware';
 
-import { JWT_SECRET } from '../../configuration';
-import { VERCEL } from '../../configuration';
+import { isProduction, JWT_SECRET, VERCEL } from '../../configuration';
 import { SessionModel } from '../../models/User/Session';
 
 export type JWTContext = ParameterizedContext<
@@ -83,14 +82,27 @@ export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, 
 
     const user = await SessionModel.signInWithGitHub(token!);
 
-    res.setHeader('Set-Cookie', `JWT=${user.token}; Path=/`);
+    res.setHeader(
+      'Set-Cookie',
+      [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
+        .filter(Boolean)
+        .join('; '),
+    );
 
     return { props: { jwtPayload: JSON.parse(JSON.stringify(user)) } };
   }
 };
 
-const client_id = process.env.GITHUB_OAUTH_CLIENT_ID!,
-  client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET!;
+const client_id = process.env.GITHUB_OAUTH_CLIENT_ID,
+  client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET;
+
+if (!client_id || !client_secret)
+  throw new ReferenceError(
+    `[OAuth Config Error] Missing required environment variables:
+  - GITHUB_OAUTH_CLIENT_ID
+  - GITHUB_OAUTH_CLIENT_SECRET
+Please configure them in .env.local or environment settings.`,
+  );
 
 export const ProxyBaseURL = 'https://test.hackathon.fcc-cd.dev/proxy';
 

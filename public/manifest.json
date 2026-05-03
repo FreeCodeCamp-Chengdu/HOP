@@ -1,6 +1,6 @@
 {
-  "name": "开放黑客松平台",
-  "short_name": "开放黑客松",
+  "name": "黑客松开放平台",
+  "short_name": "开源黑客松",
   "start_url": ".",
   "description": "Open-source Hackathon Platform with Git-based Cloud Development Environment",
   "scope": "/",

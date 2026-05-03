@@ -17,6 +17,7 @@
     "array-unique-proposal": "^0.3.4",
     "classnames": "^2.5.1",
     "echarts-jsx": "^0.6.0",
+    "idb-keyval": "^6.2.2",
     "idea-react": "^2.2.2",
     "jsonwebtoken": "^9.0.3",
     "koa": "^3.2.0",

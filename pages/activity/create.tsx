@@ -30,12 +30,18 @@ const ActivityCreatePage: FC<JWTProps> = observer(() => {
         </hgroup>
       </section>
 
-      <section className="pb-5 bg-body-tertiary">
-        <Card className={classNames(styles['form-card'], 'border-0 mx-auto')}>
-          <Card.Body className="p-4 p-md-5">
-            <ActivityEditor />
-          </Card.Body>
-        </Card>
+      <section className="py-5 bg-body-tertiary">
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={10} xl={8}>
+              <Card className={classNames(styles['form-card'], 'border-0 rounded-4')}>
+                <Card.Body className="p-4 p-md-5">
+                  <ActivityEditor />
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </>
   );

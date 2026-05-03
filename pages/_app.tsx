@@ -20,6 +20,7 @@ import {
   loadSSRLanguage,
 } from '../models/Base/Translation';
 import styles from './_app.module.less';
+import sessionStore from '../models/User/Session';
 
 configure({ enforceActions: 'never' });
 
@@ -45,6 +46,8 @@ export default class CustomApp extends App<I18nProps> {
 
       if (tips) alert(tips);
     });
+
+    sessionStore.getProfile().catch(console.debug);
   }
 
   render() {
