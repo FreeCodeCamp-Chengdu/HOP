@@ -10,7 +10,7 @@ export class UserModel extends TableModel<User, UserFilter> {
   baseURI = 'user';
 
   async getUserTopList() {
-    const { body } = await this.client.get<UserRankListChunk>(`activity-log/user-rank`);
+    const { body } = await this.client.get<UserRankListChunk>('activity-log/user-rank');
     return body!.list;
   }
 }

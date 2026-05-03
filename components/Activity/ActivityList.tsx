@@ -13,6 +13,7 @@ import { ActivityCard, ActivityCardProps } from './ActivityCard';
 export interface ActivityListLayoutProps
   extends XScrollListProps<Hackathon>,
     Pick<ActivityCardProps, 'onPublish' | 'onDelete'> {
+  store?: ActivityModel;
   type?: ActivityListType;
   size?: 'sm' | 'lg';
   userId?: number;
@@ -29,7 +30,7 @@ export const ActivityListLayout: FC<ActivityListLayoutProps> = ({
     className="g-4"
     xs={1}
     sm={2}
-    {...(size === 'sm' ? {} : !size ? { lg: 3, xxl: 4 } : { lg: 4, xxl: 6 })}
+    {...(size === 'sm' ? {} : size ? { lg: 4, xxl: 6 } : { lg: 3, xxl: 4 })}
   >
     {defaultData.map(item => (
       <Col key={item.name + item.id}>
@@ -49,7 +50,7 @@ export const ActivityListLayout: FC<ActivityListLayoutProps> = ({
 export type ActivityListProps = ActivityListLayoutProps;
 
 export default class ActivityList extends PureComponent<ActivityListProps> {
-  store = new ActivityModel();
+  store = this.props.store || new ActivityModel();
 
   componentDidMount() {
     if (this.props.type === 'admin' && !platformAdmin.isPlatformAdmin)

@@ -29,11 +29,13 @@ import { TeamListLayout } from '../../../components/Team/TeamList';
 import { TeamRank } from '../../../components/Team/TeamRank';
 import { isServer } from '../../../configuration';
 import activityStore, { ActivityModel } from '../../../models/Activity';
-import { i18n, I18nContext } from '../../../models/Base/Translation';
+import { I18nContext, i18n } from '../../../models/Base/Translation';
 import sessionStore from '../../../models/User/Session';
 import { convertDatetime } from '../../../utils/time';
 
-const ChinaMap = dynamic(() => import('../../../components/ChinaMap'), { ssr: false });
+const ChinaMap = dynamic(() => import('../../../components/ChinaMap'), {
+  ssr: false,
+});
 
 interface ActivityPageProps {
   activity: Hackathon;
@@ -51,7 +53,9 @@ export const getServerSideProps = compose<{ name?: string }, ActivityPageProps>(
       activityStore.organizationOf(name).getList(),
     ]);
 
-    return { props: JSON.parse(JSON.stringify({ activity, organizationList })) };
+    return {
+      props: JSON.parse(JSON.stringify({ activity, organizationList })),
+    };
   },
 );
 
@@ -273,14 +277,8 @@ export default class ActivityPage extends ObservedComponent<ActivityPageProps, t
         <Row className="mt-3">
           <Col lg={9} md={12} sm={12} className="mb-3">
             <Tabs defaultActiveKey="detail" id="activity-detail-tabs">
-              <Tab
-                as="article"
-                className="pt-2"
-                eventKey="detail"
-                title={t('hackathon_detail')}
-                dangerouslySetInnerHTML={{ __html: detail }}
-              >
-                {/*todo update no data*/}
+              <Tab className="pt-2" eventKey="detail" title={t('hackathon_detail')}>
+                <article dangerouslySetInnerHTML={{ __html: detail }} />
               </Tab>
               <Tab className="pt-2" eventKey="log" title={t('latest_news')}>
                 <AnnouncementList store={myMessage} />
@@ -304,15 +302,15 @@ export default class ActivityPage extends ObservedComponent<ActivityPageProps, t
                   renderList={allItems => <TeamListLayout defaultData={allItems} />}
                 />
               </Tab>
-            </Tabs>
-            <Tab eventKey="award" title={t('award')} className="pt-2">
-              <AwardList store={this.awardStore} />
-            </Tab>
-            {ActivityModel.isEvaluatable(activity) && (
-              <Tab eventKey="team-rank" title={t('works_awards')} className="pt-2">
-                <TeamRank activityName={name} teamStore={this.teamStore} />
+              <Tab eventKey="award" title={t('award')} className="pt-2">
+                <AwardList store={this.awardStore} />
               </Tab>
-            )}
+              {ActivityModel.isEvaluatable(activity) && (
+                <Tab eventKey="team-rank" title={t('works_awards')} className="pt-2">
+                  <TeamRank activityName={name} teamStore={this.teamStore} />
+                </Tab>
+              )}
+            </Tabs>
           </Col>
           <Col className="d-flex flex-column">
             {organizationList.length > 0 && (

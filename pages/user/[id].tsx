@@ -8,9 +8,10 @@ import { FC, useContext, useEffect, useState } from 'react';
 import { Badge, Button, Card, Col, Container, Image, Nav, Row, Tab } from 'react-bootstrap';
 
 import { PageHead } from '../../components/layout/PageHead';
+import { UserActivityModel } from '../../models/Activity';
 import { I18nContext } from '../../models/Base/Translation';
-import sessionStore from '../../models/User/Session';
 import userStore from '../../models/User';
+import sessionStore from '../../models/User/Session';
 import styles from './[id].module.less';
 
 const ActivityList = dynamic(() => import('../../components/Activity/ActivityList'), {
@@ -40,6 +41,7 @@ const UserDetailPage: FC<PublicUser> = observer(({ id, name, avatar }) => {
   const { user } = sessionStore;
   const [isOwner, setIsOwner] = useState(false);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: user?.id is redundant when id is already listed
   useEffect(() => {
     setIsOwner(user?.id === id);
   }, [id, user?.id]);
@@ -154,13 +156,13 @@ const UserDetailPage: FC<PublicUser> = observer(({ id, name, avatar }) => {
 
                   <Tab.Content>
                     <Tab.Pane eventKey="enrolled">
-                      <ActivityList type="enrolled" userId={id} />
+                      <ActivityList store={new UserActivityModel(id, 'enrollee')} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="created">
-                      <ActivityList type="created" userId={id} />
+                      <ActivityList store={new UserActivityModel(id, 'creator')} />
                     </Tab.Pane>
                     <Tab.Pane eventKey="admin">
-                      <ActivityList type="admin" userId={id} />
+                      <ActivityList store={new UserActivityModel(id, 'staff')} />
                     </Tab.Pane>
                   </Tab.Content>
                 </Tab.Container>
