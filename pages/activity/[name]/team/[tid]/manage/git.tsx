@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { ScrollList } from 'mobx-restful-table';
 import { compose, router } from 'next-ssr-middleware';
-import { FC, FormEvent, useContext } from 'react';
+import { FC, SubmitEvent, useContext } from 'react';
 import { Button, Container, Dropdown, DropdownButton, Form, Modal } from 'react-bootstrap';
 import { buildURLData, formToJSON } from 'web-utility';
 
@@ -19,7 +19,7 @@ import {
   TeamManageFrame,
 } from '../../../../../../components/Team/TeamManageFrame';
 import activityStore from '../../../../../../models/Activity';
-import { i18n, I18nContext } from '../../../../../../models/Base/Translation';
+import { I18nContext, i18n } from '../../../../../../models/Base/Translation';
 import sessionStore from '../../../../../../models/User/Session';
 import { sessionGuard } from '../../../../../api/core';
 
@@ -57,7 +57,7 @@ class GitView extends ObservedComponent<TeamManageBaseProps, typeof i18n> {
   @observable
   accessor creatorOpen = false;
 
-  handleCreate = async (event: FormEvent<HTMLFormElement>) => {
+  handleCreate = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
