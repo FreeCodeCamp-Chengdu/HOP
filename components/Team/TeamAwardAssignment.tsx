@@ -13,7 +13,7 @@ export const TeamAwardAssignmentLayout: FC<TeamAwardAssignmentLayoutProps> = ({
 }) => (
   <>
     <ol>
-      {defaultData.map(({ updatedAt, id, description, award: { name } }) => (
+      {defaultData.map(({ id, award: { name } }) => (
         <li key={id} className="list-unstyled">
           {name}
         </li>

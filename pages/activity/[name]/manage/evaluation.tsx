@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
-import { NewData } from 'mobx-restful';
 import { compose, RouteProps, router } from 'next-ssr-middleware';
 import { FC, FormEvent, useContext } from 'react';
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
@@ -9,7 +8,7 @@ import { formToJSON } from 'web-utility';
 import { ActivityManageFrame } from '../../../../components/Activity/ActivityManageFrame';
 import { TeamAwardList } from '../../../../components/Team/TeamAwardList';
 import activityStore from '../../../../models/Activity';
-import { AwardAssignment } from '../../../../models/Activity/Award';
+import { AwardTarget } from '../../../../models/Activity/Award';
 import { i18n, I18nContext } from '../../../../models/Base/Translation';
 import { sessionGuard } from '../../../api/core';
 
@@ -53,14 +52,13 @@ class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n
 
     const { awardStore, store } = this,
       form = event.currentTarget,
-      data = formToJSON<NewData<AwardAssignment>>(form);
+      { award: awardId } = formToJSON<{ award: number }>(form);
 
-    await awardStore.getOne(data.awardId!);
+    await awardStore.getOne(awardId);
 
-    const assignmentStore = awardStore.assignmentOf(data.awardId!),
-      assigneeId = store.currentOne.id;
+    const assignmentStore = awardStore.assignmentOf(awardId);
 
-    await assignmentStore.updateOne({ assigneeId });
+    await assignmentStore.updateOne({ team: store.currentOne });
     await store.refreshList();
 
     store.clearCurrent();
@@ -93,14 +91,14 @@ class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n
         <ul className="list-unstyled">
           {allItems.map(
             ({ id, name, quantity, target }) =>
-              target === 'team' && (
+              target === AwardTarget.Team && (
                 <li key={id} className="d-flex mx-2 my-3">
                   {awardTeamId ? (
                     <Form.Check
                       key={id}
                       type="radio"
                       label={name}
-                      name="awardId"
+                      name="award"
                       value={id}
                       required
                     />

@@ -5,12 +5,12 @@ import { ObservedComponent } from 'mobx-react-helper';
 import { Column, RestTable } from 'mobx-restful-table';
 import { Image } from 'react-bootstrap';
 
-import { Award, AwardModel } from '../../models/Activity/Award';
+import { Award, AwardModel, AwardTarget } from '../../models/Activity/Award';
 import { i18n, I18nContext } from '../../models/Base/Translation';
 
 export const AwardTargetName = ({ t }: typeof i18n) => ({
-  individual: t('personal'),
-  team: t('team'),
+  [AwardTarget.Individual]: t('personal'),
+  [AwardTarget.Team]: t('team'),
 });
 
 @observer
@@ -27,7 +27,7 @@ export class AwardList extends ObservedComponent<{ store: AwardModel }, typeof i
       {
         key: 'target',
         renderHead: t('type'),
-        renderBody: ({ target }) => AwardTargetName(i18n)[target],
+        renderBody: ({ target }) => target && AwardTargetName(i18n)[target],
       },
       {
         key: 'pictures',
