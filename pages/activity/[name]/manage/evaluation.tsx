@@ -52,11 +52,11 @@ class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n
 
     const { awardStore, store } = this,
       form = event.currentTarget,
-      { award: awardId } = formToJSON<{ award: number }>(form);
+      { award } = formToJSON<{ award: number }>(form);
 
-    await awardStore.getOne(awardId);
+    await awardStore.getOne(award);
 
-    const assignmentStore = awardStore.assignmentOf(awardId);
+    const assignmentStore = awardStore.assignmentOf(award);
 
     await assignmentStore.updateOne({ team: store.currentOne });
     await store.refreshList();

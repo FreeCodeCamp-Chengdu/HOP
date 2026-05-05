@@ -27,7 +27,7 @@ export class AwardList extends ObservedComponent<{ store: AwardModel }, typeof i
       {
         key: 'target',
         renderHead: t('type'),
-        renderBody: ({ target }) => target && AwardTargetName(i18n)[target],
+        renderBody: ({ target }) => target ? (AwardTargetName(i18n)[target] ?? '') : '',
       },
       {
         key: 'pictures',
