@@ -99,6 +99,14 @@ class ActivityQuestionnaireEditor extends ObservedComponent<
   };
 
   fillWithDefaults = () => {
+    const { t } = this.observedContext;
+
+    if (
+      activityStore.questionnaire.length > 0 &&
+      !confirm(t('confirm_to_delete_questionnaire'))
+    )
+      return;
+
     const defaultQuestions = questions(this.observedContext).map((q, i) => ({
       ...q,
       id: String(i + 1),
