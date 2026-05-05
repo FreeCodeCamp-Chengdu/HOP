@@ -353,5 +353,6 @@ export default {
   delete_questionnaire_success: '刪除問卷成功！',
   preview_questionnaire: '預覽問卷',
   confirm_to_delete_questionnaire: '確定刪除該問卷？',
+  fill_default_questions: '填入預設問題',
   for_example: (example: string) => '例如：' + example,
 } as const;

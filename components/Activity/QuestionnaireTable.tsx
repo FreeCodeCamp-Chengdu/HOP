@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import { FC, useContext } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
 
-import { Question } from '../../models/Activity/Question';
+import { Question, QuestionType } from '../../models/Activity/Question';
 import { i18n, I18nContext } from '../../models/Base/Translation';
 
 export interface QuestionnaireTableProps {
@@ -35,7 +35,7 @@ export const QuestionnaireTable: FC<QuestionnaireTableProps> = observer(
           </thead>
           <tbody>
             {questionnaire.map(
-              ({ id, title, options, multiple, type = 'text', required }, index, { length }) => (
+              ({ id, title, options, multiple, type = QuestionType.Text, required }, index, { length }) => (
                 <tr key={id}>
                   <td>{index + 1}</td>
                   <td>{id}</td>
