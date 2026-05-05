@@ -1,6 +1,5 @@
+import type { AwardAssignment } from '@freecodecamp-chengdu/hop-service';
 import { FC } from 'react';
-
-import { AwardAssignment } from '../../models/Activity/Award';
 import { XScrollListProps } from '../layout/ScrollList';
 
 export interface TeamAwardAssignmentLayoutProps extends XScrollListProps<AwardAssignment> {

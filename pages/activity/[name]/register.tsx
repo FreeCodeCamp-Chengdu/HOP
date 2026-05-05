@@ -1,4 +1,4 @@
-import { Answer } from '@freecodecamp-chengdu/hop-service';
+import type { Answer, Question } from '@freecodecamp-chengdu/hop-service';
 import { textJoin } from 'mobx-i18n';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
@@ -10,7 +10,6 @@ import { formToJSON } from 'web-utility';
 import { QuestionnaireForm } from '../../../components/Activity/QuestionnairePreview';
 import { PageHead } from '../../../components/layout/PageHead';
 import activityStore, { ActivityModel } from '../../../models/Activity';
-import { Question } from '../../../models/Activity/Question';
 import { i18n, I18nContext } from '../../../models/Base/Translation';
 import { sessionGuard } from '../../api/core';
 

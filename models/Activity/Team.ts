@@ -1,4 +1,5 @@
-import {
+import type {
+  AwardAssignment,
   BaseFilter,
   Team as _Team,
   TeamMember,
@@ -15,7 +16,6 @@ import { isServer } from '../../configuration';
 import { createListStream, Filter, InputData, TableModel } from '../Base';
 import { WorkspaceModel } from '../Git';
 import sessionStore from '../User/Session';
-import { AwardAssignment } from './Award';
 import { EvaluationModel } from './Evaluation';
 
 export interface Team extends _Team {

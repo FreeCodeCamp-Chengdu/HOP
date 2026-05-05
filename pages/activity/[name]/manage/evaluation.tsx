@@ -8,7 +8,6 @@ import { formToJSON } from 'web-utility';
 import { ActivityManageFrame } from '../../../../components/Activity/ActivityManageFrame';
 import { TeamAwardList } from '../../../../components/Team/TeamAwardList';
 import activityStore from '../../../../models/Activity';
-import { AwardTarget } from '../../../../models/Activity/Award';
 import { i18n, I18nContext } from '../../../../models/Base/Translation';
 import { sessionGuard } from '../../../api/core';
 
@@ -91,7 +90,7 @@ class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n
         <ul className="list-unstyled">
           {allItems.map(
             ({ id, name, quantity, target }) =>
-              target === AwardTarget.Team && (
+              target === 'team' && (
                 <li key={id} className="d-flex mx-2 my-3">
                   {awardTeamId ? (
                     <Form.Check

@@ -1,3 +1,4 @@
+import type { Award } from '@freecodecamp-chengdu/hop-service';
 import { Loading } from 'idea-react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -5,12 +6,12 @@ import { ObservedComponent } from 'mobx-react-helper';
 import { Column, RestTable } from 'mobx-restful-table';
 import { Image } from 'react-bootstrap';
 
-import { Award, AwardModel, AwardTarget } from '../../models/Activity/Award';
+import { AwardModel } from '../../models/Activity/Award';
 import { i18n, I18nContext } from '../../models/Base/Translation';
 
 export const AwardTargetName = ({ t }: typeof i18n) => ({
-  [AwardTarget.Individual]: t('personal'),
-  [AwardTarget.Team]: t('team'),
+  individual: t('personal'),
+  team: t('team'),
 });
 
 @observer

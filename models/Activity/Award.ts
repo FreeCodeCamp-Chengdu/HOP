@@ -1,14 +1,8 @@
-import {
-  Award,
-  AwardAssignment,
-  AwardTarget,
-} from '@freecodecamp-chengdu/hop-service';
+import type { Award, AwardAssignment } from '@freecodecamp-chengdu/hop-service';
 import { ListModel, Stream, toggle } from 'mobx-restful';
 
 import { createListStream, InputData, TableModel } from '../Base';
 import sessionStore from '../User/Session';
-
-export { Award, AwardAssignment, AwardTarget };
 
 export class AwardModel extends TableModel<Award> {
   client = sessionStore.client;

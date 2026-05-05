@@ -1,3 +1,4 @@
+import type { Award } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { NewData } from 'mobx-restful';
@@ -9,7 +10,6 @@ import { formToJSON } from 'web-utility';
 import { ActivityManageFrame } from '../../../../components/Activity/ActivityManageFrame';
 import { AwardList, AwardTargetName } from '../../../../components/Activity/AwardList';
 import activityStore from '../../../../models/Activity';
-import { Award } from '../../../../models/Activity/Award';
 import { i18n, I18nContext } from '../../../../models/Base/Translation';
 import { sessionGuard } from '../../../api/core';
 

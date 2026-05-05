@@ -1,4 +1,4 @@
-import { Question } from '@freecodecamp-chengdu/hop-service';
+import type { Question } from '@freecodecamp-chengdu/hop-service';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
@@ -107,9 +107,9 @@ class ActivityQuestionnaireEditor extends ObservedComponent<
     )
       return;
 
-    const defaultQuestions = questions(this.observedContext).map((q, i) => ({
-      ...q,
-      id: String(i + 1),
+    const defaultQuestions = questions(this.observedContext).map((question, index) => ({
+      ...question,
+      id: String(index + 1),
     }));
 
     return activityStore.editQuestionnaireStatus(defaultQuestions);

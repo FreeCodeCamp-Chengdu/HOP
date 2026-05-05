@@ -1,8 +1,7 @@
+import type { Question, QuestionType } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { FC, useContext } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
-
-import { Question, QuestionType } from '../../models/Activity/Question';
 import { i18n, I18nContext } from '../../models/Base/Translation';
 
 export interface QuestionnaireTableProps {
@@ -35,7 +34,7 @@ export const QuestionnaireTable: FC<QuestionnaireTableProps> = observer(
           </thead>
           <tbody>
             {questionnaire.map(
-              ({ id, title, options, multiple, type = QuestionType.Text, required }, index, { length }) => (
+              ({ id, title, options, multiple, type = 'text' as QuestionType, required }, index, { length }) => (
                 <tr key={id}>
                   <td>{index + 1}</td>
                   <td>{id}</td>

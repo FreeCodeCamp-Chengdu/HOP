@@ -1,8 +1,7 @@
+import type { Question } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { Container, Form, Row } from 'react-bootstrap';
-
-import { Question } from '../../models/Activity/Question';
 import { i18n, I18nContext } from '../../models/Base/Translation';
 
 export interface QuestionnaireFormProps {
