@@ -2,9 +2,11 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { verify } from 'jsonwebtoken';
 import { observer } from 'mobx-react';
+import { GetServerSideProps } from 'next';
 import { compose } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
 import { Button, Container } from 'react-bootstrap';
+import { buildURLData } from 'web-utility';
 
 import { PageHead } from '../../components/layout/PageHead';
 import { JWT_SECRET } from '../../configuration';
@@ -13,53 +15,53 @@ import { GITHUB_OAUTH_SCOPES, githubSigner, jwtSigner } from '../api/core';
 
 interface SignInPageProps {
   callback: string;
-  githubOAuthURL: string;
+  origin: string;
+  clientId: string;
 }
 
-export const getServerSideProps = compose<SignInPageProps>(
-  async (context, next) => {
-    const { query, req } = context;
-    const callback = (query.callback as string) || '/';
+export const getServerSideProps: GetServerSideProps<SignInPageProps> = async context => {
+  const { query, req } = context;
+  const callback = (query.callback as string) || '/';
 
-    // If there is a `code` param, this is the OAuth callback — run the auth
-    // middleware chain (githubSigner exchanges the code for a token cookie,
-    // jwtSigner then signs a JWT and returns jwtPayload in props).
-    if (query.code) {
-      const result = await next();
+  // If there is a `code` param, this is the OAuth callback — run the auth
+  // chain for the specific platform (githubSigner exchanges the code for a
+  // token cookie, jwtSigner then signs a JWT and returns jwtPayload in props).
+  if (query.code && query.OAuth === 'GitHub') {
+    const result = await compose(jwtSigner, githubSigner)(context);
 
-      if ('props' in result && (result.props as any).jwtPayload)
-        return { redirect: { destination: callback, permanent: false } };
-
-      return result;
-    }
-
-    // If the user is already logged in, skip the sign-in page.
-    const { JWT: jwtCookie = '' } = req.cookies;
-
-    try {
-      verify(jwtCookie, JWT_SECRET!);
+    if ('props' in result && (result.props as any).jwtPayload)
       return { redirect: { destination: callback, permanent: false } };
-    } catch {
-      // Not logged in — fall through to render the sign-in page.
-    }
 
-    // Build the GitHub OAuth URL pointing back to this page so the callback
-    // lands here and is processed by the middleware chain above.
-    const proto =
-      (req.headers['x-forwarded-proto'] as string) ||
-      ((req as any).socket?.encrypted ? 'https' : 'http');
-    const origin = `${proto}://${req.headers.host}`;
-    const pageUrl = `${origin}/user/signIn?callback=${encodeURIComponent(callback)}`;
-    const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(process.env.GITHUB_OAUTH_CLIENT_ID!)}&redirect_uri=${encodeURIComponent(pageUrl)}&scope=${encodeURIComponent(GITHUB_OAUTH_SCOPES.join(','))}`;
+    return result as any;
+  }
 
-    return { props: { callback, githubOAuthURL } };
-  },
-  jwtSigner,
-  githubSigner,
-);
+  // If the user is already logged in, skip the sign-in page.
+  const { JWT: jwtCookie = '' } = req.cookies;
 
-const SignInPage: FC<SignInPageProps> = observer(({ githubOAuthURL }) => {
+  try {
+    verify(jwtCookie, JWT_SECRET!);
+    return { redirect: { destination: callback, permanent: false } };
+  } catch {
+    // Not logged in — fall through to render the sign-in page.
+  }
+
+  const proto =
+    (req.headers['x-forwarded-proto'] as string) ||
+    ((req as any).socket?.encrypted ? 'https' : 'http');
+  const origin = `${proto}://${req.headers.host}`;
+
+  return { props: { callback, origin, clientId: process.env.GITHUB_OAUTH_CLIENT_ID! } };
+};
+
+const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }) => {
   const { t } = useContext(I18nContext);
+
+  const githubRedirectURI = `${origin}/user/signIn?${buildURLData({ callback, OAuth: 'GitHub' })}`;
+  const githubOAuthURL = `https://github.com/login/oauth/authorize?${buildURLData({
+    client_id: clientId,
+    redirect_uri: githubRedirectURI,
+    scope: GITHUB_OAUTH_SCOPES.join(' '),
+  })}`;
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center min-vh-100 gap-3">
