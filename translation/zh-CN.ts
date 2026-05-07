@@ -354,6 +354,6 @@ export default {
   preview_questionnaire: '问卷预览',
   confirm_to_delete_questionnaire: '确认删除该问卷？',
   fill_default_questions: '填入默认问题',
-  sign_in_with_github: '用 GitHub 账号登录',
+  sign_in_with: (platform: string) => `用 ${platform} 账号登录`,
   for_example: (example: string) => '例如：' + example,
 } as const;

@@ -38,7 +38,7 @@ const UserBar = observer(() => {
           </Dropdown.Menu>
         </Dropdown>
       ) : (
-        <Button variant="outline-light" href="/user/signIn">
+        <Button variant="outline-light" href="/user/me">
           {t('sign_in')}
         </Button>
       )}
