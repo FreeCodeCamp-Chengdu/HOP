@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<SignInPageProps> = async con
     if ('props' in result && (result.props as any).jwtPayload)
       return { redirect: { destination: callback, permanent: false } };
 
-    return result as any;
+    if ('redirect' in result || 'notFound' in result) return result;
   }
 
   // If the user is already logged in, skip the sign-in page.
@@ -60,7 +60,7 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }
   const githubOAuthURL = `https://github.com/login/oauth/authorize?${buildURLData({
     client_id: clientId,
     redirect_uri: githubRedirectURI,
-    scope: GITHUB_OAUTH_SCOPES.join(' '),
+    scope: GITHUB_OAUTH_SCOPES.join(','),
   })}`;
 
   return (
