@@ -359,5 +359,6 @@ export default {
   preview_questionnaire: 'Preview the questionnaire',
   confirm_to_delete_questionnaire: 'Confirm to delete the questionnaire?',
   fill_default_questions: 'Fill with default questions',
+  sign_in_with_github: 'Sign in with GitHub',
   for_example: (example: string) => 'E.g., ' + example,
 } as const;

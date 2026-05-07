@@ -113,4 +113,23 @@ export const githubSigner = githubOAuth2({
   scopes: ['user:email', 'read:user', 'public_repo', 'read:project'],
 });
 
-export const sessionGuard = compose<DataObject, JWTProps<User>>(jwtSigner, githubSigner);
+export const sessionGuard = compose<DataObject, JWTProps<User>>(async ({ req }, next) => {
+  const { JWT = '' } = req.cookies;
+
+  try {
+    const jwtPayload = verify(JWT, JWT_SECRET!) as User;
+    const nextResult = await next();
+
+    if ('props' in nextResult) {
+      return { props: { ...nextResult.props, jwtPayload } };
+    }
+    return nextResult;
+  } catch {
+    return {
+      redirect: {
+        destination: `/user/signIn?callback=${encodeURIComponent(req.url || '/')}`,
+        permanent: false,
+      },
+    };
+  }
+});
