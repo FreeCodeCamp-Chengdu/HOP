@@ -7,7 +7,7 @@ import { Button, Container } from 'react-bootstrap';
 
 import { PageHead } from '../../components/layout/PageHead';
 import { I18nContext } from '../../models/Base/Translation';
-import { githubSigner, jwtSigner } from '../api/core';
+import { GITHUB_OAUTH_SCOPES, githubSigner, jwtSigner } from '../api/core';
 
 interface SignInPageProps {
   callback: string;
@@ -30,8 +30,7 @@ export const getServerSideProps = compose<SignInPageProps>(
       ((req as any).socket?.encrypted ? 'https' : 'http');
     const origin = `${proto}://${req.headers.host}`;
     const pageUrl = `${origin}/user/signIn?callback=${encodeURIComponent(callback)}`;
-    const scopes = 'user:email,read:user,public_repo,read:project';
-    const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_OAUTH_CLIENT_ID}&redirect_uri=${encodeURIComponent(pageUrl)}&scope=${scopes}`;
+    const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(process.env.GITHUB_OAUTH_CLIENT_ID!)}&redirect_uri=${encodeURIComponent(pageUrl)}&scope=${encodeURIComponent(GITHUB_OAUTH_SCOPES.join(','))}`;
 
     return { props: { callback, githubOAuthURL } };
   },

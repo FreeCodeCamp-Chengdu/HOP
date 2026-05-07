@@ -106,11 +106,13 @@ Please configure them in .env.local or environment settings.`,
 
 export const ProxyBaseURL = 'https://test.hackathon.fcc-cd.dev/proxy';
 
+export const GITHUB_OAUTH_SCOPES = ['user:email', 'read:user', 'public_repo', 'read:project'];
+
 export const githubSigner = githubOAuth2({
   rootBaseURL: VERCEL ? undefined : `${ProxyBaseURL}/github.com/`,
   client_id,
   client_secret,
-  scopes: ['user:email', 'read:user', 'public_repo', 'read:project'],
+  scopes: GITHUB_OAUTH_SCOPES,
 });
 
 export const sessionGuard = compose<DataObject, JWTProps<User>>(async ({ req }, next) => {
