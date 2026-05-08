@@ -1,59 +1,80 @@
-import { User } from '@freecodecamp-chengdu/hop-service';
-import { verify } from 'jsonwebtoken';
 import { observer } from 'mobx-react';
 import { GetServerSideProps } from 'next';
-import { JWTProps } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
-import { Button, Container, Form, InputGroup } from 'react-bootstrap';
+import { Alert, Button, Container, Form, InputGroup } from 'react-bootstrap';
+import { buildURLData } from 'web-utility';
 
 import { PageHead } from '../../../components/layout/PageHead';
-import { JWT_SECRET } from '../../../configuration';
+import { isProduction } from '../../../configuration';
 import { I18nContext } from '../../../models/Base/Translation';
-import { cnbSigner } from '../../api/core';
 
 interface CNBOAuthPageProps {
   callback: string;
+  error?: string;
 }
 
+const CNB_API_BASE = 'https://api.cnb.cool';
+
 export const getServerSideProps: GetServerSideProps<CNBOAuthPageProps> = async context => {
-  const { query, req } = context;
+  const { query, req, res } = context;
   const callback = (query.callback as string) || '/';
 
-  // If the user is already logged in, redirect to the callback page.
-  const { JWT: jwtCookie = '' } = req.cookies;
-
-  try {
-    verify(jwtCookie, JWT_SECRET!);
-    return { redirect: { destination: callback, permanent: false } };
-  } catch {
-    // Not logged in — continue below.
+  // Step 1: Form submitted with a token — store it in cookie, redirect to self to trigger validation.
+  const { token } = query;
+  if (token) {
+    res.setHeader(
+      'Set-Cookie',
+      [`CNB_token=${token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
+        .filter(Boolean)
+        .join('; '),
+    );
+    return {
+      redirect: {
+        destination: `/user/OAuth/CNB?${buildURLData({ callback })}`,
+        permanent: false,
+      },
+    };
   }
 
-  // If the form was submitted with a token, attempt CNB login.
-  if (query.token) {
-    const result = await cnbSigner(context, async () => ({ props: {} as JWTProps<User> }));
-
-    if ('props' in result && (result.props as JWTProps<User>).jwtPayload)
-      return { redirect: { destination: callback, permanent: false } };
-
-    if ('redirect' in result || 'notFound' in result) return result as any;
+  // Step 2: CNB_token cookie present — validate against the CNB API.
+  const { CNB_token } = req.cookies;
+  if (CNB_token) {
+    let errorMessage: string | undefined;
+    try {
+      const response = await fetch(`${CNB_API_BASE}/user`, {
+        headers: { Authorization: `Bearer ${CNB_token}` },
+      });
+      if (response.ok) {
+        // Valid token — let the sign-in page mint the JWT.
+        return { redirect: { destination: callback, permanent: false } };
+      }
+      const body = await response.json().catch(() => ({}));
+      errorMessage = (body as { message?: string }).message || response.statusText;
+    } catch (error) {
+      errorMessage = (error as Error).message;
+    }
+    // Invalid — clear the cookie and show the error.
+    res.setHeader(
+      'Set-Cookie',
+      ['CNB_token=', 'Path=/', 'Expires=Thu, 01 Jan 1970 00:00:00 GMT'].join('; '),
+    );
+    return { props: { callback, error: errorMessage } };
   }
 
   return { props: { callback } };
 };
 
-const CNBOAuthPage: FC<CNBOAuthPageProps> = observer(({ callback }) => {
+const CNBOAuthPage: FC<CNBOAuthPageProps> = observer(({ callback, error }) => {
   const { t } = useContext(I18nContext);
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center min-vh-100 gap-3">
-      <PageHead title={t('sign_in_with')('CNB')} />
-      <h1>{t('sign_in_with')('CNB')}</h1>
-      <Form method="GET" className="d-flex flex-column gap-3 w-100" style={{ maxWidth: 400 }}>
+      <PageHead title={t('sign_in_with', 'CNB')} />
+      <h1>{t('sign_in_with', 'CNB')}</h1>
+      <Form className="d-flex flex-column gap-3 w-100" style={{ maxWidth: 400 }}>
         <input type="hidden" name="callback" value={callback} />
         <InputGroup>
           <Form.Control
-            type="text"
             name="token"
             placeholder={t('personal_access_token')}
             required
@@ -69,6 +90,7 @@ const CNBOAuthPage: FC<CNBOAuthPageProps> = observer(({ callback }) => {
             {t('generate_token')}
           </Button>
         </InputGroup>
+        {error && <Alert variant="danger">{error}</Alert>}
         <Button type="submit">{t('sign_in')}</Button>
       </Form>
     </Container>
@@ -76,3 +98,4 @@ const CNBOAuthPage: FC<CNBOAuthPageProps> = observer(({ callback }) => {
 });
 
 export default CNBOAuthPage;
+

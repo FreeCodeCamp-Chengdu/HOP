@@ -9,8 +9,9 @@ import { Button, Container } from 'react-bootstrap';
 import { buildURLData } from 'web-utility';
 
 import { PageHead } from '../../components/layout/PageHead';
-import { JWT_SECRET } from '../../configuration';
+import { isProduction, JWT_SECRET } from '../../configuration';
 import { I18nContext } from '../../models/Base/Translation';
+import { SessionModel } from '../../models/User/Session';
 import { GITHUB_OAUTH_SCOPES, githubSigner, jwtSigner } from '../api/core';
 
 interface SignInPageProps {
@@ -20,12 +21,10 @@ interface SignInPageProps {
 }
 
 export const getServerSideProps: GetServerSideProps<SignInPageProps> = async context => {
-  const { query, req } = context;
+  const { query, req, res } = context;
   const callback = (query.callback as string) || '/';
 
-  // If there is a `code` param, this is the OAuth callback — run the auth
-  // chain for the specific platform (githubSigner exchanges the code for a
-  // token cookie, jwtSigner then signs a JWT and returns jwtPayload in props).
+  // GitHub OAuth callback — exchange code for JWT.
   if (query.code && query.OAuth === 'GitHub') {
     const result = await compose(jwtSigner, githubSigner)(context);
 
@@ -33,6 +32,28 @@ export const getServerSideProps: GetServerSideProps<SignInPageProps> = async con
       return { redirect: { destination: callback, permanent: false } };
 
     if ('redirect' in result || 'notFound' in result) return result;
+  }
+
+  // CNB OAuth callback — exchange CNB_token cookie for JWT.
+  if (query.OAuth === 'CNB') {
+    const { CNB_token } = req.cookies;
+
+    if (CNB_token) {
+      try {
+        const user = await SessionModel.signInWithCNB(CNB_token);
+
+        res.setHeader(
+          'Set-Cookie',
+          [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
+            .filter(Boolean)
+            .join('; '),
+        );
+        return { redirect: { destination: callback, permanent: false } };
+      } catch (error) {
+        console.error('[CNB signIn]', (error as Error).message);
+        // Fall through to render the sign-in page.
+      }
+    }
   }
 
   // If the user is already logged in, skip the sign-in page.
@@ -63,6 +84,10 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }
     scope: GITHUB_OAUTH_SCOPES.join(','),
   })}`;
 
+  const cnbPageURL = `/user/OAuth/CNB?${buildURLData({
+    callback: `/user/signIn?${buildURLData({ callback, OAuth: 'CNB' })}`,
+  })}`;
+
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center min-vh-100 gap-3">
       <PageHead title={t('sign_in')} />
@@ -78,16 +103,17 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }
       </Button>
       <Button
         as="a"
-        href={`/user/OAuth/CNB?${buildURLData({ callback })}`}
+        href={cnbPageURL}
         size="lg"
         variant="outline-dark"
         className="d-flex align-items-center gap-2"
       >
         <img src="https://cnb.cool/favicon.ico" width={20} height={20} alt="CNB" />
-        {t('sign_in_with')('CNB')}
+        {t('sign_in_with', 'CNB')}
       </Button>
     </Container>
   );
 });
 
 export default SignInPage;
+

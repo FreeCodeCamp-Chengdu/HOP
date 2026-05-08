@@ -135,29 +135,3 @@ export const sessionGuard = compose<DataObject, JWTProps<User>>(async ({ req }, 
     };
   }
 });
-
-export const cnbSigner: SSRM<DataObject, JWTProps<User>> = async (context, next) => {
-  const { req, res } = context;
-  const { JWT: jwtCookie = '' } = req.cookies;
-
-  try {
-    const jwtPayload = verify(jwtCookie, JWT_SECRET!) as User;
-
-    return { props: { jwtPayload } };
-  } catch {
-    const { token } = (context as any).query as { token?: string };
-
-    if (!token) return next();
-
-    const user = await SessionModel.signInWithCNB(token);
-
-    res.setHeader(
-      'Set-Cookie',
-      [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
-        .filter(Boolean)
-        .join('; '),
-    );
-
-    return { props: { jwtPayload: JSON.parse(JSON.stringify(user)) } };
-  }
-};
