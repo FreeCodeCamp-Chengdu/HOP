@@ -10,6 +10,7 @@ import type {
 import { action, observable } from 'mobx';
 import { persist, restore, toggle } from 'mobx-restful';
 import { buildURLData } from 'web-utility';
+
 import { isServer } from '../../configuration';
 import { Filter, InputData, TableModel } from '../Base';
 import { GitModel } from '../Git';

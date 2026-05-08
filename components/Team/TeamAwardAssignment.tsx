@@ -10,13 +10,11 @@ export interface TeamAwardAssignmentLayoutProps extends XScrollListProps<AwardAs
 export const TeamAwardAssignmentLayout: FC<TeamAwardAssignmentLayoutProps> = ({
   defaultData = [],
 }) => (
-  <>
-    <ol>
-      {defaultData.map(({ id, award: { name } }) => (
-        <li key={id} className="list-unstyled">
-          {name}
-        </li>
-      ))}
-    </ol>
-  </>
+  <ol>
+    {defaultData.map(({ id, award: { name } }) => (
+      <li key={id} className="list-unstyled">
+        {name}
+      </li>
+    ))}
+  </ol>
 );

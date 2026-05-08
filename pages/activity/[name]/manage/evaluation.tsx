@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { compose, RouteProps, router } from 'next-ssr-middleware';
-import { FC, FormEvent, useContext } from 'react';
+import { FC, SubmitEvent, useContext } from 'react';
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import { formToJSON } from 'web-utility';
 
 import { ActivityManageFrame } from '../../../../components/Activity/ActivityManageFrame';
 import { TeamAwardList } from '../../../../components/Team/TeamAwardList';
 import activityStore from '../../../../models/Activity';
-import { i18n, I18nContext } from '../../../../models/Base/Translation';
+import { I18nContext, i18n } from '../../../../models/Base/Translation';
 import { sessionGuard } from '../../../api/core';
 
 type EvaluationPageProps = RouteProps<{ name: string }>;
@@ -36,20 +36,20 @@ export default EvaluationPage;
 class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n> {
   static contextType = I18nContext;
 
-  store = activityStore.teamOf(this.props.route.params!.name);
+  teamStore = activityStore.teamOf(this.props.route.params!.name);
   awardStore = activityStore.awardOf(this.props.route.params!.name);
 
   componentDidMount() {
     this.awardStore.getAll();
   }
 
-  handleReset = () => this.store.clearCurrent();
+  handleReset = () => this.teamStore.clearCurrent();
 
-  handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
-    const { awardStore, store } = this,
+    const { awardStore, teamStore } = this,
       form = event.currentTarget,
       { award } = formToJSON<{ award: number }>(form);
 
@@ -57,28 +57,28 @@ class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n
 
     const assignmentStore = awardStore.assignmentOf(award);
 
-    await assignmentStore.updateOne({ team: store.currentOne });
-    await store.refreshList();
+    await assignmentStore.updateOne({ team: teamStore.currentOne });
+    await teamStore.refreshList();
 
-    store.clearCurrent();
+    teamStore.clearCurrent();
     form.reset();
   };
 
-  onSearch = (event: FormEvent<HTMLFormElement>) => {
+  onSearch = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
     const { keywords } = formToJSON<{ keywords: string }>(event.currentTarget);
 
-    this.store.clear();
+    this.teamStore.clear();
 
-    return this.store.getList({ keywords });
+    return this.teamStore.getList({ keywords });
   };
 
   renderForm = () => {
     const { t } = this.observedContext,
       { allItems } = this.awardStore,
-      { id: awardTeamId, displayName: awardTeamName } = this.store.currentOne;
+      { id: awardTeamId, displayName: awardTeamName } = this.teamStore.currentOne;
 
     return (
       <Form
@@ -142,7 +142,7 @@ class EvalationEditor extends ObservedComponent<EvaluationPageProps, typeof i18n
             </InputGroup>
           </Form>
           <div className="my-3">
-            <TeamAwardList store={this.store} />
+            <TeamAwardList store={this.teamStore} />
           </div>
         </Col>
         <Col md={3} className="p-2">

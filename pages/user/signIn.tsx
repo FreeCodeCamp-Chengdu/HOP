@@ -1,114 +1,97 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { verify } from 'jsonwebtoken';
+import { JsonWebTokenError, verify } from 'jsonwebtoken';
+import { HTTPError } from 'koajax';
 import { observer } from 'mobx-react';
 import { GetServerSideProps } from 'next';
-import { compose } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Alert, Button, Container, Image } from 'react-bootstrap';
 import { buildURLData } from 'web-utility';
 
 import { PageHead } from '../../components/layout/PageHead';
 import { isProduction, JWT_SECRET } from '../../configuration';
 import { I18nContext } from '../../models/Base/Translation';
 import { SessionModel } from '../../models/User/Session';
-import { GITHUB_OAUTH_SCOPES, githubSigner, jwtSigner } from '../api/core';
 
-interface SignInPageProps {
+export interface SignInPageProps {
   callback: string;
-  origin: string;
-  clientId: string;
+  error?: string;
 }
 
-export const getServerSideProps: GetServerSideProps<SignInPageProps> = async context => {
-  const { query, req, res } = context;
-  const callback = (query.callback as string) || '/';
-
-  // GitHub OAuth callback — exchange code for JWT.
-  if (query.code && query.OAuth === 'GitHub') {
-    const result = await compose(jwtSigner, githubSigner)(context);
-
-    if ('props' in result && (result.props as any).jwtPayload)
-      return { redirect: { destination: callback, permanent: false } };
-
-    if ('redirect' in result || 'notFound' in result) return result;
-  }
-
-  // CNB OAuth callback — exchange CNB_token cookie for JWT.
-  if (query.OAuth === 'CNB') {
-    const { CNB_token } = req.cookies;
-
-    if (CNB_token) {
-      try {
-        const user = await SessionModel.signInWithCNB(CNB_token);
-
-        res.setHeader(
-          'Set-Cookie',
-          [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
-            .filter(Boolean)
-            .join('; '),
-        );
-        return { redirect: { destination: callback, permanent: false } };
-      } catch (error) {
-        console.error('[CNB signIn]', (error as Error).message);
-        // Fall through to render the sign-in page.
-      }
-    }
-  }
-
-  // If the user is already logged in, skip the sign-in page.
-  const { JWT: jwtCookie = '' } = req.cookies;
+export const getServerSideProps: GetServerSideProps<SignInPageProps> = async ({
+  query,
+  req,
+  res,
+}) => {
+  const { callback = '/' } = query;
+  const destination = callback + '';
+  const { JWT = '', token, CNB_token } = req.cookies;
 
   try {
-    verify(jwtCookie, JWT_SECRET!);
-    return { redirect: { destination: callback, permanent: false } };
-  } catch {
-    // Not logged in — fall through to render the sign-in page.
+    const user =
+      query.OAuth === 'GitHub' && token
+        ? await SessionModel.signInWithGitHub(token)
+        : query.OAuth === 'CNB' && CNB_token
+          ? await SessionModel.signInWithCNB(CNB_token)
+          : null;
+
+    if (user) {
+      res.setHeader(
+        'Set-Cookie',
+        [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
+          .filter(Boolean)
+          .join('; '),
+      );
+      return { redirect: { destination, permanent: false } };
+    }
+  } catch (error) {
+    const { message, response } = error as HTTPError;
+    const errorMessage = response?.body?.message || message || 'Unknown error';
+
+    return { props: { callback: destination, error: errorMessage } };
   }
+  // If the user is already logged in, skip the sign-in page.
+  try {
+    verify(JWT, JWT_SECRET!);
 
-  const proto =
-    (req.headers['x-forwarded-proto'] as string) ||
-    ((req as any).socket?.encrypted ? 'https' : 'http');
-  const origin = `${proto}://${req.headers.host}`;
-
-  return { props: { callback, origin, clientId: process.env.GITHUB_OAUTH_CLIENT_ID! } };
+    return { redirect: { destination, permanent: false } };
+  } catch (error) {
+    console.error((error as JsonWebTokenError).message, JWT);
+    // Not logged in — fall through to render the sign-in page.
+    return { props: { callback: destination } };
+  }
 };
 
-const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }) => {
+const SignInPage: FC<SignInPageProps> = observer(({ callback, error }) => {
   const { t } = useContext(I18nContext);
 
-  const githubRedirectURI = `${origin}/user/signIn?${buildURLData({ callback, OAuth: 'GitHub' })}`;
-  const githubOAuthURL = `https://github.com/login/oauth/authorize?${buildURLData({
-    client_id: clientId,
-    redirect_uri: githubRedirectURI,
-    scope: GITHUB_OAUTH_SCOPES.join(','),
-  })}`;
-
-  const cnbPageURL = `/user/OAuth/CNB?${buildURLData({
-    callback: `/user/signIn?${buildURLData({ callback, OAuth: 'CNB' })}`,
-  })}`;
+  const oAuthURLOf = (provider: string) =>
+    `/user/OAuth/${provider}?${buildURLData({
+      callback: `/user/signIn?${buildURLData({ callback, OAuth: provider })}`,
+    })}`;
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center min-vh-100 gap-3">
       <PageHead title={t('sign_in')} />
       <h1>{t('sign_in')}</h1>
+      {error && <Alert variant="danger">{error}</Alert>}
       <Button
         as="a"
-        href={githubOAuthURL}
+        href={oAuthURLOf('GitHub')}
         size="lg"
         className="d-flex align-items-center gap-2"
       >
         <FontAwesomeIcon icon={faGithub} />
-        {t('sign_in_with')('GitHub')}
+        {t('sign_in_with', 'GitHub')}
       </Button>
       <Button
         as="a"
-        href={cnbPageURL}
+        href={oAuthURLOf('CNB')}
         size="lg"
         variant="outline-dark"
         className="d-flex align-items-center gap-2"
       >
-        <img src="https://cnb.cool/favicon.ico" width={20} height={20} alt="CNB" />
+        <Image src="https://cnb.cool/favicon.ico" width={20} height={20} alt="CNB" />
         {t('sign_in_with', 'CNB')}
       </Button>
     </Container>
@@ -116,4 +99,3 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }
 });
 
 export default SignInPage;
-

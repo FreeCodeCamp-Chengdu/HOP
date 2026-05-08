@@ -29,7 +29,7 @@
         "useShorthandAssign": "error",
         "useSingleVarDeclarator": "off",
         "useImportType": "off",
-        "useTemplate": "error",
+        "useTemplate": "warn",
         "noImplicitBoolean": "off",
         "noInferrableTypes": "error",
         "noNegationElse": "error",

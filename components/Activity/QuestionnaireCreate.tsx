@@ -1,7 +1,7 @@
 import type { Question } from '@freecodecamp-chengdu/hop-service';
 import { observer } from 'mobx-react';
 import { BadgeInput } from 'mobx-restful-table';
-import { FC, FormEvent, useContext } from 'react';
+import { FC, SubmitEvent, useContext } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { formToJSON } from 'web-utility';
 
@@ -18,7 +18,7 @@ export interface QuestionnaireCreateProps {
 export const QuestionnaireCreate: FC<QuestionnaireCreateProps> = observer(({ onAdd }) => {
   const { t } = useContext(I18nContext);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
