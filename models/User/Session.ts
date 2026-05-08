@@ -58,6 +58,13 @@ export class SessionModel extends BaseModel {
     return body!;
   }
 
+  static async signInWithCNB(accessToken: string) {
+    const { body } = await ownClient.post<User>('user/OAuth/CNB', {
+      accessToken,
+    });
+    return body!;
+  }
+
   async signOut(reload = false) {
     setCookie('token', '', { path: '/', expires: new Date() });
     setCookie('JWT', '', { path: '/', expires: new Date() });

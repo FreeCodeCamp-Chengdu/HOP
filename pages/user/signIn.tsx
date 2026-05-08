@@ -76,6 +76,16 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, origin, clientId }
         <FontAwesomeIcon icon={faGithub} />
         {t('sign_in_with')('GitHub')}
       </Button>
+      <Button
+        as="a"
+        href={`/user/OAuth/CNB?${buildURLData({ callback })}`}
+        size="lg"
+        variant="outline-dark"
+        className="d-flex align-items-center gap-2"
+      >
+        <img src="https://cnb.cool/favicon.ico" width={20} height={20} alt="CNB" />
+        {t('sign_in_with')('CNB')}
+      </Button>
     </Container>
   );
 });
