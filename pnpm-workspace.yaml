@@ -1,0 +1,7 @@
+autoInstallPeers: false
+overrides:
+  next: $next
+allowBuilds:
+  '@sentry/cli': true
+  core-js: true
+  sharp: true

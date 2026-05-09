@@ -361,6 +361,6 @@ export default {
   fill_default_questions: 'Fill with default questions',
   personal_access_token: 'Personal Access Token',
   generate_token: 'Generate',
-  sign_in_with: (platform: string) => `Sign in with ${platform}`,
-  for_example: (example: string) => 'E.g., ' + example,
+  sign_in_with: ({ platform }: { platform: string }) => `Sign in with ${platform}`,
+  for_example: ({ example }: { example: string }) => `E.g., ${example}`,
 } as const;

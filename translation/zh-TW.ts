@@ -356,6 +356,6 @@ export default {
   fill_default_questions: '填入預設問題',
   personal_access_token: '個人訪問令牌',
   generate_token: '生成',
-  sign_in_with: (platform: string) => `用 ${platform} 帳號登錄`,
-  for_example: (example: string) => '例如：' + example,
+  sign_in_with: ({ platform }: { platform: string }) => `用 ${platform} 帳號登錄`,
+  for_example: ({ example }: { example: string }) => `例如：${example}`,
 } as const;

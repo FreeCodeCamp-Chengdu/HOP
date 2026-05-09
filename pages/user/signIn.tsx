@@ -12,7 +12,7 @@ import { PageHead } from '../../components/layout/PageHead';
 import { isProduction, JWT_SECRET } from '../../configuration';
 import { I18nContext } from '../../models/Base/Translation';
 import { SessionModel } from '../../models/User/Session';
-import { sanitizeCallback } from '../../utils/url';
+import { sanitizeCallbackPath } from '../api/core';
 
 export interface SignInPageProps {
   callback: string;
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<SignInPageProps> = async ({
   res,
 }) => {
   const { callback = '/' } = query;
-  const destination = sanitizeCallback(callback + '');
+  const destination = sanitizeCallbackPath(callback + '');
   const { JWT = '', token, CNB_token } = req.cookies;
 
   try {
@@ -83,7 +83,7 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, error }) => {
         className="d-flex align-items-center gap-2"
       >
         <FontAwesomeIcon icon={faGithub} />
-        {t('sign_in_with', 'GitHub')}
+        {t('sign_in_with', { platform: 'GitHub' })}
       </Button>
       <Button
         as="a"
@@ -93,7 +93,7 @@ const SignInPage: FC<SignInPageProps> = observer(({ callback, error }) => {
         className="d-flex align-items-center gap-2"
       >
         <Image src="https://cnb.cool/favicon.ico" width={20} height={20} alt="CNB" />
-        {t('sign_in_with', 'CNB')}
+        {t('sign_in_with', { platform: 'CNB' })}
       </Button>
     </Container>
   );

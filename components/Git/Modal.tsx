@@ -5,7 +5,7 @@ import { FormEvent } from 'react';
 import { Button, Col, Form, FormGroup, Modal, ModalProps, Row } from 'react-bootstrap';
 import { formToJSON } from 'web-utility';
 
-import { i18n, I18nContext } from '../../models/Base/Translation';
+import { I18nContext, i18n } from '../../models/Base/Translation';
 import { GitModel } from '../../models/Git';
 
 export interface GitModalProps extends Pick<ModalProps, 'show' | 'onHide'> {
@@ -71,10 +71,9 @@ export class GitModal extends ObservedComponent<GitModalProps, typeof i18n> {
                   name="html_url"
                   value={value}
                   required
-                  placeholder={t(
-                    'for_example',
-                    'https://github.com/idea2app/React-MobX-Bootstrap-ts',
-                  )}
+                  placeholder={t('for_example', {
+                    example: 'https://github.com/idea2app/React-MobX-Bootstrap-ts',
+                  })}
                   onChange={({ currentTarget: { value } }) => (this.value = value)}
                 />
               </Col>

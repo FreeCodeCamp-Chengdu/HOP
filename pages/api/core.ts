@@ -74,6 +74,8 @@ export const githubSigner = githubOAuth2({
   scopes: ['user:email', 'read:user', 'public_repo', 'read:project'],
 });
 
+export const sanitizeCallbackPath = (raw: string) => (/^\/(?!\/)/.test(raw) ? raw : '/');
+
 export const sessionGuard = compose<DataObject, JWTProps<User>>(async ({ req }, next) => {
   const { JWT = '' } = req.cookies;
 
