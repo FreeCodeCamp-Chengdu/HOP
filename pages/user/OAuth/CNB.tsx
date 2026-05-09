@@ -1,3 +1,5 @@
+import { IncomingMessage } from 'http';
+
 import { observer } from 'mobx-react';
 import { GetServerSideProps } from 'next';
 import { FC, useContext } from 'react';
@@ -7,6 +9,7 @@ import { buildURLData } from 'web-utility';
 import { PageHead } from '../../../components/layout/PageHead';
 import { isProduction } from '../../../configuration';
 import { I18nContext } from '../../../models/Base/Translation';
+import { sanitizeCallback } from '../../../utils/url';
 import type { SignInPageProps } from '../signIn';
 
 const CNB_API_BASE = 'https://api.cnb.cool';
@@ -17,28 +20,53 @@ interface CNBError {
   errparam: object;
 }
 
+const MAX_BODY_BYTES = 4096;
+
+const parseFormBody = (req: IncomingMessage) =>
+  new Promise<URLSearchParams>((resolve, reject) => {
+    let data = '';
+    let size = 0;
+    req.on('data', (chunk: Buffer) => {
+      size += chunk.length;
+      if (size > MAX_BODY_BYTES) {
+        req.destroy(new Error('Request body too large'));
+        return;
+      }
+      data += chunk.toString();
+    });
+    req.on('end', () => resolve(new URLSearchParams(data)));
+    req.on('error', reject);
+  });
+
 export const getServerSideProps: GetServerSideProps<SignInPageProps> = async ({
   query,
   req,
   res,
 }) => {
-  const { callback = '/', token } = query;
-  const destination = callback + '';
+  const { callback = '/' } = query;
+  const destination = sanitizeCallback(callback + '');
 
-  // Step 1: Form submitted with a token — store it in cookie, redirect to self to trigger validation.
-  if (token) {
-    res.setHeader(
-      'Set-Cookie',
-      [`CNB_token=${token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
-        .filter(Boolean)
-        .join('; '),
-    );
-    return {
-      redirect: {
-        destination: `/user/OAuth/CNB?${buildURLData({ callback })}`,
-        permanent: false,
-      },
-    };
+  // Step 1: Form submitted via POST with a token — store it in cookie, redirect to self (GET).
+  if (req.method === 'POST') {
+    const body = await parseFormBody(req);
+    const token = body.get('token');
+
+    if (token) {
+      res.setHeader(
+        'Set-Cookie',
+        [`CNB_token=${token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
+          .filter(Boolean)
+          .join('; '),
+      );
+      return {
+        redirect: {
+          // Pass the already-sanitized destination so the subsequent GET
+          // still has a safe callback value in its query string.
+          destination: `/user/OAuth/CNB?${buildURLData({ callback: destination })}`,
+          permanent: false,
+        },
+      };
+    }
   }
   // Step 2: CNB_token cookie present — validate against the CNB API.
   const { CNB_token } = req.cookies;
@@ -53,9 +81,9 @@ export const getServerSideProps: GetServerSideProps<SignInPageProps> = async ({
         // Valid token — let the sign-in page mint the JWT.
         return { redirect: { destination, permanent: false } };
 
-      const body = (await response.json()) as CNBError;
+      const cnbBody = (await response.json()) as CNBError;
 
-      errorMessage = body.errmsg || response.statusText;
+      errorMessage = cnbBody.errmsg || response.statusText;
     } catch (error) {
       errorMessage = (error as Error).message;
     }
@@ -77,8 +105,12 @@ const CNBOAuthPage: FC<SignInPageProps> = observer(({ callback, error }) => {
     <Container className="d-flex flex-column align-items-center justify-content-center min-vh-100 gap-3">
       <PageHead title={t('sign_in_with', 'CNB')} />
       <h1>{t('sign_in_with', 'CNB')}</h1>
-      <Form className="d-flex flex-column gap-3 w-100" style={{ maxWidth: 400 }}>
-        <input type="hidden" name="callback" value={callback} />
+      <Form
+        action={`/user/OAuth/CNB?${buildURLData({ callback })}`}
+        method="post"
+        className="d-flex flex-column gap-3 w-100"
+        style={{ maxWidth: 400 }}
+      >
         <InputGroup>
           <Form.Control name="token" placeholder={t('personal_access_token')} required />
           <Button

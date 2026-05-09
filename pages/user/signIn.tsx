@@ -12,6 +12,7 @@ import { PageHead } from '../../components/layout/PageHead';
 import { isProduction, JWT_SECRET } from '../../configuration';
 import { I18nContext } from '../../models/Base/Translation';
 import { SessionModel } from '../../models/User/Session';
+import { sanitizeCallback } from '../../utils/url';
 
 export interface SignInPageProps {
   callback: string;
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<SignInPageProps> = async ({
   res,
 }) => {
   const { callback = '/' } = query;
-  const destination = callback + '';
+  const destination = sanitizeCallback(callback + '');
   const { JWT = '', token, CNB_token } = req.cookies;
 
   try {
