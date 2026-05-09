@@ -27,10 +27,50 @@ export class GitModel extends TableModel<GitTemplate> {
   }
 
   @toggle('uploading')
-  async createOneFrom(templateURI: string, name: string) {
+  async createOneFrom(templateURI: string, name: string, cnbToken?: string) {
     const { body } = await githubClient.post<Repository>(`repos/${templateURI}/generate`, { name });
+    const repo = body!;
 
-    return body!;
+    if (cnbToken) await this.createCNBWorkspace(repo.html_url, repo.name, cnbToken);
+
+    return repo;
+  }
+
+  async createCNBWorkspace(githubRepoURL: string, name: string, cnbToken: string) {
+    const cnbHeaders = {
+      Authorization: `Bearer ${cnbToken}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/vnd.cnb.api+json',
+    };
+
+    const userResp = await fetch('https://api.cnb.cool/user', { headers: cnbHeaders });
+    if (!userResp.ok) throw new Error(`CNB authentication failed: ${userResp.status}`);
+    const { username } = (await userResp.json()) as { username: string };
+
+    const repoResp = await fetch(`https://api.cnb.cool/${username}/-/repos`, {
+      method: 'POST',
+      headers: cnbHeaders,
+      body: JSON.stringify({ name, visibility: 'private' }),
+    });
+    if (!repoResp.ok) throw new Error(`CNB repo creation failed: ${repoResp.status}`);
+    const repoPath = `${username}/${name}`;
+
+    const pushResp = await fetch('/api/git/cnb-push', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ repoPath, githubRepoURL, cnbToken }),
+    });
+    if (!pushResp.ok) throw new Error(`CNB git push failed: ${pushResp.status}`);
+
+    const workspaceResp = await fetch(`https://api.cnb.cool/${repoPath}/-/workspace/start`, {
+      method: 'POST',
+      headers: cnbHeaders,
+      body: JSON.stringify({ branch: 'main' }),
+    });
+    if (!workspaceResp.ok) throw new Error(`CNB workspace start failed: ${workspaceResp.status}`);
+    const { url } = (await workspaceResp.json()) as { url: string };
+
+    return { repoPath, workspaceURL: url };
   }
 
   @toggle('uploading')
