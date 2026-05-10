@@ -1,24 +1,8 @@
-import { User, Base, Media, Team } from '@freecodecamp-chengdu/hop-service';
+import type { Award, AwardAssignment } from '@freecodecamp-chengdu/hop-service';
 import { ListModel, Stream, toggle } from 'mobx-restful';
 
 import { createListStream, InputData, TableModel } from '../Base';
 import sessionStore from '../User/Session';
-
-export interface Award extends Record<'hackathonName' | 'name' | 'description', string>, Base {
-  quantity: number;
-  target: 'team' | 'individual';
-  pictures: Media[];
-}
-
-export interface AwardAssignment
-  extends
-    Omit<Base, 'id'>,
-    Omit<Award, 'name' | 'quantity' | 'target' | 'pictures'>,
-    Record<'assignmentId' | 'assigneeId' | 'awardId', number> {
-  user?: User;
-  team?: Team;
-  award: Award;
-}
 
 export class AwardModel extends TableModel<Award> {
   client = sessionStore.client;

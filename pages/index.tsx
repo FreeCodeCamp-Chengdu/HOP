@@ -10,7 +10,7 @@ import { Badge, Button, Card, Carousel, Col, Container, Image, Row } from 'react
 import { ActivityListLayout } from '../components/Activity/ActivityList';
 import { PageHead } from '../components/layout/PageHead';
 import { ActivityModel } from '../models/Activity';
-import { i18n, I18nContext } from '../models/Base/Translation';
+import { I18nContext, i18n } from '../models/Base/Translation';
 import { UserModel } from '../models/User';
 import styles from './index.module.less';
 
@@ -143,7 +143,7 @@ export default class HomePage extends ObservedComponent<HomePageProps, typeof i1
                   {this.renderPrimaryActions()}
                 </nav>
 
-                <ul className="d-flex flex-wrap gap-4 mt-5">
+                <ul className="list-unstyled d-flex flex-wrap gap-4 mt-5">
                   {this.stats.map(({ label, value }) => (
                     <li key={label}>
                       <div className="display-6 fw-semibold">{value}</div>

@@ -1,13 +1,6 @@
-import { i18n } from '../Base/Translation';
+import type { Question, QuestionType } from '@freecodecamp-chengdu/hop-service';
 
-export interface Question {
-  id?: string;
-  title: string;
-  options?: string[];
-  multiple?: boolean;
-  type?: 'text' | 'url';
-  required?: boolean;
-}
+import { i18n } from '../Base/Translation';
 
 export const questions = ({ t }: typeof i18n): Question[] => [
   {
@@ -48,19 +41,19 @@ export const questions = ({ t }: typeof i18n): Question[] => [
   },
   {
     title: t('linkein_or_cv'),
-    type: 'url',
+    type: 'url' as QuestionType,
   },
   {
     title: t('social_media_account_or_twitter_or_weibo'),
-    type: 'url',
+    type: 'url' as QuestionType,
   },
   {
     title: t('which_of_these_particular_areas_are_you_interested_in_going_into_this_event'),
-    type: 'text',
+    type: 'text' as QuestionType,
   },
   {
     title: t('what_do_you_hope_to_learn_from_the_workshops'),
-    type: 'text',
+    type: 'text' as QuestionType,
   },
   {
     title: t('do_you_plan__on_hacking_solo_or_with_a_team'),
@@ -72,6 +65,6 @@ export const questions = ({ t }: typeof i18n): Question[] => [
   },
   {
     title: t('anything_else_we_should_know_about_what_youre_looking_for_in_a_team_or_teammate'),
-    type: 'text',
+    type: 'text' as QuestionType,
   },
 ];

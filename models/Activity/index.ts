@@ -1,12 +1,15 @@
-import {
+import type {
   Enrollment,
   Hackathon,
+  HackathonFilter,
   HackathonStatus,
+  ListChunk,
   Question,
   Questionnaire,
 } from '@freecodecamp-chengdu/hop-service';
 import { action, observable } from 'mobx';
 import { persist, restore, toggle } from 'mobx-restful';
+import { buildURLData } from 'web-utility';
 
 import { isServer } from '../../configuration';
 import { Filter, InputData, TableModel } from '../Base';
@@ -158,9 +161,25 @@ export class ActivityModel extends TableModel<Hackathon, ActivityFilter> {
 
   @toggle('uploading')
   async signOne(name: string, form: Enrollment['form'] = []) {
-    await this.client.put(`${this.baseURI}/${name}/enrollment`, { form });
+    await this.client.post(`${this.baseURI}/${name}/enrollment`, { form });
 
     return this.currentEnrollment?.getSessionOne();
+  }
+}
+
+export class UserActivityModel extends ActivityModel {
+  constructor(
+    public userId: number,
+    public role: 'creator' | 'staff' | 'enrollee',
+  ) {
+    super();
+  }
+
+  async loadPage(pageIndex: number, pageSize: number, filter: HackathonFilter) {
+    const { body } = await this.client.get<ListChunk<Hackathon>>(
+      `user/${this.userId}/hackathon/${this.role}?${buildURLData({ ...filter, pageIndex, pageSize })}`,
+    );
+    return { pageData: body!.list, totalCount: body!.count };
   }
 }
 

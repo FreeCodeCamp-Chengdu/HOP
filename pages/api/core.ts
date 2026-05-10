@@ -4,17 +4,9 @@ import { Context, Middleware, ParameterizedContext } from 'koa';
 import JWT from 'koa-jwt';
 import { HTTPError } from 'koajax';
 import { DataObject } from 'mobx-restful';
-import {
-  compose,
-  githubOAuth2,
-  JWTProps,
-  KoaOption,
-  Middleware as SSRM,
-  withKoa,
-} from 'next-ssr-middleware';
+import { compose, githubOAuth2, JWTProps, KoaOption, withKoa } from 'next-ssr-middleware';
 
-import { isProduction, JWT_SECRET, VERCEL } from '../../configuration';
-import { SessionModel } from '../../models/User/Session';
+import { JWT_SECRET, VERCEL } from '../../configuration';
 
 export type JWTContext = ParameterizedContext<
   { jwtOriginalError: JsonWebTokenError } | { user: { email: string } }
@@ -62,37 +54,6 @@ export const safeAPI: Middleware<any, any> = async (context: Context, next) => {
 export const withSafeKoa = <S, C>(...middlewares: Middleware<S, C>[]) =>
   withKoa<S, C>({} as KoaOption, safeAPI, ...middlewares);
 
-export const jwtSigner: SSRM<DataObject, JWTProps<User>> = async ({ req, res }, next) => {
-  const { token, JWT = '' } = req.cookies;
-
-  try {
-    const jwtPayload = verify(JWT, JWT_SECRET!) as User;
-
-    return { props: { jwtPayload } };
-  } catch (error) {
-    console.error((error as JsonWebTokenError).message, JWT);
-
-    const nextResult = await next();
-
-    if (
-      ('redirect' in nextResult && nextResult.redirect) ||
-      ('notFound' in nextResult && nextResult.notFound)
-    )
-      return nextResult;
-
-    const user = await SessionModel.signInWithGitHub(token!);
-
-    res.setHeader(
-      'Set-Cookie',
-      [`JWT=${user.token}`, 'Path=/', isProduction ? 'Secure' : '', 'SameSite=Lax']
-        .filter(Boolean)
-        .join('; '),
-    );
-
-    return { props: { jwtPayload: JSON.parse(JSON.stringify(user)) } };
-  }
-};
-
 const client_id = process.env.GITHUB_OAUTH_CLIENT_ID,
   client_secret = process.env.GITHUB_OAUTH_CLIENT_SECRET;
 
@@ -113,4 +74,24 @@ export const githubSigner = githubOAuth2({
   scopes: ['user:email', 'read:user', 'public_repo', 'read:project'],
 });
 
-export const sessionGuard = compose<DataObject, JWTProps<User>>(jwtSigner, githubSigner);
+export const sanitizeCallbackPath = (raw: string) => (/^\/(?!\/)/.test(raw) ? raw : '/');
+
+export const sessionGuard = compose<DataObject, JWTProps<User>>(async ({ req }, next) => {
+  const { JWT = '' } = req.cookies;
+
+  try {
+    const jwtPayload = verify(JWT, JWT_SECRET!) as User;
+    const nextResult = await next();
+
+    return 'props' in nextResult ? { props: { ...nextResult.props, jwtPayload } } : nextResult;
+  } catch (error) {
+    console.error((error as JsonWebTokenError).message, JWT);
+
+    return {
+      redirect: {
+        destination: `/user/signIn?callback=${encodeURIComponent(req.url || '/')}`,
+        permanent: false,
+      },
+    };
+  }
+});

@@ -29,7 +29,7 @@
         "useShorthandAssign": "error",
         "useSingleVarDeclarator": "off",
         "useImportType": "off",
-        "useTemplate": "error",
+        "useTemplate": "warn",
         "noImplicitBoolean": "off",
         "noInferrableTypes": "error",
         "noNegationElse": "error",
@@ -72,7 +72,8 @@
         "noAccumulatingSpread": "warn"
       },
       "security": {
-        "noGlobalEval": "error"
+        "noGlobalEval": "error",
+        "noDangerouslySetInnerHtml": "warn"
       },
       "complexity": {
         "noCommaOperator": "error"

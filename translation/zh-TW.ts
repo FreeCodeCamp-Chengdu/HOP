@@ -353,5 +353,9 @@ export default {
   delete_questionnaire_success: '刪除問卷成功！',
   preview_questionnaire: '預覽問卷',
   confirm_to_delete_questionnaire: '確定刪除該問卷？',
-  for_example: (example: string) => '例如：' + example,
+  fill_default_questions: '填入預設問題',
+  personal_access_token: '個人訪問令牌',
+  generate_token: '生成',
+  sign_in_with: ({ platform }: { platform: string }) => `用 ${platform} 帳號登錄`,
+  for_example: ({ example }: { example: string }) => `例如：${example}`,
 } as const;

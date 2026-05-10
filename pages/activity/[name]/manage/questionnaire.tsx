@@ -1,4 +1,4 @@
-import { Question } from '@freecodecamp-chengdu/hop-service';
+import type { Question } from '@freecodecamp-chengdu/hop-service';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
@@ -12,6 +12,7 @@ import { QuestionnaireForm } from '../../../../components/Activity/Questionnaire
 import { QuestionnaireTable } from '../../../../components/Activity/QuestionnaireTable';
 import { isServer } from '../../../../configuration';
 import activityStore from '../../../../models/Activity';
+import { questions } from '../../../../models/Activity/Question';
 import { i18n, I18nContext } from '../../../../models/Base/Translation';
 import { sessionGuard } from '../../../api/core';
 
@@ -97,6 +98,23 @@ class ActivityQuestionnaireEditor extends ObservedComponent<
     ]);
   };
 
+  fillWithDefaults = () => {
+    const { t } = this.observedContext;
+
+    if (
+      activityStore.questionnaire.length > 0 &&
+      !confirm(t('confirm_to_delete_questionnaire'))
+    )
+      return;
+
+    const defaultQuestions = questions(this.observedContext).map((question, index) => ({
+      ...question,
+      id: String(index + 1),
+    }));
+
+    return activityStore.editQuestionnaireStatus(defaultQuestions);
+  };
+
   deleteQuestionnaireItem = (id: string) => {
     const curQuestionnaire = activityStore.questionnaire.filter(v => v.id !== id);
 
@@ -131,6 +149,9 @@ class ActivityQuestionnaireEditor extends ObservedComponent<
             onMove={this.handleMoveQuestionnaireItem}
           />
           <footer className="text-center">
+            <Button className="mx-1 px-5" variant="secondary" onClick={this.fillWithDefaults}>
+              {t('fill_default_questions')}
+            </Button>
             <Button className="mx-1 px-5" onClick={this.createRegister}>
               {this.isCreate ? t('create_questionnaire') : t('update_questionnaire')}
             </Button>
