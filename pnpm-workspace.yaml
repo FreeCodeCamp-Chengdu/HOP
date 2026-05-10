@@ -1,7 +1,12 @@
+packages:
+  - .
 autoInstallPeers: false
 overrides:
   next: $next
 allowBuilds:
-  '@sentry/cli': true
+  "@sentry/cli": true
   core-js: true
   sharp: true
+publicHoistPattern:
+  - "*import-in-the-middle*"
+  - "*require-in-the-middle*"
